@@ -4,6 +4,7 @@ BeginPackage["MathGR`gr`", {"MathGR`tensor`","MathGR`decomp`", "MathGR`util`"}]
 WithMetric::usage = "WithMetric[g, expr] calculates expr with metric g. It does not change the default metric"
 UseMetric::usage = "UseMetric[g] chooses g for contraction and calculation of affine ane curvatures. UseMetric[g, False] set attributes for g, but don't set g as default metric."
 Metric::usage = "The current metric for contraction, affine and curvatures"
+g::usage = "The default metric for contraction, affine and curvatures"
 IdxOfMetric::usage = "The indices used with the metric"
 DG::usage = "MetricContract pairs with lower idx"
 UG::usage = "MetricContract pairs with upper idx"
@@ -42,6 +43,8 @@ UseMetric[g_, idx_:{UP, DN}, default_:True]:= Module[{u=idx[[1]], d=idx[[2]], id
 	If[IntegerQ[Dim@u],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
 		LeviCivita /: LeviCivita[a:((u|d)[_]..)]*LeviCivita[b:((u|d)[_]..)]:= DtaGen[a, b, DtaGenDta->g]; ]]
+
+UseMetric[g]
 
 MetricContract[e_]:= mcTerm~apply2term~e
 mcTerm[tRaw_]:=Module[{t, cnt=1, idTab, metrics, tmp=Unique[]},

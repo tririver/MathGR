@@ -63,11 +63,7 @@ UniqueIdx:= Unique[]& /@ Range[50]
 
 SetAttributes[Dta, Orderless]
 Pd[Dta[__],_]:= 0
-(*
-DtaGen[a:(up_[_]..),b:(dn_[_]..)] /;Length[{a}]===Length[{b}]:= Module[{btmp, tmp, i, d=Length[{a}]}, 
-	btmp = Inner[#1[#2] &, ({b}[[#]][[0]] & /@ Range[d]), tmp /@ Range[d], List];
-	Asym[Product[Dta[{a}[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->{b}[[#]] &/@Range[d])//ReleaseHold]
-*)
+
 Options[DtaGen]={DtaGenDta->Dta}
 DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2, a, b},
 	a = Take[{ids}, d]; b = Take[{ids}, -d]; 
@@ -128,11 +124,27 @@ addAss[cond_]:= $Assumptions=Simplify[$Assumptions&&cond,Assumptions->True]
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]])
 
-(* SimpQ cannot auto-choose idx wrt identifiers. LatinIdx is chosen instead. *)
-SimpQ[e0_]:= Module[{e=ReleaseHold@Expand@ReleaseHold@e0, fr, dum, rule,a},
+(* SimpQ does not auto-choose idx wrt identifiers. LatinIdx is chosen instead. *)
+(*SimpQ[e0_]:= Module[{e=ReleaseHold@Expand@ReleaseHold@e0, fr, dum, rule,a},
 	{fr, dum} = {#, Complement[LatinIdx, #]} &@ (free @ If[Head@e===Plus, e[[1]], e]);
 	rule = Function[term, Inner[Rule,Sequence@@{(a:sumAlt)/@#,a/@Take[dum,Length@#]}&@dummy[term], List]];
 	If[Head@e===Plus, (#/.rule@# &) /@e, e/.rule@e] ]
+*)
+SimpQ::overdummy="Error: index `1` appears `2` times in term `3`"
+SimpQ::diffree="Error: free index `1` in term `2` is different from that of first term"
+simpQterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
+	idStat = Tally[idx@t];
+	If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[SimpQ::overdummy, a, b, t]];
+	fr = Sort@Cases[idStat, {a_,1}:>a];
+	If[fr=!=fr1, Message[SimpQ::diffree, fr, t]];
+	dum = Cases[idStat, {a_,2}:>a];
+	availDum = Take[Complement[LatinIdx, fr], Length@dum];
+	rule = Inner[Rule, (a0:sumAlt)/@dum, a0/@availDum, List];
+	t /. rule]
+SimpQ[e_]:= Module[{eList},
+	eList = ReleaseHold@plus2list@ReleaseHold@e;
+	Total[simpQterm[#, Sort@free@eList[[1]]]& /@ eList]] 
+
 SimpH = If[$VersionNumber>8.99, SimpM[SimpQ@#]&, SimpQ, SimpQ]
 
 If[!ValueQ@SimpHook,SimpHook = {}]
