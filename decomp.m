@@ -21,6 +21,7 @@ Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
 DeclareIdx[{UTot, DTot}, DimTot, LatinCapitalIdx, Blue]
+
 DeclareIdx[{U2, D2}, Dim2, LatinIdx, Red]
 
 If[!ValueQ@DecompHook,DecompHook = {}]

@@ -47,6 +47,8 @@ SimpUq::usage = "Simp, keeping dummy unique"
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpMSelect::usage = "A function to select terms to simplify, disregard others."
 
+\[Bullet]::usage = "Symbol for time derivative"
+
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
@@ -122,7 +124,7 @@ sumAlt:=Alternatives@@IdxList;
 rmNE[e_] := DeleteCases[e, IdxNonSumPtn];
 addAss[cond_]:= $Assumptions=Simplify[$Assumptions&&cond,Assumptions->True]
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
-	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]])
+	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
 
 (* SimpQ does not auto-choose idx wrt identifiers. LatinIdx is chosen instead. *)
 (*SimpQ[e0_]:= Module[{e=ReleaseHold@Expand@ReleaseHold@e0, fr, dum, rule,a},
@@ -171,7 +173,7 @@ tReduceMaxMemory=10^9 (* 1GB max memory *)
 tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[SimpM::ld, term];e]
 
 simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, cntId, slot1, slot2, oldDummy=dummy@term},
-	If[oldDummy==={}, Return[term]]; (* no need to simp with no dummy idx *)
+	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)
 	t = x ~TensorProduct~ times2prod[term, TensorProduct]; (* Add tensor product and contraction tensor *)
 	tCt = Map[Flatten@Position[idx@t,#]&, fr~Join~oldDummy]; (* Determine contraction pairs *)
 	tM = t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},sumAlt,1]; (* The tensor to input to TensorReduce *)

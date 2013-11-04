@@ -25,5 +25,17 @@ MakeBoxes[Pd[f_, d_@i_], form_] /; MatchQ[d, altDn] := TagBox[RowBox[{SubscriptB
 
 MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], form_] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], form]
 
+(* following: time derivative. May need cleanup *)
+
+MakeBoxes[Pd[a_, DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]"];
+MakeBoxes[Pd[Pd[a_, DE@0], DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]\[Bullet]"]
+MakeBoxes[Pd[Pd[Pd[a_, DE@0], DE@0], DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]\[Bullet]\[Bullet]"]
+MakeBoxes[Pd[Pd[Pd[Pd[a_, DE@0], DE@0], DE@0], DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"]
+
+MakeExpression[OverscriptBox[a_, "\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@", a}], form]
+MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
+MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
+MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
+
 End[]
 EndPackage[]
