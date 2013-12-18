@@ -17,7 +17,7 @@ Begin["`Private`"]
 plus2listRaw = If[Head[#]===Plus, List@@#, {#}]&
 plus2list = plus2listRaw[Expand@#]&
 apply2term = Total[#1/@plus2list[#2]]&
-replaceTo = Inner[RuleDelayed, #1, #2, List]&
+replaceTo = Thread[RuleDelayed[##]]&
 getSampleTerm = Function[e, If[Head@#===Plus, #[[1]], #]&[Expand@e]] 
 
 SetAttributes[prod,Flat]

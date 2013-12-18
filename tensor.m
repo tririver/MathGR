@@ -40,7 +40,7 @@ UniqueIdx::usage = "unique vars {$n1, $n2, ...}"
 
 DeclareSym::usage = "Declare tensor symmetry"
 SimpM::usage = "Mathematica abstract tensor simpification"
-SimpQ::usage = "Quick simplification"
+SimpF::usage = "Fast (and imcomplete) simplification"
 SimpH::usage = "Hybrid simplification"
 Simp::usage = "Default simplification, with SimpHook applied"
 SimpUq::usage = "Simp, keeping dummy unique"
@@ -69,7 +69,7 @@ Pd[Dta[__],_]:= 0
 Options[DtaGen]={DtaGenDta->Dta}
 DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2, a, b},
 	a = Take[{ids}, d]; b = Take[{ids}, -d]; 
-	btmp = Inner[#1[#2] &, (b[[#]][[0]] & /@ Range[d]), tmp /@ Range[d], List];
+	btmp = MapThread[#1[#2] &, {(b[[#]][[0]] & /@ Range[d]), tmp /@ Range[d]}];
 	Asym[Product[OptionValue[DtaGenDta][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])//ReleaseHold]
 
 DeclareIdx[ids_List, d_, set_, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
@@ -126,28 +126,22 @@ addAss[cond_]:= $Assumptions=Simplify[$Assumptions&&cond,Assumptions->True]
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
 
-(* SimpQ does not auto-choose idx wrt identifiers. LatinIdx is chosen instead. *)
-(*SimpQ[e0_]:= Module[{e=ReleaseHold@Expand@ReleaseHold@e0, fr, dum, rule,a},
-	{fr, dum} = {#, Complement[LatinIdx, #]} &@ (free @ If[Head@e===Plus, e[[1]], e]);
-	rule = Function[term, Inner[Rule,Sequence@@{(a:sumAlt)/@#,a/@Take[dum,Length@#]}&@dummy[term], List]];
-	If[Head@e===Plus, (#/.rule@# &) /@e, e/.rule@e] ]
-*)
-SimpQ::overdummy="Error: index `1` appears `2` times in term `3`"
-SimpQ::diffree="Error: free index `1` in term `2` is different from that of first term"
-simpQterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
+SimpF::overdummy="Error: index `1` appears `2` times in term `3`"
+SimpF::diffree="Error: free index `1` in term `2` is different from that of first term"
+SimpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
 	idStat = Tally[idx@t];
-	If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[SimpQ::overdummy, a, b, t]];
+	If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[SimpF::overdummy, a, b, t]];
 	fr = Sort@Cases[idStat, {a_,1}:>a];
-	If[fr=!=fr1, Message[SimpQ::diffree, fr, t]];
+	If[fr=!=fr1, Message[SimpF::diffree, fr, t]];
 	dum = Cases[idStat, {a_,2}:>a];
 	availDum = Take[Complement[LatinIdx, fr], Length@dum];
-	rule = Inner[Rule, (a0:sumAlt)/@dum, a0/@availDum, List];
+	rule = replaceTo[(a0:sumAlt)/@dum, a0/@availDum];
 	t /. rule]
-SimpQ[e_]:= Module[{eList},
+SimpF[e_]:= Module[{eList},
 	eList = ReleaseHold@plus2list@ReleaseHold@e;
-	Total[simpQterm[#, Sort@free@eList[[1]]]& /@ eList]] 
+	Total[SimpFterm[#, Sort@free@eList[[1]]]& /@ eList]] 
 
-SimpH = If[$VersionNumber>8.99, SimpM[SimpQ@#]&, SimpQ, SimpQ]
+SimpH = If[$VersionNumber>8.99, SimpM[SimpF@#]&, SimpF, SimpF]
 
 If[!ValueQ@SimpHook,SimpHook = {}]
 Simp[e_]:= SimpH[e//.SimpHook]//.SimpHook//Expand

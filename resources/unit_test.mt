@@ -87,7 +87,7 @@ Test[Pd[a_,d@b_]:>f[a,b],Pd[a_,d@b_]:>f[a,b], TestID->"Pattern is not considered
 (* ::Subsection:: *)
 (* SimpQ *)
 
-Test[SimpQ[f[u@"x", d@"b"] f1[d@"b"]], f[u["x"], d["a"]] f1[d["a"]], TestID->"SimpQ re-arrange idx"]
+Test[SimpF[f[u@"x", d@"b"] f1[d@"b"]], f[u["x"], d["a"]] f1[d["a"]], TestID->"SimpF re-arrange idx"]
 
 (* ::Subsection:: *)
 (* SimpM *)
