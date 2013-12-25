@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    207083,       6667]
-NotebookOptionsPosition[    199513,       6416]
-NotebookOutlinePosition[    199849,       6431]
-CellTagsIndexPosition[    199806,       6428]
+NotebookDataLength[    247373,       8015]
+NotebookOptionsPosition[    239791,       7764]
+NotebookOutlinePosition[    240126,       7779]
+CellTagsIndexPosition[    240083,       7776]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -117,7 +117,8 @@ Cell[BoxData[
    3.592384665184346*^9, 3.5923848296110573`*^9, 3.592385543683503*^9, 
    3.59255224733722*^9, 3.592552483637986*^9, 3.592566903005534*^9, {
    3.5926233045092907`*^9, 3.592623325905444*^9}, {3.59262338491138*^9, 
-   3.592623396618031*^9}, {3.592623442684757*^9, 3.5926234498436527`*^9}}]
+   3.592623396618031*^9}, {3.592623442684757*^9, 3.5926234498436527`*^9}, 
+   3.596958897190613*^9}]
 }, Open  ]],
 
 Cell[TextData[{
@@ -654,7 +655,7 @@ Cell[BoxData[
           MathGR`tensor`UP], ""},
         {"", 
          TagBox[
-          StyleBox["$484",
+          StyleBox["$3",
            FontColor->GrayLevel[0]],
           MathGR`tensor`DN]}
        },
@@ -680,7 +681,7 @@ Cell[BoxData[
           MathGR`tensor`UP], ""},
         {"", 
          TagBox[
-          StyleBox["$485",
+          StyleBox["$4",
            FontColor->GrayLevel[0]],
           MathGR`tensor`DN]}
        },
@@ -701,7 +702,7 @@ Cell[BoxData[
      StyleBox[GridBox[{
         {
          TagBox[
-          StyleBox["$484",
+          StyleBox["$3",
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP], ""},
         {"", 
@@ -727,7 +728,7 @@ Cell[BoxData[
      StyleBox[GridBox[{
         {
          TagBox[
-          StyleBox["$485",
+          StyleBox["$4",
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP], ""},
         {"", 
@@ -750,7 +751,7 @@ Cell[BoxData[
    3.5925479260594263`*^9, 3.592547954753255*^9}, 3.592552247434173*^9, 
    3.5925524837407093`*^9, 3.5925669030865803`*^9, {3.592623304599566*^9, 
    3.592623326043706*^9}, {3.592623385110477*^9, 3.5926233969911222`*^9}, {
-   3.592623442753937*^9, 3.592623449928732*^9}}]
+   3.592623442753937*^9, 3.592623449928732*^9}, 3.5969589050617523`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -999,7 +1000,7 @@ Cell[BoxData[
    3.592535185288974*^9, 3.592552247541443*^9, 3.59255248384684*^9, 
    3.592566903190234*^9, {3.592623304737172*^9, 3.59262332623808*^9}, {
    3.5926233851942863`*^9, 3.592623397201036*^9}, {3.592623442812731*^9, 
-   3.592623450002203*^9}}]
+   3.592623450002203*^9}, 3.5969589088248377`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1153,7 +1154,7 @@ Cell[BoxData[
    3.5923855441215277`*^9, 3.592552247652443*^9, 3.592552483954777*^9, 
    3.592566903273094*^9, {3.592623304831995*^9, 3.592623326575317*^9}, {
    3.592623385270816*^9, 3.592623397340296*^9}, {3.592623442884169*^9, 
-   3.592623450099037*^9}}]
+   3.592623450099037*^9}, 3.59695891310843*^9}]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1265,7 +1266,7 @@ Cell[BoxData[
   3.5925356431472683`*^9, 3.592552247739015*^9, 3.592552484043466*^9, 
    3.592566903283193*^9, {3.5926233048439283`*^9, 3.5926233267499323`*^9}, {
    3.5926233852782383`*^9, 3.5926233973530912`*^9}, {3.592623442894405*^9, 
-   3.592623450111801*^9}}]
+   3.592623450111801*^9}, 3.5969589177626867`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1317,7 +1318,7 @@ Cell[BoxData[
   3.5925357669684277`*^9, 3.592552247753811*^9, 3.5925524840575438`*^9, 
    3.592566903528707*^9, {3.592623304921487*^9, 3.592623326900395*^9}, {
    3.592623385366194*^9, 3.592623397635202*^9}, {3.592623442933345*^9, 
-   3.592623450189477*^9}}]
+   3.592623450189477*^9}, 3.5969589192997913`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1355,7 +1356,7 @@ Cell[BoxData[
   3.592535860337606*^9, 3.592552247837673*^9, 3.592552484131105*^9, 
    3.592566903945957*^9, {3.59262330492708*^9, 3.592623327040902*^9}, {
    3.592623385380733*^9, 3.59262339764351*^9}, {3.592623443010791*^9, 
-   3.592623450236676*^9}}]
+   3.592623450236676*^9}, 3.596958920835064*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1440,7 +1441,7 @@ Cell[BoxData[
           MathGR`tensor`UP], ""},
         {"", 
          TagBox[
-          StyleBox["$490",
+          StyleBox["$9",
            FontColor->GrayLevel[0]],
           MathGR`tensor`DN]}
        },
@@ -1461,7 +1462,7 @@ Cell[BoxData[
      StyleBox[GridBox[{
         {
          TagBox[
-          StyleBox["$490",
+          StyleBox["$9",
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP], ""},
         {"", 
@@ -1482,7 +1483,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.592536030710761*^9, 3.592536049409071*^9}, 
    3.592552247927678*^9, 3.5925524842322607`*^9, 3.592566904046266*^9, {
    3.592623305128131*^9, 3.5926233273488483`*^9}, {3.5926233854831944`*^9, 
-   3.592623397749036*^9}, {3.592623443017017*^9, 3.592623450310655*^9}}]
+   3.592623397749036*^9}, {3.592623443017017*^9, 3.592623450310655*^9}, 
+   3.596958925685793*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1563,7 +1565,7 @@ Cell[BoxData[
           MathGR`tensor`UP], ""},
         {"", 
          TagBox[
-          StyleBox["$491",
+          StyleBox["$10",
            FontColor->GrayLevel[0]],
           MathGR`tensor`DN]}
        },
@@ -1584,7 +1586,7 @@ Cell[BoxData[
      StyleBox[GridBox[{
         {
          TagBox[
-          StyleBox["$491",
+          StyleBox["$10",
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP], ""},
         {"", 
@@ -1632,7 +1634,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.592536235469802*^9, 3.592536270877605*^9}, 
    3.592552247936401*^9, 3.592552484248513*^9, 3.592566904088455*^9, {
    3.5926233054044952`*^9, 3.5926233274633303`*^9}, {3.592623385574839*^9, 
-   3.592623398158699*^9}, {3.592623443074771*^9, 3.592623450323901*^9}}]
+   3.592623398158699*^9}, {3.592623443074771*^9, 3.592623450323901*^9}, 
+   3.5969589277917747`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1675,7 +1678,7 @@ Cell[BoxData["DefaultDim"], "Output",
   3.592536379129898*^9, 3.592552248000677*^9, 3.592552484323791*^9, 
    3.592566904128502*^9, {3.592623305417657*^9, 3.592623327562953*^9}, {
    3.592623385686133*^9, 3.592623398534938*^9}, {3.5926234433740463`*^9, 
-   3.592623450371579*^9}}]
+   3.592623450371579*^9}, 3.59695893088735*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1820,7 +1823,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.592536468066381*^9, 3.592536498822962*^9}, 
    3.592552248089136*^9, 3.5925524843714733`*^9, 3.5925669041600018`*^9, {
    3.592623305540909*^9, 3.592623327706264*^9}, {3.592623385701824*^9, 
-   3.592623398693427*^9}, {3.592623443438369*^9, 3.59262345044751*^9}}]
+   3.592623398693427*^9}, {3.592623443438369*^9, 3.59262345044751*^9}, 
+   3.596958935746752*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1933,7 +1937,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.592536964233883*^9, 3.592536974448186*^9}, 
    3.5925522481574783`*^9, 3.592552484448515*^9, 3.592566904171669*^9, {
    3.5926233057832747`*^9, 3.592623327719996*^9}, {3.592623385798024*^9, 
-   3.592623398969266*^9}, {3.592623443453079*^9, 3.592623450518778*^9}}]
+   3.592623398969266*^9}, {3.592623443453079*^9, 3.592623450518778*^9}, 
+   3.596958937453475*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2023,10 +2028,10 @@ Cell[BoxData[
   3.592536964233883*^9, 3.592552248399541*^9, 3.5925524845297613`*^9, 
    3.5925669042067947`*^9, {3.592623305902053*^9, 3.592623327837315*^9}, {
    3.592623385906249*^9, 3.5926233989842567`*^9}, {3.59262344352314*^9, 
-   3.592623450635056*^9}}]
+   3.592623450635056*^9}, 3.5969589384917917`*^9}]
 }, Open  ]]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2085,12 +2090,143 @@ Cell[BoxData[
   "mgrTsr"]], "Input",
  CellChangeTimes->{{3.5925370563040752`*^9, 3.59253705636567*^9}}],
 
-Cell[BoxData["0"], "Output",
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], " ", 
+  RowBox[{"(", 
+   TagBox[
+    RowBox[{
+     AdjustmentBox["g",
+      BoxMargins->{{0, -0.2}, {0, 0}}], 
+     StyleBox[GridBox[{
+        {
+         TagBox[
+          StyleBox["\<\"\[Alpha]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`tensor`UP], 
+         TagBox[
+          StyleBox["$11",
+           FontColor->GrayLevel[0]],
+          MathGR`tensor`UP]},
+        {"", ""}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      FontSize->10]}],
+    "mgrTsr"], ")"}], " ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"-", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["$11",
+           FontColor->GrayLevel[0]],
+          MathGR`tensor`DN]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["g",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\<\"\[Beta]\"\>",
+                FontColor->GrayLevel[0]],
+               MathGR`tensor`DN], 
+              TagBox[
+               StyleBox["\<\"\[Gamma]\"\>",
+                FontColor->GrayLevel[0]],
+               MathGR`tensor`DN]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"], ")"}]}], "+", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Gamma]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["$11",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], "+", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Beta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["$11",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"]}], ")"}]}]], "Output",
  CellChangeTimes->{
   3.592537057975049*^9, 3.592552248506106*^9, 3.5925524848068113`*^9, 
    3.592566904283984*^9, {3.592623306014205*^9, 3.592623328005434*^9}, {
    3.5926233859921827`*^9, 3.592623399169107*^9}, {3.592623443706889*^9, 
-   3.5926234508212147`*^9}}]
+   3.5926234508212147`*^9}, 3.5969589459038*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2100,12 +2236,960 @@ Cell[BoxData[
   RowBox[{"R", "[", "]"}], "//", "Simp"}]], "Input",
  CellChangeTimes->{{3.592547067850177*^9, 3.592547071015139*^9}}],
 
-Cell[BoxData["0"], "Output",
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   FractionBox["3", "4"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[CurlyEpsilon]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Zeta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[CurlyEpsilon]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Zeta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Delta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[CurlyEpsilon]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Zeta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Zeta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Delta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[CurlyEpsilon]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}]}], "-", 
+  RowBox[{
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[CurlyEpsilon]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Zeta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Delta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Zeta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[CurlyEpsilon]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}]}], "-", 
+  RowBox[{
+   FractionBox["1", "4"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[CurlyEpsilon]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Zeta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[CurlyEpsilon]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Zeta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Delta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}]}], "+", 
+  RowBox[{
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[CurlyEpsilon]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Zeta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Delta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Zeta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[CurlyEpsilon]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}]}], "-", 
+  RowBox[{
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Delta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["\<\"\[Gamma]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`tensor`DN]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["g",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\<\"\[Alpha]\"\>",
+                FontColor->GrayLevel[0]],
+               MathGR`tensor`DN], 
+              TagBox[
+               StyleBox["\<\"\[Beta]\"\>",
+                FontColor->GrayLevel[0]],
+               MathGR`tensor`DN]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"]}],
+     "mgrPd"], ")"}]}], "+", 
+  RowBox[{
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Beta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Delta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["\<\"\[Beta]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`tensor`DN]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["g",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\<\"\[Alpha]\"\>",
+                FontColor->GrayLevel[0]],
+               MathGR`tensor`DN], 
+              TagBox[
+               StyleBox["\<\"\[Gamma]\"\>",
+                FontColor->GrayLevel[0]],
+               MathGR`tensor`DN]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"]}],
+     "mgrPd"], ")"}]}]}]], "Output",
  CellChangeTimes->{
   3.592547071880156*^9, 3.5925522487292633`*^9, 3.592552485063575*^9, 
    3.592566904534931*^9, {3.592623306337317*^9, 3.592623328268077*^9}, {
    3.59262338608315*^9, 3.592623399308264*^9}, {3.592623443983449*^9, 
-   3.5926234509590273`*^9}}]
+   3.5926234509590273`*^9}, 3.596958958321105*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3076,7 +4160,7 @@ Cell[BoxData[
   3.592547173228063*^9, 3.592552249008205*^9, 3.592552485285125*^9, 
    3.59256690498538*^9, {3.592623306588084*^9, 3.592623328586069*^9}, {
    3.592623386289989*^9, 3.592623399616419*^9}, {3.592623444224001*^9, 
-   3.592623451195444*^9}}]
+   3.592623451195444*^9}, 3.596958963022174*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3414,7 +4498,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.5925472648246927`*^9, 3.592547268607706*^9}, 
    3.592552249060154*^9, 3.592552485354107*^9, 3.592566905113068*^9, {
    3.592623306819353*^9, 3.592623328669876*^9}, {3.5926233864188128`*^9, 
-   3.5926233999672537`*^9}, {3.592623444288439*^9, 3.592623451239603*^9}}]
+   3.5926233999672537`*^9}, {3.592623444288439*^9, 3.592623451239603*^9}, 
+   3.5969589643442497`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -3436,39 +4521,300 @@ Cell[BoxData[
  CellChangeTimes->{{3.592547383447771*^9, 3.592547406346381*^9}}],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{
-   SubscriptBox["\[CapitalSampi]", 
+ RowBox[{
+  TagBox[
+   RowBox[{
+    SubscriptBox["\[CapitalSampi]", 
+     TagBox[
+      StyleBox["\<\"\[Beta]\"\>",
+       FontColor->GrayLevel[0]],
+      MathGR`tensor`DN]], 
     TagBox[
-     StyleBox["\<\"\[Beta]\"\>",
-      FontColor->GrayLevel[0]],
-     MathGR`tensor`DN]], 
-   TagBox[
-    RowBox[{
-     AdjustmentBox["T",
-      BoxMargins->{{0, -0.2}, {0, 0}}], 
-     StyleBox[GridBox[{
-        {""},
-        {
-         TagBox[
-          StyleBox["\<\"\[Alpha]\"\>",
-           FontColor->GrayLevel[0]],
-          MathGR`tensor`DN]}
-       },
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      FontSize->10]}],
-    "mgrTsr"]}],
-  "mgrPd"]], "Output",
+     RowBox[{
+      AdjustmentBox["T",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {""},
+         {
+          TagBox[
+           StyleBox["\<\"\[Alpha]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`DN]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"]}],
+   "mgrPd"], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Delta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["T",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {""},
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`DN]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Beta]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Alpha]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["T",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {""},
+         {
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`DN]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["g",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\<\"\[Gamma]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`UP]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\<\"\[Alpha]\"\>",
+         FontColor->GrayLevel[0]],
+        MathGR`tensor`DN]], 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["g",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\<\"\[Beta]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN], 
+            TagBox[
+             StyleBox["\<\"\[Gamma]\"\>",
+              FontColor->GrayLevel[0]],
+             MathGR`tensor`DN]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"]}],
+     "mgrPd"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["T",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {""},
+         {
+          TagBox[
+           StyleBox["\<\"\[Delta]\"\>",
+            FontColor->GrayLevel[0]],
+           MathGR`tensor`DN]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}]}]}]], "Output",
  CellChangeTimes->{{3.5925474034058857`*^9, 3.59254740694311*^9}, 
    3.592552249129002*^9, 3.592552485420312*^9, 3.592566905308597*^9, {
    3.592623306951138*^9, 3.592623328768993*^9}, {3.592623386544668*^9, 
-   3.592623400123444*^9}, {3.592623444341186*^9, 3.592623451293209*^9}}]
+   3.592623400123444*^9}, {3.592623444341186*^9, 3.592623451293209*^9}, 
+   3.596958973632131*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -3597,7 +4943,7 @@ Cell[BoxData[
   3.592548281246608*^9, 3.592552249196795*^9, 3.592552485438751*^9, 
    3.59256690540143*^9, {3.592623307075439*^9, 3.5926233287779293`*^9}, {
    3.592623386693965*^9, 3.592623400263131*^9}, {3.592623444354697*^9, 
-   3.5926234513101797`*^9}}]
+   3.5926234513101797`*^9}, 3.596958977240753*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3751,10 +5097,10 @@ Cell[BoxData[
    3.592548380063374*^9, 3.592552249428406*^9, 3.592552485520343*^9, 
    3.5925669054717073`*^9, {3.592623307227124*^9, 3.59262332886201*^9}, {
    3.592623386834155*^9, 3.5926234004246264`*^9}, {3.5926234444013653`*^9, 
-   3.592623451381364*^9}}]
+   3.592623451381364*^9}, 3.596958978885734*^9}]
 }, Open  ]]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -3762,10 +5108,11 @@ Cell["Integration by parts (ibp.m)", "Section",
  CellChangeTimes->{{3.592548872819849*^9, 3.5925488986372433`*^9}}],
 
 Cell[BoxData[{
- RowBox[{"<<", "ibp.m"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "MathGR/ibp.m"}], "\[IndentingNewLine]", 
  RowBox[{"<<", "MathGR/typeset.m"}]}], "Input",
  CellChangeTimes->{{3.592548883231072*^9, 3.592548885423325*^9}, {
-  3.592563333218902*^9, 3.5925633340647087`*^9}}],
+  3.592563333218902*^9, 3.5925633340647087`*^9}, {3.596958991814237*^9, 
+  3.596958993329874*^9}}],
 
 Cell["\<\
 This module tries to rewrite an expression into a total derivative, possibly \
@@ -3807,7 +5154,7 @@ Cell[BoxData[
   3.59254914769416*^9, 3.5925522495365133`*^9, 3.592552485632535*^9, 
    3.592566905558329*^9, {3.592623307827752*^9, 3.5926233293657312`*^9}, {
    3.5926233875573587`*^9, 3.592623400902482*^9}, {3.592623444504614*^9, 
-   3.592623451460738*^9}}]
+   3.592623451460738*^9}, 3.596958995398645*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3865,7 +5212,7 @@ Cell[BoxData[
   3.5925493186860323`*^9, 3.5925522496984177`*^9, 3.592552485959116*^9, 
    3.592566905974062*^9, {3.592623308144906*^9, 3.592623329538454*^9}, {
    3.592623387885622*^9, 3.5926234014085608`*^9}, {3.592623444637096*^9, 
-   3.5926234516025667`*^9}}]
+   3.5926234516025667`*^9}, 3.5969589978002987`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3922,7 +5269,7 @@ Cell[BoxData[
    3.59255224984006*^9, 3.592552486132552*^9, 3.592556972679886*^9, 
    3.592566906109055*^9, {3.5926233086061697`*^9, 3.5926233297078323`*^9}, {
    3.592623388380424*^9, 3.592623401750649*^9}, {3.5926234448350697`*^9, 
-   3.592623451727701*^9}}]
+   3.592623451727701*^9}, 3.59695900272034*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3962,7 +5309,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.592556951526786*^9, 3.592556973943396*^9}, 
    3.592566906146654*^9, {3.592623308760557*^9, 3.592623329798568*^9}, {
    3.592623388544425*^9, 3.592623401932147*^9}, {3.5926234448862133`*^9, 
-   3.592623451874774*^9}}]
+   3.592623451874774*^9}, 3.5969590039714193`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3992,8 +5339,6 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"2", " ", 
-   SuperscriptBox["H", "2"], " ", "\[Epsilon]"}], "+", 
   RowBox[{
    SuperscriptBox["M", "2"], " ", 
    SuperscriptBox["\[Phi]", "2"]}], "-", 
@@ -4001,6 +5346,8 @@ Cell[BoxData[
    RowBox[{
     SuperscriptBox["\[Phi]", "2"], " ", 
     OverscriptBox["m", "\[Bullet]"]}], "2"], "+", 
+  SuperscriptBox[
+   OverscriptBox["\[Phi]", "\[Bullet]"], "2"], "+", 
   RowBox[{"PdHold", "[", 
    RowBox[{
     FractionBox[
@@ -4018,9 +5365,9 @@ Cell[BoxData[
   3.592556871506406*^9, {3.592557007787573*^9, 3.592557042543975*^9}, 
    3.5925669062559977`*^9, {3.5926233094346523`*^9, 3.592623330048965*^9}, {
    3.592623389045257*^9, 3.5926234024698257`*^9}, {3.592623445054178*^9, 
-   3.5926234520561447`*^9}}]
+   3.5926234520561447`*^9}, 3.59695900492488*^9}]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -5180,7 +6527,7 @@ Cell[BoxData[
   3.592564614269884*^9, {3.5925650504876013`*^9, 3.592565062311471*^9}, 
    3.59256690698011*^9, {3.5926233100755367`*^9, 3.5926233310927887`*^9}, {
    3.592623390124276*^9, 3.5926234033246403`*^9}, {3.592623445629925*^9, 
-   3.592623452650238*^9}}]
+   3.592623452650238*^9}, 3.5969590364433537`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -5452,9 +6799,10 @@ Cell[BoxData[
  CellChangeTimes->{
   3.59256527754312*^9, 3.592565372268806*^9, 3.592566907526195*^9, {
    3.5926233106482267`*^9, 3.59262333140038*^9}, {3.592623390688212*^9, 
-   3.5926234038580837`*^9}, {3.592623445762424*^9, 3.59262345279537*^9}}]
+   3.5926234038580837`*^9}, {3.592623445762424*^9, 3.59262345279537*^9}, 
+   3.596959037741493*^9}]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -6037,7 +7385,7 @@ Cell[BoxData[
   3.59256607655898*^9, 3.592566107542033*^9, 3.5925662383004627`*^9, 
    3.592566910169251*^9, {3.592623312401331*^9, 3.592623332656321*^9}, {
    3.592623392050716*^9, 3.592623405163845*^9}, {3.592623447108526*^9, 
-   3.592623454072809*^9}}]
+   3.592623454072809*^9}, 3.596959044261691*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6122,7 +7470,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.5925660911681967`*^9, 3.592566111248671*^9}, 
    3.592566240943439*^9, 3.592566910527968*^9, {3.592623312650408*^9, 
    3.592623333084898*^9}, {3.5926233924729033`*^9, 3.592623405552698*^9}, {
-   3.592623447314098*^9, 3.5926234542888308`*^9}}]
+   3.592623447314098*^9, 3.5926234542888308`*^9}, 3.596959044307406*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6194,7 +7542,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.5925661330107822`*^9, 3.5925662430249662`*^9}, 
    3.592566910606022*^9, {3.5926233127432632`*^9, 3.592623333263301*^9}, {
    3.592623392632369*^9, 3.5926234056957607`*^9}, {3.592623447372363*^9, 
-   3.592623454358177*^9}}]
+   3.592623454358177*^9}, 3.5969590443331614`*^9}]
 }, Open  ]],
 
 Cell["The second order action.", "Text",
@@ -6280,7 +7628,7 @@ Cell[BoxData[
  CellChangeTimes->{
   3.5925662466214867`*^9, 3.5925669107414913`*^9, {3.592623312865692*^9, 
    3.592623333574745*^9}, {3.592623392767048*^9, 3.59262340582801*^9}, {
-   3.5926234474911623`*^9, 3.5926234544783916`*^9}}]
+   3.5926234474911623`*^9, 3.5926234544783916`*^9}, 3.596959044396988*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6362,7 +7710,7 @@ Cell[BoxData[
  CellChangeTimes->{
   3.592566255651764*^9, 3.5925669108105917`*^9, {3.5926233129715157`*^9, 
    3.592623334104526*^9}, {3.592623392939781*^9, 3.592623405988326*^9}, {
-   3.5926234475277653`*^9, 3.592623454553454*^9}}]
+   3.5926234475277653`*^9, 3.592623454553454*^9}, 3.596959044418895*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6398,7 +7746,7 @@ Cell[BoxData[
  CellChangeTimes->{
   3.5925662626264563`*^9, 3.592566911054432*^9, {3.592623313274959*^9, 
    3.592623334431535*^9}, {3.5926233934436283`*^9, 3.59262340644344*^9}, {
-   3.5926234477124968`*^9, 3.592623454748464*^9}}]
+   3.5926234477124968`*^9, 3.592623454748464*^9}, 3.5969590444703007`*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -6411,12 +7759,12 @@ Cell[BoxData[
     RowBox[{"standard", " ", "definition"}]}], " ", "*)"}]}]], "Input",
  CellChangeTimes->{{3.592623340769743*^9, 3.592623381390614*^9}, {
   3.5926234309349737`*^9, 3.5926234312312613`*^9}}]
-}, Closed]]
+}, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1366, 748},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -6432,242 +7780,242 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 95, 1, 92, "Title"],
-Cell[677, 25, 923, 17, 148, "Text"],
+Cell[677, 25, 923, 17, 165, "Text"],
 Cell[CellGroupData[{
 Cell[1625, 46, 164, 2, 80, "Section"],
 Cell[1792, 50, 372, 8, 55, "Input"],
 Cell[CellGroupData[{
 Cell[2189, 62, 107, 1, 44, "Subsection"],
-Cell[2299, 65, 138, 3, 30, "Text"],
+Cell[2299, 65, 138, 3, 33, "Text"],
 Cell[CellGroupData[{
 Cell[2462, 72, 323, 7, 32, "Input"],
-Cell[2788, 81, 1288, 38, 36, "Output"]
+Cell[2788, 81, 1314, 39, 36, "Output"]
 }, Open  ]],
-Cell[4091, 122, 2497, 43, 443, "Text"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6625, 170, 146, 3, 44, "Subsection"],
-Cell[6774, 175, 9897, 324, 158, "Text"],
-Cell[16674, 501, 2416, 82, 36, "Input"],
-Cell[CellGroupData[{
-Cell[19115, 587, 1482, 52, 36, "Input"],
-Cell[20600, 641, 3338, 111, 36, "Output"]
-}, Open  ]],
-Cell[23953, 755, 355, 7, 31, "Text"]
+Cell[4117, 123, 2497, 43, 517, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24345, 767, 109, 1, 44, "Subsection"],
-Cell[24457, 770, 201, 4, 30, "Text"],
+Cell[6651, 171, 146, 3, 44, "Subsection"],
+Cell[6800, 176, 9897, 324, 173, "Text"],
+Cell[16700, 502, 2416, 82, 36, "Input"],
 Cell[CellGroupData[{
-Cell[24683, 778, 3275, 111, 36, "Input"],
-Cell[27961, 891, 3344, 110, 36, "Output"]
+Cell[19141, 588, 1482, 52, 36, "Input"],
+Cell[20626, 642, 3354, 111, 36, "Output"]
 }, Open  ]],
-Cell[31320, 1004, 222, 4, 30, "Text"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[31579, 1013, 110, 1, 44, "Subsection"],
-Cell[31692, 1016, 291, 5, 49, "Text"],
-Cell[31986, 1023, 435, 10, 32, "Input"],
-Cell[32424, 1035, 132, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[32581, 1042, 2133, 70, 36, "Input"],
-Cell[34717, 1114, 1427, 41, 36, "Output"]
-}, Open  ]],
-Cell[36159, 1158, 278, 7, 30, "Text"]
+Cell[23995, 756, 355, 7, 33, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[36474, 1170, 133, 2, 44, "Subsection"],
-Cell[36610, 1174, 161, 4, 30, "Text"],
+Cell[24387, 768, 109, 1, 44, "Subsection"],
+Cell[24499, 771, 201, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[36796, 1182, 1155, 37, 36, "Input"],
-Cell[37954, 1221, 1444, 46, 36, "Output"]
+Cell[24725, 779, 3275, 111, 36, "Input"],
+Cell[28003, 892, 3368, 110, 36, "Output"]
 }, Open  ]],
-Cell[39413, 1270, 148, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[39586, 1277, 235, 6, 32, "Input"],
-Cell[39824, 1285, 997, 34, 32, "Output"]
+Cell[31386, 1005, 222, 4, 33, "Text"]
 }, Open  ]],
-Cell[40836, 1322, 206, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[41067, 1330, 345, 10, 55, "Input"],
-Cell[41415, 1342, 526, 15, 32, "Output"]
+Cell[31645, 1014, 110, 1, 44, "Subsection"],
+Cell[31758, 1017, 291, 5, 55, "Text"],
+Cell[32052, 1024, 435, 10, 32, "Input"],
+Cell[32490, 1036, 132, 3, 33, "Text"],
+Cell[CellGroupData[{
+Cell[32647, 1043, 2133, 70, 36, "Input"],
+Cell[34783, 1115, 1448, 41, 36, "Output"]
+}, Open  ]],
+Cell[36246, 1159, 278, 7, 33, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36561, 1171, 133, 2, 44, "Subsection"],
+Cell[36697, 1175, 161, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[36883, 1183, 1155, 37, 36, "Input"],
+Cell[38041, 1222, 1468, 46, 36, "Output"]
+}, Open  ]],
+Cell[39524, 1271, 148, 3, 33, "Text"],
+Cell[CellGroupData[{
+Cell[39697, 1278, 235, 6, 32, "Input"],
+Cell[39935, 1286, 1021, 34, 32, "Output"]
+}, Open  ]],
+Cell[40971, 1323, 206, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[41202, 1331, 345, 10, 55, "Input"],
+Cell[41550, 1343, 548, 15, 32, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[41990, 1363, 119, 1, 44, "Subsection"],
-Cell[42112, 1366, 159, 3, 31, "Text"],
+Cell[42147, 1364, 119, 1, 44, "Subsection"],
+Cell[42269, 1367, 159, 3, 33, "Text"],
 Cell[CellGroupData[{
-Cell[42296, 1373, 1496, 52, 36, "Input"],
-Cell[43795, 1427, 1796, 57, 36, "Output"]
+Cell[42453, 1374, 1496, 52, 36, "Input"],
+Cell[43952, 1428, 1818, 58, 36, "Output"]
 }, Open  ]],
-Cell[45606, 1487, 286, 5, 31, "Text"],
+Cell[45785, 1489, 286, 5, 55, "Text"],
 Cell[CellGroupData[{
-Cell[45917, 1496, 1495, 52, 36, "Input"],
-Cell[47415, 1550, 2580, 84, 36, "Output"]
+Cell[46096, 1498, 1495, 52, 36, "Input"],
+Cell[47594, 1552, 2606, 85, 36, "Output"]
 }, Open  ]],
-Cell[50010, 1637, 121, 3, 30, "Text"],
+Cell[50215, 1640, 121, 3, 33, "Text"],
 Cell[CellGroupData[{
-Cell[50156, 1644, 761, 26, 36, "Input"],
-Cell[50920, 1672, 300, 5, 32, "Output"]
+Cell[50361, 1647, 761, 26, 36, "Input"],
+Cell[51125, 1675, 321, 5, 32, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[51269, 1683, 119, 1, 44, "Subsection"],
-Cell[51391, 1686, 225, 4, 31, "Text"],
+Cell[51495, 1686, 119, 1, 44, "Subsection"],
+Cell[51617, 1689, 225, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[51641, 1694, 323, 7, 32, "Input"],
-Cell[51967, 1703, 3662, 119, 36, "Output"]
+Cell[51867, 1697, 323, 7, 32, "Input"],
+Cell[52193, 1706, 3688, 120, 36, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[55678, 1828, 162, 2, 44, "Subsection"],
-Cell[55843, 1832, 320, 6, 51, "Text"]
+Cell[55930, 1832, 162, 2, 44, "Subsection"],
+Cell[56095, 1836, 320, 6, 55, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[56200, 1843, 198, 4, 44, "Subsection"],
+Cell[56452, 1847, 198, 4, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[56423, 1851, 813, 27, 36, "Input"],
-Cell[57239, 1880, 1718, 55, 36, "Output"]
+Cell[56675, 1855, 813, 27, 36, "Input"],
+Cell[57491, 1884, 1744, 56, 36, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[58994, 1940, 814, 27, 36, "Input"],
-Cell[59811, 1969, 1698, 56, 36, "Output"]
+Cell[59272, 1945, 814, 27, 36, "Input"],
+Cell[60089, 1974, 1722, 56, 36, "Output"]
 }, Open  ]]
 }, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[61570, 2032, 109, 1, 50, "Section"],
-Cell[61682, 2035, 235, 4, 55, "Input"],
-Cell[CellGroupData[{
-Cell[61942, 2043, 101, 1, 44, "Subsection"],
-Cell[62046, 2046, 259, 5, 30, "Text"],
-Cell[CellGroupData[{
-Cell[62330, 2055, 884, 30, 36, "Input"],
-Cell[63217, 2087, 295, 5, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[63549, 2097, 142, 3, 32, "Input"],
-Cell[63694, 2102, 292, 5, 32, "Output"]
-}, Open  ]],
-Cell[64001, 2110, 145, 3, 30, "Text"],
+Cell[61872, 2037, 109, 1, 80, "Section"],
+Cell[61984, 2040, 235, 4, 55, "Input"],
 Cell[CellGroupData[{
-Cell[64171, 2117, 256, 6, 32, "Input"],
-Cell[64430, 2125, 28292, 953, 84, "Output"]
-}, Open  ]],
-Cell[92737, 3081, 286, 5, 30, "Text"],
+Cell[62244, 2048, 101, 1, 44, "Subsection"],
+Cell[62348, 2051, 259, 5, 33, "Text"],
 Cell[CellGroupData[{
-Cell[93048, 3090, 270, 7, 32, "Input"],
-Cell[93321, 3099, 9592, 317, 36, "Output"]
-}, Open  ]]
+Cell[62632, 2060, 884, 30, 36, "Input"],
+Cell[63519, 2092, 4192, 136, 47, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[102962, 3422, 109, 1, 44, "Subsection"],
+Cell[67748, 2233, 142, 3, 32, "Input"],
+Cell[67893, 2238, 28318, 953, 84, "Output"]
+}, Open  ]],
+Cell[96226, 3194, 145, 3, 33, "Text"],
 Cell[CellGroupData[{
-Cell[103096, 3427, 288, 8, 32, "Input"],
-Cell[103387, 3437, 1074, 33, 36, "Output"]
+Cell[96396, 3201, 256, 6, 32, "Input"],
+Cell[96655, 3209, 28314, 953, 84, "Output"]
+}, Open  ]],
+Cell[124984, 4165, 286, 5, 33, "Text"],
+Cell[CellGroupData[{
+Cell[125295, 4174, 270, 7, 32, "Input"],
+Cell[125568, 4183, 9620, 318, 36, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[104510, 3476, 108, 1, 44, "Subsection"],
-Cell[104621, 3479, 203, 4, 30, "Text"],
+Cell[135237, 4507, 109, 1, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[104849, 3487, 1492, 52, 36, "Input"],
-Cell[106344, 3541, 1792, 58, 36, "Output"]
+Cell[135371, 4512, 288, 8, 32, "Input"],
+Cell[135662, 4522, 8685, 294, 47, "Output"]
+}, Open  ]]
 }, Open  ]],
-Cell[108151, 3602, 329, 6, 30, "Text"],
 Cell[CellGroupData[{
-Cell[108505, 3612, 468, 13, 32, "Input"],
-Cell[108976, 3627, 3860, 126, 36, "Output"]
+Cell[144396, 4822, 108, 1, 44, "Subsection"],
+Cell[144507, 4825, 203, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[144735, 4833, 1492, 52, 36, "Input"],
+Cell[146230, 4887, 1814, 58, 36, "Output"]
+}, Open  ]],
+Cell[148059, 4948, 329, 6, 55, "Text"],
+Cell[CellGroupData[{
+Cell[148413, 4958, 468, 13, 32, "Input"],
+Cell[148884, 4973, 3882, 126, 36, "Output"]
 }, Open  ]]
 }, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[112897, 3760, 115, 1, 50, "Section"],
-Cell[113015, 3763, 229, 4, 55, "Input"],
-Cell[113247, 3769, 186, 4, 30, "Text"],
-Cell[CellGroupData[{
-Cell[113458, 3777, 591, 21, 32, "Input"],
-Cell[114052, 3800, 418, 9, 32, "Output"]
 }, Open  ]],
-Cell[114485, 3812, 308, 7, 68, "Text"],
 Cell[CellGroupData[{
-Cell[114818, 3823, 622, 22, 32, "Input"],
-Cell[115443, 3847, 692, 20, 32, "Output"]
+Cell[152827, 5106, 115, 1, 80, "Section"],
+Cell[152945, 5109, 285, 5, 55, "Input"],
+Cell[153233, 5116, 186, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[153444, 5124, 591, 21, 32, "Input"],
+Cell[154038, 5147, 440, 9, 32, "Output"]
 }, Open  ]],
-Cell[116150, 3870, 454, 9, 68, "Text"],
-Cell[116607, 3881, 162, 3, 30, "Text"],
+Cell[154493, 5159, 308, 7, 77, "Text"],
 Cell[CellGroupData[{
-Cell[116794, 3888, 403, 13, 32, "Input"],
-Cell[117200, 3903, 754, 21, 32, "Output"]
+Cell[154826, 5170, 622, 22, 32, "Input"],
+Cell[155451, 5194, 716, 20, 32, "Output"]
 }, Open  ]],
-Cell[117969, 3927, 177, 4, 30, "Text"],
+Cell[156182, 5217, 454, 9, 99, "Text"],
+Cell[156639, 5228, 162, 3, 33, "Text"],
 Cell[CellGroupData[{
-Cell[118171, 3935, 378, 12, 32, "Input"],
-Cell[118552, 3949, 521, 15, 32, "Output"]
+Cell[156826, 5235, 403, 13, 32, "Input"],
+Cell[157232, 5250, 775, 21, 32, "Output"]
 }, Open  ]],
-Cell[119088, 3967, 145, 3, 30, "Text"],
+Cell[158022, 5274, 177, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[119258, 3974, 605, 16, 44, "Input"],
-Cell[119866, 3992, 1017, 28, 52, "Output"]
+Cell[158224, 5282, 378, 12, 32, "Input"],
+Cell[158605, 5296, 545, 15, 32, "Output"]
+}, Open  ]],
+Cell[159165, 5314, 145, 3, 33, "Text"],
+Cell[CellGroupData[{
+Cell[159335, 5321, 605, 16, 44, "Input"],
+Cell[159943, 5339, 1032, 28, 52, "Output"]
 }, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[120932, 4026, 229, 5, 50, "Section"],
-Cell[121164, 4033, 398, 7, 99, "Input"],
-Cell[121565, 4042, 517, 10, 70, "Text"],
-Cell[122085, 4054, 411, 10, 55, "Input"],
-Cell[122499, 4066, 665, 12, 87, "Text"],
-Cell[123167, 4080, 25083, 728, 209, "Input"],
-Cell[148253, 4810, 1409, 48, 143, "Input"],
-Cell[149665, 4860, 104, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[149794, 4865, 269, 6, 32, "Input"],
-Cell[150066, 4873, 9222, 309, 47, "Output"]
 }, Open  ]],
-Cell[159303, 5185, 205, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[159533, 5193, 3670, 110, 36, "Input"],
-Cell[163206, 5305, 4430, 149, 47, "Output"]
+Cell[161024, 5373, 229, 5, 80, "Section"],
+Cell[161256, 5380, 398, 7, 99, "Input"],
+Cell[161657, 5389, 517, 10, 99, "Text"],
+Cell[162177, 5401, 411, 10, 55, "Input"],
+Cell[162591, 5413, 665, 12, 121, "Text"],
+Cell[163259, 5427, 25083, 728, 209, "Input"],
+Cell[188345, 6157, 1409, 48, 143, "Input"],
+Cell[189757, 6207, 104, 1, 33, "Text"],
+Cell[CellGroupData[{
+Cell[189886, 6212, 269, 6, 32, "Input"],
+Cell[190158, 6220, 9246, 309, 47, "Output"]
+}, Open  ]],
+Cell[199419, 6532, 205, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[199649, 6540, 3670, 110, 36, "Input"],
+Cell[203322, 6652, 4456, 150, 47, "Output"]
 }, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[167685, 5460, 185, 4, 50, "Section"],
-Cell[167873, 5466, 318, 6, 30, "Text"],
-Cell[168194, 5474, 658, 12, 121, "Input"],
-Cell[168855, 5488, 340, 7, 70, "Text"],
-Cell[169198, 5497, 708, 18, 77, "Input"],
-Cell[169909, 5517, 310, 6, 30, "Text"],
-Cell[CellGroupData[{
-Cell[170244, 5527, 484, 13, 32, "Input"],
-Cell[170731, 5542, 16481, 497, 197, "Output"]
 }, Open  ]],
-Cell[187227, 6042, 186, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[187438, 6050, 297, 6, 32, "Input"],
-Cell[187738, 6058, 2149, 66, 47, "Output"]
-}, Open  ]],
-Cell[189902, 6127, 180, 4, 30, "Text"],
+Cell[207827, 6808, 185, 4, 80, "Section"],
+Cell[208015, 6814, 318, 6, 33, "Text"],
+Cell[208336, 6822, 658, 12, 121, "Input"],
+Cell[208997, 6836, 340, 7, 77, "Text"],
+Cell[209340, 6845, 708, 18, 77, "Input"],
+Cell[210051, 6865, 310, 6, 33, "Text"],
 Cell[CellGroupData[{
-Cell[190107, 6135, 1061, 29, 32, "Input"],
-Cell[191171, 6166, 1126, 30, 45, "Output"]
+Cell[210386, 6875, 484, 13, 32, "Input"],
+Cell[210873, 6890, 16503, 497, 160, "Output"]
 }, Open  ]],
-Cell[192312, 6199, 108, 1, 30, "Text"],
+Cell[227391, 7390, 186, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[192445, 6204, 330, 7, 32, "Input"],
-Cell[192778, 6213, 2504, 69, 57, "Output"]
+Cell[227602, 7398, 297, 6, 32, "Input"],
+Cell[227902, 7406, 2171, 66, 47, "Output"]
 }, Open  ]],
-Cell[195297, 6285, 139, 3, 30, "Text"],
+Cell[230088, 7475, 180, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[195461, 6292, 1014, 27, 32, "Input"],
-Cell[196478, 6321, 1404, 43, 56, "Output"]
+Cell[230293, 7483, 1061, 29, 32, "Input"],
+Cell[231357, 7514, 1150, 30, 45, "Output"]
 }, Open  ]],
-Cell[197897, 6367, 198, 4, 30, "Text"],
+Cell[232522, 7547, 108, 1, 33, "Text"],
 Cell[CellGroupData[{
-Cell[198120, 6375, 435, 10, 32, "Input"],
-Cell[198558, 6387, 526, 13, 38, "Output"]
+Cell[232655, 7552, 330, 7, 32, "Input"],
+Cell[232988, 7561, 2526, 69, 57, "Output"]
 }, Open  ]],
-Cell[199099, 6403, 386, 9, 32, "Input"]
-}, Closed]]
+Cell[235529, 7633, 139, 3, 33, "Text"],
+Cell[CellGroupData[{
+Cell[235693, 7640, 1014, 27, 32, "Input"],
+Cell[236710, 7669, 1426, 43, 56, "Output"]
+}, Open  ]],
+Cell[238151, 7715, 198, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[238374, 7723, 435, 10, 32, "Input"],
+Cell[238812, 7735, 550, 13, 38, "Output"]
+}, Open  ]],
+Cell[239377, 7751, 386, 9, 32, "Input"]
+}, Open  ]]
 }, Open  ]]
 }
 ]
