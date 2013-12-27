@@ -38,10 +38,11 @@ LatinCapitalIdx::usage = "strings {A, B, ...}"
 UniqueIdx::usage = "unique vars {$n1, $n2, ...}"
 
 DeclareSym::usage = "Declare tensor symmetry"
+DeleteSym::usage = "DeleteSym[tensor, {UP, DN, ...}] deletes tensor symmetry"
 Simp::usage = "Default simplification, with SimpHook applied"
 SimpUq::usage = "Simp, keeping dummy unique"
 SimpHook::usage = "Rules to apply before and after Simp"
-simpMSelect::usage = "A function to select terms to simplify, disregard others."
+simpMSelect::usage = "A function to select terms to simplify, disregard others"
 
 \[Bullet]::usage = "Symbol for time derivative"
 
@@ -118,9 +119,13 @@ pdts2pd = #/.pdts[n_][f_][idx__] :> Fold[Pd, If[n===Length[{idx}], f, f[Sequence
 sumAlt:=Alternatives@@IdxList;
 
 rmNE[e_] := DeleteCases[e, IdxNonSumPtn];
-addAss[cond_]:= $Assumptions=Simplify[$Assumptions&&cond,Assumptions->True]
+
+If[!ValueQ@simpMAss,simpMAss = True]
+addAss[cond_]:= (simpMAss=Simplify[simpMAss&&cond];)
+
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
+DeleteSym[t_,idx_]:= (simpMAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpMAss}, Element[MAT[t][Sequence@@idx], _], Infinity];)
 
 simpFterm[t_, fr_]:= Module[{dum, availDum, rule, a0},
 	dum = dummy@t;
@@ -144,13 +149,13 @@ SimpUq[e_, OptionsPattern[]]:= Block[{IdxSet}, (IdxSet[#]=IdxSet[IdxDual[#]]=Uni
 (* ::Section:: *)
 (* M-backend of Simp *)
 
-simpMTermAss[tM_]:= Module[{tInPdts, ass, cnt},
+simpMTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
 	(* Add assumptions for tensors encountered in each term *)
-	ass = And@@Cases[{tM},f:MAT[t_][idx__]:>(f~Element~Arrays[Dim/@rmNE[{idx}]]), Infinity];
+	ass = ass && (And@@Cases[{tM},f:MAT[t_][idx__]:>(f~Element~Arrays[Dim/@rmNE[{idx}]]), Infinity]);
 	(* Add symmetry of T in PdPdPdT *)
 	tInPdts = Cases[{tM}, HoldPattern[f:MAT[pdts[n_][t_]][idx__]] :>
 		{MAT[t][Sequence@@Take[{idx},Length[{idx}]-n]],f,Dim/@rmNE[{idx}]}, Infinity];
-	ass = ass && And@@Flatten[Cases[$Assumptions,#[[1]]~Element~HoldPattern[Arrays[dim_,dom_,sym_]]:>
+	ass = ass && And@@Flatten[Cases[simpMAss,#[[1]]~Element~HoldPattern[Arrays[dim_,dom_,sym_]]:>
 		#[[2]]~Element~Arrays[#[[3]],dom,sym],Infinity]&/@tInPdts];
 	(* Add symmetry of PdPdPd in PdPdPdT *)
 	ass = ass && And@@Flatten@Cases[{tM},f:MAT[pdts[n_][t_]][idx__] /; n>1 :> ((f~Element~Arrays[Dim/@rmNE[{idx}], Symmetric[#]])& 
