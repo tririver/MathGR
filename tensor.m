@@ -122,14 +122,8 @@ addAss[cond_]:= $Assumptions=Simplify[$Assumptions&&cond,Assumptions->True]
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
 
-simpF::overdummy="Error: index `1` appears `2` times in term `3`"
-simpF::diffree="Error: free index `1` in term `2` is different from that of first term"
-simpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
-	idStat = Tally[idx@t];
-	If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[simpF::overdummy, a, b, t]];
-	fr = Sort@Cases[idStat, {a_,1}:>a];
-	If[fr=!=fr1, Message[simpF::diffree, fr, t]];
-	dum = Cases[idStat, {a_,2}:>a];
+simpFterm[t_, fr_]:= Module[{dum, availDum, rule, a0},
+	dum = dummy@t;
 	availDum = Take[Complement[LatinIdx, fr], Length@dum];
 	rule = replaceTo[(a0:sumAlt)/@dum, a0/@availDum];
 	t /. rule]
