@@ -42,7 +42,7 @@ UseMetric[g_, idx_:{UP, DN}, default_:True]:= Module[{u=idx[[1]], d=idx[[2]], id
 	g /: Pd[g[u@m_, u@a_], d@l_]:= -g[u@#1, u@a]g[u@#2, u@m]Pd[g[d@#1, d@#2], d@l] &@Uq[2];
 	If[IntegerQ[Dim@u],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
-		LeviCivita /: LeviCivita[a:((u|d)[_]..)]*LeviCivita[b:((u|d)[_]..)]:= DtaGen[a, b, DtaGenDta->g]; ]]
+		LeviCivita /: LeviCivita[a:((u|d)[_]..)]*LeviCivita[b:((u|d)[_]..)]:= DtaGen[a, b, "DtaGenDta"->g]; ]]
 
 UseMetric[g]
 

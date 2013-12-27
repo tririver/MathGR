@@ -29,7 +29,6 @@ Asym::usage = "ASym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... Asym[e
 
 Dta::usage = "Delta symbol"
 DtaGen::usage = "DtaGen[up..., dn...] is the generalized delta symbol"
-DtaGenDta::usage = "Option for DtaGen to use which contraction variable"
 Pd::usage = "Pd[f, DN@a] is partial derivative"
 LeviCivita::usage = "LeviCivita[a, b, ...] is the Levi Civita tensor, defined only if dimension is given as an explicit number"
 
@@ -39,13 +38,10 @@ LatinCapitalIdx::usage = "strings {A, B, ...}"
 UniqueIdx::usage = "unique vars {$n1, $n2, ...}"
 
 DeclareSym::usage = "Declare tensor symmetry"
-SimpM::usage = "Mathematica abstract tensor simpification"
-SimpF::usage = "Fast (and imcomplete) simplification"
-SimpH::usage = "Hybrid simplification"
 Simp::usage = "Default simplification, with SimpHook applied"
 SimpUq::usage = "Simp, keeping dummy unique"
 SimpHook::usage = "Rules to apply before and after Simp"
-SimpMSelect::usage = "A function to select terms to simplify, disregard others."
+simpMSelect::usage = "A function to select terms to simplify, disregard others."
 
 \[Bullet]::usage = "Symbol for time derivative"
 
@@ -66,11 +62,11 @@ UniqueIdx:= Unique[]& /@ Range[50]
 SetAttributes[Dta, Orderless]
 Pd[Dta[__],_]:= 0
 
-Options[DtaGen]={DtaGenDta->Dta}
+Options[DtaGen]={"DtaGenDta"->Dta}
 DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2, a, b},
 	a = Take[{ids}, d]; b = Take[{ids}, -d]; 
 	btmp = MapThread[#1[#2] &, {(b[[#]][[0]] & /@ Range[d]), tmp /@ Range[d]}];
-	Asym[Product[OptionValue[DtaGenDta][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])//ReleaseHold]
+	Asym[Product[OptionValue["DtaGenDta"][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])//ReleaseHold]
 
 DeclareIdx[ids_List, d_, set_, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
 	Dim[idsAlt]:=d; IdxSet[idsAlt]:=set; IdxColor[idsAlt]:=color; add2set[IdxList, {ids}]; IdxPtn=Alternatives@@(Blank/@IdxList);
@@ -126,26 +122,30 @@ addAss[cond_]:= $Assumptions=Simplify[$Assumptions&&cond,Assumptions->True]
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
 
-SimpF::overdummy="Error: index `1` appears `2` times in term `3`"
-SimpF::diffree="Error: free index `1` in term `2` is different from that of first term"
-SimpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
+simpF::overdummy="Error: index `1` appears `2` times in term `3`"
+simpF::diffree="Error: free index `1` in term `2` is different from that of first term"
+simpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
 	idStat = Tally[idx@t];
-	If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[SimpF::overdummy, a, b, t]];
+	If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[simpF::overdummy, a, b, t]];
 	fr = Sort@Cases[idStat, {a_,1}:>a];
-	If[fr=!=fr1, Message[SimpF::diffree, fr, t]];
+	If[fr=!=fr1, Message[simpF::diffree, fr, t]];
 	dum = Cases[idStat, {a_,2}:>a];
 	availDum = Take[Complement[LatinIdx, fr], Length@dum];
 	rule = replaceTo[(a0:sumAlt)/@dum, a0/@availDum];
 	t /. rule]
-SimpF[e_]:= Module[{eList},
+simpF[e_]:= Module[{eList},
 	eList = ReleaseHold@plus2list@ReleaseHold@e;
-	Total[SimpFterm[#, Sort@free@eList[[1]]]& /@ eList]] 
+	Total[simpFterm[#, Sort@free@eList[[1]]]& /@ eList]] 
 
-SimpH = If[$VersionNumber>8.99, SimpM[SimpF@#]&, SimpF, SimpF]
+simpH::ver="Warning: Mathematica version 8 or lower detected. Simp may not bring tensor to unique form"
+simpH = If[$VersionNumber>8.99, simpM[simpF@#]&, Message[simpH::ver]; simpF]
 
 If[!ValueQ@SimpHook,SimpHook = {}]
-Simp[e_]:= SimpH[e//.SimpHook]//.SimpHook//Expand
-SimpUq[e_]:= Block[{IdxSet}, (IdxSet[#]=IdxSet[IdxDual[#]]=UniqueIdx)&/@DeleteDuplicates[IdxList, IdxDual[#1] == #2 &]; Simp@e]
+
+Options[Simp]= {"Method"->"Hybrid"}
+Simp[e_, OptionsPattern[]]:= Switch[OptionValue["Method"], "Fast", simpF, "MOnly", simpM, _, simpH][e//.SimpHook]//.SimpHook//Expand
+Options[SimpUq]= {"Method"->"Hybrid"}
+SimpUq[e_, OptionsPattern[]]:= Block[{IdxSet}, (IdxSet[#]=IdxSet[IdxDual[#]]=UniqueIdx)&/@DeleteDuplicates[IdxList, IdxDual[#1] == #2 &]; Simp[e, "Method"->OptionValue["Method"]]]
 
 (* ::Section:: *)
 (* M-backend of Simp *)
@@ -162,9 +162,9 @@ simpMTermAss[tM_]:= Module[{tInPdts, ass, cnt},
 	ass = ass && And@@Flatten@Cases[{tM},f:MAT[pdts[n_][t_]][idx__] /; n>1 :> ((f~Element~Arrays[Dim/@rmNE[{idx}], Symmetric[#]])& 
 		/@ (cnt=Length[{idx}]-n; Split[Cases[Take[{idx},-n],sumAlt],Function[{x,y},Dim[x]==Dim[y]]]/.{s:(sumAlt):> ++cnt})), Infinity] ]
 
-SimpM::ld="Warning: Memory constraint reached in `1`, simplification skipped."
+simpM::ld="Warning: Memory constraint reached in `1`, simplification skipped"
 tReduceMaxMemory=10^9 (* 1GB max memory *)
-tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[SimpM::ld, term];e]
+tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[simpM::ld, term];e]
 
 simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, cntId, slot1, slot2, oldDummy=dummy@term},
 	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)
@@ -185,10 +185,10 @@ simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, c
 		)& /@ tCt // Flatten[#,1]& // Sort // Transpose)[[2]];
 	cnt=1; tM /. TensorContract[a_,i_]:>a /. MAT[f_]:>f /. id:sumAlt|xFr:>id@tNewIdx[[cnt++]] /._xMat->1 //prod2times[#,TensorProduct|List]& (* Put idx back *)]
 
-If[!ValueQ@SimpMSelect,SimpMSelect = Identity]
-simpMHook:= {{ReleaseHold (*here eval first*), plus2list, SimpMSelect, pd2pdts, ReleaseHold (*here eval last*)}, {pdts2pd, SimpMSelect,Total}}
-SimpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *), fr, dum, x},
-	If[eList=={}, Return[0]]; (* SimpMSelect may return empty list *)
+If[!ValueQ@simpMSelect,simpMSelect = Identity]
+simpMHook:= {{ReleaseHold (*here eval first*), plus2list, simpMSelect, pd2pdts, ReleaseHold (*here eval last*)}, {pdts2pd, simpMSelect,Total}}
+simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *), fr, dum, x},
+	If[eList=={}, Return[0]]; (* simpMSelect may return empty list *)
 	fr = Sort@free@eList[[1]]; 
 	x = If[fr==={}, 1, xMat@@(Function[i, Operate[IdxDual,i]]/@ SortBy[freeFull@eList[[1]], #[[1]]&]) ]; (* contraction tensor *) 
 	(dum[#] = Complement[IdxSet[#], fr]) & /@ IdxList; (* Available free idx for each identifier *)

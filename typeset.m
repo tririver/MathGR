@@ -21,12 +21,9 @@ MakeExpression[TagBox[RowBox[{AdjustmentBox[t_, ___], StyleBox[GridBox[idx__, __
 	MakeExpression[RowBox[{t, "[", Sequence @@ Flatten[Riffle[parseUD[idx], ","]], "]"}], form]*)
 	
 parseUD[lst_, form_]:= Sequence @@ (Map[If[#[[1]] === "", #[[2]], #[[1]]] &, Transpose[lst]] /. {TagBox[i_ | StyleBox[i_, __], tag_] :> tag@ToExpression[i, form]})
-
 MakeExpression[TagBox[RowBox[{AdjustmentBox[t_, ___], StyleBox[GridBox[idx__, ___], ___]}], "mgrTsr"], form_] := 
 	With[{h = ToExpression[t, form], i = parseUD[idx, form]}, HoldComplete@h@i]
-	
-
-	
+		
 MakeBoxes[Pd[f_, d_@i_], form_] /; MatchQ[d, altDn] := TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", 
 		TagBox[StyleBox[MakeBoxes[i, form], FontColor -> IdxColor@d], d]], MakeBoxes[f, form]}], "mgrPd"]
 

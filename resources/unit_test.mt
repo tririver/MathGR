@@ -85,17 +85,17 @@ Test[Pd[undefined, d@"x"], Pd[undefined, d@"x"], TestID->"PD on unknown var"]
 Test[Pd[a_,d@b_]:>f[a,b],Pd[a_,d@b_]:>f[a,b], TestID->"Pattern is not considered as background or constant"]
 
 (* ::Subsection:: *)
-(* SimpQ *)
+(* SimpF *)
 
-Test[SimpF[f[u@"x", d@"b"] f1[d@"b"]], f[u["x"], d["a"]] f1[d["a"]], TestID->"SimpF re-arrange idx"]
+Test[Simp[f[u@"x", d@"b"] f1[d@"b"], "Method"->"Fast"], f[u["x"], d["a"]] f1[d["a"]], TestID->"SimpF re-arrange idx"]
 
 (* ::Subsection:: *)
 (* SimpM *)
 DeclareSym[f3, {d, d, d, d}, Symmetric[{1, 2}]];
 DeclareSym[f3, {d, d, d, d}, Antisymmetric[{3, 4}]];
-Test[f3[d@"i", d@"j", d@"i", d@"j"] // SimpM, 0, TestID->"SimpM symmetric"]
-Test[Pd[f3[d@"i", d@"j", d@"i", d@"j"],d@"k"] // SimpM, 0, TestID->"SimpM antisymmetric"]
-Test[Pd[f3[d@"i", de@0, d@"i", de@0],d@"k"] // SimpM, Pd[f3[d["a"], de[0], d["a"], de[0]], d["k"]], TestID->"SimpM with explicit idx"]
+Test[f3[d@"i", d@"j", d@"i", d@"j"] // Simp[#, "Method"->"MOnly"]&, 0, TestID->"SimpM symmetric"]
+Test[Pd[f3[d@"i", d@"j", d@"i", d@"j"],d@"k"] // Simp[#, "Method"->"MOnly"]&, 0, TestID->"SimpM antisymmetric"]
+Test[Pd[f3[d@"i", de@0, d@"i", de@0],d@"k"] // Simp[#, "Method"->"MOnly"]&, Pd[f3[d["a"], de[0], d["a"], de[0]], d["k"]], TestID->"SimpM with explicit idx"]
 Test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Simp, 
 	A[U2["b"], DN["\[Mu]"]] A[U2["c"], DN["\[Nu]"]] c[D2["b"], D2["c"], U2["a"]], TestID->"Simp with free idx sorted"]
 (* ::Subsection:: *)
