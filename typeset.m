@@ -1,5 +1,5 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
-BeginPackage["MathGR`look`", {"MathGR`tensor`"}]
+BeginPackage["MathGR`typeset`", {"MathGR`tensor`"}]
 Begin["`Private`"]
 
 altUp:= Alternatives @@ IdxUpList
