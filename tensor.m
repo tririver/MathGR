@@ -194,5 +194,17 @@ simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *
 	(dum[#] = Complement[IdxSet[#], fr]) & /@ IdxList; (* Available free idx for each identifier *)
 	Fold[#2[#1]&, simpMTerm[#,fr,dum,x]&/@eList, simpMHook[[2]]] (* Apply ending hook and return result *) ]
 
+
+(* ::Section:: *)
+(* Check tensor validity at $Pre *)
+
+preCheckList = {checkNestIdx}
+
+$PreRead::nestidx = "Nested indices are not allowed in `1`. This may produce mistakes."
+checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn)/;!FreeQ[List@@a,IdxPtn], Infinity]}, 
+		If[t =!= {}, Message[$PreRead::nestidx, t]]]&
+
+$PreRead := (Through@preCheckList@MakeExpression[#, StandardForm]; #)&
+
 End[]
 EndPackage[]
