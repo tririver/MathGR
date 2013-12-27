@@ -198,11 +198,21 @@ simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)
 
-preCheckList = {checkNestIdx}
+preCheckList = {checkNestIdx, checkDummyIdx}
 
-$PreRead::nestidx = "Nested indices are not allowed in `1`. This may produce mistakes."
+$PreRead::nestidx = "Nested indices are not allowed in `1`."
 checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn)/;!FreeQ[List@@a,IdxPtn], Infinity]}, 
 		If[t =!= {}, Message[$PreRead::nestidx, t]]]&
+
+$PreRead::wrongFree = "Free indices at `1` doesn't match in different terms."
+$PreRead::wrongMulti = "Indices `1` appeared more than 2 times."
+checkDummyIdx = Function[e, Module[{elist = ReleaseHold@plus2list@ReleaseHold@e, idStat, testFree, testMulti},
+	idStat = Tally[idx@#]& /@ elist;
+	testFree = DeleteDuplicates[Sort@Cases[#, {_, 1}] & /@ idStat];
+	If[Length@testFree > 1, Message[$PreRead::wrongFree, testFree]];
+	testMulti = Cases[idStat, {_, n_/;n>2}, Infinity];
+	If[testMulti =!= {}, Message[$PreRead::wrongMulti, testMulti]];
+]]
 
 $PreRead := (Through@preCheckList@MakeExpression[#, StandardForm]; #)&
 
