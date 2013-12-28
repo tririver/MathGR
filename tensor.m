@@ -86,7 +86,9 @@ DeclareExplicitIdx[ids_List, color_]:= Module[{},
 	(IdxColor[#]:=color; add2set[IdxNonSumList, #]; IdxNonSumPtn=Alternatives@@(Blank/@IdxNonSumList))&/@ids;
 	Dta[(Alternatives@@ids)@i_, (Alternatives@@ids)@j_]:= KroneckerDelta[i, j]]
 
-DeclareIdx[{UP, DN}, DefaultDim, GreekIdx, Black]
+(*DeclareIdx[{UP, DN}, DefaultDim, GreekIdx, Black]*)
+DeclareIdx[{UP, DN}, DefaultDim, LatinIdx, Black]
+
 DeclareExplicitIdx[{UE, DE}, Gray]
 
 idx:= Cases[times2prod@#,a:IdxPtn:>a[[1]],Infinity]& (* only find indices with Einstein convention *)
@@ -127,8 +129,15 @@ DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, Set
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
 DeleteSym[t_,idx_]:= (simpMAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpMAss}, Element[MAT[t][Sequence@@idx], _], Infinity];)
 
-simpFterm[t_, fr_]:= Module[{dum, availDum, rule, a0},
-	dum = dummy@t;
+
+simpF::overdummy="Error: index `1` appears `2` times in `3`"
+simpF::diffree="Error: free index `1` in term `2` is different from that of first term"
+simpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
+       idStat = Tally[idx@t];
+       If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[simpF::overdummy, Sequence@@(Cases[idStat, {a_,b_}/;b>2][[1]]), t]];
+       fr = Sort@Cases[idStat, {a_,1}:>a];
+       If[fr=!=fr1, Message[simpF::diffree, fr, t]];
+       dum = Cases[idStat, {a_,2}:>a];
 	availDum = Take[Complement[LatinIdx, fr], Length@dum];
 	rule = replaceTo[(a0:sumAlt)/@dum, a0/@availDum];
 	t /. rule]
@@ -197,21 +206,11 @@ simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)
 
-preCheckList = {checkNestIdx, checkDummyIdx}
+preCheckList = {checkNestIdx}
 
 $PreRead::nestidx = "Nested indices are not allowed in `1`."
 checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn)/;!FreeQ[List@@a,IdxPtn], Infinity]}, 
 		If[t =!= {}, Message[$PreRead::nestidx, t]]]&
-
-$PreRead::wrongFree = "Free indices at `1` doesn't match in different terms."
-$PreRead::wrongMulti = "Indices `1` appeared more than 2 times."
-checkDummyIdx = Function[e, Module[{elist = ReleaseHold@plus2list@ReleaseHold@e, idStat, testFree, testMulti},
-	idStat = Tally[idx@#]& /@ elist;
-	testFree = DeleteDuplicates[Sort@Cases[#, {_, 1}] & /@ idStat];
-	If[Length@testFree > 1, Message[$PreRead::wrongFree, testFree]];
-	testMulti = Cases[idStat, {_, n_/;n>2}, Infinity];
-	If[testMulti =!= {}, Message[$PreRead::wrongMulti, testMulti]];
-]]
 
 $PreRead := (Through@preCheckList@MakeExpression[#, StandardForm]; #)&
 
