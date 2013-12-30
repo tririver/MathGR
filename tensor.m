@@ -25,7 +25,7 @@ DE::usage = "Explicit lower idx prefix"
 
 Uq::usage = "Uq[n] generates a sequence of Unique[] of length n"
 Sym::usage = "Sym[expr, {a, b, ...}] symmetrizes indices a, b, ... Sym[expr] symmetrizes all free indices"
-Asym::usage = "ASym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... Asym[expr] anti-symmetrizes all free indices"
+AntiSym::usage = "AntiSym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... AntiSym[expr] anti-symmetrizes all free indices"
 
 Dta::usage = "Delta symbol"
 DtaGen::usage = "DtaGen[up..., dn...] is the generalized delta symbol"
@@ -67,9 +67,9 @@ Options[DtaGen]={"DtaGenDta"->Dta}
 DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2, a, b},
 	a = Take[{ids}, d]; b = Take[{ids}, -d]; 
 	btmp = MapThread[#1[#2] &, {(b[[#]][[0]] & /@ Range[d]), tmp /@ Range[d]}];
-	Asym[Product[OptionValue["DtaGenDta"][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])//ReleaseHold]
+	AntiSym[Product[OptionValue["DtaGenDta"][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])//ReleaseHold]
 
-DeclareIdx[ids_List, d_, set_, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
+DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
 	Dim[idsAlt]:=d; IdxSet[idsAlt]:=set; IdxColor[idsAlt]:=color; add2set[IdxList, {ids}]; IdxPtn=Alternatives@@(Blank/@IdxList);
 	IdxDual[ids[[1]]]=ids[[2]];	IdxDual[ids[[2]]]=ids[[1]];
 	add2set[IdxUpList,ids[[1]]]; IdxUpPtn=Alternatives@@(Blank/@IdxUpList);
@@ -98,9 +98,9 @@ dummy:= Cases[Tally[idx@#], {a_,2}:>a] &
 getFreeSample:= free[getSampleTerm@#]&
 
 Sym[e_, iList_]:= Plus@@ ( (e/.(iList~replaceTo~#)&) /@ Permutations[iList] )
-Asym[e_, iList_]:= Plus@@ ( (Signature[#] e/.(iList~replaceTo~#)&) /@ Permutations[iList] )
+AntiSym[e_, iList_]:= Plus@@ ( (Signature[#] e/.(iList~replaceTo~#)&) /@ Permutations[iList] )
 Sym[e_]:= Sym[e, free@e]
-Asym[e_]:= Asym[e, free@e]  
+AntiSym[e_]:= AntiSym[e, free@e]  
 
 (* ::Section:: *)
 (* Partial derivative *)
@@ -127,8 +127,14 @@ addAss[cond_]:= (simpMAss=Simplify[simpMAss&&cond];)
 
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@idx]~Element~Arrays[Dim/@rmNE[idx], sym]];)
-DeleteSym[t_,idx_]:= (simpMAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpMAss}, Element[MAT[t][Sequence@@idx], _], Infinity];)
 
+DeleteSym[t_]:= DeleteSym[t,{___}]
+DeleteSym[t_,idx_]:= Module[{del},
+	del = Cases[{simpMAss}, Element[MAT[t][Sequence@@idx], _], Infinity];
+	If[del==={}, Print["No match found in tensor definitions. Nothing is changed."];Return[]];
+	Print["The following definitions has been deleted: ", del];
+	ClearAttributes[t, Orderless];
+	simpMAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpMAss}, Element[MAT[t][Sequence@@idx], _], Infinity];]
 
 simpF::overdummy="Error: index `1` appears `2` times in `3`"
 simpF::diffree="Error: free index `1` in term `2` is different from that of first term"

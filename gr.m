@@ -31,10 +31,11 @@ isu[a_]:=Head@a===iu
 isd[a_]:=Head@a===id
 
 SetAttributes[{WithMetric, UseMetric}, HoldAll]
-WithMetric[g_, idx_:{UP, DN}, e_]:= (UseMetric[g, idx, False]; 
+WithMetric[g_, idx_:{UP, DN}, e_]:= (UseMetric[g, idx, "SetAsDefault"->False]; 
 	Block[{Metric=g, IdxOfMetric=idx}, e])
-UseMetric[g_, idx_:{UP, DN}, default_:True]:= Module[{u=idx[[1]], d=idx[[2]], ids},
-	If[default, Metric = g; IdxOfMetric = idx]; (* When default=False, only set attributes, but don't set Metric *)
+Options[UseMetric]={"SetAsDefault"->True}
+UseMetric[g_, idx_:{UP, DN}, OptionsPattern[]]:= Module[{u=idx[[1]], d=idx[[2]], ids},
+	If[OptionValue["SetAsDefault"], Metric = g; IdxOfMetric = idx]; (* When default=False, only set attributes, but don't set Metric *)
 	DeclareSym[g, {u,u}, Symmetric[All]];
 	DeclareSym[g, {d,d}, Symmetric[All]];
 	g /: g[u@a_, d@b_]:= Dta[u@a, d@b];

@@ -72,7 +72,7 @@ Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[u3@"d", u3@"e", u3@"f"], -(g3
 (* Sym, Asym *)
 
 Test[Sym[f[d@"a",d@"b"]],f[d@"a",d@"b"]+f[d@"b",d@"a"], TestID->"Sym"]
-Test[Asym[f[d@"a",d@"b"]],f[d@"a",d@"b"]-f[d@"b",d@"a"], TestID->"Sym"]
+Test[AntiSym[f[d@"a",d@"b"]],f[d@"a",d@"b"]-f[d@"b",d@"a"], TestID->"AntiSym"]
 
 (* ::Subsection:: *)
 (* Pd *)
