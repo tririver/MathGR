@@ -182,3 +182,38 @@ solCons =  Solve[{D[s2, \[Alpha]] == 0, D[s2, \[Beta]] == 0, D[s2, b[DN@"a"]] ==
 s2Solved = s2 /. solCons // Ibp[#, IbpStd2] &
 Print["Result of s2Solved =========="];Print[s2Solved]
 Test[s2Solved, -(a*k^2*\[Epsilon]*\[Zeta]^2) + a^3*\[Epsilon]*Pd[\[Zeta], DE[0]]^2, TestID->"zeta gauge 2nd order action"]
+PdHold[__]=.
+(* ::Section:: *)
+(* Decomposition *)
+
+<< MathGR/gr.m
+<< MathGR/decomp.m
+<< MathGR/ibp.m
+<< MathGR/typeset.m
+
+UseMetric[\[DoubleStruckG], {UTot, DTot}]
+UseMetric[\[Eta], {U1, D1}, "SetAsDefault" -> False]
+UseMetric[\[Gamma], {U2, D2}, "SetAsDefault" -> False]
+
+Test[\[DoubleStruckG][U1@"a",D1@"b"], Dta[U1@"a",D1@"b"], TestID->"metric on other dual pairs of indices"]
+Test[\[DoubleStruckG][UTot@"a",D1@"b"], \[DoubleStruckG][UTot@"a",D1@"b"], TestID->"metric on non-dual pairs of indices is unevaluated"]
+
+DecompHook={\[DoubleStruckG][D1[\[Alpha]_], D1[\[Beta]_]] :> (\[Eta][Sequence[D1[\[Alpha]], D1[\[Beta]]]] + A[Sequence[U2[#1], D1[\[Alpha]]]]*
+      A[Sequence[U2[#1], D1[\[Beta]]]] & )[Uq[1]], \[DoubleStruckG][D1[\[Alpha]_], D2[b_]] :> A[Sequence[U2[b], D1[\[Alpha]]]], 
+ \[DoubleStruckG][U1[\[Alpha]_], U1[\[Beta]_]] :> \[Eta][Sequence[U1[\[Alpha]], U1[\[Beta]]]], 
+ \[DoubleStruckG][U1[\[Alpha]_], U2[b_]] :> ((-\[Eta][Sequence[U1[\[Alpha]], U1[#1]]])*A[Sequence[U2[b], D1[#1]]] & )[Uq[1]], 
+ \[DoubleStruckG][U2[a_], U2[b_]] :> (Dta[Sequence[U2[a], U2[b]]] + \[Eta][Sequence[U1[#1], U1[#2]]]*
+      A[Sequence[U2[a], D1[#1]]]*A[Sequence[U2[b], D1[#2]]] & )[Uq[2]], 
+ \[DoubleStruckG][D2[a_], D2[b_]] :> Dta[Sequence[U2[a], U2[b]]]}
+ 
+Pd[\[Eta][__], _] := 0;
+Pd[\[Gamma][__], _] := 0;
+Pd[A[__], _D2] := 0;
+Pd[Pd[A[__], _], _D2] := 0;
+
+R\[Bullet]decomp = DecompSe[R[] // Simp]
+
+Test[TrySimp[R\[Bullet]decomp, (a_.) + (b_.)*Pd[A[U2[m_], D1[\[Alpha]_]], D1[\[Beta]_]] :> 
+  a + Simp[b*(F[Sequence[U2[m], D1[\[Alpha]], D1[\[Beta]]]] + Pd[A[Sequence[U2[m], D1[\[Beta]]]], D1[\[Alpha]]])]], 
+  -(F[U2["a"], D1["\[Alpha]"], D1["\[Beta]"]]*Pd[A[U2["a"], D1["\[Gamma]"]], D1["\[Delta]"]]*\[Eta][U1["\[Alpha]"], U1["\[Gamma]"]]*
+   \[Eta][U1["\[Beta]"], U1["\[Delta]"]])/2, TestID->"Decomposition of non-diag metric into Maxwell"]
