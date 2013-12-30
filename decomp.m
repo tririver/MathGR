@@ -4,7 +4,10 @@ BeginPackage["MathGR`decomp`", {"MathGR`tensor`", "MathGR`util`"}]
 DimTot::usage = "Dimension of the tensors, higher demension for decomposition."
 UTot::usage = "Upper index in higher dimensions"
 DTot::usage = "Lower index in higher dimensions"
+Dim1::usage = "Dimension of the tensors, first dimensions for decomposition."
 Dim2::usage = "Dimension of the tensors, second dimensions for decomposition."
+U1::usage = "Upper index in first dimensions"
+D1::usage = "Lower index in first dimensions"
 U2::usage = "Upper index in second dimensions"
 D2::usage = "Lower index in second dimensions"
 
@@ -21,16 +24,23 @@ Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
 DeclareIdx[{UTot, DTot}, DimTot, LatinCapitalIdx, Blue]
-
+DeclareIdx[{U1, D1}, Dim1, GreekIdx, Black]
 DeclareIdx[{U2, D2}, Dim2, LatinIdx, Red]
 
 If[!ValueQ@DecompHook,DecompHook = {}]
 SetAttributes[{Decomp0i, Decomp01i, Decomp0123, Decomp}, HoldFirst]
 Decomp[e_, decRule_, idList___]:= apply2term[decompTerm[#, decRule,
 	Alternatives@@Cases[decRule[[1]], (tid_[_] -> _) :> tid, Infinity](* this is type of idx, like DTot|TTot *), idList]&, e]
-decompTerm[t_, decRule_, idPtn_]:= Module[{totDummy= Cases[Tally[ Cases[t, idPtn[a_]:>a,Infinity] ], {a_,2}:>a]}, decompTerm[t, decRule, idPtn, totDummy]]
-decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id},  
-	Do[	rule = #[id]& /@ decRule; If[!FreeQ[s, idPtn@id], s = Total[s/.rule]//.DecompHook//Expand], {id, idList}];
+decompTerm[t_, decRule_, idPtn_]:= Module[{totDummy}, 
+	totDummy = Cases[Tally[ Cases[t, idPtn[a_]:>a,Infinity] ], {a_,2}:>a];
+	decompTerm[t, decRule, idPtn, totDummy]]
+decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id}, 
+	Do[	rule = #[id]& /@ decRule; 
+		If[(s/.rule[[1]])=!=s (* decompose only when idx exists *), 
+			s = Total[s/.rule//.DecompHook]] 
+			(* Here is a subtlety: cannot expand inside Do[]. Otherwise if there is Dta in DecompHook, Dta, e.g. Dta[U2, U2] may raise or lower indices too early. *)
+			(* In other words, one must know by oneself which indices are upper / lower by which metric -- Dta doesn't know that! *)
+			, {id, idList}]; 
 	s//.DecompHook//Simp]
 
 Decomp0i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]
@@ -38,7 +48,7 @@ Decomp01i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DE@1, U
 Decomp0123[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DE@1, UTot@#->UE@1}&, {DTot@#->DE@2, UTot@#->UE@2}&, {DTot@#->DE@3,UTot@#->UE@3}&}, i]
 Decomp1i[e_, i___]:= Decomp[e, {{DTot@#->DE@1, UTot@#->UE@1}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]
 Decomp123[e_, i___]:= Decomp[e, {{DTot@#->DE@1, UTot@#->UE@1}&, {DTot@#->DE@2, UTot@#->UE@2}&, {DTot@#->DE@3,UTot@#->UE@3}&}, i]
-DecompSe[e_, i___] := Decomp[e, {{DTot@# -> D2@#, UTot@# -> U2@#}&, {DTot@# -> DN@#, UTot@# -> UP@#}&}, i]
+DecompSe[e_, i___] := Decomp[e, {{DTot@# -> D2@#, UTot@# -> U2@#}&, {DTot@# -> D1@#, UTot@# -> U1@#}&}, i]
 
 End[]
 EndPackage[]

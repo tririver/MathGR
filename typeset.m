@@ -6,7 +6,7 @@ altUp:= Alternatives @@ IdxUpList
 altDn:= Alternatives @@ IdxDnList
 idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn | IdxNonSumPtn) ..}]
 
-MakeBoxes[tsr_[idx__], form_]/;(idxQ[idx]&&tsr=!=List):= TagBox[RowBox[{AdjustmentBox[MakeBoxes[tsr, form], BoxMargins -> {{0, -0.2}, {0, 0}}], 
+MakeBoxes[tsr_[idx__], form_]/;(idxQ[idx]&&tsr=!=List&&tsr=!=Rule):= TagBox[RowBox[{AdjustmentBox[MakeBoxes[tsr, form], BoxMargins -> {{0, -0.2}, {0, 0}}], 
 	StyleBox[ GridBox[{idx} /. {
 		{(a:altUp)[i_]:>TagBox[StyleBox[MakeBoxes[i, form], FontColor->IdxColor@a], a], 
 			IdxDnPtn:>"", UE@n_:>TagBox[StyleBox[MakeBoxes[n, form], FontColor->IdxColor@UE],UE], DE@n_:>""}, 

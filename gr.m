@@ -38,7 +38,8 @@ UseMetric[g_, idx_:{UP, DN}, OptionsPattern[]]:= Module[{u=idx[[1]], d=idx[[2]],
 	If[OptionValue["SetAsDefault"], Metric = g; IdxOfMetric = idx]; (* When default=False, only set attributes, but don't set Metric *)
 	DeclareSym[g, {u,u}, Symmetric[All]];
 	DeclareSym[g, {d,d}, Symmetric[All]];
-	g /: g[u@a_, d@b_]:= Dta[u@a, d@b];
+	(*g /: g[u@a_, d@b_]:= Dta[u@a, d@b];*) (* this is replaced by below because say, g[_UTot, _DTot] should also have g[_U1, _D1]=Dta*)
+	g /: g[i_@a_, j_@b_]/;i===IdxDual@j := Dta[i@a,j@b];
 	g /: g[u@a_, u@c_]g[d@c_, d@b_]:= Dta[u@a, d@b];
 	g /: Pd[g[u@m_, u@a_], d@l_]:= -g[u@#1, u@a]g[u@#2, u@m]Pd[g[d@#1, d@#2], d@l] &@Uq[2];
 	If[IntegerQ[Dim@u],
