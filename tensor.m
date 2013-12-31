@@ -72,12 +72,13 @@ DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2
 DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
 	Dim[idsAlt]:=d; IdxSet[idsAlt]:=set; IdxColor[idsAlt]:=color; add2set[IdxList, {ids}]; IdxPtn=Alternatives@@(Blank/@IdxList);
 	IdxDual[ids[[1]]]=ids[[2]];	IdxDual[ids[[2]]]=ids[[1]];
+	idxIdentity[ids[[1]]] = idxIdentity[ids[[2]]] = Unique[];
 	add2set[IdxUpList,ids[[1]]]; IdxUpPtn=Alternatives@@(Blank/@IdxUpList);
 	add2set[IdxDnList,ids[[2]]]; IdxDnPtn=Alternatives@@(Blank/@IdxDnList);
 	Dta[idsAlt@a_, idsAlt@a_]:= d;
 	Dta/:Power[Dta[idsAlt@a_, idsAlt@b_], 2]:= d;
-	Dta/:Dta[(a:idsAlt)@m_, (b:idsAlt)@n_] f_ := Piecewise[{{ReleaseHold[f/.idsAlt@n -> a@m], !FreeQ[f, idsAlt@n]}, 
-		{ReleaseHold[f/.idsAlt@m -> b@n], !FreeQ[f, idsAlt@m]}},	Hold[Dta][a@m, b@n] f];
+	Dta/:Dta[(a:idsAlt)@m_, (b:idsAlt)@n_] f_ := Piecewise[{{ReleaseHold[f/.(c:idsAlt)@n -> c@m], !FreeQ[f, idsAlt@n]}, 
+		{ReleaseHold[f/.(c:idsAlt)@m -> c@n], !FreeQ[f, idsAlt@m]}},	Hold[Dta][a@m, b@n] f];
 	If[IntegerQ[d],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
 		LeviCivita /: LeviCivita[a:(ids[[1]][_]..)]*LeviCivita[b:(ids[[2]][_]..)]:= DtaGen[a,b];  ]]
@@ -136,20 +137,22 @@ DeleteSym[t_,idx_]:= Module[{del},
 	ClearAttributes[t, Orderless];
 	simpMAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpMAss}, Element[MAT[t][Sequence@@idx], _], Infinity];]
 
-simpF::overdummy="Error: index `1` appears `2` times in `3`"
-simpF::diffree="Error: free index `1` in term `2` is different from that of first term"
+Simp::overdummy="Error: index `1` appears `2` times in `3`"
+Simp::diffree="Error: free index `1` in term `2` is different from that of first term"
 simpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
        idStat = Tally[idx@t];
-       If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[simpF::overdummy, Sequence@@(Cases[idStat, {a_,b_}/;b>2][[1]]), t]];
+       If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[Simp::overdummy, Sequence@@(Cases[idStat, {a_,b_}/;b>2][[1]]), t]];
        fr = Sort@Cases[idStat, {a_,1}:>a];
-       If[fr=!=fr1, Message[simpF::diffree, fr, t]];
+       If[fr=!=fr1, Message[Simp::diffree, fr, t]];
        dum = Cases[idStat, {a_,2}:>a];
 	availDum = Take[Complement[LatinIdx, fr], Length@dum];
 	rule = replaceTo[(a0:sumAlt)/@dum, a0/@availDum];
 	t /. rule]
 simpF[e_]:= Module[{eList},
 	eList = ReleaseHold@plus2list@ReleaseHold@e;
-	Total[simpFterm[#, Sort@free@eList[[1]]]& /@ eList]] 
+	Total[simpFterm[#, Sort@free@eList[[1]]]& /@ eList]]
+
+
 
 simpH::ver="Warning: Mathematica version 8 or lower detected. Simp may not bring tensor to unique form"
 simpH = If[$VersionNumber>8.99, simpM[simpF@#]&, Message[simpH::ver]; simpF]
@@ -215,7 +218,7 @@ simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *
 preCheckList = {checkNestIdx}
 
 $PreRead::nestidx = "Nested indices are not allowed in `1`."
-checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn)/;!FreeQ[List@@a,IdxPtn], Infinity]}, 
+checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn)/;!FreeQ[List@@a,IdxPtn], Infinity]},
 		If[t =!= {}, Message[$PreRead::nestidx, t]]]&
 
 $PreRead := (Through@preCheckList@MakeExpression[#, StandardForm]; #)&

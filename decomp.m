@@ -37,10 +37,7 @@ decompTerm[t_, decRule_, idPtn_]:= Module[{totDummy},
 decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id}, 
 	Do[	rule = #[id]& /@ decRule; 
 		If[(s/.rule[[1]])=!=s (* decompose only when idx exists *), 
-			s = Total[s/.rule//.DecompHook]] 
-			(* Here is a subtlety: cannot expand inside Do[]. Otherwise if there is Dta in DecompHook, Dta, e.g. Dta[U2, U2] may raise or lower indices too early. *)
-			(* In other words, one must know by oneself which indices are upper / lower by which metric -- Dta doesn't know that! *)
-			, {id, idList}]; 
+			s = Total[s/.rule//.DecompHook]], {id, idList}]; 
 	s//.DecompHook//Simp]
 
 Decomp0i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]

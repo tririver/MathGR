@@ -34,6 +34,7 @@ Test[MemberQ[IdxNonSumList, ue] && MemberQ[IdxNonSumList, de] && MatchQ[ue[0], I
 Test[f[u@"a", f1[u@"b"]]Dta[u@"b", u@"c"], f[u@"a", f1[u@"c"]], TestID->"Dta up-up, with nest func"]
 Test[f[u@"a", d@"b"]Dta[u@"b", d@"c"], f[u@"a", d@"c"], TestID->"Dta up-dn"]
 Test[f[d@"a", d@"b"]Dta[d@"b", d@"c"], f[d@"a", d@"c"], TestID->"Dta dn-dn"]
+Test[f[u@"a", u@"b"]Dta[d@"b", d@"c"], f[u@"a", u@"c"], TestID->"Dta does not raise/lower idx"]
 Test[Dta[u@"a", u@"c"]Dta[u@"b", u@"c"], Dta[u@"a", u@"b"], TestID->"Dta-Dta contraction up-up"]
 Test[Dta[u@"a", d@"c"]Dta[d@"b", u@"c"], Dta[u@"a", d@"b"], TestID->"Dta-Dta contraction up-dn"]
 Test[Dta[d@"a", d@"c"]Dta[d@"b", d@"c"], Dta[d@"a", d@"b"], TestID->"Dta-Dta contraction dn-dn"]
