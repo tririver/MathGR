@@ -45,6 +45,9 @@ Test[Dta[u@"a", u@"a"]==dimTest && Dta[u@"a", d@"a"]==dimTest && Dta[d@"a", d@"a
 	True, TestID->"Dta sum"]
 Test[Dta[ue@1, de@0]==0 && Dta[ue@1, de@1]==1, True, TestID->"Dta explicit idx"]
 
+Test[DtaGen[UP@"a", UP@"b", DN@"m", DN@"n"],-Hold[Dta][DN["m"], UP["b"]] Hold[Dta][DN["n"], UP["a"]] + 
+ Hold[Dta][DN["m"], UP["a"]] Hold[Dta][DN["n"], UP["b"]], TestID->"DtaGen"]
+
 (* ::Subsection:: *)
 (* LeviCivita *)
 

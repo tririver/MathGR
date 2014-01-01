@@ -35,5 +35,340 @@ MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]"], form_] := MakeExpression
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
 
+
+(* ::Section:: *)
+(* Paste the blob calculated in InputAliases.nb *)
+
+aliasesList={"tp" -> TagBox[
+   RowBox[{SubscriptBox["\[CapitalSampi]", 
+      TagBox[StyleBox["\"\[SelectionPlaceholder]\"", 
+        FontColor -> GrayLevel[0]], DN]], "\[Placeholder]"}], 
+   "mgrPd"], 
+ "tp1" -> TagBox[
+   RowBox[{SubscriptBox["\[CapitalSampi]", 
+      TagBox[StyleBox["\"\[SelectionPlaceholder]\"", 
+        FontColor -> GrayLevel[0]], D1]], "\[Placeholder]"}], 
+   "mgrPd"], 
+ "tp2" -> TagBox[
+   RowBox[{SubscriptBox["\[CapitalSampi]", 
+      TagBox[StyleBox["\"\[SelectionPlaceholder]\"", 
+        FontColor -> RGBColor[1, 0, 0]], D2]], "\[Placeholder]"}], 
+   "mgrPd"], 
+ "tpt" -> TagBox[
+   RowBox[{SubscriptBox["\[CapitalSampi]", 
+      TagBox[StyleBox["\"\[SelectionPlaceholder]\"", 
+        FontColor -> RGBColor[0, 0, 1]], DTot]], "\[Placeholder]"}], 
+   "mgrPd"], 
+ "tu" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "td" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tuu" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tud" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], ""}, {"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], DN]}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "tdu" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], UP]}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tdd" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         ""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tuuu" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], UP], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], UP]}, {"", "", ""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tudd" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], "", ""}, {"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], DN], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], DN]}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "tddd" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", "", 
+         ""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], DN]}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "tuuuu" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          UP]}, {"", "", "", ""}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "tdddd" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", "", "", 
+         ""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          DN], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], DN], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], DN]}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "tu1" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          U1]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "td1" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          D1]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tu1u1" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          U1], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], U1]}, {"", ""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tu1d1" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          U1], ""}, {"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], D1]}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "td1u1" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> GrayLevel[0]], U1]}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          D1], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "td1d1" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         ""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          D1], TagBox[
+          StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+          D1]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tu2" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], U2]}, {""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "td2" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], D2]}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tu2u2" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], U2], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], U2]}, {"", ""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tu2d2" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], U2], ""}, {"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], D2]}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "td2u2" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], U2]}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], D2], ""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "td2d2" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         ""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], D2], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[1, 0, 0]], D2]}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tut" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], UTot]}, {""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tdt" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], DTot]}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tutut" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], UTot], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], UTot]}, {"", ""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tutdt" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], UTot], ""}, {"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], DTot]}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tdtut" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], UTot]}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], DTot], ""}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"], 
+ "tdtdt" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         ""}, {TagBox[
+          StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], DTot], 
+         TagBox[StyleBox["\"\[Placeholder]\"", 
+           FontColor -> RGBColor[0, 0, 1]], DTot]}}, 
+       ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
+   "mgrTsr"]}
+
+SetOptions[EvaluationNotebook[], InputAliases -> aliasesList];
+
 End[]
 EndPackage[]
