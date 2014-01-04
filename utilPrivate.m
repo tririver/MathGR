@@ -15,6 +15,7 @@ add2pattern
 
 Begin["`Private`"]
 
+SetAttributes[defQ, HoldAll];
 defQ[x_]:= {OwnValues[x],UpValues[x],DownValues[x]} =!= {{},{},{}};
 
 plus2listRaw = If[Head[#]===Plus, List@@#, {#}]&

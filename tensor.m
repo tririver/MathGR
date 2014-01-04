@@ -77,8 +77,8 @@ DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, 
 	add2set[IdxDnList,ids[[2]]]; IdxDnPtn=Alternatives@@(Blank/@IdxDnList);
 	Dta[idsAlt@a_, idsAlt@a_]:= d;
 	Dta/:Power[Dta[idsAlt@a_, idsAlt@b_], 2]:= d;
-	Dta/:Dta[(a:idsAlt)@m_, (b:idsAlt)@n_] f_ := Piecewise[{{ReleaseHold[f/.(c:idsAlt)@n -> c@m], !FreeQ[f, idsAlt@n]}, 
-		{ReleaseHold[f/.(c:idsAlt)@m -> c@n], !FreeQ[f, idsAlt@m]}},	Hold[Dta][a@m, b@n] f];
+	Dta/:Dta[(a:idsAlt)@m_, (b:idsAlt)@n_] f_ := Piecewise[{{ReleaseHold[f/.(c:idsAlt)@n -> c@m], !FreeQ[f, (ids[[1]][n])|(ids[[2]][n])]}, 
+		{ReleaseHold[f/.(c:idsAlt)@m -> c@n], !FreeQ[f, (ids[[1]][m])|(ids[[2]][m])]}},	Hold[Dta][a@m, b@n] f];
 	If[IntegerQ[d],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
 		LeviCivita /: LeviCivita[a:(ids[[1]][_]..)]*LeviCivita[b:(ids[[2]][_]..)]:= DtaGen[a,b];  ]]
