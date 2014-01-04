@@ -1,6 +1,7 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
 BeginPackage["MathGR`utilPrivate`"]
 
+defQ
 plus2listRaw
 plus2list
 apply2term
@@ -13,6 +14,8 @@ add2set
 add2pattern
 
 Begin["`Private`"]
+
+defQ[x_]:= {OwnValues[x],UpValues[x],DownValues[x]} =!= {{},{},{}};
 
 plus2listRaw = If[Head[#]===Plus, List@@#, {#}]&
 plus2list = plus2listRaw[Expand@#]&

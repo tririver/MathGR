@@ -27,7 +27,7 @@ DeclareIdx[{UTot, DTot}, DimTot, LatinCapitalIdx, Blue]
 DeclareIdx[{U1, D1}, Dim1, GreekIdx, Black]
 DeclareIdx[{U2, D2}, Dim2, LatinIdx, Red]
 
-If[!ValueQ@DecompHook,DecompHook = {}]
+If[!defQ@DecompHook,DecompHook = {}]
 SetAttributes[{Decomp0i, Decomp01i, Decomp0123, Decomp}, HoldFirst]
 Decomp[e_, decRule_, idList___]:= apply2term[decompTerm[#, decRule,
 	Alternatives@@Cases[decRule[[1]], (tid_[_] -> _) :> tid, Infinity](* this is type of idx, like DTot|TTot *), idList]&, e]

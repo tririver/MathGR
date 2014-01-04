@@ -42,7 +42,7 @@ DeleteSym::usage = "DeleteSym[tensor, {UP, DN, ...}] deletes tensor symmetry"
 Simp::usage = "Default simplification, with SimpHook applied"
 SimpUq::usage = "Simp, keeping dummy unique"
 SimpHook::usage = "Rules to apply before and after Simp"
-simpMSelect::usage = "A function to select terms to simplify, disregard others"
+SimpMSelect::usage = "A function to select terms to simplify, disregard others"
 
 \[Bullet]::usage = "Symbol for time derivative"
 
@@ -123,7 +123,7 @@ sumAlt:=Alternatives@@IdxList;
 
 rmNE[e_] := DeleteCases[e, IdxNonSumPtn];
 
-If[!ValueQ@simpMAss,simpMAss = True]
+If[!defQ@simpMAss,simpMAss = True]
 addAss[cond_]:= (simpMAss=Simplify[simpMAss&&cond];)
 
 DeclareSym[t_,idx_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
@@ -157,7 +157,7 @@ simpF[e_]:= Module[{eList},
 simpH::ver="Warning: Mathematica version 8 or lower detected. Simp may not bring tensor to unique form"
 simpH = If[$VersionNumber>8.99, simpM[simpF@#]&, Message[simpH::ver]; simpF]
 
-If[!ValueQ@SimpHook,SimpHook = {}]
+If[!defQ@SimpHook,SimpHook = {}]
 
 Options[Simp]= {"Method"->"Hybrid"}
 Simp[e_, OptionsPattern[]]:= Switch[OptionValue["Method"], "Fast", simpF, "MOnly", simpM, _, simpH][e//.SimpHook]//.SimpHook//Expand
@@ -202,10 +202,10 @@ simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, c
 		)& /@ tCt // Flatten[#,1]& // Sort // Transpose)[[2]];
 	cnt=1; tM /. TensorContract[a_,i_]:>a /. MAT[f_]:>f /. id:sumAlt|xFr:>id@tNewIdx[[cnt++]] /._xMat->1 //prod2times[#,TensorProduct|List]& (* Put idx back *)]
 
-If[!ValueQ@simpMSelect,simpMSelect = Identity]
-simpMHook:= {{ReleaseHold (*here eval first*), plus2list, simpMSelect, pd2pdts, ReleaseHold (*here eval last*)}, {pdts2pd, simpMSelect,Total}}
+If[!defQ@SimpMSelect,SimpMSelect = Identity]
+simpMHook:= {{ReleaseHold (*here eval first*), plus2list, SimpMSelect, pd2pdts, ReleaseHold (*here eval last*)}, {pdts2pd, SimpMSelect,Total}}
 simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *), fr, dum, x},
-	If[eList=={}, Return[0]]; (* simpMSelect may return empty list *)
+	If[eList=={}, Return[0]]; (* SimpMSelect may return empty list *)
 	fr = Sort@free@eList[[1]]; 
 	x = If[fr==={}, 1, xMat@@(Function[i, Operate[IdxDual,i]]/@ SortBy[freeFull@eList[[1]], #[[1]]&]) ]; (* contraction tensor *) 
 	(dum[#] = Complement[IdxSet[#], fr]) & /@ IdxList; (* Available free idx for each identifier *)
