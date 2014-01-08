@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    111065,       2906]
-NotebookOptionsPosition[     95081,       2497]
-NotebookOutlinePosition[    110407,       2880]
-CellTagsIndexPosition[    110364,       2877]
+NotebookDataLength[    127719,       3342]
+NotebookOptionsPosition[    111416,       2930]
+NotebookOutlinePosition[    127054,       3316]
+CellTagsIndexPosition[    127011,       3313]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -37,7 +37,7 @@ https://github.com/tririver/MathGR/issues\\nLoaded components tensor, decomp, \
 gr, ibp, typeset.\"\>"], "Print",
  CellChangeTimes->{
   3.5975853589759893`*^9, {3.5975863670317993`*^9, 3.597586373420066*^9}, 
-   3.597587160151313*^9, 3.597587278389813*^9}]
+   3.597587160151313*^9, 3.597587278389813*^9, 3.598182022965835*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -229,14 +229,47 @@ Cell[BoxData[
      RowBox[{"\[SelectionPlaceholder]", "[", 
       RowBox[{
        RowBox[{"DTot", "[", "\"\<\[Placeholder]\>\"", "]"}], ",", 
-       RowBox[{"DTot", "[", "\"\<\[Placeholder]\>\"", "]"}]}], "]"}]}]}], 
+       RowBox[{"DTot", "[", "\"\<\[Placeholder]\>\"", "]"}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<tue\>\"", "\[Rule]", 
+     RowBox[{"\[SelectionPlaceholder]", "[", 
+      RowBox[{"UE", "[", "\[Placeholder]", "]"}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<tde\>\"", "\[Rule]", 
+     RowBox[{"\[SelectionPlaceholder]", "[", 
+      RowBox[{"DE", "[", "\[Placeholder]", "]"}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<tueue\>\"", "\[Rule]", 
+     RowBox[{"\[SelectionPlaceholder]", "[", 
+      RowBox[{
+       RowBox[{"UE", "[", "\[Placeholder]", "]"}], ",", 
+       RowBox[{"UE", "[", "\[Placeholder]", "]"}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<tuede\>\"", "\[Rule]", 
+     RowBox[{"\[SelectionPlaceholder]", "[", 
+      RowBox[{
+       RowBox[{"UE", "[", "\[Placeholder]", "]"}], ",", 
+       RowBox[{"DE", "[", "\[Placeholder]", "]"}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<tdeue\>\"", "\[Rule]", 
+     RowBox[{"\[SelectionPlaceholder]", "[", 
+      RowBox[{
+       RowBox[{"DE", "[", "\[Placeholder]", "]"}], ",", 
+       RowBox[{"UE", "[", "\[Placeholder]", "]"}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<tdede\>\"", "\[Rule]", 
+     RowBox[{"\[SelectionPlaceholder]", "[", 
+      RowBox[{
+       RowBox[{"DE", "[", "\[Placeholder]", "]"}], ",", 
+       RowBox[{"DE", "[", "\[Placeholder]", "]"}]}], "]"}]}]}], 
    "\[IndentingNewLine]", "}"}]}]], "Input",
  CellChangeTimes->{{3.5975852921054497`*^9, 3.597585330024191*^9}, {
   3.5975853649248753`*^9, 3.597585410196486*^9}, {3.597585443061914*^9, 
   3.5975855346962357`*^9}, {3.5975855669988623`*^9, 3.5975858369617243`*^9}, {
   3.5975860329237137`*^9, 3.597586097460855*^9}, {3.597586127519538*^9, 
   3.597586207571638*^9}, {3.597586329885125*^9, 3.597586363042583*^9}, {
-  3.597586411340517*^9, 3.597586452600955*^9}}],
+  3.597586411340517*^9, 3.597586452600955*^9}, {3.5981819043976717`*^9, 
+  3.5981820177949533`*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1055,9 +1088,163 @@ Cell[BoxData[
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
        FontSize->10]}],
+     "mgrTsr"]}], ",", 
+   RowBox[{"\<\"tue\"\>", "\[Rule]", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["\[SelectionPlaceholder]",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`UE]},
+         {""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"]}], ",", 
+   RowBox[{"\<\"tde\"\>", "\[Rule]", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["\[SelectionPlaceholder]",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {""},
+         {
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`DE]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"]}], ",", 
+   RowBox[{"\<\"tueue\"\>", "\[Rule]", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["\[SelectionPlaceholder]",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`UE], 
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`UE]},
+         {"", ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"]}], ",", 
+   RowBox[{"\<\"tuede\"\>", "\[Rule]", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["\[SelectionPlaceholder]",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`UE], ""},
+         {"", 
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`DE]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"]}], ",", 
+   RowBox[{"\<\"tdeue\"\>", "\[Rule]", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["\[SelectionPlaceholder]",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {"", 
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`UE]},
+         {
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`DE], ""}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"]}], ",", 
+   RowBox[{"\<\"tdede\"\>", "\[Rule]", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["\[SelectionPlaceholder]",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {"", ""},
+         {
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`DE], 
+          TagBox[
+           StyleBox["\[Placeholder]",
+            FontColor->GrayLevel[0.5]],
+           MathGR`tensor`DE]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
      "mgrTsr"]}]}], "}"}]], "Output",
  CellChangeTimes->{3.597586452935966*^9, 3.5975871615249968`*^9, 
-  3.5975872785168743`*^9}]
+  3.5975872785168743`*^9, 3.5981820253809423`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2424,8 +2611,254 @@ Cell[BoxData[
              RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
              RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
            RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
+      ",", "\<\"mgrTsr\"\>"}], "]"}]}], ",", 
+   RowBox[{"\<\"tue\"\>", "\[Rule]", 
+    RowBox[{"TagBox", "[", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AdjustmentBox", "[", 
+          RowBox[{"\<\"\[SelectionPlaceholder]\"\>", ",", 
+           RowBox[{"BoxMargins", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"-", "0.2`"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"GridBox", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"TagBox", "[", 
+                 RowBox[{
+                  RowBox[{"StyleBox", "[", 
+                   RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                  "UE"}], "]"}], "}"}], ",", 
+               RowBox[{"{", "\<\"\"\>", "}"}]}], "}"}], ",", 
+             RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
+             RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
+      ",", "\<\"mgrTsr\"\>"}], "]"}]}], ",", 
+   RowBox[{"\<\"tde\"\>", "\[Rule]", 
+    RowBox[{"TagBox", "[", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AdjustmentBox", "[", 
+          RowBox[{"\<\"\[SelectionPlaceholder]\"\>", ",", 
+           RowBox[{"BoxMargins", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"-", "0.2`"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"GridBox", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", "\<\"\"\>", "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"TagBox", "[", 
+                 RowBox[{
+                  RowBox[{"StyleBox", "[", 
+                   RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                  "DE"}], "]"}], "}"}]}], "}"}], ",", 
+             RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
+             RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
+      ",", "\<\"mgrTsr\"\>"}], "]"}]}], ",", 
+   RowBox[{"\<\"tueue\"\>", "\[Rule]", 
+    RowBox[{"TagBox", "[", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AdjustmentBox", "[", 
+          RowBox[{"\<\"\[SelectionPlaceholder]\"\>", ",", 
+           RowBox[{"BoxMargins", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"-", "0.2`"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"GridBox", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "UE"}], "]"}], ",", 
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "UE"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"\<\"\"\>", ",", "\<\"\"\>"}], "}"}]}], "}"}], ",", 
+             RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
+             RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
+      ",", "\<\"mgrTsr\"\>"}], "]"}]}], ",", 
+   RowBox[{"\<\"tuede\"\>", "\[Rule]", 
+    RowBox[{"TagBox", "[", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AdjustmentBox", "[", 
+          RowBox[{"\<\"\[SelectionPlaceholder]\"\>", ",", 
+           RowBox[{"BoxMargins", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"-", "0.2`"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"GridBox", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "UE"}], "]"}], ",", "\<\"\"\>"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"\<\"\"\>", ",", 
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "DE"}], "]"}]}], "}"}]}], "}"}], ",", 
+             RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
+             RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
+      ",", "\<\"mgrTsr\"\>"}], "]"}]}], ",", 
+   RowBox[{"\<\"tdeue\"\>", "\[Rule]", 
+    RowBox[{"TagBox", "[", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AdjustmentBox", "[", 
+          RowBox[{"\<\"\[SelectionPlaceholder]\"\>", ",", 
+           RowBox[{"BoxMargins", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"-", "0.2`"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"GridBox", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"\<\"\"\>", ",", 
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "UE"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "DE"}], "]"}], ",", "\<\"\"\>"}], "}"}]}], "}"}], ",", 
+             RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
+             RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
+      ",", "\<\"mgrTsr\"\>"}], "]"}]}], ",", 
+   RowBox[{"\<\"tdede\"\>", "\[Rule]", 
+    RowBox[{"TagBox", "[", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"AdjustmentBox", "[", 
+          RowBox[{"\<\"\[SelectionPlaceholder]\"\>", ",", 
+           RowBox[{"BoxMargins", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"-", "0.2`"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"GridBox", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"\<\"\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "DE"}], "]"}], ",", 
+                 RowBox[{"TagBox", "[", 
+                  RowBox[{
+                   RowBox[{"StyleBox", "[", 
+                    RowBox[{"\<\"\[Placeholder]\"\>", ",", 
+                    RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"GrayLevel", "[", "0.5`", "]"}]}]}], "]"}], ",", 
+                   "DE"}], "]"}]}], "}"}]}], "}"}], ",", 
+             RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", 
+             RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], "]"}], 
       ",", "\<\"mgrTsr\"\>"}], "]"}]}]}], "}"}]], "Output",
- CellChangeTimes->{3.5975895009602747`*^9}]
+ CellChangeTimes->{3.5975895009602747`*^9, 3.598182029282915*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -2496,7 +2929,7 @@ Cell[BoxData[
 }, Open  ]]
 },
 WindowSize->{740, 867},
-WindowMargins->{{Automatic, 313}, {Automatic, 24}},
+WindowMargins->{{0, 1180}, {Automatic, 0}},
 InputAliases->{"tp" -> TagBox[
     RowBox[{
       SubscriptBox["\[CapitalSampi]", 
@@ -2507,19 +2940,22 @@ InputAliases->{"tp" -> TagBox[
       SubscriptBox["\[CapitalSampi]", 
        TagBox[
         StyleBox["\"\[SelectionPlaceholder]\"", FontColor -> GrayLevel[0]], 
-        MathGR`decomp`D1]], "\[Placeholder]"}], "mgrPd"], "tp2" -> TagBox[
+        MathGR`typeset`Private`D1]], "\[Placeholder]"}], "mgrPd"], "tp2" -> 
+  TagBox[
     RowBox[{
       SubscriptBox["\[CapitalSampi]", 
        TagBox[
         StyleBox[
         "\"\[SelectionPlaceholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-        MathGR`decomp`D2]], "\[Placeholder]"}], "mgrPd"], "tpt" -> TagBox[
+        MathGR`typeset`Private`D2]], "\[Placeholder]"}], "mgrPd"], "tpt" -> 
+  TagBox[
     RowBox[{
       SubscriptBox["\[CapitalSampi]", 
        TagBox[
         StyleBox[
         "\"\[SelectionPlaceholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-        MathGR`decomp`DTot]], "\[Placeholder]"}], "mgrPd"], "tu" -> TagBox[
+        MathGR`typeset`Private`DTot]], "\[Placeholder]"}], "mgrPd"], "tu" -> 
+  TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2674,8 +3110,8 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`U1]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "td1" -> TagBox[
+           MathGR`typeset`Private`U1]}, {""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "td1" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2683,8 +3119,8 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{""}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`D1]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tu1u1" -> TagBox[
+           MathGR`typeset`Private`D1]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tu1u1" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2692,11 +3128,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`U1], 
+           MathGR`typeset`Private`U1], 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`U1]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 
-        0], FontSize -> 10]}], "mgrTsr"], "tu1d1" -> TagBox[
+           MathGR`typeset`Private`U1]}, {"", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tu1d1" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2704,11 +3140,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`U1], ""}, {"", 
+           MathGR`typeset`Private`U1], ""}, {"", 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`D1]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "td1u1" -> TagBox[
+           MathGR`typeset`Private`D1]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td1u1" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2716,11 +3152,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{"", 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`U1]}, {
+           MathGR`typeset`Private`U1]}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`D1], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "td1d1" -> TagBox[
+           MathGR`typeset`Private`D1], ""}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td1d1" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2728,11 +3164,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{"", ""}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`D1], 
+           MathGR`typeset`Private`D1], 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
-           MathGR`decomp`D1]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tu2" -> TagBox[
+           MathGR`typeset`Private`D1]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tu2" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2740,8 +3176,8 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`U2]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "td2" -> TagBox[
+           MathGR`typeset`Private`U2]}, {""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "td2" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2749,8 +3185,8 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{""}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`D2]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tu2u2" -> TagBox[
+           MathGR`typeset`Private`D2]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tu2u2" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2758,11 +3194,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`U2], 
+           MathGR`typeset`Private`U2], 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`U2]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 
-        0], FontSize -> 10]}], "mgrTsr"], "tu2d2" -> TagBox[
+           MathGR`typeset`Private`U2]}, {"", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tu2d2" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2770,11 +3206,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`U2], ""}, {"", 
+           MathGR`typeset`Private`U2], ""}, {"", 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`D2]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "td2u2" -> TagBox[
+           MathGR`typeset`Private`D2]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td2u2" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2782,11 +3218,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{"", 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`U2]}, {
+           MathGR`typeset`Private`U2]}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`D2], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "td2d2" -> TagBox[
+           MathGR`typeset`Private`D2], ""}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td2d2" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2794,11 +3230,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{"", ""}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`D2], 
+           MathGR`typeset`Private`D2], 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
-           MathGR`decomp`D2]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tut" -> TagBox[
+           MathGR`typeset`Private`D2]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tut" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2806,8 +3242,8 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`UTot]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 
-        0], FontSize -> 10]}], "mgrTsr"], "tdt" -> TagBox[
+           MathGR`typeset`Private`UTot]}, {""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tdt" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2815,8 +3251,8 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{""}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tutut" -> TagBox[
+           MathGR`typeset`Private`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tutut" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2824,11 +3260,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`UTot], 
+           MathGR`typeset`Private`UTot], 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`UTot]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 
-        0], FontSize -> 10]}], "mgrTsr"], "tutdt" -> TagBox[
+           MathGR`typeset`Private`UTot]}, {"", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tutdt" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2836,11 +3272,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`UTot], ""}, {"", 
+           MathGR`typeset`Private`UTot], ""}, {"", 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tdtut" -> TagBox[
+           MathGR`typeset`Private`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tdtut" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2848,11 +3284,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{"", 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`UTot]}, {
+           MathGR`typeset`Private`UTot]}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`DTot], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"], "tdtdt" -> TagBox[
+           MathGR`typeset`Private`DTot], ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tdtdt" -> TagBox[
     RowBox[{
       AdjustmentBox[
       "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
@@ -2860,11 +3296,11 @@ InputAliases->{"tp" -> TagBox[
        GridBox[{{"", ""}, {
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`DTot], 
+           MathGR`typeset`Private`DTot], 
           TagBox[
            StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
-           MathGR`decomp`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
-       FontSize -> 10]}], "mgrTsr"]},
+           MathGR`typeset`Private`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"]},
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
 StyleDefinitions->"Default.nb"
 ]
@@ -2883,29 +3319,29 @@ Cell[CellGroupData[{
 Cell[579, 22, 127, 3, 80, "Section"],
 Cell[CellGroupData[{
 Cell[731, 29, 146, 2, 32, "Input"],
-Cell[880, 33, 368, 6, 62, "Print"]
+Cell[880, 33, 390, 6, 62, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1285, 44, 9021, 194, 781, "Input"],
-Cell[10309, 240, 25546, 819, 161, "Output"]
+Cell[1307, 44, 10450, 227, 913, "Input"],
+Cell[11760, 273, 30266, 973, 179, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[35892, 1064, 463, 12, 32, "Input"],
-Cell[36358, 1078, 56465, 1349, 3487, "Output"]
+Cell[42063, 1251, 463, 12, 32, "Input"],
+Cell[42529, 1265, 66629, 1595, 4103, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[92872, 2433, 102, 1, 80, "Section"],
+Cell[109207, 2866, 102, 1, 80, "Section"],
 Cell[CellGroupData[{
-Cell[92999, 2438, 319, 8, 32, "Input"],
-Cell[93321, 2448, 779, 15, 36, "Message"]
+Cell[109334, 2871, 319, 8, 32, "Input"],
+Cell[109656, 2881, 779, 15, 36, "Message"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[94149, 2469, 115, 1, 80, "Section"],
+Cell[110484, 2902, 115, 1, 80, "Section"],
 Cell[CellGroupData[{
-Cell[94289, 2474, 409, 10, 32, "Input"],
-Cell[94701, 2486, 352, 7, 43, "Output"]
+Cell[110624, 2907, 409, 10, 32, "Input"],
+Cell[111036, 2919, 352, 7, 43, "Output"]
 }, Open  ]]
 }, Open  ]]
 }

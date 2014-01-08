@@ -84,7 +84,7 @@ DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, 
 		LeviCivita /: LeviCivita[a:(ids[[1]][_]..)]*LeviCivita[b:(ids[[2]][_]..)]:= DtaGen[a,b];  ]]
 
 DeclareExplicitIdx[ids_List, color_]:= Module[{}, 
-	(IdxColor[#]:=color; add2set[IdxNonSumList, #]; IdxNonSumPtn=Alternatives@@(Blank/@IdxNonSumList))&/@ids;
+	(IdxColor[#]:=color; add2set[IdxNonSumList, #]; IdxNonSumPtn=Alternatives@@(Blank/@IdxNonSumList))&/@ids; IdxDual[ids[[1]]]=ids[[2]];IdxDual[ids[[2]]]=ids[[1]];
 	Dta[(Alternatives@@ids)@i_, (Alternatives@@ids)@j_]:= KroneckerDelta[i, j]]
 
 (*DeclareIdx[{UP, DN}, DefaultDim, GreekIdx, Black]*)
@@ -183,12 +183,17 @@ simpM::ld="Warning: Memory constraint reached in `1`, simplification skipped"
 tReduceMaxMemory=10^9 (* 1GB max memory *)
 tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[simpM::ld, term];e]
 
+(* TODO: make this fix work faster, or use other method. *)
+simpMTerm[fact_*term_, fr_, dum_, x_] /; FreeQ[fact, IdxPtn] := fact * simpMTerm[term, fr, dum, x];
+
 simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, cntId, slot1, slot2, oldDummy=dummy@term},
 	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)
 	t = x ~TensorProduct~ times2prod[term, TensorProduct]; (* Add tensor product and contraction tensor *)
 	tCt = Map[Flatten@Position[idx@t,#]&, fr~Join~oldDummy]; (* Determine contraction pairs *)
 	tM = t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},sumAlt,1]; (* The tensor to input to TensorReduce *)
+	(*Print[TensorContract1[tM, tCt]];Print[simpMTermAss[tM]];*)
 	tM = times2prod[Assuming[simpMTermAss[tM], Expand@tReduce@TensorContract[tM, tCt]], List]; (* Outcome from TensorReduce *)
+	(*Print[tM];*)
 	If[tM===0, Return[0]]; 
 	tCt = Cases[{tM}, TensorContract[f_,cts_]:> cts, Infinity]; (* Get new contraction pairs *)
 	cnt=0; tCt = Sequence@@(#+(cnt=cnt+2*Length@#)-2*Length@#)&/@tCt; (* Apply adjustments (if multiple TensorContract[], shift contraction pair) *)

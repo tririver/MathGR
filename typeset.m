@@ -39,7 +39,7 @@ MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], form_]
 (* ::Section:: *)
 (* Paste the blob calculated in InputAliases.nb *)
 
-aliasesList={"tp" -> TagBox[
+aliasesList= {"tp" -> TagBox[
    RowBox[{SubscriptBox["\[CapitalSampi]", 
       TagBox[StyleBox["\"\[SelectionPlaceholder]\"", 
         FontColor -> GrayLevel[0]], DN]], "\[Placeholder]"}], 
@@ -366,7 +366,64 @@ aliasesList={"tp" -> TagBox[
          TagBox[StyleBox["\"\[Placeholder]\"", 
            FontColor -> RGBColor[0, 0, 1]], DTot]}}, 
        ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
-   "mgrTsr"]}
+   "mgrTsr"], 
+ "tue" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          UE]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tde" -> TagBox[
+   RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{""}, {TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          DE]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tueue" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          UE], TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          UE]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tuede" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          UE], ""}, {"", 
+         TagBox[StyleBox["\[Placeholder]", 
+           FontColor -> GrayLevel[0.5]], DE]}}, ColumnSpacings -> 0, 
+       RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], 
+ "tdeue" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         TagBox[StyleBox["\[Placeholder]", 
+           FontColor -> GrayLevel[0.5]], UE]}, {TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          DE], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"], 
+ "tdede" -> 
+  TagBox[RowBox[{AdjustmentBox["\[SelectionPlaceholder]", 
+      BoxMargins -> {{0, -0.2}, {0, 0}}], 
+     StyleBox[
+      GridBox[{{"", 
+         ""}, {TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          DE], TagBox[
+          StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+          DE]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+      FontSize -> 10]}], "mgrTsr"]}
 
 SetOptions[EvaluationNotebook[], InputAliases -> aliasesList];
 
