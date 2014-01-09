@@ -45,28 +45,28 @@ Test[Dta[u@"a", u@"a"]==dimTest && Dta[u@"a", d@"a"]==dimTest && Dta[d@"a", d@"a
 	True, TestID->"Dta sum"]
 Test[Dta[ue@1, de@0]==0 && Dta[ue@1, de@1]==1, True, TestID->"Dta explicit idx"]
 
-Test[DtaGen[UP@"a", UP@"b", DN@"m", DN@"n"],-Hold[Dta][DN["m"], UP["b"]] Hold[Dta][DN["n"], UP["a"]] + 
- Hold[Dta][DN["m"], UP["a"]] Hold[Dta][DN["n"], UP["b"]], TestID->"DtaGen"]
+Test[DtaGen[UP@"a", UP@"b", DN@"m", DN@"n"],-Identity[Dta][DN["m"], UP["b"]] Identity[Dta][DN["n"], UP["a"]] + 
+ Identity[Dta][DN["m"], UP["a"]] Identity[Dta][DN["n"], UP["b"]], TestID->"DtaGen"]
 
 (* ::Subsection:: *)
 (* LeviCivita *)
 
 DeclareIdx[{u3,d3}, 3, LatinIdx, Brown]
-Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"d", d3@"e", d3@"f"], -Hold[Dta][d3["d"], u3["c"]] Hold[Dta][d3["e"], u3["b"]] Hold[Dta][
+Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"d", d3@"e", d3@"f"], -Identity[Dta][d3["d"], u3["c"]] Identity[Dta][d3["e"], u3["b"]] Identity[Dta][
    d3["f"], u3["a"]] + 
- Hold[Dta][d3["d"], u3["b"]] Hold[Dta][d3["e"], u3["c"]] Hold[Dta][
+ Identity[Dta][d3["d"], u3["b"]] Identity[Dta][d3["e"], u3["c"]] Identity[Dta][
    d3["f"], u3["a"]] + 
- Hold[Dta][d3["d"], u3["c"]] Hold[Dta][d3["e"], u3["a"]] Hold[Dta][
+ Identity[Dta][d3["d"], u3["c"]] Identity[Dta][d3["e"], u3["a"]] Identity[Dta][
    d3["f"], u3["b"]] - 
- Hold[Dta][d3["d"], u3["a"]] Hold[Dta][d3["e"], u3["c"]] Hold[Dta][
+ Identity[Dta][d3["d"], u3["a"]] Identity[Dta][d3["e"], u3["c"]] Identity[Dta][
    d3["f"], u3["b"]] - 
- Hold[Dta][d3["d"], u3["b"]] Hold[Dta][d3["e"], u3["a"]] Hold[Dta][
+ Identity[Dta][d3["d"], u3["b"]] Identity[Dta][d3["e"], u3["a"]] Identity[Dta][
    d3["f"], u3["c"]] + 
- Hold[Dta][d3["d"], u3["a"]] Hold[Dta][d3["e"], u3["b"]] Hold[Dta][
+ Identity[Dta][d3["d"], u3["a"]] Identity[Dta][d3["e"], u3["b"]] Identity[Dta][
    d3["f"], u3["c"]], TestID->"2 LeviCivita's"]
-Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"a", d3@"d", d3@"e"], -Hold[Dta][d3["d"], u3["c"]] Hold[Dta][d3["e"], u3["b"]] + 
- Hold[Dta][d3["d"], u3["b"]] Hold[Dta][d3["e"], u3["c"]], TestID->"LeviCivita contract 1"]
-Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"a", d3@"b", d3@"d"], 2 Hold[Dta][d3["d"], u3["c"]], TestID->"LeviCivita contract 2"]
+Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"a", d3@"d", d3@"e"], -Identity[Dta][d3["d"], u3["c"]] Identity[Dta][d3["e"], u3["b"]] + 
+ Identity[Dta][d3["d"], u3["b"]] Identity[Dta][d3["e"], u3["c"]], TestID->"LeviCivita contract 1"]
+Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"a", d3@"b", d3@"d"], 2 Identity[Dta][d3["d"], u3["c"]], TestID->"LeviCivita contract 2"]
 Test[LeviCivita[u3@"a", u3@"b", u3@"c"] LeviCivita[d3@"a", d3@"b", d3@"c"], 6, TestID->"LeviCivita contract 3"]
 
 UseMetric[g3, {u3,d3}]

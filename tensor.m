@@ -60,7 +60,6 @@ GreekIdx = Join[FromCharacterCode /@ Range[945, 945 + 24], "\[Omega]"<>ToString[
 LatinCapitalIdx = Join[FromCharacterCode /@ Range[65, 65 + 24], "Y"<>ToString[#]&/@Range[26]]
 UniqueIdx:= Unique[]& /@ Range[50]
 
-(* TODO: Use HoldPattern to match Dta, instead of Hold Dta *)
 SetAttributes[Dta, Orderless]
 Pd[Dta[__],_]:= 0
 
@@ -68,7 +67,7 @@ Options[DtaGen]={"DtaGenDta"->Dta}
 DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2, a, b},
 	a = Take[{ids}, d]; b = Take[{ids}, -d]; 
 	btmp = MapThread[#1[#2] &, {(b[[#]][[0]] & /@ Range[d]), tmp /@ Range[d]}];
-	AntiSym[Product[OptionValue["DtaGenDta"][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])//ReleaseHold]
+	AntiSym[Product[OptionValue["DtaGenDta"][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])]
 
 DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
 	Dim[idsAlt]:=d; IdxSet[idsAlt]:=set; IdxColor[idsAlt]:=color; add2set[IdxList, {ids}]; IdxPtn=Alternatives@@(Blank/@IdxList);
@@ -78,8 +77,9 @@ DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, 
 	add2set[IdxDnList,ids[[2]]]; IdxDnPtn=Alternatives@@(Blank/@IdxDnList);
 	Dta[idsAlt@a_, idsAlt@a_]:= d;
 	Dta/:Power[Dta[idsAlt@a_, idsAlt@b_], 2]:= d;
-	Dta/:Dta[(a:idsAlt)@m_, (b:idsAlt)@n_] f_ := Piecewise[{{ReleaseHold[f/.(c:idsAlt)@n -> c@m], !FreeQ[f, (ids[[1]][n])|(ids[[2]][n])]}, 
-		{ReleaseHold[f/.(c:idsAlt)@m -> c@n], !FreeQ[f, (ids[[1]][m])|(ids[[2]][m])]}},	Hold[Dta][a@m, b@n] f];
+	Dta/:HoldPattern[Times][f__, Dta[(a:idsAlt)@m_, (b:idsAlt)@n_]] /; !FreeQ[Hold[f], (ids[[1]][n])|(ids[[2]][n])|(ids[[1]][m])|(ids[[2]][m])]
+		:= Piecewise[{{Times[f]/.(c:idsAlt)@n -> c@m, !FreeQ[Hold[f], (ids[[1]][n])|(ids[[2]][n])]}, 
+		{Times[f]/.(c:idsAlt)@m -> c@n, !FreeQ[Hold[f], (ids[[1]][m])|(ids[[2]][m])]}},	Times[f, Dta[a@m, b@n]]];
 	If[IntegerQ[d],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
 		LeviCivita /: LeviCivita[a:(ids[[1]][_]..)]*LeviCivita[b:(ids[[2]][_]..)]:= DtaGen[a,b];  ]]
@@ -150,7 +150,7 @@ simpFterm[t_, fr1_]:= Module[{idStat, fr, dum, availDum, rule, a0},
 	rule = replaceTo[(a0:sumAlt)/@dum, a0/@availDum];
 	t /. rule]
 simpF[e_]:= Module[{eList},
-	eList = ReleaseHold@plus2list@ReleaseHold@e;
+	eList = plus2list@e;
 	Total[simpFterm[#, Sort@free@eList[[1]]]& /@ eList]]
 
 
@@ -213,7 +213,7 @@ simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, c
 	cnt=1; tM /. TensorContract[a_,i_]:>a /. MAT[f_]:>f /. id:sumAlt|xFr:>id@tNewIdx[[cnt++]] /._xMat->1 //prod2times[#,TensorProduct|List]& (* Put idx back *)]
 
 If[!defQ@SimpMSelect,SimpMSelect = Identity]
-simpMHook:= {{ReleaseHold (*here eval first*), plus2list, SimpMSelect, pd2pdts, ReleaseHold (*here eval last*)}, {pdts2pd, SimpMSelect,Total}}
+simpMHook:= {{(*here eval first*) plus2list, SimpMSelect, pd2pdts (*here eval last*)}, {pdts2pd, SimpMSelect,Total}}
 simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *), fr, dum, x},
 	If[eList=={}, Return[0]]; (* SimpMSelect may return empty list *)
 	fr = Sort@free@eList[[1]]; 
