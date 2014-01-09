@@ -155,8 +155,8 @@ simpF[e_]:= Module[{eList},
 
 
 
-simpH::ver="Warning: Mathematica version 8 or lower detected. Simp may not bring tensor to unique form"
-simpH = If[$VersionNumber>8.99, simpM[simpF@#]&, Message[simpH::ver]; simpF]
+Simp::ver="Warning: Mathematica version 8 or lower detected. Simp may not bring tensor to unique form"
+simpH = If[$VersionNumber>8.99, simpM[simpF@#]&, Message[Simp::ver]; simpF]
 
 If[!defQ@SimpHook,SimpHook = {}]
 
@@ -180,16 +180,16 @@ simpMTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
 	ass = ass && And@@Flatten@Cases[{tM},f:MAT[pdts[n_][t_]][idx__] /; n>1 :> ((f~Element~Arrays[Dim/@rmNE[{idx}], Symmetric[#]])& 
 		/@ (cnt=Length[{idx}]-n; Split[Cases[Take[{idx},-n],sumAlt],Function[{x,y},Dim[x]==Dim[y]]]/.{s:(sumAlt):> ++cnt})), Infinity] ]
 
-SimpM::ld="Warning: Memory constraint reached in `1`, simplification skipped"
+Simp::ld="Warning: Memory constraint reached in `1`, simplification skipped"
 tReduceMaxMemory=10^9 (* 1GB max memory *)
-tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[SimpM::ld, term];e]
+tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp::ld, term];e]
 
 (* TODO: make this fix work faster, or use other method. *)
 simpMTerm[fact_*term_, fr_, dum_, x_] /; FreeQ[fact, IdxPtn] := fact * simpMTerm[term, fr, dum, x];
 
-SimpM::nosupp="Warning: `1` has tensors in unsupported functions. This may cause mistake"
+Simp::nosupp="Warning: `1` has tensors in unsupported functions. This may cause mistake"
 simpMTermSupported={prod}
-simpMTermCheckSupported[e_]:= If[ (Flatten@{times2prod@e/.(# -> List & /@ simpMTermSupported)} // Cases[#, IdxPtn, {3, Infinity}] &) =!={}, Message[SimpM::nosupp, e], "Supported"]
+simpMTermCheckSupported[e_]:= If[ (Flatten@{times2prod@e/.(# -> List & /@ simpMTermSupported)} // Cases[#, IdxPtn, {3, Infinity}] &) =!={}, Message[Simp::nosupp, e], "Supported"]
 simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, cntId, slot1, slot2, oldDummy=dummy@term},
 	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)
 	simpMTermCheckSupported[term];
