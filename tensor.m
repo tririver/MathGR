@@ -60,6 +60,7 @@ GreekIdx = Join[FromCharacterCode /@ Range[945, 945 + 24], "\[Omega]"<>ToString[
 LatinCapitalIdx = Join[FromCharacterCode /@ Range[65, 65 + 24], "Y"<>ToString[#]&/@Range[26]]
 UniqueIdx:= Unique[]& /@ Range[50]
 
+(* TODO: Use HoldPattern to match Dta, instead of Hold Dta *)
 SetAttributes[Dta, Orderless]
 Pd[Dta[__],_]:= 0
 
@@ -179,15 +180,19 @@ simpMTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
 	ass = ass && And@@Flatten@Cases[{tM},f:MAT[pdts[n_][t_]][idx__] /; n>1 :> ((f~Element~Arrays[Dim/@rmNE[{idx}], Symmetric[#]])& 
 		/@ (cnt=Length[{idx}]-n; Split[Cases[Take[{idx},-n],sumAlt],Function[{x,y},Dim[x]==Dim[y]]]/.{s:(sumAlt):> ++cnt})), Infinity] ]
 
-simpM::ld="Warning: Memory constraint reached in `1`, simplification skipped"
+SimpM::ld="Warning: Memory constraint reached in `1`, simplification skipped"
 tReduceMaxMemory=10^9 (* 1GB max memory *)
-tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[simpM::ld, term];e]
+tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[SimpM::ld, term];e]
 
 (* TODO: make this fix work faster, or use other method. *)
 simpMTerm[fact_*term_, fr_, dum_, x_] /; FreeQ[fact, IdxPtn] := fact * simpMTerm[term, fr, dum, x];
 
+SimpM::nosupp="Warning: `1` has tensors in unsupported functions. This may cause mistake"
+simpMTermSupported={prod}
+simpMTermCheckSupported[e_]:= If[ (Flatten@{times2prod@e/.(# -> List & /@ simpMTermSupported)} // Cases[#, IdxPtn, {3, Infinity}] &) =!={}, Message[SimpM::nosupp, e], "Supported"]
 simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, cntId, slot1, slot2, oldDummy=dummy@term},
 	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)
+	simpMTermCheckSupported[term];
 	t = x ~TensorProduct~ times2prod[term, TensorProduct]; (* Add tensor product and contraction tensor *)
 	tCt = Map[Flatten@Position[idx@t,#]&, fr~Join~oldDummy]; (* Determine contraction pairs *)
 	tM = t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},sumAlt,1]; (* The tensor to input to TensorReduce *)

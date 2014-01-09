@@ -1,0 +1,1859 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     58827,       1850]
+NotebookOptionsPosition[     57706,       1813]
+NotebookOutlinePosition[     58160,       1829]
+CellTagsIndexPosition[     58117,       1826]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "MathGR/MathGR.m"}]], "Input",
+ CellChangeTimes->{{3.597845370008361*^9, 3.597845375696615*^9}}],
+
+Cell[BoxData["\<\"MathGR, by Yi Wang (2013), \
+https://github.com/tririver/MathGR. \\nBugs can be reported to \
+https://github.com/tririver/MathGR/issues\\nLoaded components tensor, decomp, \
+gr, ibp, typeset.\"\>"], "Print",
+ CellChangeTimes->{3.5978453759985*^9, 3.597846240233239*^9, 
+  3.59784635803863*^9, 3.597846623855707*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Profile", "[", 
+  RowBox[{"AbsoluteTiming", "[", 
+   RowBox[{"ReleaseHold", "[", 
+    RowBox[{
+     RowBox[{"3", "/", "4"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["DF",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", 
+            TagBox[
+             StyleBox["\"\<a\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], "", ""},
+           {
+            TagBox[
+             StyleBox["\"\<\[Alpha]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], "", 
+            TagBox[
+             StyleBox["\"\<\[Beta]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], 
+            TagBox[
+             StyleBox["\"\<\[Gamma]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["DF",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", 
+            TagBox[
+             StyleBox["\"\<b\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], "", ""},
+           {
+            TagBox[
+             StyleBox["\"\<\[Alpha]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], "", 
+            TagBox[
+             StyleBox["\"\<\[Beta]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], 
+            TagBox[
+             StyleBox["\"\<\[Gamma]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["\"\<k\>\"",
+           FontColor->RGBColor[1, 0, 0]],
+          MathGR`decomp`D2]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["\[Gamma]",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\"\<i\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2], 
+              TagBox[
+               StyleBox["\"\<j\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["\"\<n\>\"",
+           FontColor->RGBColor[1, 0, 0]],
+          MathGR`decomp`D2]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["\[Gamma]",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\"\<l\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2], 
+              TagBox[
+               StyleBox["\"\<m\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\"\<e\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2], 
+            TagBox[
+             StyleBox["\"\<c\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\"\<f\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2], 
+            TagBox[
+             StyleBox["\"\<d\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\"\<g\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2], 
+            TagBox[
+             StyleBox["\"\<h\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<e\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<f\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<g\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<i\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<h\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<j\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> 
+            {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<k\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<l\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<m\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<n\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox[
+         RowBox[{"Hold", "[", "Dta", "]"}],
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<c\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], ""},
+           {"", 
+            TagBox[
+             StyleBox["\"\<a\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}]}], " ", "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.597845338353632*^9, 3.597845348411311*^9}, 
+   3.597849424732008*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.02231700000000000003175237850427947706`4.369235726707669", ",", 
+   RowBox[{
+    FractionBox["3", "4"], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["DF",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", 
+           TagBox[
+            StyleBox["\<\"a\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], "", ""},
+          {
+           TagBox[
+            StyleBox["\<\"\[Alpha]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], "", 
+           TagBox[
+            StyleBox["\<\"\[Beta]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], 
+           TagBox[
+            StyleBox["\<\"\[Gamma]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["DF",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", 
+           TagBox[
+            StyleBox["\<\"b\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], "", ""},
+          {
+           TagBox[
+            StyleBox["\<\"\[Alpha]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], "", 
+           TagBox[
+            StyleBox["\<\"\[Beta]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], 
+           TagBox[
+            StyleBox["\<\"\[Gamma]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       SubscriptBox["\[CapitalSampi]", 
+        TagBox[
+         StyleBox["\<\"k\"\>",
+          FontColor->RGBColor[1, 0, 0]],
+         MathGR`decomp`D2]], 
+       TagBox[
+        RowBox[{
+         AdjustmentBox["\[Gamma]",
+          BoxMargins->{{0, -0.2}, {0, 0}}], 
+         StyleBox[GridBox[{
+            {"", ""},
+            {
+             TagBox[
+              StyleBox["\<\"i\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2], 
+             TagBox[
+              StyleBox["\<\"j\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          FontSize->10]}],
+        "mgrTsr"]}],
+      "mgrPd"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       SubscriptBox["\[CapitalSampi]", 
+        TagBox[
+         StyleBox["\<\"n\"\>",
+          FontColor->RGBColor[1, 0, 0]],
+         MathGR`decomp`D2]], 
+       TagBox[
+        RowBox[{
+         AdjustmentBox["\[Gamma]",
+          BoxMargins->{{0, -0.2}, {0, 0}}], 
+         StyleBox[GridBox[{
+            {"", ""},
+            {
+             TagBox[
+              StyleBox["\<\"l\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2], 
+             TagBox[
+              StyleBox["\<\"m\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          FontSize->10]}],
+        "mgrTsr"]}],
+      "mgrPd"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", ""},
+          {
+           TagBox[
+            StyleBox["\<\"e\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2], 
+           TagBox[
+            StyleBox["\<\"a\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", ""},
+          {
+           TagBox[
+            StyleBox["\<\"f\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2], 
+           TagBox[
+            StyleBox["\<\"d\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", ""},
+          {
+           TagBox[
+            StyleBox["\<\"g\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2], 
+           TagBox[
+            StyleBox["\<\"h\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"e\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"f\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"g\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"i\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"h\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"j\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"k\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"l\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"m\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"n\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.597845350247117*^9, 3.597845378039401*^9}, 
+   3.5978462430165157`*^9, 3.5978463600537443`*^9, 3.5978466261604977`*^9, 
+   3.597849372021015*^9, {3.597849425452815*^9, 3.597849431408223*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["DF",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {"", 
+          TagBox[
+           StyleBox["\"\<a\>\"",
+            FontColor->RGBColor[1, 0, 0]],
+           MathGR`decomp`U2], "", ""},
+         {
+          TagBox[
+           StyleBox["\"\<\[Alpha]\>\"",
+            FontColor->GrayLevel[0]],
+           MathGR`decomp`D1], "", 
+          TagBox[
+           StyleBox["\"\<\[Beta]\>\"",
+            FontColor->GrayLevel[0]],
+           MathGR`decomp`D1], 
+          TagBox[
+           StyleBox["\"\<\[Gamma]\>\"",
+            FontColor->GrayLevel[0]],
+           MathGR`decomp`D1]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox["DF",
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {"", 
+          TagBox[
+           StyleBox["\"\<b\>\"",
+            FontColor->RGBColor[1, 0, 0]],
+           MathGR`decomp`U2], "", ""},
+         {
+          TagBox[
+           StyleBox["\"\<\[Alpha]\>\"",
+            FontColor->GrayLevel[0]],
+           MathGR`decomp`D1], "", 
+          TagBox[
+           StyleBox["\"\<\[Beta]\>\"",
+            FontColor->GrayLevel[0]],
+           MathGR`decomp`D1], 
+          TagBox[
+           StyleBox["\"\<\[Gamma]\>\"",
+            FontColor->GrayLevel[0]],
+           MathGR`decomp`D1]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}], "f", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      AdjustmentBox[
+       RowBox[{"Hold", "[", "Dta", "]"}],
+       BoxMargins->{{0, -0.2}, {0, 0}}], 
+      StyleBox[GridBox[{
+         {
+          TagBox[
+           StyleBox["\"\<c\>\"",
+            FontColor->RGBColor[1, 0, 0]],
+           MathGR`decomp`U2], ""},
+         {"", 
+          TagBox[
+           StyleBox["\"\<a\>\"",
+            FontColor->RGBColor[1, 0, 0]],
+           MathGR`decomp`D2]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       FontSize->10]}],
+     "mgrTsr"], ")"}]}], "//", "ReleaseHold"}]], "Input",
+ CellChangeTimes->{{3.597846377730481*^9, 3.597846391128928*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", " ", 
+  RowBox[{"(", 
+   TagBox[
+    RowBox[{
+     AdjustmentBox["DF",
+      BoxMargins->{{0, -0.2}, {0, 0}}], 
+     StyleBox[GridBox[{
+        {"", 
+         TagBox[
+          StyleBox["\<\"b\"\>",
+           FontColor->RGBColor[1, 0, 0]],
+          MathGR`decomp`U2], "", ""},
+        {
+         TagBox[
+          StyleBox["\<\"\[Alpha]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`decomp`D1], "", 
+         TagBox[
+          StyleBox["\<\"\[Beta]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`decomp`D1], 
+         TagBox[
+          StyleBox["\<\"\[Gamma]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`decomp`D1]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      FontSize->10]}],
+    "mgrTsr"], ")"}], " ", 
+  RowBox[{"(", 
+   TagBox[
+    RowBox[{
+     AdjustmentBox["DF",
+      BoxMargins->{{0, -0.2}, {0, 0}}], 
+     StyleBox[GridBox[{
+        {"", 
+         TagBox[
+          StyleBox["\<\"c\"\>",
+           FontColor->RGBColor[1, 0, 0]],
+          MathGR`decomp`U2], "", ""},
+        {
+         TagBox[
+          StyleBox["\<\"\[Alpha]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`decomp`D1], "", 
+         TagBox[
+          StyleBox["\<\"\[Beta]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`decomp`D1], 
+         TagBox[
+          StyleBox["\<\"\[Gamma]\"\>",
+           FontColor->GrayLevel[0]],
+          MathGR`decomp`D1]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      FontSize->10]}],
+    "mgrTsr"], ")"}]}]], "Output",
+ CellChangeTimes->{{3.597846378639511*^9, 3.597846392188713*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Profile", "[", 
+  RowBox[{"AbsoluteTiming", "[", 
+   RowBox[{"ReleaseHold", "[", 
+    RowBox[{
+     RowBox[{"3", "/", "4"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["DF",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", 
+            TagBox[
+             StyleBox["\"\<a\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], "", ""},
+           {
+            TagBox[
+             StyleBox["\"\<\[Alpha]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], "", 
+            TagBox[
+             StyleBox["\"\<\[Beta]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], 
+            TagBox[
+             StyleBox["\"\<\[Gamma]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["DF",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", 
+            TagBox[
+             StyleBox["\"\<b\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], "", ""},
+           {
+            TagBox[
+             StyleBox["\"\<\[Alpha]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], "", 
+            TagBox[
+             StyleBox["\"\<\[Beta]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1], 
+            TagBox[
+             StyleBox["\"\<\[Gamma]\>\"",
+              FontColor->GrayLevel[0]],
+             MathGR`decomp`D1]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["\"\<k\>\"",
+           FontColor->RGBColor[1, 0, 0]],
+          MathGR`decomp`D2]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["\[Gamma]",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\"\<i\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2], 
+              TagBox[
+               StyleBox["\"\<j\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        SubscriptBox["\[CapitalSampi]", 
+         TagBox[
+          StyleBox["\"\<n\>\"",
+           FontColor->RGBColor[1, 0, 0]],
+          MathGR`decomp`D2]], 
+        TagBox[
+         RowBox[{
+          AdjustmentBox["\[Gamma]",
+           BoxMargins->{{0, -0.2}, {0, 0}}], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {
+              TagBox[
+               StyleBox["\"\<l\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2], 
+              TagBox[
+               StyleBox["\"\<m\>\"",
+                FontColor->RGBColor[1, 0, 0]],
+               MathGR`decomp`D2]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           FontSize->10]}],
+         "mgrTsr"]}],
+       "mgrPd"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\"\<e\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2], 
+            TagBox[
+             StyleBox["\"\<c\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\"\<f\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2], 
+            TagBox[
+             StyleBox["\"\<d\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {"", ""},
+           {
+            TagBox[
+             StyleBox["\"\<g\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2], 
+            TagBox[
+             StyleBox["\"\<h\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<e\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<f\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<g\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<i\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<h\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<j\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> 
+            {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<k\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<l\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox["\[Gamma]",
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<m\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], 
+            TagBox[
+             StyleBox["\"\<n\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2]},
+           {"", ""}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox[
+         RowBox[{"Hold", "[", "Dta", "]"}],
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<c\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], ""},
+           {"", 
+            TagBox[
+             StyleBox["\"\<a\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}], " ", 
+     RowBox[{"(", 
+      TagBox[
+       RowBox[{
+        AdjustmentBox[
+         RowBox[{"Hold", "[", "Dta", "]"}],
+         BoxMargins->{{0, -0.2}, {0, 0}}], 
+        StyleBox[GridBox[{
+           {
+            TagBox[
+             StyleBox["\"\<d\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`U2], ""},
+           {"", 
+            TagBox[
+             StyleBox["\"\<b\>\"",
+              FontColor->RGBColor[1, 0, 0]],
+             MathGR`decomp`D2]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         FontSize->10]}],
+       "mgrTsr"], ")"}]}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.597846415731567*^9, 3.5978464257662153`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"FreeQ", "::", "argtu"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\(FreeQ\\)\[NoBreak] called with 1 argument; \
+\[NoBreak]\\!\\(2\\)\[NoBreak] or \[NoBreak]\\!\\(3\\)\[NoBreak] arguments \
+are expected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/argtu\\\", ButtonNote -> \
+\\\"FreeQ::argtu\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597846426566708*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ReplaceAll", "::", "argr"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\(ReplaceAll\\)\[NoBreak] called with 1 \
+argument; \[NoBreak]\\!\\(2\\)\[NoBreak] arguments are expected. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/ReplaceAll\\\", ButtonNote -> \
+\\\"ReplaceAll::argr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597846426605316*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"FreeQ", "::", "argtu"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\(FreeQ\\)\[NoBreak] called with 1 argument; \
+\[NoBreak]\\!\\(2\\)\[NoBreak] or \[NoBreak]\\!\\(3\\)\[NoBreak] arguments \
+are expected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/argtu\\\", ButtonNote -> \
+\\\"FreeQ::argtu\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597846426632029*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ReplaceAll", "::", "argr"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\(ReplaceAll\\)\[NoBreak] called with 1 \
+argument; \[NoBreak]\\!\\(2\\)\[NoBreak] arguments are expected. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/ReplaceAll\\\", ButtonNote -> \
+\\\"ReplaceAll::argr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597846426670937*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(ids \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597846426700931*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(ids \
+\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5978464267297573`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(ids \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5978464267580757`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partd\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597846426777627*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.12169599999999999861977073578600538895`5.1058762170111125", ",", 
+   RowBox[{
+    FractionBox["3", "4"], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["DF",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", 
+           TagBox[
+            StyleBox["\<\"a\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], "", ""},
+          {
+           TagBox[
+            StyleBox["\<\"\[Alpha]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], "", 
+           TagBox[
+            StyleBox["\<\"\[Beta]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], 
+           TagBox[
+            StyleBox["\<\"\[Gamma]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["DF",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", 
+           TagBox[
+            StyleBox["\<\"b\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], "", ""},
+          {
+           TagBox[
+            StyleBox["\<\"\[Alpha]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], "", 
+           TagBox[
+            StyleBox["\<\"\[Beta]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1], 
+           TagBox[
+            StyleBox["\<\"\[Gamma]\"\>",
+             FontColor->GrayLevel[0]],
+            MathGR`decomp`D1]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       SubscriptBox["\[CapitalSampi]", 
+        TagBox[
+         StyleBox["\<\"k\"\>",
+          FontColor->RGBColor[1, 0, 0]],
+         MathGR`decomp`D2]], 
+       TagBox[
+        RowBox[{
+         AdjustmentBox["\[Gamma]",
+          BoxMargins->{{0, -0.2}, {0, 0}}], 
+         StyleBox[GridBox[{
+            {"", ""},
+            {
+             TagBox[
+              StyleBox["\<\"i\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2], 
+             TagBox[
+              StyleBox["\<\"j\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          FontSize->10]}],
+        "mgrTsr"]}],
+      "mgrPd"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       SubscriptBox["\[CapitalSampi]", 
+        TagBox[
+         StyleBox["\<\"n\"\>",
+          FontColor->RGBColor[1, 0, 0]],
+         MathGR`decomp`D2]], 
+       TagBox[
+        RowBox[{
+         AdjustmentBox["\[Gamma]",
+          BoxMargins->{{0, -0.2}, {0, 0}}], 
+         StyleBox[GridBox[{
+            {"", ""},
+            {
+             TagBox[
+              StyleBox["\<\"l\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2], 
+             TagBox[
+              StyleBox["\<\"m\"\>",
+               FontColor->RGBColor[1, 0, 0]],
+              MathGR`decomp`D2]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          FontSize->10]}],
+        "mgrTsr"]}],
+      "mgrPd"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", ""},
+          {
+           TagBox[
+            StyleBox["\<\"e\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2], 
+           TagBox[
+            StyleBox["\<\"a\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", ""},
+          {
+           TagBox[
+            StyleBox["\<\"f\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2], 
+           TagBox[
+            StyleBox["\<\"b\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {"", ""},
+          {
+           TagBox[
+            StyleBox["\<\"g\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2], 
+           TagBox[
+            StyleBox["\<\"h\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`D2]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"e\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"f\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"g\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"i\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"h\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"j\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"k\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"l\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[
+      RowBox[{
+       AdjustmentBox["\[Gamma]",
+        BoxMargins->{{0, -0.2}, {0, 0}}], 
+       StyleBox[GridBox[{
+          {
+           TagBox[
+            StyleBox["\<\"m\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2], 
+           TagBox[
+            StyleBox["\<\"n\"\>",
+             FontColor->RGBColor[1, 0, 0]],
+            MathGR`decomp`U2]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        FontSize->10]}],
+      "mgrTsr"], ")"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.597846411313445*^9, 3.5978464268094*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 867},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->FrontEnd`FileName[{$RootDirectory, "home", "wangyi", "Copy",
+    "Code", "Mathematica"}, "myStyle.nb", CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 125, 2, 32, "Input"],
+Cell[707, 26, 333, 5, 62, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1077, 36, 12197, 379, 134, "Input"],
+Cell[13277, 417, 11079, 351, 79, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24393, 773, 3044, 101, 36, "Input"],
+Cell[27440, 876, 2110, 70, 36, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29587, 951, 13032, 405, 134, "Input"],
+Cell[42622, 1358, 530, 11, 23, "Message"],
+Cell[43155, 1371, 496, 10, 23, "Message"],
+Cell[43654, 1383, 530, 11, 23, "Message"],
+Cell[44187, 1396, 496, 10, 23, "Message"],
+Cell[44686, 1408, 509, 11, 23, "Message"],
+Cell[45198, 1421, 511, 11, 23, "Message"],
+Cell[45712, 1434, 511, 11, 23, "Message"],
+Cell[46226, 1447, 528, 11, 23, "Message"],
+Cell[46757, 1460, 10933, 350, 79, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

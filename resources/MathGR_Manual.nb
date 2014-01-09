@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    230387,       7471]
-NotebookOptionsPosition[    222797,       7219]
-NotebookOutlinePosition[    223156,       7235]
-CellTagsIndexPosition[    223113,       7232]
+NotebookDataLength[    249375,       7938]
+NotebookOptionsPosition[    223752,       7246]
+NotebookOutlinePosition[    242065,       7699]
+CellTagsIndexPosition[    242022,       7696]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -118,7 +118,7 @@ Cell[BoxData[
    3.5926233045092907`*^9, 3.592623325905444*^9}, {3.59262338491138*^9, 
    3.592623396618031*^9}, {3.592623442684757*^9, 3.5926234498436527`*^9}, 
    3.596958897190613*^9, 3.597390426412369*^9, 3.597390462651232*^9, 
-   3.5973909826840754`*^9}]
+   3.5973909826840754`*^9, 3.598258946533245*^9}]
 }, Open  ]],
 
 Cell[TextData[{
@@ -544,7 +544,7 @@ Cell[BoxData[
           MathGR`tensor`UP], ""},
         {"", 
          TagBox[
-          StyleBox["$3",
+          StyleBox["$4",
            FontColor->GrayLevel[0]],
           MathGR`tensor`DN]}
        },
@@ -565,7 +565,7 @@ Cell[BoxData[
      StyleBox[GridBox[{
         {
          TagBox[
-          StyleBox["$3",
+          StyleBox["$4",
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP], ""},
         {"", 
@@ -583,7 +583,8 @@ Cell[BoxData[
            Offset[0.2]}, "RowsIndexed" -> {}}],
       FontSize->10]}],
     "mgrTsr"], ")"}]}]], "Output",
- CellChangeTimes->{{3.5973909580877247`*^9, 3.597390988579556*^9}}]
+ CellChangeTimes->{{3.5973909580877247`*^9, 3.597390988579556*^9}, 
+   3.598258954540825*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -781,7 +782,7 @@ Cell[BoxData[
    3.592566903190234*^9, {3.592623304737172*^9, 3.59262332623808*^9}, {
    3.5926233851942863`*^9, 3.592623397201036*^9}, {3.592623442812731*^9, 
    3.592623450002203*^9}, 3.5969589088248377`*^9, 3.5973904372146*^9, 
-   3.597391020892139*^9}]
+   3.597391020892139*^9, 3.598258959231984*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -937,7 +938,7 @@ Cell[BoxData[
    3.592566903273094*^9, {3.592623304831995*^9, 3.592623326575317*^9}, {
    3.592623385270816*^9, 3.592623397340296*^9}, {3.592623442884169*^9, 
    3.592623450099037*^9}, 3.59695891310843*^9, {3.597391056576263*^9, 
-   3.597391060401595*^9}}]
+   3.597391060401595*^9}, 3.598258963620727*^9}]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1048,7 +1049,8 @@ Cell[BoxData[
   3.5925356431472683`*^9, 3.592552247739015*^9, 3.592552484043466*^9, 
    3.592566903283193*^9, {3.5926233048439283`*^9, 3.5926233267499323`*^9}, {
    3.5926233852782383`*^9, 3.5926233973530912`*^9}, {3.592623442894405*^9, 
-   3.592623450111801*^9}, 3.5969589177626867`*^9, 3.597391093883931*^9}]
+   3.592623450111801*^9}, 3.5969589177626867`*^9, 3.597391093883931*^9, 
+   3.598258966625681*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1101,7 +1103,8 @@ Cell[BoxData[
   3.5925357669684277`*^9, 3.592552247753811*^9, 3.5925524840575438`*^9, 
    3.592566903528707*^9, {3.592623304921487*^9, 3.592623326900395*^9}, {
    3.592623385366194*^9, 3.592623397635202*^9}, {3.592623442933345*^9, 
-   3.592623450189477*^9}, 3.5969589192997913`*^9, 3.597391097473832*^9}]
+   3.592623450189477*^9}, 3.5969589192997913`*^9, 3.597391097473832*^9, 
+   3.5982589680979567`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1140,7 +1143,8 @@ Cell[BoxData[
   3.592535860337606*^9, 3.592552247837673*^9, 3.592552484131105*^9, 
    3.592566903945957*^9, {3.59262330492708*^9, 3.592623327040902*^9}, {
    3.592623385380733*^9, 3.59262339764351*^9}, {3.592623443010791*^9, 
-   3.592623450236676*^9}, 3.596958920835064*^9, 3.597391102162075*^9}]
+   3.592623450236676*^9}, 3.596958920835064*^9, 3.597391102162075*^9, 
+   3.598258969427919*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1241,7 +1245,7 @@ Cell[BoxData[
    3.592552247927678*^9, 3.5925524842322607`*^9, 3.592566904046266*^9, {
    3.592623305128131*^9, 3.5926233273488483`*^9}, {3.5926233854831944`*^9, 
    3.592623397749036*^9}, {3.592623443017017*^9, 3.592623450310655*^9}, 
-   3.596958925685793*^9, 3.5973911195747347`*^9}]
+   3.596958925685793*^9, 3.5973911195747347`*^9, 3.598258973674271*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1367,7 +1371,7 @@ Cell[BoxData[
    3.592552247936401*^9, 3.592552484248513*^9, 3.592566904088455*^9, {
    3.5926233054044952`*^9, 3.5926233274633303`*^9}, {3.592623385574839*^9, 
    3.592623398158699*^9}, {3.592623443074771*^9, 3.592623450323901*^9}, 
-   3.5969589277917747`*^9, 3.597391133199937*^9}]
+   3.5969589277917747`*^9, 3.597391133199937*^9, 3.598258975171687*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1411,7 +1415,8 @@ Cell[BoxData["DefaultDim"], "Output",
   3.592536379129898*^9, 3.592552248000677*^9, 3.592552484323791*^9, 
    3.592566904128502*^9, {3.592623305417657*^9, 3.592623327562953*^9}, {
    3.592623385686133*^9, 3.592623398534938*^9}, {3.5926234433740463`*^9, 
-   3.592623450371579*^9}, 3.59695893088735*^9, 3.597391140754752*^9}]
+   3.592623450371579*^9}, 3.59695893088735*^9, 3.597391140754752*^9, 
+   3.598258978244679*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1558,7 +1563,7 @@ Cell[BoxData[
    3.592552248089136*^9, 3.5925524843714733`*^9, 3.5925669041600018`*^9, {
    3.592623305540909*^9, 3.592623327706264*^9}, {3.592623385701824*^9, 
    3.592623398693427*^9}, {3.592623443438369*^9, 3.59262345044751*^9}, 
-   3.596958935746752*^9, 3.597391159972927*^9}]
+   3.596958935746752*^9, 3.597391159972927*^9, 3.598258980002915*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1673,7 +1678,7 @@ Cell[BoxData[
    3.5925522481574783`*^9, 3.592552484448515*^9, 3.592566904171669*^9, {
    3.5926233057832747`*^9, 3.592623327719996*^9}, {3.592623385798024*^9, 
    3.592623398969266*^9}, {3.592623443453079*^9, 3.592623450518778*^9}, 
-   3.596958937453475*^9, 3.597391175813857*^9}]
+   3.596958937453475*^9, 3.597391175813857*^9, 3.598258981719084*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1764,7 +1769,8 @@ Cell[BoxData[
   3.592536964233883*^9, 3.592552248399541*^9, 3.5925524845297613`*^9, 
    3.5925669042067947`*^9, {3.592623305902053*^9, 3.592623327837315*^9}, {
    3.592623385906249*^9, 3.5926233989842567`*^9}, {3.59262344352314*^9, 
-   3.592623450635056*^9}, 3.5969589384917917`*^9, 3.5973911853635197`*^9}]
+   3.592623450635056*^9}, 3.5969589384917917`*^9, 3.5973911853635197`*^9, 
+   3.598258984628199*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -1842,7 +1848,7 @@ Cell[BoxData[
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP], 
          TagBox[
-          StyleBox["$4",
+          StyleBox["$8",
            FontColor->GrayLevel[0]],
           MathGR`tensor`UP]},
         {"", ""}
@@ -1864,7 +1870,7 @@ Cell[BoxData[
        RowBox[{
         SubscriptBox["\[CapitalSampi]", 
          TagBox[
-          StyleBox["$4",
+          StyleBox["$8",
            FontColor->GrayLevel[0]],
           MathGR`tensor`DN]], 
         TagBox[
@@ -1912,7 +1918,7 @@ Cell[BoxData[
               FontColor->GrayLevel[0]],
              MathGR`tensor`DN], 
             TagBox[
-             StyleBox["$4",
+             StyleBox["$8",
               FontColor->GrayLevel[0]],
              MathGR`tensor`DN]}
           },
@@ -1945,7 +1951,7 @@ Cell[BoxData[
               FontColor->GrayLevel[0]],
              MathGR`tensor`DN], 
             TagBox[
-             StyleBox["$4",
+             StyleBox["$8",
               FontColor->GrayLevel[0]],
              MathGR`tensor`DN]}
           },
@@ -1963,7 +1969,8 @@ Cell[BoxData[
   3.592537057975049*^9, 3.592552248506106*^9, 3.5925524848068113`*^9, 
    3.592566904283984*^9, {3.592623306014205*^9, 3.592623328005434*^9}, {
    3.5926233859921827`*^9, 3.592623399169107*^9}, {3.592623443706889*^9, 
-   3.5926234508212147`*^9}, 3.5969589459038*^9, 3.597391200818638*^9}]
+   3.5926234508212147`*^9}, 3.5969589459038*^9, 3.597391200818638*^9, 
+   3.5982589907170143`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2926,7 +2933,8 @@ Cell[BoxData[
   3.592547071880156*^9, 3.5925522487292633`*^9, 3.592552485063575*^9, 
    3.592566904534931*^9, {3.592623306337317*^9, 3.592623328268077*^9}, {
    3.59262338608315*^9, 3.592623399308264*^9}, {3.592623443983449*^9, 
-   3.5926234509590273`*^9}, 3.596958958321105*^9, 3.5973912074531097`*^9}]
+   3.5926234509590273`*^9}, 3.596958958321105*^9, 3.5973912074531097`*^9, 
+   3.598258992248263*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -3897,7 +3905,8 @@ Cell[BoxData[
   3.592547173228063*^9, 3.592552249008205*^9, 3.592552485285125*^9, 
    3.59256690498538*^9, {3.592623306588084*^9, 3.592623328586069*^9}, {
    3.592623386289989*^9, 3.592623399616419*^9}, {3.592623444224001*^9, 
-   3.592623451195444*^9}, 3.596958963022174*^9, 3.597391210265374*^9}]
+   3.592623451195444*^9}, 3.596958963022174*^9, 3.597391210265374*^9, 
+   3.598258994232566*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -4236,7 +4245,7 @@ Cell[BoxData[
    3.592552249060154*^9, 3.592552485354107*^9, 3.592566905113068*^9, {
    3.592623306819353*^9, 3.592623328669876*^9}, {3.5926233864188128`*^9, 
    3.5926233999672537`*^9}, {3.592623444288439*^9, 3.592623451239603*^9}, 
-   3.5969589643442497`*^9, 3.59739121314824*^9}]
+   3.5969589643442497`*^9, 3.59739121314824*^9, 3.598258998490423*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -4551,7 +4560,7 @@ Cell[BoxData[
    3.592552249129002*^9, 3.592552485420312*^9, 3.592566905308597*^9, {
    3.592623306951138*^9, 3.592623328768993*^9}, {3.592623386544668*^9, 
    3.592623400123444*^9}, {3.592623444341186*^9, 3.592623451293209*^9}, 
-   3.596958973632131*^9, 3.597391223525185*^9}]
+   3.596958973632131*^9, 3.597391223525185*^9, 3.598258999810625*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -4681,7 +4690,8 @@ Cell[BoxData[
   3.592548281246608*^9, 3.592552249196795*^9, 3.592552485438751*^9, 
    3.59256690540143*^9, {3.592623307075439*^9, 3.5926233287779293`*^9}, {
    3.592623386693965*^9, 3.592623400263131*^9}, {3.592623444354697*^9, 
-   3.5926234513101797`*^9}, 3.596958977240753*^9, 3.597391235523432*^9}]
+   3.5926234513101797`*^9}, 3.596958977240753*^9, 3.597391235523432*^9, 
+   3.598259003164502*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -4835,7 +4845,8 @@ Cell[BoxData[
    3.592548380063374*^9, 3.592552249428406*^9, 3.592552485520343*^9, 
    3.5925669054717073`*^9, {3.592623307227124*^9, 3.59262332886201*^9}, {
    3.592623386834155*^9, 3.5926234004246264`*^9}, {3.5926234444013653`*^9, 
-   3.592623451381364*^9}, 3.596958978885734*^9, 3.597391238096994*^9}]
+   3.592623451381364*^9}, 3.596958978885734*^9, 3.597391238096994*^9, 
+   3.5982590055740223`*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -4894,7 +4905,7 @@ Cell[BoxData[
    3.592566905558329*^9, {3.592623307827752*^9, 3.5926233293657312`*^9}, {
    3.5926233875573587`*^9, 3.592623400902482*^9}, {3.592623444504614*^9, 
    3.592623451460738*^9}, 3.596958995398645*^9, {3.597391254649465*^9, 
-   3.597391262322075*^9}}]
+   3.597391262322075*^9}, 3.598259010611229*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -4952,7 +4963,8 @@ Cell[BoxData[
   3.5925493186860323`*^9, 3.5925522496984177`*^9, 3.592552485959116*^9, 
    3.592566905974062*^9, {3.592623308144906*^9, 3.592623329538454*^9}, {
    3.592623387885622*^9, 3.5926234014085608`*^9}, {3.592623444637096*^9, 
-   3.5926234516025667`*^9}, 3.5969589978002987`*^9, 3.597391271581978*^9}]
+   3.5926234516025667`*^9}, 3.5969589978002987`*^9, 3.597391271581978*^9, 
+   3.598259012075303*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -5011,7 +5023,7 @@ Cell[BoxData[
    3.592566906109055*^9, {3.5926233086061697`*^9, 3.5926233297078323`*^9}, {
    3.592623388380424*^9, 3.592623401750649*^9}, {3.5926234448350697`*^9, 
    3.592623451727701*^9}, 3.59695900272034*^9, {3.597391273395215*^9, 
-   3.597391291355946*^9}}]
+   3.597391291355946*^9}, 3.598259015377441*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -5053,7 +5065,7 @@ Cell[BoxData[
    3.592566906146654*^9, {3.592623308760557*^9, 3.592623329798568*^9}, {
    3.592623388544425*^9, 3.592623401932147*^9}, {3.5926234448862133`*^9, 
    3.592623451874774*^9}, 3.5969590039714193`*^9, {3.597391275593852*^9, 
-   3.5973912969060183`*^9}}]
+   3.5973912969060183`*^9}, 3.598259016658906*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -5110,7 +5122,7 @@ Cell[BoxData[
    3.5925669062559977`*^9, {3.5926233094346523`*^9, 3.592623330048965*^9}, {
    3.592623389045257*^9, 3.5926234024698257`*^9}, {3.592623445054178*^9, 
    3.5926234520561447`*^9}, 3.59695900492488*^9, {3.597391283523058*^9, 
-   3.597391299939764*^9}}]
+   3.597391299939764*^9}, 3.598259017635803*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -6001,7 +6013,7 @@ Cell[BoxData[
    3.597406663979579*^9}, 3.597407424004333*^9, 3.597407982941352*^9, 
    3.5974080759018927`*^9, 3.597408271769603*^9, 3.597409175868773*^9, 
    3.597409256834408*^9, 3.597409297412675*^9, 3.597409360274295*^9, 
-   3.597413067464963*^9}]
+   3.597413067464963*^9, 3.598259030956201*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6255,7 +6267,7 @@ Cell[BoxData[
    3.596959037741493*^9, 3.597391337642589*^9, {3.597391452537125*^9, 
    3.597391485791061*^9}, 3.59739276758778*^9, 3.597392956438257*^9, 
    3.5973997899761887`*^9, 3.597400029055373*^9, 3.59740175548687*^9, 
-   3.597409177713132*^9, 3.597413070017212*^9}]
+   3.597409177713132*^9, 3.597413070017212*^9, 3.5982590325199738`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -6275,6 +6287,8 @@ cosmological perturbations.\
  CellChangeTimes->{{3.5925663283418407`*^9, 3.592566526740505*^9}, {
   3.592623248046653*^9, 3.5926232487204943`*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[{
  RowBox[{"Remove", "[", 
   RowBox[{
@@ -6288,6 +6302,22 @@ Cell[BoxData[{
    3.592566071705748*^9, 3.592566103393549*^9}, 3.592566541700692*^9, {
    3.592623230329701*^9, 3.592623238765238*^9}, {3.5926232900686293`*^9, 
    3.5926232921910667`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"\[Eta]", "::", "shdw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(\\\"\\\\[Eta]\\\"\\)\[NoBreak] \
+appears in multiple contexts \[NoBreak]\\!\\({\\\"MathGR`frwadm`\\\", \
+\\\"Global`\\\"}\\)\[NoBreak]; definitions in context \
+\[NoBreak]\\!\\(\\\"MathGR`frwadm`\\\"\\)\[NoBreak] may shadow or be shadowed \
+by other definitions. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/shdw\\\", ButtonNote -> \
+\\\"MathGR`frwadm`\[Eta]::shdw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5982590360936537`*^9}]
+}, Open  ]],
 
 Cell["\<\
 Here we define the indices explicitly, because we want to use LatinIdx \
@@ -6422,37 +6452,35 @@ Cell[BoxData[
       RowBox[{"V", "[", "\[Phi]", "]"}]}]}], ")"}]}], "+", 
   RowBox[{
    FractionBox["1", 
-    RowBox[{"4", " ", "a", " ", "\[ExponentialE]"}]], 
+    RowBox[{"4", " ", "a"}]], 
    RowBox[{
     SuperscriptBox["Eps", "2"], " ", 
     RowBox[{"(", 
      RowBox[{
       RowBox[{
        RowBox[{"-", "12"}], " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox["H", "2"], " ", 
        SuperscriptBox["\[Alpha]", "2"]}], "+", 
       RowBox[{"36", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox["H", "2"], " ", "\[Alpha]", " ", "\[Zeta]"}], "-", 
       RowBox[{"54", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox["H", "2"], " ", 
        SuperscriptBox["\[Zeta]", "2"]}], "+", 
       RowBox[{"24", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", "H", " ", 
-       "\[Alpha]", " ", 
+       SuperscriptBox["a", "4"], " ", "H", " ", "\[Alpha]", " ", 
        OverscriptBox["\[Zeta]", "\[Bullet]"]}], "-", 
       RowBox[{"72", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", "H", " ", 
-       "\[Zeta]", " ", 
+       SuperscriptBox["a", "4"], " ", "H", " ", "\[Zeta]", " ", 
        OverscriptBox["\[Zeta]", "\[Bullet]"]}], "-", 
       RowBox[{"12", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox[
         OverscriptBox["\[Zeta]", "\[Bullet]"], "2"]}], "+", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", "H", " ", 
+       SuperscriptBox["a", "2"], " ", "H", " ", 
        RowBox[{"(", 
         TagBox[
          RowBox[{
@@ -6485,7 +6513,7 @@ Cell[BoxData[
             MathGR`tensor`DN]], "\[Zeta]"}],
          "mgrPd"], ")"}]}], "+", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", "H", " ", 
+       SuperscriptBox["a", "2"], " ", "H", " ", 
        RowBox[{"(", 
         TagBox[
          RowBox[{
@@ -6505,7 +6533,7 @@ Cell[BoxData[
             MathGR`tensor`DN]], "\[Zeta]"}],
          "mgrPd"], ")"}]}], "-", 
       RowBox[{"4", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "2"], " ", 
        SuperscriptBox[
         RowBox[{"(", 
          TagBox[
@@ -6517,17 +6545,16 @@ Cell[BoxData[
              MathGR`tensor`DN]], "\[Zeta]"}],
           "mgrPd"], ")"}], "2"]}], "+", 
       RowBox[{"2", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox["\[Alpha]", "2"], " ", 
        SuperscriptBox[
         OverscriptBox["\[Phi]", "\[Bullet]"], "2"]}], "-", 
       RowBox[{"6", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", "\[Alpha]", " ",
-        "\[Zeta]", " ", 
+       SuperscriptBox["a", "4"], " ", "\[Alpha]", " ", "\[Zeta]", " ", 
        SuperscriptBox[
         OverscriptBox["\[Phi]", "\[Bullet]"], "2"]}], "+", 
       RowBox[{"9", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox["\[Zeta]", "2"], " ", 
        SuperscriptBox[
         OverscriptBox["\[Phi]", "\[Bullet]"], "2"]}], "+", 
@@ -6627,8 +6654,7 @@ Cell[BoxData[
            "mgrTsr"]}],
          "mgrPd"], ")"}]}], "-", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", "H", " ", 
-       "\[Alpha]", " ", 
+       SuperscriptBox["a", "2"], " ", "H", " ", "\[Alpha]", " ", 
        RowBox[{"(", 
         TagBox[
          RowBox[{
@@ -6647,8 +6673,7 @@ Cell[BoxData[
            "mgrPd"]}],
          "mgrPd"], ")"}]}], "+", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", "H", " ", 
-       "\[Zeta]", " ", 
+       SuperscriptBox["a", "2"], " ", "H", " ", "\[Zeta]", " ", 
        RowBox[{"(", 
         TagBox[
          RowBox[{
@@ -6667,7 +6692,7 @@ Cell[BoxData[
            "mgrPd"]}],
          "mgrPd"], ")"}]}], "+", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "2"], " ", 
        OverscriptBox["\[Zeta]", "\[Bullet]"], " ", 
        RowBox[{"(", 
         TagBox[
@@ -6790,7 +6815,7 @@ Cell[BoxData[
            "mgrPd"]}],
          "mgrPd"], ")"}]}], "-", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", "\[Alpha]", " ", 
+       SuperscriptBox["a", "2"], " ", "\[Alpha]", " ", 
        RowBox[{"(", 
         TagBox[
          RowBox[{
@@ -6809,8 +6834,7 @@ Cell[BoxData[
            "mgrPd"]}],
          "mgrPd"], ")"}]}], "-", 
       RowBox[{"8", " ", 
-       SuperscriptBox["a", "2"], " ", "\[ExponentialE]", " ", "\[Zeta]", " ", 
-       
+       SuperscriptBox["a", "2"], " ", "\[Zeta]", " ", 
        RowBox[{"(", 
         TagBox[
          RowBox[{
@@ -6829,18 +6853,17 @@ Cell[BoxData[
            "mgrPd"]}],
          "mgrPd"], ")"}]}], "-", 
       RowBox[{"12", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", "\[Alpha]", " ",
-        "\[Zeta]", " ", 
+       SuperscriptBox["a", "4"], " ", "\[Alpha]", " ", "\[Zeta]", " ", 
        RowBox[{"V", "[", "\[Phi]", "]"}]}], "-", 
       RowBox[{"18", " ", 
-       SuperscriptBox["a", "4"], " ", "\[ExponentialE]", " ", 
+       SuperscriptBox["a", "4"], " ", 
        SuperscriptBox["\[Zeta]", "2"], " ", 
        RowBox[{"V", "[", "\[Phi]", "]"}]}]}], ")"}]}]}]}]], "Output",
  CellChangeTimes->{
   3.59256607655898*^9, 3.592566107542033*^9, 3.5925662383004627`*^9, 
    3.592566910169251*^9, {3.592623312401331*^9, 3.592623332656321*^9}, {
    3.592623392050716*^9, 3.592623405163845*^9}, {3.592623447108526*^9, 
-   3.592623454072809*^9}, 3.596959044261691*^9}]
+   3.592623454072809*^9}, 3.596959044261691*^9, 3.598259052075189*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6925,7 +6948,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.5925660911681967`*^9, 3.592566111248671*^9}, 
    3.592566240943439*^9, 3.592566910527968*^9, {3.592623312650408*^9, 
    3.592623333084898*^9}, {3.5926233924729033`*^9, 3.592623405552698*^9}, {
-   3.592623447314098*^9, 3.5926234542888308`*^9}, 3.596959044307406*^9}]
+   3.592623447314098*^9, 3.5926234542888308`*^9}, 3.596959044307406*^9, 
+   3.59825905632586*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -6997,7 +7021,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.5925661330107822`*^9, 3.5925662430249662`*^9}, 
    3.592566910606022*^9, {3.5926233127432632`*^9, 3.592623333263301*^9}, {
    3.592623392632369*^9, 3.5926234056957607`*^9}, {3.592623447372363*^9, 
-   3.592623454358177*^9}, 3.5969590443331614`*^9}]
+   3.592623454358177*^9}, 3.5969590443331614`*^9, 3.598259059762434*^9}]
 }, Open  ]],
 
 Cell["The second order action.", "Text",
@@ -7066,7 +7090,7 @@ Cell[BoxData[
               Offset[0.2]}, "RowsIndexed" -> {}}],
          FontSize->10]}],
        "mgrTsr"], ")"}], "2"]}], 
-   RowBox[{"4", " ", "a", " ", "\[ExponentialE]"}]], "+", 
+   RowBox[{"4", " ", "a"}]], "+", 
   RowBox[{"6", " ", 
    SuperscriptBox["a", "3"], " ", "H", " ", "\[Alpha]", " ", 
    OverscriptBox["\[Zeta]", "\[Bullet]"]}], "-", 
@@ -7083,7 +7107,8 @@ Cell[BoxData[
  CellChangeTimes->{
   3.5925662466214867`*^9, 3.5925669107414913`*^9, {3.592623312865692*^9, 
    3.592623333574745*^9}, {3.592623392767048*^9, 3.59262340582801*^9}, {
-   3.5926234474911623`*^9, 3.5926234544783916`*^9}, 3.596959044396988*^9}]
+   3.5926234474911623`*^9, 3.5926234544783916`*^9}, 3.596959044396988*^9, 
+   3.598259061420475*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -7165,7 +7190,8 @@ Cell[BoxData[
  CellChangeTimes->{
   3.592566255651764*^9, 3.5925669108105917`*^9, {3.5926233129715157`*^9, 
    3.592623334104526*^9}, {3.592623392939781*^9, 3.592623405988326*^9}, {
-   3.5926234475277653`*^9, 3.592623454553454*^9}, 3.596959044418895*^9}]
+   3.5926234475277653`*^9, 3.592623454553454*^9}, 3.596959044418895*^9, 
+   3.598259065068953*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -7201,7 +7227,8 @@ Cell[BoxData[
  CellChangeTimes->{
   3.5925662626264563`*^9, 3.592566911054432*^9, {3.592623313274959*^9, 
    3.592623334431535*^9}, {3.5926233934436283`*^9, 3.59262340644344*^9}, {
-   3.5926234477124968`*^9, 3.592623454748464*^9}, 3.5969590444703007`*^9}]
+   3.5926234477124968`*^9, 3.592623454748464*^9}, 3.5969590444703007`*^9, 
+   3.5982590686322308`*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -7218,8 +7245,445 @@ Cell[BoxData[
 }, Open  ]]
 },
 WindowSize->{1096, 669},
-WindowMargins->{{68, Automatic}, {Automatic, 146}},
+WindowMargins->{{66, Automatic}, {Automatic, 123}},
 ShowSelection->True,
+InputAliases->{"tp" -> TagBox[
+    RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\"\[SelectionPlaceholder]\"", FontColor -> GrayLevel[0]], 
+        MathGR`tensor`DN]], "\[Placeholder]"}], "mgrPd"], "tp1" -> TagBox[
+    RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox["\"\[SelectionPlaceholder]\"", FontColor -> GrayLevel[0]], 
+        MathGR`typeset`Private`D1]], "\[Placeholder]"}], "mgrPd"], "tp2" -> 
+  TagBox[
+    RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox[
+        "\"\[SelectionPlaceholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+        MathGR`typeset`Private`D2]], "\[Placeholder]"}], "mgrPd"], "tpt" -> 
+  TagBox[
+    RowBox[{
+      SubscriptBox["\[CapitalSampi]", 
+       TagBox[
+        StyleBox[
+        "\"\[SelectionPlaceholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+        MathGR`typeset`Private`DTot]], "\[Placeholder]"}], "mgrPd"], "tu" -> 
+  TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "td" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tuu" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tud" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], ""}, {"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tdu" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP]}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tdd" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", ""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tuuu" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP]}, {"", "", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tudd" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], "", ""}, {"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tddd" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", "", ""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tuuuu" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`UP]}, {"", "", "", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tdddd" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", "", "", ""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`tensor`DN]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tu1" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`U1]}, {""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "td1" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`D1]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tu1u1" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`U1], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`U1]}, {"", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tu1d1" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`U1], ""}, {"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`D1]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td1u1" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`U1]}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`D1], ""}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td1d1" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", ""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`D1], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> GrayLevel[0]], 
+           MathGR`typeset`Private`D1]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tu2" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`U2]}, {""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "td2" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`D2]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tu2u2" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`U2], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`U2]}, {"", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tu2d2" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`U2], ""}, {"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`D2]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td2u2" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`U2]}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`D2], ""}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "td2d2" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", ""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`D2], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[1, 0, 0]], 
+           MathGR`typeset`Private`D2]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tut" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`UTot]}, {""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tdt" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tutut" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`UTot], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`UTot]}, {"", ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tutdt" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`UTot], ""}, {"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tdtut" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`UTot]}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`DTot], ""}}, ColumnSpacings -> 0, 
+        RowSpacings -> 0], FontSize -> 10]}], "mgrTsr"], "tdtdt" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", ""}, {
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`DTot], 
+          TagBox[
+           StyleBox["\"\[Placeholder]\"", FontColor -> RGBColor[0, 0, 1]], 
+           MathGR`typeset`Private`DTot]}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tue" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`UE]}, {""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tde" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{""}, {
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`DE]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tueue" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`UE], 
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`UE]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> 
+        0], FontSize -> 10]}], "mgrTsr"], "tuede" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`UE], ""}, {"", 
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`DE]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tdeue" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", 
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`UE]}, {
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`DE], ""}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"], "tdede" -> TagBox[
+    RowBox[{
+      AdjustmentBox[
+      "\[SelectionPlaceholder]", BoxMargins -> {{0, -0.2}, {0, 0}}], 
+      StyleBox[
+       GridBox[{{"", ""}, {
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`DE], 
+          TagBox[
+           StyleBox["\[Placeholder]", FontColor -> GrayLevel[0.5]], 
+           MathGR`tensor`DE]}}, ColumnSpacings -> 0, RowSpacings -> 0], 
+       FontSize -> 10]}], "mgrTsr"]},
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
 StyleDefinitions->"Default.nb"
 ]
@@ -7236,241 +7700,244 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 95, 1, 92, "Title"],
-Cell[677, 25, 849, 15, 143, "Text"],
+Cell[677, 25, 849, 15, 125, "Text"],
 Cell[CellGroupData[{
 Cell[1551, 44, 164, 2, 80, "Section"],
 Cell[1718, 48, 372, 8, 55, "Input"],
 Cell[CellGroupData[{
 Cell[2115, 60, 107, 1, 44, "Subsection"],
-Cell[2225, 63, 138, 3, 33, "Text"],
+Cell[2225, 63, 138, 3, 30, "Text"],
 Cell[CellGroupData[{
 Cell[2388, 70, 345, 8, 32, "Input"],
-Cell[2736, 80, 1359, 40, 36, "Output"]
+Cell[2736, 80, 1381, 40, 36, "Output"]
 }, Open  ]],
-Cell[4110, 123, 2546, 42, 539, "Text"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6693, 170, 146, 3, 44, "Subsection"],
-Cell[6842, 175, 9897, 324, 151, "Text"],
-Cell[16742, 501, 574, 19, 32, "Input"],
-Cell[CellGroupData[{
-Cell[17341, 524, 214, 5, 32, "Input"],
-Cell[17558, 531, 1556, 54, 36, "Output"]
-}, Open  ]],
-Cell[19129, 588, 355, 7, 33, "Text"]
+Cell[4132, 123, 2546, 42, 463, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[19521, 600, 109, 1, 44, "Subsection"],
-Cell[19633, 603, 201, 4, 33, "Text"],
+Cell[6715, 170, 146, 3, 44, "Subsection"],
+Cell[6864, 175, 9897, 324, 184, "Text"],
+Cell[16764, 501, 574, 19, 32, "Input"],
 Cell[CellGroupData[{
-Cell[19859, 611, 3281, 111, 36, "Input"],
-Cell[23143, 724, 1890, 59, 36, "Output"]
+Cell[17363, 524, 214, 5, 32, "Input"],
+Cell[17580, 531, 1582, 55, 36, "Output"]
 }, Open  ]],
-Cell[25048, 786, 222, 4, 33, "Text"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[25307, 795, 110, 1, 44, "Subsection"],
-Cell[25420, 798, 291, 5, 33, "Text"],
-Cell[25714, 805, 435, 10, 32, "Input"],
-Cell[26152, 817, 132, 3, 33, "Text"],
-Cell[CellGroupData[{
-Cell[26309, 824, 2128, 71, 36, "Input"],
-Cell[28440, 897, 1471, 42, 36, "Output"]
-}, Open  ]],
-Cell[29926, 942, 278, 7, 33, "Text"]
+Cell[19177, 589, 355, 7, 49, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30241, 954, 133, 2, 44, "Subsection"],
-Cell[30377, 958, 153, 2, 33, "Text"],
+Cell[19569, 601, 109, 1, 44, "Subsection"],
+Cell[19681, 604, 201, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[30555, 964, 1171, 38, 36, "Input"],
-Cell[31729, 1004, 1455, 46, 36, "Output"]
+Cell[19907, 612, 3281, 111, 36, "Input"],
+Cell[23191, 725, 1912, 59, 36, "Output"]
 }, Open  ]],
-Cell[33199, 1053, 148, 3, 33, "Text"],
-Cell[CellGroupData[{
-Cell[33372, 1060, 277, 7, 32, "Input"],
-Cell[33652, 1069, 1022, 34, 32, "Output"]
+Cell[25118, 787, 222, 4, 30, "Text"]
 }, Open  ]],
-Cell[34689, 1106, 206, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[34920, 1114, 386, 11, 55, "Input"],
-Cell[35309, 1127, 563, 15, 32, "Output"]
+Cell[25377, 796, 110, 1, 44, "Subsection"],
+Cell[25490, 799, 291, 5, 49, "Text"],
+Cell[25784, 806, 435, 10, 32, "Input"],
+Cell[26222, 818, 132, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[26379, 825, 2128, 71, 36, "Input"],
+Cell[28510, 898, 1493, 42, 36, "Output"]
+}, Open  ]],
+Cell[30018, 943, 278, 7, 30, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30333, 955, 133, 2, 44, "Subsection"],
+Cell[30469, 959, 153, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[30647, 965, 1171, 38, 36, "Input"],
+Cell[31821, 1005, 1481, 47, 36, "Output"]
+}, Open  ]],
+Cell[33317, 1055, 148, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[33490, 1062, 277, 7, 32, "Input"],
+Cell[33770, 1071, 1050, 35, 32, "Output"]
+}, Open  ]],
+Cell[34835, 1109, 206, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[35066, 1117, 386, 11, 55, "Input"],
+Cell[35455, 1130, 589, 16, 32, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[35921, 1148, 119, 1, 44, "Subsection"],
-Cell[36043, 1151, 159, 3, 33, "Text"],
+Cell[36093, 1152, 119, 1, 44, "Subsection"],
+Cell[36215, 1155, 159, 3, 31, "Text"],
 Cell[CellGroupData[{
-Cell[36227, 1158, 1519, 53, 36, "Input"],
-Cell[37749, 1213, 1019, 30, 36, "Output"]
+Cell[36399, 1162, 1519, 53, 36, "Input"],
+Cell[37921, 1217, 1041, 30, 36, "Output"]
 }, Open  ]],
-Cell[38783, 1246, 286, 5, 33, "Text"],
+Cell[38977, 1250, 286, 5, 50, "Text"],
 Cell[CellGroupData[{
-Cell[39094, 1255, 1516, 53, 36, "Input"],
-Cell[40613, 1310, 1875, 59, 36, "Output"]
+Cell[39288, 1259, 1516, 53, 36, "Input"],
+Cell[40807, 1314, 1897, 59, 36, "Output"]
 }, Open  ]],
-Cell[42503, 1372, 121, 3, 33, "Text"],
+Cell[42719, 1376, 121, 3, 30, "Text"],
 Cell[CellGroupData[{
-Cell[42649, 1379, 796, 27, 36, "Input"],
-Cell[43448, 1408, 343, 5, 32, "Output"]
+Cell[42865, 1383, 796, 27, 36, "Input"],
+Cell[43664, 1412, 369, 6, 32, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43840, 1419, 119, 1, 44, "Subsection"],
-Cell[43962, 1422, 225, 4, 33, "Text"],
+Cell[44082, 1424, 119, 1, 44, "Subsection"],
+Cell[44204, 1427, 225, 4, 31, "Text"],
 Cell[CellGroupData[{
-Cell[44212, 1430, 351, 8, 32, "Input"],
-Cell[44566, 1440, 3668, 120, 36, "Output"]
+Cell[44454, 1435, 351, 8, 32, "Input"],
+Cell[44808, 1445, 3690, 120, 36, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[48283, 1566, 162, 2, 44, "Subsection"],
-Cell[48448, 1570, 320, 6, 33, "Text"]
+Cell[48547, 1571, 162, 2, 44, "Subsection"],
+Cell[48712, 1575, 320, 6, 51, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[48805, 1581, 198, 4, 44, "Subsection"],
+Cell[49069, 1586, 198, 4, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[49028, 1589, 849, 28, 36, "Input"],
-Cell[49880, 1619, 1740, 56, 36, "Output"]
+Cell[49292, 1594, 849, 28, 36, "Input"],
+Cell[50144, 1624, 1762, 56, 36, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[51657, 1680, 855, 28, 36, "Input"],
-Cell[52515, 1710, 1720, 56, 36, "Output"]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[54296, 1773, 109, 1, 80, "Section"],
-Cell[54408, 1776, 235, 4, 55, "Input"],
-Cell[CellGroupData[{
-Cell[54668, 1784, 101, 1, 44, "Subsection"],
-Cell[54772, 1787, 259, 5, 33, "Text"],
-Cell[CellGroupData[{
-Cell[55056, 1796, 917, 31, 36, "Input"],
-Cell[55976, 1829, 4164, 136, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[60177, 1970, 142, 3, 32, "Input"],
-Cell[60322, 1975, 27764, 953, 84, "Output"]
-}, Open  ]],
-Cell[88101, 2931, 145, 3, 33, "Text"],
-Cell[CellGroupData[{
-Cell[88271, 2938, 256, 6, 32, "Input"],
-Cell[88530, 2946, 27758, 953, 84, "Output"]
-}, Open  ]],
-Cell[116303, 3902, 286, 5, 33, "Text"],
-Cell[CellGroupData[{
-Cell[116614, 3911, 270, 7, 32, "Input"],
-Cell[116887, 3920, 9453, 318, 36, "Output"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[126389, 4244, 109, 1, 44, "Subsection"],
-Cell[CellGroupData[{
-Cell[126523, 4249, 324, 8, 32, "Input"],
-Cell[126850, 4259, 8571, 294, 47, "Output"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[135470, 4559, 108, 1, 44, "Subsection"],
-Cell[135581, 4562, 203, 4, 33, "Text"],
-Cell[CellGroupData[{
-Cell[135809, 4570, 1515, 53, 36, "Input"],
-Cell[137327, 4625, 1810, 58, 36, "Output"]
-}, Open  ]],
-Cell[139152, 4686, 329, 6, 55, "Text"],
-Cell[CellGroupData[{
-Cell[139506, 4696, 468, 13, 32, "Input"],
-Cell[139977, 4711, 3810, 126, 36, "Output"]
+Cell[51943, 1685, 855, 28, 36, "Input"],
+Cell[52801, 1715, 1746, 57, 36, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[143848, 4844, 115, 1, 80, "Section"],
-Cell[143966, 4847, 285, 5, 55, "Input"],
-Cell[144254, 4854, 186, 4, 33, "Text"],
+Cell[54608, 1779, 109, 1, 80, "Section"],
+Cell[54720, 1782, 235, 4, 55, "Input"],
 Cell[CellGroupData[{
-Cell[144465, 4862, 626, 22, 32, "Input"],
-Cell[145094, 4886, 483, 10, 32, "Output"]
+Cell[54980, 1790, 101, 1, 44, "Subsection"],
+Cell[55084, 1793, 259, 5, 30, "Text"],
+Cell[CellGroupData[{
+Cell[55368, 1802, 917, 31, 36, "Input"],
+Cell[56288, 1835, 4192, 137, 47, "Output"]
 }, Open  ]],
-Cell[145592, 4899, 308, 7, 77, "Text"],
 Cell[CellGroupData[{
-Cell[145925, 4910, 622, 22, 32, "Input"],
-Cell[146550, 4934, 738, 20, 32, "Output"]
+Cell[60517, 1977, 142, 3, 32, "Input"],
+Cell[60662, 1982, 27790, 954, 110, "Output"]
 }, Open  ]],
-Cell[147303, 4957, 454, 9, 99, "Text"],
-Cell[147760, 4968, 162, 3, 33, "Text"],
+Cell[88467, 2939, 145, 3, 30, "Text"],
 Cell[CellGroupData[{
-Cell[147947, 4975, 447, 14, 32, "Input"],
-Cell[148397, 4991, 811, 22, 32, "Output"]
+Cell[88637, 2946, 256, 6, 32, "Input"],
+Cell[88896, 2954, 27784, 954, 110, "Output"]
 }, Open  ]],
-Cell[149223, 5016, 177, 4, 33, "Text"],
+Cell[116695, 3911, 286, 5, 30, "Text"],
 Cell[CellGroupData[{
-Cell[149425, 5024, 420, 13, 32, "Input"],
-Cell[149848, 5039, 590, 16, 32, "Output"]
-}, Open  ]],
-Cell[150453, 5058, 145, 3, 33, "Text"],
-Cell[CellGroupData[{
-Cell[150623, 5065, 605, 16, 44, "Input"],
-Cell[151231, 5083, 1082, 29, 52, "Output"]
+Cell[117006, 3920, 270, 7, 32, "Input"],
+Cell[117279, 3929, 9475, 318, 36, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[152362, 5118, 229, 5, 80, "Section"],
-Cell[152594, 5125, 398, 7, 99, "Input"],
-Cell[152995, 5134, 517, 10, 99, "Text"],
-Cell[153515, 5146, 997, 21, 77, "Input"],
-Cell[154515, 5169, 665, 12, 121, "Text"],
-Cell[155183, 5183, 17544, 506, 183, "Input"],
-Cell[172730, 5691, 1074, 31, 99, "Input"],
-Cell[173807, 5724, 104, 1, 33, "Text"],
+Cell[126803, 4253, 109, 1, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[173936, 5729, 318, 7, 32, "Input"],
-Cell[174257, 5738, 8430, 265, 47, "Output"]
-}, Open  ]],
-Cell[182702, 6006, 254, 5, 33, "Text"],
-Cell[CellGroupData[{
-Cell[182981, 6015, 3853, 113, 36, "Input"],
-Cell[186837, 6130, 3947, 127, 47, "Output"]
+Cell[126937, 4258, 324, 8, 32, "Input"],
+Cell[127264, 4268, 8593, 294, 47, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[190833, 6263, 185, 4, 80, "Section"],
-Cell[191021, 6269, 318, 6, 55, "Text"],
-Cell[191342, 6277, 658, 12, 121, "Input"],
-Cell[192003, 6291, 340, 7, 77, "Text"],
-Cell[192346, 6300, 708, 18, 77, "Input"],
-Cell[193057, 6320, 310, 6, 55, "Text"],
+Cell[135906, 4568, 108, 1, 44, "Subsection"],
+Cell[136017, 4571, 203, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[193392, 6330, 484, 13, 32, "Input"],
-Cell[193879, 6345, 16503, 497, 226, "Output"]
+Cell[136245, 4579, 1515, 53, 36, "Input"],
+Cell[137763, 4634, 1836, 59, 36, "Output"]
 }, Open  ]],
-Cell[210397, 6845, 186, 4, 33, "Text"],
+Cell[139614, 4696, 329, 6, 49, "Text"],
 Cell[CellGroupData[{
-Cell[210608, 6853, 297, 6, 32, "Input"],
-Cell[210908, 6861, 2171, 66, 47, "Output"]
+Cell[139968, 4706, 468, 13, 32, "Input"],
+Cell[140439, 4721, 3838, 127, 36, "Output"]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]],
-Cell[213094, 6930, 180, 4, 33, "Text"],
 Cell[CellGroupData[{
-Cell[213299, 6938, 1061, 29, 32, "Input"],
-Cell[214363, 6969, 1150, 30, 45, "Output"]
-}, Open  ]],
-Cell[215528, 7002, 108, 1, 33, "Text"],
+Cell[144338, 4855, 115, 1, 80, "Section"],
+Cell[144456, 4858, 285, 5, 55, "Input"],
+Cell[144744, 4865, 186, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[215661, 7007, 330, 7, 32, "Input"],
-Cell[215994, 7016, 2526, 69, 81, "Output"]
+Cell[144955, 4873, 626, 22, 32, "Input"],
+Cell[145584, 4897, 505, 10, 32, "Output"]
 }, Open  ]],
-Cell[218535, 7088, 139, 3, 33, "Text"],
+Cell[146104, 4910, 308, 7, 68, "Text"],
 Cell[CellGroupData[{
-Cell[218699, 7095, 1014, 27, 32, "Input"],
-Cell[219716, 7124, 1426, 43, 56, "Output"]
+Cell[146437, 4921, 622, 22, 32, "Input"],
+Cell[147062, 4945, 764, 21, 32, "Output"]
 }, Open  ]],
-Cell[221157, 7170, 198, 4, 33, "Text"],
+Cell[147841, 4969, 454, 9, 87, "Text"],
+Cell[148298, 4980, 162, 3, 30, "Text"],
 Cell[CellGroupData[{
-Cell[221380, 7178, 435, 10, 32, "Input"],
-Cell[221818, 7190, 550, 13, 38, "Output"]
+Cell[148485, 4987, 447, 14, 32, "Input"],
+Cell[148935, 5003, 833, 22, 32, "Output"]
 }, Open  ]],
-Cell[222383, 7206, 386, 9, 32, "Input"]
+Cell[149783, 5028, 177, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[149985, 5036, 420, 13, 32, "Input"],
+Cell[150408, 5051, 612, 16, 32, "Output"]
+}, Open  ]],
+Cell[151035, 5070, 145, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[151205, 5077, 605, 16, 44, "Input"],
+Cell[151813, 5095, 1104, 29, 52, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[152966, 5130, 229, 5, 80, "Section"],
+Cell[153198, 5137, 398, 7, 99, "Input"],
+Cell[153599, 5146, 517, 10, 90, "Text"],
+Cell[154119, 5158, 997, 21, 77, "Input"],
+Cell[155119, 5181, 665, 12, 106, "Text"],
+Cell[155787, 5195, 17544, 506, 183, "Input"],
+Cell[173334, 5703, 1074, 31, 99, "Input"],
+Cell[174411, 5736, 104, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[174540, 5741, 318, 7, 32, "Input"],
+Cell[174861, 5750, 8452, 265, 47, "Output"]
+}, Open  ]],
+Cell[183328, 6018, 254, 5, 30, "Text"],
+Cell[CellGroupData[{
+Cell[183607, 6027, 3853, 113, 36, "Input"],
+Cell[187463, 6142, 3971, 127, 47, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[191483, 6275, 185, 4, 80, "Section"],
+Cell[191671, 6281, 318, 6, 49, "Text"],
+Cell[CellGroupData[{
+Cell[192014, 6291, 658, 12, 121, "Input"],
+Cell[192675, 6305, 679, 13, 41, "Message"]
+}, Open  ]],
+Cell[193369, 6321, 340, 7, 70, "Text"],
+Cell[193712, 6330, 708, 18, 77, "Input"],
+Cell[194423, 6350, 310, 6, 49, "Text"],
+Cell[CellGroupData[{
+Cell[194758, 6360, 484, 13, 32, "Input"],
+Cell[195245, 6375, 15989, 490, 227, "Output"]
+}, Open  ]],
+Cell[211249, 6868, 186, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[211460, 6876, 297, 6, 32, "Input"],
+Cell[211760, 6884, 2196, 67, 47, "Output"]
+}, Open  ]],
+Cell[213971, 6954, 180, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[214176, 6962, 1061, 29, 32, "Input"],
+Cell[215240, 6993, 1172, 30, 45, "Output"]
+}, Open  ]],
+Cell[216427, 7026, 108, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[216560, 7031, 330, 7, 32, "Input"],
+Cell[216893, 7040, 2528, 70, 79, "Output"]
+}, Open  ]],
+Cell[219436, 7113, 139, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[219600, 7120, 1014, 27, 32, "Input"],
+Cell[220617, 7149, 1452, 44, 56, "Output"]
+}, Open  ]],
+Cell[222084, 7196, 198, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[222307, 7204, 435, 10, 32, "Input"],
+Cell[222745, 7216, 578, 14, 38, "Output"]
+}, Open  ]],
+Cell[223338, 7233, 386, 9, 32, "Input"]
 }, Open  ]]
 }, Open  ]]
 }
