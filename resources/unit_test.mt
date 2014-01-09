@@ -1,5 +1,5 @@
 (* Mathematica Test File *)
-
+startTestTime=SessionTime[]
 
 (* ::Section:: *)
 (* Tests for tensor.m *)
@@ -221,3 +221,7 @@ Test[TrySimp[R\[Bullet]decomp, (a_.) + (b_.)*Pd[A[U2[m_], D1[\[Alpha]_]], D1[\[B
   a + Simp[b*(F[Sequence[U2[m], D1[\[Alpha]], D1[\[Beta]]]] + Pd[A[Sequence[U2[m], D1[\[Beta]]]], D1[\[Alpha]]])]], 
   -(F[U2["a"], D1["\[Alpha]"], D1["\[Beta]"]]*Pd[A[U2["a"], D1["\[Gamma]"]], D1["\[Delta]"]]*\[Eta][U1["\[Alpha]"], U1["\[Gamma]"]]*
    \[Eta][U1["\[Beta]"], U1["\[Delta]"]])/2, TestID->"Decomposition of non-diag metric into Maxwell"]
+
+ 
+ Print["Total time used:"]  
+ Print[SessionTime[]-startTestTime]
