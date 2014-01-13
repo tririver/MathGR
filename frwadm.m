@@ -5,7 +5,7 @@ DeclareIdx[{UP, DN}, DefaultDim, LatinIdx]
 
 Pd[Mp,_]:=0
 (Pd[#,DN@_]:=0) &/@ {a, H, \[Epsilon], \[Eta]}
-SimpHook = {DefaultDim->3, Pd[a, DE@0]->a*H, Pd[H, DE@0]->-\[Epsilon]*H*H, Pd[\[Epsilon], DE@0]->H*\[Epsilon]*\[Eta]}
+SimpHook = {DefaultDim->3, Pd[a, DE@0]->a*H, Pd[H, DE@0]->-\[Epsilon]*H*H, Pd[\[Epsilon], DE@0]->H*\[Epsilon]*\[Eta], Pd[\[Eta], DE@0] -> H*\[Eta]2*\[Eta]}
 LapseN = 1 + Eps * \[Alpha]
 ShiftN[DN@i_] := Eps * Pd[\[Beta], DN@i] + Eps * b[DN@i]
 Pd[b[DN@i_],DN@i_]:= 0
