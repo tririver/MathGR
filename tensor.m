@@ -170,7 +170,9 @@ SimpUq[e_, OptionsPattern[]]:= Block[{IdxSet}, (IdxSet[#]=IdxSet[IdxDual[#]]=Uni
 
 simpMTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
 	(* Add assumptions for tensors encountered in each term *)
-	ass = ass && (And@@Cases[{tM},f:MAT[t_][idx__]:>(f~Element~Arrays[Dim/@rmNE[{idx}]]), Infinity]);
+	ass = ass && (And@@Cases[{tM},f:MAT[t_][idx__] 
+		/;Cases[simpMAss, Element[f,__], Infinity]==={} (* This line is added to avoid duplicate assumptions, as a work around of a bug in M*)
+		:>(f~Element~Arrays[Dim/@rmNE[{idx}]]), Infinity]);
 	(* Add symmetry of T in PdPdPdT *)
 	tInPdts = Cases[{tM}, HoldPattern[f:MAT[pdts[n_][t_]][idx__]] :>
 		{MAT[t][Sequence@@Take[{idx},Length[{idx}]-n]],f,Dim/@rmNE[{idx}]}, Infinity];
