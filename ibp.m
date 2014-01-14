@@ -14,7 +14,7 @@ IbpCountPd2::usage = "IbpCountPd2[e] counts second derivatives"
 IbpVar::usage = "IbpVar[var][e] counts Pd on specified var"
 IbpStd2::usage = "Ibp count trying to bring second order Lagrangian to standard form"
 IbpVariation::usage = "IbpVariation[e, var] is Ibp which eliminates derivative on var."
-IbpReduceVars::usage = "IbpReduceVars[vars_List][e] counts power of vars."
+IbpReduceOrder::usage = "IbpReduceOrder[vars_List][e] counts power of vars."
 
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
@@ -66,7 +66,7 @@ IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, Pd[Pd[a_, _], _], Infinity] + IbpCountL
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
 IbpStd2[e_]:= IbpCountPt2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_, Infinity] + IbpCountLeaf[e]
 
-IbpReduceVars[vars_List][e_]:=Module[{eOrderList, tmp},
+IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@plus2list[e+tmp /.holdPtn->0];
 	Total[100^(5-#)&/@eOrderList]-100^5 + IbpCountLeaf[e]]
 
