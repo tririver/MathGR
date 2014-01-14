@@ -25,11 +25,15 @@ trySimpStep[e_, rule_, rank_, level_:1]:= Module[{ try, replaceFun },
 	If[try=!={} && try[[1,2]]<rank@e, PrintTemporary["Trying rules. Terms remaining: "<>ToString@Length@try[[1,1]]];try[[1,1]], e]]
 TrySimp[e_, rule_, rank_:LeafCount, sel_:Identity]:= Module[{rest=#-sel[#]&}, FixedPoint[trySimpStep[sel@#, rule, rank]+rest@#&, Simp@e]] 
 
-TrySimp2[e_, rule_, rank_:LeafCount]:= Module[{resStage, res2},
+trySimp2Step[e_, rule_, rank_]:= Module[{resStage, res2},
 	resStage = TrySimp[e, rule, rank];
 	PrintTemporary["Trying more rules, please wait..."];
 	res2 = trySimpStep[e, rule, rank, 2];
-	TrySimp[res2, rule, rank]]
+	res2 = If[rank[res2]<rank[resStage], res2, resStage];
+	PrintTemporary["Exiting hard phase. Terms remaining: "<>ToString@Length@res2];
+	res2]
+
+TrySimp2[e_, rule_, rank_:LeafCount]:= FixedPoint[trySimp2Step[#, rule, rank]&, Simp@e]
 
 PdHold[0,_]:=0
 PdHold /: -PdHold[a_,c_]:=PdHold[-a,c]
