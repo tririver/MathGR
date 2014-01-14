@@ -22,15 +22,15 @@ Needs["MathGR`utilPrivate`"]
 trySimpStep[e_, rule_, rank_, level_:1]:= Module[{ try, replaceFun },
 	replaceFun = Function[list, Flatten@Map[ReplaceList[#, rule] &, list]];
 	try = SortBy[{#, rank@#}& /@ Nest[replaceFun, {e}, level], Last];
-	If[try=!={} && try[[1,2]]<rank@e, PrintTemporary["Trying rules. Terms remaining: "<>ToString@Length@try[[1,1]]];try[[1,1]], e]]
+	If[try=!={} && try[[1,2]]<rank@e, PrintTemporary["Trying rules. Terms remaining: "<>ToString@Length@try[[1,1]]<>". Current rank: "<>ToString@CForm@N@try[[1,2]]];try[[1,1]], e]]
 TrySimp[e_, rule_, rank_:LeafCount, sel_:Identity]:= Module[{rest=#-sel[#]&}, FixedPoint[trySimpStep[sel@#, rule, rank]+rest@#&, Simp@e]] 
 
 trySimp2Step[e_, rule_, rank_]:= Module[{resStage, res2},
 	resStage = TrySimp[e, rule, rank];
 	PrintTemporary["Trying more rules, please wait..."];
-	res2 = trySimpStep[e, rule, rank, 2];
+	res2 = trySimpStep[resStage, rule, rank, 2];
 	res2 = If[rank[res2]<rank[resStage], res2, resStage];
-	PrintTemporary["Exiting hard phase. Terms remaining: "<>ToString@Length@res2];
+	PrintTemporary["Exiting hard phase. Terms remaining: "<>ToString@Length@res2<>". Current rank: "<>ToString@CForm@N@rank@res2];
 	res2]
 
 TrySimp2[e_, rule_, rank_:LeafCount]:= FixedPoint[trySimp2Step[#, rule, rank]&, Simp@e]
@@ -51,6 +51,7 @@ IbpRules = Dispatch@{ a_. b_^(n_.) Pd[b_,c_] + e_. :> PdHold[a b^(n+1) / (n+1), 
 	Pd[f_,a_]Pd[g_,b_]h_ + n_. :> PdHold[f Pd[g,b]h, a] - PdHold[f Pd[g,a]h, b] + Simp[Pd[f,b]Pd[g,a]h + f Pd[g,a]Pd[h,b] - f Pd[g,b] Pd[h,a]] + n,
 	Pd[Pd[f_,a_],c_]Pd[g_,b_]h_ + n_. :> PdHold[Pd[f,c] Pd[g,b]h, a] - PdHold[Pd[f,c] Pd[g,a]h, b] + Simp[Pd[Pd[f,c],b]Pd[g,a]h + Pd[f,c] Pd[g,a]Pd[h,b] - Pd[f,c] Pd[g,b] Pd[h,a]] + n,
 	Pd[Pd[f_,a_],c_]Pd[Pd[g_,b_],d_]h_ + n_. :> PdHold[Pd[f,c] Pd[Pd[g,d],b]h, a] - PdHold[Pd[f,c] Pd[Pd[g,d],a]h, b] + Simp[Pd[Pd[f,c],b]Pd[Pd[g,d],a]h + Pd[f,c] Pd[Pd[g,d],a]Pd[h,b] - Pd[f,c] Pd[Pd[g,d],b] Pd[h,a]] + n,
+	n_. + g_ Pd[f_, i_] Pd[Pd[f_, a_],i_] :> n + PdHold[g Pd[f,i]^2/2, a] - Simp[Pd[g,a]Pd[f,i]^2/2],
 	(* expansion of Pd[f Pd[g,a]^2 Pd[Pd[g,b],b], c] *)
 	e_. + f_. Pd[Pd[g_, a_], a_] Pd[Pd[g_, b_], b_] Pd[g_, c_] :> e - PdHold[f Pd[g, a]^2 Pd[Pd[g, b], b], c]/2 + PdHold[f Pd[g, c] Pd[g, a] Pd[Pd[g, b], b], a] + PdHold[f Pd[g, a]^2 Pd[Pd[g, b], c], b]/2 - PdHold[Pd[f Pd[g, a]^2, b] Pd[g, c], b]/2 
 		+ Simp[Pd[f, c] Pd[g, a]^2 Pd[Pd[g, b], b]/2 - Pd[g, c] Pd[f, a] Pd[g, a] Pd[Pd[g, b], b] + Pd[g, c] Pd[Pd[f, b], b] Pd[g, a]^2/2 + 2 Pd[f, b] Pd[Pd[g, a], b] Pd[g, a] Pd[g, c] + f Pd[Pd[g, a], b]^2 Pd[g, c]],
