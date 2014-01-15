@@ -20,7 +20,7 @@ Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
 trySimpStep[e_, rule_, rank_, level_:1]:= Module[{ try, replaceFun },
-	replaceFun = Function[list, Flatten@Map[ReplaceList[#, rule] &, list]];
+	replaceFun = Function[list, DeleteDuplicates@Flatten@Map[ReplaceList[#, rule] &, list]];
 	try = SortBy[{#, rank@#}& /@ Nest[replaceFun, {e}, level], Last];
 	If[try=!={} && try[[1,2]]<rank@e, PrintTemporary["Trying rules. Terms remaining: "<>ToString@Length@try[[1,1]]<>". Current rank: "<>ToString@CForm@N@try[[1,2]]];try[[1,1]], e]]
 TrySimp[e_, rule_, rank_:LeafCount, sel_:Identity]:= Module[{rest=#-sel[#]&}, FixedPoint[trySimpStep[sel@#, rule, rank]+rest@#&, Simp@e]] 
@@ -58,6 +58,26 @@ IbpRules = Dispatch@{ a_. b_^(n_.) Pd[b_,c_] + e_. :> PdHold[a b^(n+1) / (n+1), 
 	(* expansion of PdHold[Pd[z, a] Pd[z, b] Pd[Pd[c, b], a], at] *)
 	x_. + y_.*Pd[z_, a_] Pd[Pd[z_, at_], b_] Pd[Pd[c_, a_], b_] :> x + PdHold[y Pd[z, a] Pd[z, b] Pd[Pd[c, b], a], at]/2 - Simp[Pd[z, a] Pd[z, b] Pd[y Pd[Pd[c, b], a], at]/2]
 }
+
+
+(* ::Subsubsection:: *)
+(* Region Title *)
+IbpRules = Dispatch@{
+	(*a_. PdT[b_, PdVars[c_, etc___]] + e_. :> PdHold[a PdT[b, PdVars[etc]], c] + e - Simp[PdT[b, PdVars[etc]] Pd[a,c]],*)
+	a_. PdT[b_, PdVars[c_, etc___]]^n_. + e_. :> PdHold[a PdT[b, PdVars[etc]] PdT[b, PdVars[c, etc]]^(n-1), c] - Simp[PdT[b, PdVars[etc]] Pd[a PdT[b, PdVars[c, etc]]^(n-1), c]] + e,
+	a_. b_^n_. PdT[b_, PdVars[c_]] + e_. :> PdHold[a b^(n+1)/(n+1), c] + e - Simp[ b^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
+	a_. PdT[b_, PdVars[etc___]]^n_. PdT[b_, PdVars[c_, etc___]] + e_. :> PdHold[a PdT[b, PdVars[etc]]^(n+1) / (n+1), c] + e - Simp[ PdT[b, PdVars[etc]]^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
+	PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_ + n_. /; Order[a,b]>=0 :> PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b] 
+		+ Simp[Pd[PdT[f,PdVars[e1]],b]Pd[PdT[g,PdVars[e2]],a]h + PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]Pd[h,b] - PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b] Pd[h,a]] + n,
+	(* some special higher order rules *)
+	x_. + f_. PdT[z, PdVars[a_, ea___]]PdT[z, PdVars[b_, c_, eb___]] /; Order[a,b]>=0 && Simp[f-(f/.{a->b,b->a})]===0 :> 
+		x + PdHold[f PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2, c] - Simp[Pd[f,c]PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2],
+	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 :> Module[{g=PdT[h,PdVars[e]]},
+		x + PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],b] - f Pd[g,b]^2 Pd[Pd[g,a],c]/2 - Pd[f,a] Pd[g,b]^2 Pd[g,c]/2, a] 
+		- PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],a], b] + PdHold[f Pd[g,b]^2 Pd[Pd[g,a],a]/2, c]
+		+ Simp[f Pd[g,c]Pd[Pd[g,a],a]Pd[Pd[g,b],b] - Pd[f,c]Pd[g,b]^2 Pd[Pd[g,a],a]/2 
+			+ Pd[f,b]Pd[g,c]Pd[g,b]Pd[Pd[g,a],a] + Pd[Pd[f,a],a]Pd[g,c]Pd[g,b]^2/2 + Pd[f,a]Pd[Pd[g,a],c]Pd[g,b]^2]	],
+	x_. + f_. g_ PdT[g_, PdVars[a_,b_,b_]] :> x + PdHold[f g Pd[Pd[g,a],b], b] - PdHold[f Pd[g,b]^2/2, a] - Pd[f,b] g Pd[Pd[g,a],b] + Pd[f,a]Pd[g,b]^2/2}
 
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5

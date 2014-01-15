@@ -47,6 +47,7 @@ SimpHook::usage = "Rules to apply before and after Simp"
 SimpMSelect::usage = "A function to select terms to simplify, disregard others"
 
 \[Bullet]::usage = "Symbol for time derivative"
+\[CapitalSampi]::usage = "Symbol for general derivative"
 
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
@@ -114,13 +115,14 @@ Pd[a_*b_, i_]:= Pd[a,i]*b + a*Pd[b,i];
 Pd[f_^g_, i_]:= f^(g-1)*g*Pd[f,i] + f^g*Log[f]*Pd[g,i];
 Pd[a_?NumericQ, i_]:=0;
 
+Pd[f_, i_]:= Piecewise[{{PdT[f, PdVars[i]], FreeQ[f, PdT]}, {PdT[f[[1]], PdVars[i, Sequence@@f[[2]]]], Head[f]==PdT}},
+	Message[PdT::nonpoly, f];PdT[f, PdVars[i]]]
+
 SetAttributes[PdVars, Orderless]
 PdT::nonpoly="Pd acting on non-polynomial objects (as `1`) is not supported."
 PdT[f_, PdVars[]]:= f
 PdT[a_?NumericQ, PdVars[__]]:=0;
-PdT[f_/;MatchQ[Head[f],Plus|Times|Power], PdVars[i__]]:= Fold[Pd, f, {i}]
-Pd[f_, i_]:= Piecewise[{{PdT[f, PdVars[i]], FreeQ[f, PdT]}, {PdT[f[[1]], PdVars[i, Sequence@@f[[2]]]], Head[f]==PdT}},
-	Message[PdT::nonpoly, f];PdT[f, PdVars[i]]]
+PdT[f_/;MatchQ[Head[f],Plus|Times|Power|Pd], PdVars[i__]]:= Fold[Pd, f, {i}]
 
 pd2pdts[expr_]:= expr /. PdT[f_, i_] :> If[FreeQ[f, IdxPtn|IdxNonSumPtn], pdts[Length@i][f][Sequence@@i], pdts[Length@i][Head@f][Sequence@@f, Sequence@@i]]
 pdts2pd = #/. pdts[n_][f_][i__] :> If[n==Length@{i}, PdT[f, PdVars[i]], PdT[f@@Take[{i}, Length@{i} - n], PdVars@@Take[{i}, -n]]] &
