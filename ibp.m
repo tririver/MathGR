@@ -73,7 +73,7 @@ IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 Ibp[e_, rank_:IbpCountLeaf, sel_:Identity]:= TrySimp[e, IbpRules, rank, sel]
 Ibp2[e_, rank_:IbpCountLeaf]:= TrySimp2[e, IbpRules, rank]
 
-IbpVariation[e_, v_]:=Expand[e] //. { a_.+b_.*Pd[f_,i_] /;FreeQ[b,v]&&!FreeQ[f,v] :> a-Expand[f*Pd[b,i]]} //Simp
+IbpVariation[e_, v_]:=Expand[e] //. { a_.+b_.*PdT[f_,PdVars[i_,j___]] /;FreeQ[b,v]&&!FreeQ[f,v] :> a-Expand[PdT[f, PdVars[j]]*Pd[b,i]]} //Simp
 
 End[]
 EndPackage[]

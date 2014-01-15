@@ -6,35 +6,29 @@ altUp:= Alternatives @@ IdxUpList
 altDn:= Alternatives @@ IdxDnList
 idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn | IdxNonSumPtn) ..}]
 
-makeBoxesTsrQ = (#=!=List&&#=!=Rule&&#=!=Alternatives&&#=!=HoldForm&&#=!=Sequence)&
-MakeBoxes[tsr_[idx__], form_]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= TagBox[RowBox[{AdjustmentBox[MakeBoxes[tsr, form], BoxMargins -> {{0, -0.2}, {0, 0}}], 
+makeBoxesTsrQ = !MatchQ[#, List|Rule|Alternatives|Sequence]&
+MakeBoxes[tsr_[idx__], StandardForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= TagBox[RowBox[{AdjustmentBox[MakeBoxes[tsr, StandardForm], BoxMargins -> {{0, -0.2}, {0, 0}}], 
 	StyleBox[ GridBox[{idx} /. {
-		{(a:altUp)[i_]:>TagBox[StyleBox[MakeBoxes[i, form], FontColor->IdxColor@a], a], 
-			IdxDnPtn:>"", UE@n_:>TagBox[StyleBox[MakeBoxes[n, form], FontColor->IdxColor@UE],UE], DE@n_:>""}, 
-		{IdxUpPtn:>"", (a:altDn)[i_]:>TagBox[StyleBox[MakeBoxes[i, form], FontColor->IdxColor@a], a], 
-			DE@n_:>TagBox[StyleBox[MakeBoxes[n, form], FontColor->IdxColor@DE],DE], UE@n_:>""}
+		{(a:altUp)[i_]:>TagBox[StyleBox[MakeBoxes[i, StandardForm], FontColor->IdxColor@a], a], 
+			IdxDnPtn:>"", UE@n_:>TagBox[StyleBox[MakeBoxes[n, StandardForm], FontColor->IdxColor@UE],UE], DE@n_:>""}, 
+		{IdxUpPtn:>"", (a:altDn)[i_]:>TagBox[StyleBox[MakeBoxes[i, StandardForm], FontColor->IdxColor@a], a], 
+			DE@n_:>TagBox[StyleBox[MakeBoxes[n, StandardForm], FontColor->IdxColor@DE],DE], UE@n_:>""}
 	}, ColumnSpacings->0, RowSpacings->0], FontSize->10]}], "mgrTsr"]
 
-parseUD[lst_, form_]:= Sequence @@ (Map[If[#[[1]] === "", #[[2]], #[[1]]] &, Transpose[lst]] /. {TagBox[i_ | StyleBox[i_, __], tag_] :> tag@ToExpression[i, form]})
-MakeExpression[TagBox[RowBox[{AdjustmentBox[t_, ___], StyleBox[GridBox[idx__, ___], ___]}], "mgrTsr"], form_] := 
-	With[{h = ToExpression[t, form], i = parseUD[idx, form]}, HoldComplete@h@i]
-		
-MakeBoxes[Pd[f_, d_@i_], form_] /; MatchQ[d, altDn] := TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", 
-		TagBox[StyleBox[MakeBoxes[i, form], FontColor -> IdxColor@d], d]], MakeBoxes[f, form]}], "mgrPd"]
+parseUD[lst_, StandardForm]:= Sequence @@ (Map[If[#[[1]] === "", #[[2]], #[[1]]] &, Transpose[lst]] /. {TagBox[i_ | StyleBox[i_, __], tag_] :> tag@ToExpression[i, StandardForm]})
+MakeExpression[TagBox[RowBox[{AdjustmentBox[t_, ___], StyleBox[GridBox[idx__, ___], ___]}], "mgrTsr"], StandardForm] := 
+	With[{h = ToExpression[t, StandardForm], i = parseUD[idx, StandardForm]}, HoldComplete@h@i]
 
-MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], form_] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], form]
+MakeBoxes[PdT[f_, PdVars[i__]], StandardForm]:= TagBox[RowBox[{Sequence@@(MakeBoxes["\[CapitalSampi]"@#, StandardForm]&/@{i}), MakeBoxes[f, StandardForm]}], "mgrPdT"]
+MakeExpression[TagBox[RowBox[{d__,f_}], "mgrPdT"], StandardForm]:= 
+	With[{idExpr=PdVars@@Cases[ToExpression[{d}, StandardForm], "\[CapitalSampi]"[a_]:>a], fExpr=ToExpression[f, StandardForm]}, HoldComplete@PdT[fExpr, idExpr]]
 
-(* following: time derivative. May need cleanup *)
-
-MakeBoxes[Pd[a_, DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]"];
-MakeBoxes[Pd[Pd[a_, DE@0], DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]\[Bullet]"]
-MakeBoxes[Pd[Pd[Pd[a_, DE@0], DE@0], DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]\[Bullet]\[Bullet]"]
-MakeBoxes[Pd[Pd[Pd[Pd[a_, DE@0], DE@0], DE@0], DE@0], form_] := OverscriptBox[MakeBoxes[a, form], "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"]
-
-MakeExpression[OverscriptBox[a_, "\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@", a}], form]
-MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
-MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
-MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], form_] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], form]
+(* the following are used for backwards compatibility *)
+MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], StandardForm] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], StandardForm]
+MakeExpression[OverscriptBox[a_, "\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@", a}], StandardForm]
+MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
+MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
+MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
 
 
 (* ::Section:: *)

@@ -173,14 +173,13 @@ Get["MathGR/frwadm.m"]
 DeclareIdx[{UP, DN}, DefaultDim, LatinIdx, Black]
 PdHold[__] := 0
 phi = phi0
-(*Pd[phi0|Pd[phi0,DE@0]|Pd[Pd[phi0,DE@0],DE@0],DN@_]:=0*)
-Pd[phi0|Pd[phi0,DE@0],DN@_]:=0
+Evaluate[Pd[phi0, DN@_]] := 0
 s012 = Sqrtg (RADM[]/2 + DecompG2H[X[phi]] - V[phi] ) // SS[2]
 Print["Result of s012 =========="];Print[s012]
 s1 = s012 // OO[1]
 Print["Result of s1 =========="];Print[s1]
 SimpHook =  SimpHook~Union~(SolveExpr[{D[s1, \[Alpha]] == 0, D[Ibp[s1, IbpVar[\[Zeta]]], \[Zeta]] == 0}, {V[phi0], Pd[phi0, DE@0]^2}][[1]])
-s2 = s012 // OO[2] // Fourier2
+s2 = s012 // OO[2] // Fourier2 // Ibp
 Print["Result of s2 =========="];Print[s2]
 solCons =  Solve[{D[s2, \[Alpha]] == 0, D[s2, \[Beta]] == 0, D[s2, b[DN@"a"]] == 0}, {\[Alpha], \[Beta], b[DN@"a"]}][[1]]
 s2Solved = s2 /. solCons // Ibp[#, IbpStd2] &
@@ -193,7 +192,6 @@ PdHold[__]=.
 << MathGR/gr.m
 << MathGR/decomp.m
 << MathGR/ibp.m
-<< MathGR/typeset.m
 
 UseMetric[\[DoubleStruckG], {UTot, DTot}]
 UseMetric[\[Eta], {U1, D1}, "SetAsDefault" -> False]
@@ -210,10 +208,10 @@ DecompHook={\[DoubleStruckG][D1[\[Alpha]_], D1[\[Beta]_]] :> (\[Eta][Sequence[D1
       A[Sequence[U2[a], D1[#1]]]*A[Sequence[U2[b], D1[#2]]] & )[Uq[2]], 
  \[DoubleStruckG][D2[a_], D2[b_]] :> Dta[Sequence[U2[a], U2[b]]]}
  
-Pd[\[Eta][__], _] := 0;
-Pd[\[Gamma][__], _] := 0;
-Pd[A[__], _D2] := 0;
-Pd[Pd[A[__], _], _D2] := 0;
+Evaluate[Pd[\[Eta][__], _]] := 0;
+Evaluate[Pd[\[Gamma][__], _]] := 0;
+Evaluate[Pd[A[__], _D2]] := 0;
+Evaluate[Pd[Pd[A[__], _], _D2]] := 0;
 
 R\[Bullet]decomp = DecompSe[R[] // Simp]
 

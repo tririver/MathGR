@@ -30,6 +30,8 @@ AntiSym::usage = "AntiSym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... 
 Dta::usage = "Delta symbol"
 DtaGen::usage = "DtaGen[up..., dn...] is the generalized delta symbol"
 Pd::usage = "Pd[f, DN@a] is partial derivative"
+PdT::usage = "PdT[f, PdVars[DN@a, DN@b, ...]] is partial derivative"
+PdVars::usage = "Pdvars[DN@a, DN@b, ...] is a list of derivative variables"
 LeviCivita::usage = "LeviCivita[a, b, ...] is the Levi Civita tensor, defined only if dimension is given as an explicit number"
 
 LatinIdx::usage = "strings {a, b, ..., }"
@@ -61,7 +63,7 @@ LatinCapitalIdx = Join[FromCharacterCode /@ Range[65, 65 + 24], "Y"<>ToString[#]
 UniqueIdx:= Unique[]& /@ Range[50]
 
 SetAttributes[Dta, Orderless]
-Pd[Dta[__],_]:= 0
+PdT[_Dta, PdVars[__]]:= 0
 
 Options[DtaGen]={"DtaGenDta"->Dta}
 DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2, a, b},
@@ -69,7 +71,7 @@ DtaGen[ids:(_[_]..), OptionsPattern[]]:= Module[{btmp, tmp, i, d=Length[{ids}]/2
 	btmp = MapThread[#1[#2] &, {(b[[#]][[0]] & /@ Range[d]), tmp /@ Range[d]}];
 	AntiSym[Product[OptionValue["DtaGenDta"][a[[i]], btmp[[i]]], {i, d}],btmp]/. (btmp[[#]]->b[[#]] &/@Range[d])]
 
-DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, Pd[d,_]:=0;
+DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, PdT[d, PdVars[__]]:=0;
 	Dim[idsAlt]:=d; IdxSet[idsAlt]:=set; IdxColor[idsAlt]:=color; add2set[IdxList, {ids}]; IdxPtn=Alternatives@@(Blank/@IdxList);
 	IdxDual[ids[[1]]]=ids[[2]];	IdxDual[ids[[2]]]=ids[[1]];
 	idxIdentity[ids[[1]]] = idxIdentity[ids[[2]]] = Unique[];
@@ -111,11 +113,17 @@ Pd[a_Plus, i_]:= Pd[#,i]& /@ a;
 Pd[a_*b_, i_]:= Pd[a,i]*b + a*Pd[b,i];
 Pd[f_^g_, i_]:= f^(g-1)*g*Pd[f,i] + f^g*Log[f]*Pd[g,i];
 Pd[a_?NumericQ, i_]:=0;
-Pd[Pd[a_, i_], j_]/;!OrderedQ[{i,j}]:=Pd[Pd[a, j], i];
 
-pd2pdts[expr_]:= Module[{ip=IdxPtn|IdxNonSumPtn}, 
-	expr/.{f:_Pd :> pdts[Count[{f}, Pd[_,_], Infinity]][f//.{Pd[e_,ip]:>e, x_[ip..]:>x}][Sequence@@Cases[f,ip,Infinity]]}]
-pdts2pd = #/.pdts[n_][f_][idx__] :> Fold[Pd, If[n===Length[{idx}], f, f[Sequence @@ Take[{idx}, Length@{idx} - n]]], Take[{idx}, -n]] &
+SetAttributes[PdVars, Orderless]
+PdT::nonpoly="Pd acting on non-polynomial objects (as `1`) is not supported."
+PdT[f_, PdVars[]]:= f
+PdT[a_?NumericQ, PdVars[__]]:=0;
+PdT[f_/;MatchQ[Head[f],Plus|Times|Power], PdVars[i__]]:= Fold[Pd, f, {i}]
+Pd[f_, i_]:= Piecewise[{{PdT[f, PdVars[i]], FreeQ[f, PdT]}, {PdT[f[[1]], PdVars[i, Sequence@@f[[2]]]], Head[f]==PdT}},
+	Message[PdT::nonpoly, f];PdT[f, PdVars[i]]]
+
+pd2pdts[expr_]:= expr /. PdT[f_, i_] :> If[FreeQ[f, IdxPtn|IdxNonSumPtn], pdts[Length@i][f][Sequence@@i], pdts[Length@i][Head@f][Sequence@@f, Sequence@@i]]
+pdts2pd = #/. pdts[n_][f_][i__] :> If[n==Length@{i}, PdT[f, PdVars[i]], PdT[f@@Take[{i}, Length@{i} - n], PdVars@@Take[{i}, -n]]] &
 
 (* ::Section:: *)
 (* Simp functions *)

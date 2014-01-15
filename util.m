@@ -22,10 +22,12 @@ SolveExpr[eqs_, exprsRaw_] := Module[{exprs = Flatten@{exprsRaw}, repList},
 CollectEps[vars_:{}, op_:Simp][f_]:= Collect[f, Eps, Collect[#, vars, op]&]
 SS[n_, vars_:{}, op_:Simp][f_]:= CollectEps[vars, op]@Normal@Series[op@f,{Eps,0,n}]
 OO[n_, vars_:{}, op_:Simp][f_]:= CollectEps[vars, op]@Coefficient[SS[n, vars, op][f], Eps, n]
+	
+fourier2RuleList = Dispatch@{PdT[f_, PdVars[DN@i_, DN@i_, j___]] :> -k^2 PdT[f, PdVars[j]],
+ PdT[f_, PdVars[DN@i_, a___]] PdT[g_, PdVars[DN@i_, b___]] :>  k^2 PdT[f, PdVars[a]] PdT[g, PdVars[b]],
+ PdT[f_, PdVars[DN@i_, j___]]^2 :> k^2 PdT[f, PdVars[j]]^2,
+ PdT[f_, PdVars[DN@i_, j___]] b_[DN@i_] :> -I k[DN@i] PdT[f, PdVars[j]] b[DN@i]}
 
-fourier2RuleList = Dispatch@{Pd[Pd[f_, DN@i_], DN@i_]:> -k^2 f, Pd[a_, DN@i_]Pd[b_, DN@i_]:> k^2 a b, Pd[a_, DN@i_]b_[DN@i_]:> -I k[DN@i] a b[DN@i],
-	Pd[Pd[a_, DN@i_], DN@j_]Pd[Pd[b_, DN@i_], DN@j_]:> k^4 a b, Pd[Pd[a_, DN@i_], DN@j_]^2:> k^4 a^2, Pd[a_, DN@i_]^2:> k^2 a^2,
-	Pd[f_[DN@i_],DN@j_]Pd[g_[DN@j_],DN@i_]:> k[DN@i]k[DN@j]f[DN@i]g[DN@j], Pd[Pd[f_[DN@i_],DN@a_],DN@j_]Pd[Pd[g_[DN@j_], DN@b_],DN@i_]:> k[DN@i]k[DN@j]Pd[f[DN@i],DN@a]Pd[g[DN@j],DN@b]}
 Fourier2[e_]:= (e//.fourier2RuleList//Expand)//.fourier2RuleList
 
 End[]
