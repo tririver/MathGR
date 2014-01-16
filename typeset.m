@@ -33,7 +33,6 @@ MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]"], StandardForm] := MakeExp
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
 
-
 (* the following are used for backwards compatibility *)
 MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], StandardForm] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], StandardForm]
 

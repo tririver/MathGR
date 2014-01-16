@@ -77,8 +77,8 @@ IbpRules = Dispatch@{
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5
 IbpCountTerm[e_]:=Length[plus2list[e/.holdPtn->0]] * 10^-2
-IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, Pd[Pd[a_, IdxNonSumPtn], IdxNonSumPtn], Infinity] + IbpCountLeaf[e] 
-IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, Pd[Pd[a_, _], _], Infinity] + IbpCountLeaf[e]
+IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxNonSumPtn, IdxNonSumPtn,___]], Infinity] + IbpCountLeaf[e] 
+IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
 IbpStd2[e_]:= IbpCountPt2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_, Infinity] + IbpCountLeaf[e]
 
