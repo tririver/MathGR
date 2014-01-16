@@ -19,17 +19,23 @@ parseUD[lst_, StandardForm]:= Sequence @@ (Map[If[#[[1]] === "", #[[2]], #[[1]]]
 MakeExpression[TagBox[RowBox[{AdjustmentBox[t_, ___], StyleBox[GridBox[idx__, ___], ___]}], "mgrTsr"], StandardForm] := 
 	With[{h = ToExpression[t, StandardForm], i = parseUD[idx, StandardForm]}, HoldComplete@h@i]
 
-MakeBoxes[PdT[f_, PdVars[i__]], StandardForm]:= TagBox[RowBox[{Sequence@@(MakeBoxes[\[CapitalSampi]@#, StandardForm]&/@{i}), MakeBoxes[f, StandardForm]}], "mgrPdT"]
+MakeBoxes[PdT[f_, PdVars[i__]], StandardForm]/;FreeQ[{i},DE@0]:= TagBox[RowBox[{Sequence@@(MakeBoxes[\[CapitalSampi]@#, StandardForm]&/@{i}), MakeBoxes[f, StandardForm]}], "mgrPdT"]
 MakeExpression[TagBox[RowBox[{d__,f_}], "mgrPdT"], StandardForm]:= 
 	With[{idExpr=PdVars@@Cases[ToExpression[{d}, StandardForm], \[CapitalSampi][a_]:>a], fExpr=ToExpression[f, StandardForm]}, HoldComplete@PdT[fExpr, idExpr]]
 
-(* the following are used for backwards compatibility *)
-MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], StandardForm] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], StandardForm]
+MakeBoxes[PdT[a_, PdVars[DE@0, i___]], StandardForm]/;FreeQ[{i},DE@0] := With[{h=PdT[a, PdVars[i]]}, OverscriptBox[MakeBoxes[h, StandardForm], "\[Bullet]"]];
+MakeBoxes[PdT[a_, PdVars[DE@0, DE@0, i___]], StandardForm]/;FreeQ[{i},DE@0] := With[{h=PdT[a, PdVars[i]]}, OverscriptBox[MakeBoxes[h, StandardForm], "\[Bullet]\[Bullet]"]];
+MakeBoxes[PdT[a_, PdVars[DE@0, DE@0, DE@0, i___]], StandardForm]/;FreeQ[{i},DE@0] := With[{h=PdT[a, PdVars[i]]}, OverscriptBox[MakeBoxes[h, StandardForm], "\[Bullet]\[Bullet]\[Bullet]"]];
+MakeBoxes[PdT[a_, PdVars[DE@0, DE@0, DE@0, DE@0, i___]], StandardForm] := With[{h=PdT[a, PdVars[i]]}, OverscriptBox[MakeBoxes[h, StandardForm], "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"]];
+
 MakeExpression[OverscriptBox[a_, "\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@", a}], StandardForm]
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
 MakeExpression[OverscriptBox[a_, "\[Bullet]\[Bullet]\[Bullet]\[Bullet]"], StandardForm] := MakeExpression[RowBox[{"Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@Pd[#,DE@0]&@", a}], StandardForm]
 
+
+(* the following are used for backwards compatibility *)
+MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], StandardForm] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], StandardForm]
 
 (* ::Section:: *)
 (* Paste the blob calculated in InputAliases.nb *)

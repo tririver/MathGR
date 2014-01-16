@@ -225,14 +225,14 @@ simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, c
 	cnt=1; tM /. TensorContract[a_,i_]:>a /. MAT[f_]:>f /. id:sumAlt|xFr:>id@tNewIdx[[cnt++]] /._xMat->1 //prod2times[#,TensorProduct|List]& (* Put idx back *)]
 
 If[!defQ@SimpMSelect,SimpMSelect = Identity]
-simpMHook:= {{(*here eval first*) plus2list, SimpMSelect, pd2pdts (*here eval last*)}, {pdts2pd, SimpMSelect,Total}}
-simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *), fr, dum, x},
+simpMpre:= pd2pdts @ SimpMSelect @ plus2list @ # &;
+simpMpost:= Total @ SimpMSelect @ pdts2pd @ # &;
+simpM[e_]:= Module[{eList = simpMpre@e, fr, dum, x},
 	If[eList=={}, Return[0]]; (* SimpMSelect may return empty list *)
 	fr = Sort@free@eList[[1]]; 
 	x = If[fr==={}, 1, xMat@@(Function[i, Operate[IdxDual,i]]/@ SortBy[freeFull@eList[[1]], #[[1]]&]) ]; (* contraction tensor *) 
 	(dum[#] = Complement[IdxSet[#], fr]) & /@ IdxList; (* Available free idx for each identifier *)
-	Fold[#2[#1]&, simpMTerm[#,fr,dum,x]&/@eList, simpMHook[[2]]] (* Apply ending hook and return result *) ]
-
+	simpMpost[simpMTerm[#,fr,dum,x]&/@eList]]
 
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)
@@ -240,7 +240,7 @@ simpM[e_]:= Module[{eList = Fold[#2[#1]&, e, simpMHook[[1]]](* apply init hook *
 preCheckList = {checkNestIdx}
 
 $PreRead::nestidx = "Nested indices are not allowed in `1`."
-checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn)/;!FreeQ[List@@a,IdxPtn], Infinity]},
+checkNestIdx = Module[{t=Cases[{#}, (a:IdxPtn|IdxNonSumPtn)/;!FreeQ[List@@a,IdxPtn|IdxNonSumPtn], Infinity]},
 		If[t =!= {}, Message[$PreRead::nestidx, t]]]&
 
 $PreRead := (Through@preCheckList@MakeExpression[#, StandardForm]; #)&
