@@ -160,9 +160,9 @@ Test[CovD[f2 f[u@"a",d@"b"]f1[d@"c"] ,d@"d"]//Simp,
 Test[Ibp[y Pd[x, d@"a"] + x Pd[y, d@"a"] + f[d@"a"] + xx yy Pd[zz, d@"a"] +   xx zz Pd[yy, d@"a"] + xxx Pd[yyy, d@"a"]],
 	f[d@"a"] - yy zz Pd[xx, d["a"]] + xxx Pd[yyy, d["a"]] +  PdHold[x y, d["a"]] + PdHold[xx yy zz, d["a"]], TestID->"Ibp CountLeaf"]
 	
-Test[Ibp[y Pd[Pd[x, de@0], de@0], IbpCountPt2], -Pd[x, de[0]] Pd[y, de[0]] + PdHold[y Pd[x, de[0]], de[0]], TestID->"Ibp CountPt2"]
+Test[Ibp[y Pd[Pd[x, de@0], de@0], "Rank"->IbpCountPt2], -Pd[x, de[0]] Pd[y, de[0]] + PdHold[y Pd[x, de[0]], de[0]], TestID->"Ibp CountPt2"]
 
-Test[Ibp[y Pd[x, d@"i"], IbpVar[x]], -x Pd[y, d["i"]] + PdHold[x y, d["i"]], TestID->"IbpVar"]
+Test[Ibp[y Pd[x, d@"i"], "Rank"->IbpVar[x]], -x Pd[y, d["i"]] + PdHold[x y, d["i"]], TestID->"IbpVar"]
 
 (* ::Section:: *)
 (* Cosmic perturbations *)
@@ -178,11 +178,11 @@ s012 = Sqrtg (RADM[]/2 + DecompG2H[X[phi]] - V[phi] ) // SS[2]
 Print["Result of s012 =========="];Print[s012]
 s1 = s012 // OO[1]
 Print["Result of s1 =========="];Print[s1]
-SimpHook =  SimpHook~Union~(SolveExpr[{D[s1, \[Alpha]] == 0, D[Ibp[s1, IbpVar[\[Zeta]]], \[Zeta]] == 0}, {V[phi0], Pd[phi0, DE@0]^2}][[1]])
+SimpHook =  SimpHook~Union~(SolveExpr[{D[s1, \[Alpha]] == 0, D[Ibp[s1, "Rank"->IbpVar[\[Zeta]]], \[Zeta]] == 0}, {V[phi0], Pd[phi0, DE@0]^2}][[1]])
 s2 = s012 // OO[2] // Fourier2 // Ibp
 Print["Result of s2 =========="];Print[s2]
 solCons =  Solve[{D[s2, \[Alpha]] == 0, D[s2, \[Beta]] == 0, D[s2, b[DN@"a"]] == 0}, {\[Alpha], \[Beta], b[DN@"a"]}][[1]]
-s2Solved = s2 /. solCons // Ibp[#, IbpStd2] &
+s2Solved = s2 /. solCons // Ibp[#, "Rank"->IbpStd2] &
 Print["Result of s2Solved =========="];Print[s2Solved]
 Test[s2Solved, -(a*k^2*\[Epsilon]*\[Zeta]^2) + a^3*\[Epsilon]*Pd[\[Zeta], DE[0]]^2, TestID->"zeta gauge 2nd order action"]
 PdHold[__]=.

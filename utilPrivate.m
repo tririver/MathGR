@@ -12,6 +12,7 @@ prod2times
 prod
 add2set
 add2pattern
+take
 
 Begin["`Private`"]
 
@@ -32,6 +33,8 @@ prod2times[expr_, t_:prod]:= expr /. t->Times
 SetAttributes[{add2set, add2pattern}, HoldFirst]
 add2set[li_, elem_]:= If[Head[li]===List, li=Union[li,Flatten@{elem}], li = Flatten@{elem}]
 add2pattern[pi_, elem_]:= If[ValueQ[pi], pi=pi|elem, pi=elem]
+
+take[list_, n_] := If[Length@list > n, Take[list, n], list]
 
 End[]
 EndPackage[]
