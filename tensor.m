@@ -45,6 +45,7 @@ Simp::usage = "Default simplification, with SimpHook applied"
 SimpUq::usage = "Simp, keeping dummy unique"
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpMSelect::usage = "A function to select terms to simplify, disregard others"
+ParaSimp::usage = "ParaSimp[expr] simplifies expr in parallel. Note that ParaSimp works faster only for complicated tensors that each tensor takes a long time to simplify. For the case with lots of simple terms, the overhead makes ParaSimp slower than Simp."
 
 \[Bullet]::usage = "Symbol for time derivative"
 \[CapitalSampi]::usage = "Symbol for general derivative"
@@ -122,7 +123,7 @@ SetAttributes[PdVars, Orderless]
 PdT::nonpoly="Pd acting on non-polynomial objects (as `1`) is not supported."
 PdT[f_, PdVars[]]:= f
 PdT[a_?NumericQ, PdVars[__]]:=0;
-PdT[f_/;MatchQ[Head[f],Plus|Times|Power|Pd], PdVars[i__]]:= Fold[Pd, f, {i}]
+PdT[f_/;MatchQ[Head[f],Plus|Times|Power|Pd|PdT], PdVars[i__]]:= Fold[Pd, f, {i}]
 
 pd2pdts[expr_]:= expr /. PdT[f_, i_] :> If[FreeQ[f, IdxPtn|IdxNonSumPtn], pdts[Length@i][f][Sequence@@i], pdts[Length@i][Head@f][Sequence@@f, Sequence@@i]]
 pdts2pd = #/. pdts[n_][f_][i__] :> If[n==Length@{i}, PdT[f, PdVars[i]], PdT[f@@Take[{i}, Length@{i} - n], PdVars@@Take[{i}, -n]]] &
@@ -163,17 +164,29 @@ simpF[e_]:= Module[{eList},
 	eList = plus2list@e;
 	Total[simpFterm[#, Sort@free@eList[[1]]]& /@ eList]]
 
-
-
 Simp::ver="Warning: Mathematica version 8 or lower detected. Simp may not bring tensor to unique form"
 simpH = If[$VersionNumber>8.99, simpM[simpF@#]&, Message[Simp::ver]; simpF]
 
 If[!defQ@SimpHook,SimpHook = {}]
 
 Options[Simp]= {"Method"->"Hybrid"}
-Simp[e_, OptionsPattern[]]:= Switch[OptionValue["Method"], "Fast", simpF, "MOnly", simpM, _, simpH][e//.SimpHook]//.SimpHook//Expand
+If[!defQ@Simp, Simp[e_, OptionsPattern[]]:= Switch[OptionValue["Method"], "Fast", simpF, "MOnly", simpM, _, simpH][e//.SimpHook]//.SimpHook//Expand]
 Options[SimpUq]= {"Method"->"Hybrid"}
 SimpUq[e_, OptionsPattern[]]:= Block[{IdxSet}, (IdxSet[#]=IdxSet[IdxDual[#]]=UniqueIdx)&/@DeleteDuplicates[IdxList, IdxDual[#1] == #2 &]; Simp[e, "Method"->OptionValue["Method"]]]
+
+Options[ParaSimp] = {"N" -> $ConfiguredKernels[[1, 1]], "Simp" :> (Expand[simpM @ simpF @ # //.SimpHook] &)};
+ParaSimp[eRaw_, OptionsPattern[]] := Module[{e = Expand[eRaw//.SimpHook], func = OptionValue["Simp"], parts, subLen},
+	If[Head@e=!=Plus, Return[Simp[e]]]; (* don't do parallel for single term. Below assuming e has elements under head Plus *)
+	subLen = Ceiling[Length@e/OptionValue["N"]];
+	parts = Partition[e, subLen, subLen, 1, 0];
+	Total@Flatten@ParallelMap[func, parts, DistributedContexts -> All]]
+
+
+Options[ParaSimp] = {"N" -> $ConfiguredKernels[[1, 1]], "Simp" :> (Expand[simpM@simpF@# //. SimpHook] &)};
+ParaSimp[e_, OptionsPattern[]] := Module[{eList = plus2list[e //. SimpHook], func = OptionValue["Simp"], parts, subLen},
+  subLen = Ceiling[Length@eList/OptionValue["N"]];
+  parts = Partition[eList, subLen, subLen, 1, 0];
+  Total @ ParallelMap[func @ Total @ # &, parts, DistributedContexts -> All]]
 
 (* ::Section:: *)
 (* M-backend of Simp *)
@@ -208,7 +221,7 @@ simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, c
 	t = x ~TensorProduct~ times2prod[term, TensorProduct]; (* Add tensor product and contraction tensor *)
 	tCt = Map[Flatten@Position[idx@t,#]&, fr~Join~oldDummy]; (* Determine contraction pairs *)
 	tM = t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},sumAlt,1]; (* The tensor to input to TensorReduce *)
-	(*Print[TensorContract1[tM, tCt]];Print[simpMTermAss[tM]];*)
+	(*Print[TensorContract1[tM, tCt]];Print[simpMTermAss[tM]];Print[$KernelID];*)
 	tM = times2prod[Assuming[simpMTermAss[tM], Expand@tReduce@TensorContract[tM, tCt]], List]; (* Outcome from TensorReduce *)
 	(*Print[tM];*)
 	If[tM===0, Return[0]]; 
