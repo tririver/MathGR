@@ -10,7 +10,7 @@ Begin["`Private`"]
 
 guessTensorQ[f_String]:= StringFreeQ[f, Characters@"+-*/"] && (!StringFreeQ[f, "^"]||!StringFreeQ[f, "_"])
 ToTeX[e_] := e // PolynomialForm[#, TraditionalOrder -> False]& // ToString[#, TeXForm] & //
-	StringReplace[#, "\\left("~~Shortest[f__]~~"\\right)"/;guessTensorQ[f] :> f] & // 
+	FixedPoint[StringReplace[#, "\\left("~~Shortest[f__]~~"\\right)"~~g___~~EndOfString/;guessTensorQ[f]&&(StringLength[g]<=3||StringTake[g,3]=!="{}^") :> f<>g] &, # ]&// 
 	StringReplace[#, "\\text{}" :> "{}"] & // TraditionalForm
 
 MakeBoxes[\[CapitalSampi], TraditionalForm]:="\[PartialD]"
