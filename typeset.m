@@ -1,9 +1,17 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
 BeginPackage["MathGR`typeset`", {"MathGR`tensor`"}]
+
+ToTeX::usage="ToTeX[expr] translates expr into TeXForm."
+
 Begin["`Private`"]
 
 (* ::Section:: *)
 (* TraditionalForm of special symbols *)
+
+guessTensorQ[f_String]:= StringFreeQ[f, Characters@"+-*/"] && (!StringFreeQ[f, "^"]||!StringFreeQ[f, "_"])
+ToTeX[e_] := e // PolynomialForm[#, TraditionalOrder -> False]& // ToString[#, TeXForm] & //
+	StringReplace[#, "\\left("~~Shortest[f__]~~"\\right)"/;guessTensorQ[f] :> f] & // 
+	StringReplace[#, "\\text{}" :> "{}"] & // TraditionalForm
 
 MakeBoxes[\[CapitalSampi], TraditionalForm]:="\[PartialD]"
 
@@ -22,8 +30,9 @@ MakeBoxes[tsr_[idx__], StandardForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= TagBox[R
 			DE@n_:>TagBox[StyleBox[MakeBoxes[n, StandardForm], FontColor->IdxColor@DE],DE], UE@n_:>""}
 	}, ColumnSpacings->0, RowSpacings->0], FontSize->10]}], "mgrTsr"]
 
-MakeBoxes[tsr_[idx__], TraditionalForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= With[{idList={idx}/.{(altUp|_UE)[i_]:>SuperscriptBox["", i], (altDn|_DE)[i_]:>SubscriptBox["", i]}},
-		RowBox[{MakeBoxes[tsr, TraditionalForm]}~Join~idList]]
+MakeBoxes[tsr_[idx__], TraditionalForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= With[
+	{idList={idx}/.{altUp[i_]:>SuperscriptBox["", i], UE[i_]:>SuperscriptBox["", ToString@i], altDn[i_]:>SubscriptBox["", i], DE[i_]:>SubscriptBox["", ToString@i]}},
+	RowBox[{MakeBoxes[tsr, TraditionalForm]}~Join~idList]]
 
 (* ::Section:: *)
 (* Tensor intepretation *)
