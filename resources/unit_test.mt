@@ -189,10 +189,6 @@ PdHold[__]=.
 (* ::Section:: *)
 (* Decomposition *)
 
-<< MathGR/gr.m
-<< MathGR/decomp.m
-<< MathGR/ibp.m
-
 UseMetric[\[DoubleStruckG], {UTot, DTot}]
 UseMetric[\[Eta], {U1, D1}, "SetAsDefault" -> False]
 UseMetric[\[Gamma], {U2, D2}, "SetAsDefault" -> False]

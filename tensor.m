@@ -216,7 +216,7 @@ Simp::nosupp="Warning: `1` has tensors in unsupported functions. This may cause 
 simpMTermSupported={prod}
 simpMTermCheckSupported[e_]:= If[ (Flatten@{times2prod@e/.(# -> List & /@ simpMTermSupported)} // Cases[#, IdxPtn, {3, Infinity}] &) =!={}, Message[Simp::nosupp, e], "Supported"]
 simpMTerm[term_, fr_, dum_, x_]:=Module[{t, tCt, tM, xFr, slots, tNewIdx, cnt, cntId, slot1, slot2, oldDummy=dummy@term},
-	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)
+	If[oldDummy==={}&&fr==={}, Return[term]]; (* no idx *)(*Print[term];Print[fr];Print[dum];Print[x];*)
 	simpMTermCheckSupported[term];
 	t = x ~TensorProduct~ times2prod[term, TensorProduct]; (* Add tensor product and contraction tensor *)
 	tCt = Map[Flatten@Position[idx@t,#]&, fr~Join~oldDummy]; (* Determine contraction pairs *)

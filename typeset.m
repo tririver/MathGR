@@ -7,7 +7,20 @@ DecorateTeXString::usage="DecorateTeXString[s] does post processing for a TeX st
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 (* ::Section:: *)
-(* TraditionalForm of special symbols *)
+(* TraditionalForm and TeX output *)
+
+altUp:= Alternatives @@ IdxUpList
+altDn:= Alternatives @@ IdxDnList
+idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn | IdxNonSumPtn) ..}]
+makeBoxesTsrQ = !MatchQ[#, List|Rule|Alternatives|Sequence]&
+mkPd[form_][i___] := Sequence @@ (MakeBoxes[\[CapitalSampi]@#, form] & /@ {i})
+
+MakeBoxes[tsr_[idx__], TraditionalForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= With[
+	{idList={idx}/.{altUp[i_]:>SuperscriptBox["", i], UE[i_]:>SuperscriptBox["", ToString@i], altDn[i_]:>SubscriptBox["", i], DE[i_]:>SubscriptBox["", ToString@i]}},
+	RowBox[{MakeBoxes[tsr, TraditionalForm]}~Join~idList]]
+
+MakeBoxes[PdT[f_, PdVars[i0:DE@0..., i___]], TraditionalForm] := With[{id0 = mkPd[TraditionalForm]@i0, id = mkPd[TraditionalForm]@i}, 
+	TagBox[RowBox[{id, id0, MakeBoxes[f, TraditionalForm]}], "mgrPdT"]]
 
 SetOptions[$Output, PageWidth -> Infinity]
 
@@ -32,58 +45,43 @@ ToTeX[e_] := e//.ToTeXHook // PolynomialForm[#, TraditionalOrder -> False]& // T
 MakeBoxes[\[CapitalSampi], TraditionalForm]:="\[PartialD]"
 MakeBoxes[Dta, TraditionalForm]:="\[Delta]"
 
-(* ::Section:: *)
-(* Tensor display *)
 
-altUp:= Alternatives @@ IdxUpList
-altDn:= Alternatives @@ IdxDnList
-idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn | IdxNonSumPtn) ..}]
-makeBoxesTsrQ = !MatchQ[#, List|Rule|Alternatives|Sequence]&
+(* ::Section:: *)
+(* All the below only run with a frontend *)
+
+If[$FrontEnd===Null, Print["(typeset.m): No FrontEnd detected. StandardForm and input aliases definitions skipped."],
+
+(* ::Section:: *)
+(* Tensor *)
+
 MakeBoxes[tsr_[idx__], StandardForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= TagBox[RowBox[{AdjustmentBox[MakeBoxes[tsr, StandardForm], BoxMargins -> {{0, -0.2}, {0, 0}}], 
 	StyleBox[ GridBox[{idx} /. {
 		{(a:altUp)[i_]:>TagBox[StyleBox[MakeBoxes[i, StandardForm], FontColor->IdxColor@a], a], 
 			IdxDnPtn:>"", UE@n_:>TagBox[StyleBox[MakeBoxes[n, StandardForm], FontColor->IdxColor@UE],UE], DE@n_:>""}, 
 		{IdxUpPtn:>"", (a:altDn)[i_]:>TagBox[StyleBox[MakeBoxes[i, StandardForm], FontColor->IdxColor@a], a], 
 			DE@n_:>TagBox[StyleBox[MakeBoxes[n, StandardForm], FontColor->IdxColor@DE],DE], UE@n_:>""}
-	}, ColumnSpacings->0, RowSpacings->0], FontSize->10]}], "mgrTsr"]
+	}, ColumnSpacings->0, RowSpacings->0], FontSize->10]}], "mgrTsr"];
 
-MakeBoxes[tsr_[idx__], TraditionalForm]/;(idxQ[idx]&&makeBoxesTsrQ[tsr]):= With[
-	{idList={idx}/.{altUp[i_]:>SuperscriptBox["", i], UE[i_]:>SuperscriptBox["", ToString@i], altDn[i_]:>SubscriptBox["", i], DE[i_]:>SubscriptBox["", ToString@i]}},
-	RowBox[{MakeBoxes[tsr, TraditionalForm]}~Join~idList]]
-
-(* ::Section:: *)
-(* Tensor intepretation *)
-
-parseUD[lst_, StandardForm]:= Sequence @@ (Map[If[#[[1]] === "", #[[2]], #[[1]]] &, Transpose[lst]] /. {TagBox[i_ | StyleBox[i_, __], tag_] :> tag@ToExpression[i, StandardForm]})
+parseUD[lst_, StandardForm]:= Sequence @@ (Map[If[#[[1]] === "", #[[2]], #[[1]]] &, Transpose[lst]] /. {TagBox[i_ | StyleBox[i_, __], tag_] :> tag@ToExpression[i, StandardForm]});
 MakeExpression[TagBox[RowBox[{AdjustmentBox[t_, ___], StyleBox[GridBox[idx__, ___], ___]}], "mgrTsr"], StandardForm] := 
-	With[{h = ToExpression[t, StandardForm], i = parseUD[idx, StandardForm]}, HoldComplete@h@i]
+	With[{h = ToExpression[t, StandardForm], i = parseUD[idx, StandardForm]}, HoldComplete@h@i];
 
 (* ::Section:: *)
-(* Derivative display *)
+(* Derivative *)
 
-mkPd[form_][i___] := Sequence @@ (MakeBoxes[\[CapitalSampi]@#, form] & /@ {i})
-MakeBoxes[PdT[f_, PdVars[i__]], StandardForm] /; FreeQ[{i}, DE@0] := With[{id = mkPd[StandardForm]@i}, TagBox[RowBox[{id, MakeBoxes[f, StandardForm]}], "mgrPdT"]]
+MakeBoxes[PdT[f_, PdVars[i__]], StandardForm] /; FreeQ[{i}, DE@0] := With[{id = mkPd[StandardForm]@i}, TagBox[RowBox[{id, MakeBoxes[f, StandardForm]}], "mgrPdT"]];
 MakeBoxes[PdT[a_, PdVars[dt : DE@0 .., i__]], StandardForm] /; FreeQ[{i}, DE@0]:= With[{id = mkPd[StandardForm]@i, bu = StringJoin@ConstantArray["\[Bullet]", Length@{dt}]}, 
-	TagBox[RowBox[{id, OverscriptBox[MakeBoxes[a, StandardForm], bu]}], "mgrPdT"]]
-MakeBoxes[PdT[a_, PdVars[dt : DE@0 ..]], StandardForm] := With[{bu = StringJoin@ConstantArray["\[Bullet]", Length@{dt}]}, OverscriptBox[MakeBoxes[a, StandardForm], bu]]
-
-(*MakeBoxes[PdT[f_, PdVars[i__]], TraditionalForm] := With[{id = mkPd[TraditionalForm]@i}, TagBox[RowBox[{id, MakeBoxes[f, TraditionalForm]}], "mgrPdT"]]*)
-
-MakeBoxes[PdT[f_, PdVars[i0:DE@0..., i___]], TraditionalForm] := With[{id0 = mkPd[TraditionalForm]@i0, id = mkPd[TraditionalForm]@i}, 
-	TagBox[RowBox[{id, id0, MakeBoxes[f, TraditionalForm]}], "mgrPdT"]]
-
-
-(* ::Section:: *)
-(* Derivative intepretation *)
+	TagBox[RowBox[{id, OverscriptBox[MakeBoxes[a, StandardForm], bu]}], "mgrPdT"]];
+MakeBoxes[PdT[a_, PdVars[dt : DE@0 ..]], StandardForm] := With[{bu = StringJoin@ConstantArray["\[Bullet]", Length@{dt}]}, OverscriptBox[MakeBoxes[a, StandardForm], bu]];
 
 MakeExpression[TagBox[RowBox[{d__,f_}], "mgrPdT"], StandardForm]:= 
-	With[{idExpr=PdVars@@Cases[ToExpression[{d}, StandardForm], \[CapitalSampi][a_]:>a], fExpr=ToExpression[f, StandardForm]}, HoldComplete@PdT[fExpr, idExpr]]
+	With[{idExpr=PdVars@@Cases[ToExpression[{d}, StandardForm], \[CapitalSampi][a_]:>a], fExpr=ToExpression[f, StandardForm]}, HoldComplete@PdT[fExpr, idExpr]];
 
 MakeExpression[OverscriptBox[a_, str_String], StandardForm] := With[{pds = Nest[Pd[#, DE@0] &, ToExpression[a, StandardForm], 
-      StringLength[str]]}, HoldComplete[pds]] /; StringMatchQ[str, "\[Bullet]" ..]
+      StringLength[str]]}, HoldComplete[pds]] /; StringMatchQ[str, "\[Bullet]" ..];
 
 (* the following are used for backwards compatibility *)
-MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], StandardForm] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], StandardForm]
+MakeExpression[TagBox[RowBox[{SubscriptBox["\[CapitalSampi]", a_], f_}], "mgrPd"], StandardForm] := MakeExpression[RowBox[{"Pd[", f, ",", a, "]"}], StandardForm];
 
 (* ::Section:: *)
 (* Paste the blob calculated in InputAliases.nb *)
@@ -484,9 +482,11 @@ aliasesList= {"tp" -> TagBox[
          ""}, {TagBox[StyleBox["0", FontColor -> GrayLevel[0.5]], DE],
           TagBox[StyleBox["0", FontColor -> GrayLevel[0.5]], DE]}}, 
        ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
-   "mgrTsr"]}
+   "mgrTsr"]};
 
 SetOptions[EvaluationNotebook[], InputAliases -> aliasesList];
+
+] (* end of the big if (or tell me how to stop in the middle of a package gracefully?) *)
 
 End[]
 EndPackage[]
