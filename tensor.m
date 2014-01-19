@@ -174,16 +174,8 @@ If[!defQ@Simp, Simp[e_, OptionsPattern[]]:= Switch[OptionValue["Method"], "Fast"
 Options[SimpUq]= {"Method"->"Hybrid"}
 SimpUq[e_, OptionsPattern[]]:= Block[{IdxSet}, (IdxSet[#]=IdxSet[IdxDual[#]]=UniqueIdx)&/@DeleteDuplicates[IdxList, IdxDual[#1] == #2 &]; Simp[e, "Method"->OptionValue["Method"]]]
 
-Options[ParaSimp] = {"N" -> $ConfiguredKernels[[1, 1]], "Simp" :> (Expand[simpM @ simpF @ # //.SimpHook] &)};
-ParaSimp[eRaw_, OptionsPattern[]] := Module[{e = Expand[eRaw//.SimpHook], func = OptionValue["Simp"], parts, subLen},
-	If[Head@e=!=Plus, Return[Simp[e]]]; (* don't do parallel for single term. Below assuming e has elements under head Plus *)
-	subLen = Ceiling[Length@e/OptionValue["N"]];
-	parts = Partition[e, subLen, subLen, 1, 0];
-	Total@Flatten@ParallelMap[func, parts, DistributedContexts -> All]]
-
-
-Options[ParaSimp] = {"N" -> $ConfiguredKernels[[1, 1]], "Simp" :> (Expand[simpM@simpF@# //. SimpHook] &)};
-ParaSimp[e_, OptionsPattern[]] := Module[{eList = plus2list[e //. SimpHook], func = OptionValue["Simp"], parts, subLen},
+Options[ParaSimp] = {"N" -> $ConfiguredKernels[[1, 1]], "Simp" :> (Expand[simpM@# //. SimpHook] &)};
+ParaSimp[e_, OptionsPattern[]] := Module[{eList = plus2listRaw[e //. SimpHook // simpF], func = OptionValue["Simp"], parts, subLen},
   subLen = Ceiling[Length@eList/OptionValue["N"]];
   parts = Partition[eList, subLen, subLen, 1, 0];
   Total @ ParallelMap[func @ Total @ # &, parts, DistributedContexts -> All]]
