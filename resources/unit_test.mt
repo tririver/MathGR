@@ -22,13 +22,6 @@ Test[
 	True, TestID->"DeclareIdx properties"]
 
 (* ::Subsection:: *)
-(* DeclareExplicitIdx *)
-
-DeclareExplicitIdx[{ue, de}, Brown]
-Test[MemberQ[IdxNonSumList, ue] && MemberQ[IdxNonSumList, de] && MatchQ[ue[0], IdxNonSumPtn] && MatchQ[de[0], IdxNonSumPtn], 
-	True, TestID->"DeclareExplicitIdx"]
-
-(* ::Subsection:: *)
 (* Dta *)
 
 Test[f[u@"a", f1[u@"b"]]Dta[u@"b", u@"c"], f[u@"a", f1[u@"c"]], TestID->"Dta up-up, with nest func"]
@@ -43,7 +36,7 @@ Test[Dta[u@"a", u@"a"]==dimTest && Dta[u@"a", d@"a"]==dimTest && Dta[d@"a", d@"a
 	&& Dta[u@"a", d@"b"]Dta[u@"a", d@"b"]==dimTest
 	&& Dta[u@"a", u@"b"]Dta[u@"b", u@"c"]Dta[u@"c", u@"d"]Dta[u@"d", u@"a"]==dimTest,
 	True, TestID->"Dta sum"]
-Test[Dta[ue@1, de@0]==0 && Dta[ue@1, de@1]==1, True, TestID->"Dta explicit idx"]
+Test[Dta[UE@1, DE@0]==0 && Dta[UE@1, DE@1]==1, True, TestID->"Dta explicit idx"]
 
 Test[DtaGen[UP@"a", UP@"b", DN@"m", DN@"n"],-Identity[Dta][DN["m"], UP["b"]] Identity[Dta][DN["n"], UP["a"]] + 
  Identity[Dta][DN["m"], UP["a"]] Identity[Dta][DN["n"], UP["b"]], TestID->"DtaGen"]
@@ -99,7 +92,7 @@ DeclareSym[f3, {d, d, d, d}, Symmetric[{1, 2}]];
 DeclareSym[f3, {d, d, d, d}, Antisymmetric[{3, 4}]];
 Test[f3[d@"i", d@"j", d@"i", d@"j"] // Simp[#, "Method"->"MOnly"]&, 0, TestID->"SimpM symmetric"]
 Test[Pd[f3[d@"i", d@"j", d@"i", d@"j"],d@"k"] // Simp[#, "Method"->"MOnly"]&, 0, TestID->"SimpM antisymmetric"]
-Test[Pd[f3[d@"i", de@0, d@"i", de@0],d@"k"] // Simp[#, "Method"->"MOnly"]&, Pd[f3[d["a"], de[0], d["a"], de[0]], d["k"]], TestID->"SimpM with explicit idx"]
+Test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp[#, "Method"->"MOnly"]&, Pd[f3[d["a"], DE[0], d["a"], DE[0]], d["k"]], TestID->"SimpM with explicit idx"]
 Test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Simp, 
 	A[U2["b"], DN["\[Mu]"]] A[U2["c"], DN["\[Nu]"]] c[D2["b"], D2["c"], U2["a"]], TestID->"Simp with free idx sorted"]
 (* ::Subsection:: *)
@@ -121,7 +114,7 @@ Test[dummy[a[u@"a", d@"b"]Pd[f[u@"c",u@"b"],d@"a"]f[d@"x"]^2], {"a","b","x"}, Te
 Test[pd2pdts[Pd[f[u@"a"],d@"a"]], pdts[1][f][u@"a", d@"a"], TestID->"Pd to pdts"]
 Test[pdts2pd[pdts[1][f][u@"a", d@"a"]], Pd[f[u@"a"],d@"a"], TestID->"pdts to Pd"]
 
-Test[rmNE[{ue@0,u@"a",d@"b",de@1,d@"c"}], {u@"a",d@"b",d@"c"}, TestID->"rmNE"]
+Test[rmE[{UE@0,u@"a",d@"b",DE@1,d@"c"}], {u@"a",d@"b",d@"c"}, TestID->"rmE"]
 End[]
 
 (* ::Section:: *)
@@ -145,7 +138,7 @@ Test[R[]//Simp,
 	(3*g[u["a"], u["b"]]*g[u["c"], u["d"]]*g[u["e"], u["f"]]*Pd[g[d["a"], d["c"]], d["e"]]*Pd[g[d["b"], d["d"]], d["f"]])/4 - (g[u["a"], u["b"]]*g[u["c"], u["d"]]*g[u["e"], u["f"]]*Pd[g[d["a"], d["c"]], d["f"]]*Pd[g[d["b"], d["e"]], d["d"]])/2 - g[u["a"], u["b"]]*g[u["c"], u["d"]]*g[u["e"], u["f"]]*Pd[g[d["a"], d["c"]], d["d"]]*Pd[g[d["b"], d["e"]], d["f"]] - (g[u["a"], u["b"]]*g[u["c"], u["d"]]*g[u["e"], u["f"]]*Pd[g[d["a"], d["b"]], d["e"]]*Pd[g[d["c"], d["d"]], d["f"]])/4 + g[u["a"], u["b"]]*g[u["c"], u["d"]]*g[u["e"], u["f"]]*Pd[g[d["a"], d["b"]], d["d"]]*Pd[g[d["c"], d["e"]], d["f"]] - g[u["a"], u["b"]]*g[u["c"], u["d"]]*Pd[Pd[g[d["a"], d["b"]], d["c"]], d["d"]] + g[u["a"], u["b"]]*g[u["c"], u["d"]]*Pd[Pd[g[d["a"], d["c"]], d["b"]], d["d"]],
 	TestID->"Ricci scalar"]
 
-Test[CovD[R[d@"a", d@"b", d@"c", d@"d"], d@"e"] + CovD[R[d@"a", d@"b", d@"d", d@"e"], d@"c"] + CovD[R[d@"a", d@"b", d@"e", d@"c"], d@"d"] // Simp, 0, TestID->"Second Bianchi of Riemann"]
+Test[CovD[R[d@"a", d@"b", d@"c", d@"d"], d@"e"] + CovD[R[d@"a", d@"b", d@"d", d@"e"], d@"c"] + CovD[R[d@"a", d@"b", d@"e", d@"c"], d@"d"]// Simp, 0, TestID->"Second Bianchi of Riemann"]
 	
 (* ::Subsection:: *)
 (* CovD *)
@@ -160,7 +153,7 @@ Test[CovD[f2 f[u@"a",d@"b"]f1[d@"c"] ,d@"d"]//Simp,
 Test[Ibp[y Pd[x, d@"a"] + x Pd[y, d@"a"] + f[d@"a"] + xx yy Pd[zz, d@"a"] +   xx zz Pd[yy, d@"a"] + xxx Pd[yyy, d@"a"]],
 	f[d@"a"] - yy zz Pd[xx, d["a"]] + xxx Pd[yyy, d["a"]] +  PdHold[x y, d["a"]] + PdHold[xx yy zz, d["a"]], TestID->"Ibp CountLeaf"]
 	
-Test[Ibp[y Pd[Pd[x, de@0], de@0], "Rank"->IbpCountPt2], -Pd[x, de[0]] Pd[y, de[0]] + PdHold[y Pd[x, de[0]], de[0]], TestID->"Ibp CountPt2"]
+Test[Ibp[y Pd[Pd[x, DE@0], DE@0], "Rank"->IbpCountPt2], -Pd[x, DE[0]] Pd[y, DE[0]] + PdHold[y Pd[x, DE[0]], DE[0]], TestID->"Ibp CountPt2"]
 
 Test[Ibp[y Pd[x, d@"i"], "Rank"->IbpVar[x]], -x Pd[y, d["i"]] + PdHold[x y, d["i"]], TestID->"IbpVar"]
 

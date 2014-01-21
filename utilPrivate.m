@@ -21,6 +21,7 @@ defQ[x_]:= {OwnValues[x],UpValues[x],DownValues[x]} =!= {{},{},{}};
 
 plus2listRaw = If[Head[#]===Plus||Head[#]===List, List@@#, {#}]&
 plus2list = plus2listRaw[Expand@#]&
+
 apply2term = Total[#1/@plus2list[#2]]&
 replaceTo = Thread[RuleDelayed[##]]&
 getSampleTerm = Function[e, If[Head@#===Plus, #[[1]], #]&[Expand@e]] 

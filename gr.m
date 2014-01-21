@@ -31,6 +31,7 @@ isu[a_]:=Head@a===iu
 isd[a_]:=Head@a===id
 
 SetAttributes[{WithMetric, UseMetric}, HoldAll]
+
 WithMetric[g_, idx_:{UP, DN}, e_]:= (UseMetric[g, idx, "SetAsDefault"->False]; 
 	Block[{Metric=g, IdxOfMetric=idx}, e])
 Options[UseMetric]={"SetAsDefault"->True}
@@ -39,9 +40,9 @@ UseMetric[g_, idx_:{UP, DN}, OptionsPattern[]]:= Module[{u=idx[[1]], d=idx[[2]],
 	DeclareSym[g, {u,u}, Symmetric[All]];
 	DeclareSym[g, {d,d}, Symmetric[All]];
 	(*g /: g[u@a_, d@b_]:= Dta[u@a, d@b];*) (* this is replaced by below because say, g[_UTot, _DTot] should also have g[_U1, _D1]=Dta*)
-	g /: g[i_@a_, j_@b_]/;i===IdxDual@j := Dta[i@a,j@b];
-	g /: g[u@a_, u@c_]g[d@c_, d@b_]:= Dta[u@a, d@b];
-	g /: Pd[g[u@m_, u@a_], d@l_]:= -g[u@#1, u@a]g[u@#2, u@m]Pd[g[d@#1, d@#2], d@l] &@Uq[2];
+	If[Head@g[u@"a", d@"b"]===g (* g has not transformed to other things *), g /: g[i_@a_, j_@b_]/;i===IdxDual@j := Dta[i@a,j@b]];
+	If[Head@g[u@"a", u@"b"]===g && Head@g[d@"a", d@"b"]===g, g /: g[u@a_, u@c_]g[d@c_, d@b_]:= Dta[u@a, d@b]];
+	If[Head@Pd[g[u@"a", u@"b"], d@"c"]===PdT, g /: Pd[g[u@m_, u@a_], d@l_]:= -g[u@#1, u@a]g[u@#2, u@m]Pd[g[d@#1, d@#2], d@l] &@Uq[2];];
 	If[IntegerQ[Dim@u],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
 		LeviCivita /: LeviCivita[a:((u|d)[_]..)]*LeviCivita[b:((u|d)[_]..)]:= DtaGen[a, b, "DtaGenDta"->g]; ]]
@@ -79,4 +80,5 @@ With[{g:=Metric, r:=Affine},
 ]
 
 End[]
+
 EndPackage[]

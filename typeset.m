@@ -11,7 +11,7 @@ Needs["MathGR`utilPrivate`"]
 
 altUp:= Alternatives @@ IdxUpList
 altDn:= Alternatives @@ IdxDnList
-idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn | IdxNonSumPtn) ..}]
+idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn|_UE|_DE) ..}]
 makeBoxesTsrQ = !MatchQ[#, List|Rule|Alternatives|Sequence]&
 mkPd[form_][i___] := Sequence @@ (MakeBoxes[\[CapitalSampi]@#, form] & /@ {i})
 
