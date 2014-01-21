@@ -147,13 +147,13 @@ DeleteSym[t_,id_]:= Module[{del},
 Simp::overdummy = "Error: index `1` appears `2` times in `3`"
 Simp::diffree = "Error: free index in term `1` is different from that of first term (`2`)"
 Simp::ld = "Warning: Memory constraint reached in `1`, simplification skipped"
-Simp:= SeriSimp
+If[!defQ@Simp, Simp:= SeriSimp]
 SimpUq:= Simp[#, "Dummy"->"Unique"]&
 
 tReduceMaxMemory=10^9 (* 1GB max memory *)
 tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp::ld, term];e]
-If[!defQ@SimpSelect,SimpSelect = Identity]
-If[!defQ@SimpHook,SimpHook = {}]
+If[!defQ@SimpSelect, SimpSelect = Identity]
+If[!defQ@SimpHook, SimpHook = {}]
 Options[SeriSimp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *)}
 SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, dum, conTsr, zMat, simpTerm, tM, idSet, dumSet},
 	eList = SimpSelect @ plus2list @ (e//.SimpHook);

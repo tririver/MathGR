@@ -50,9 +50,11 @@ PdHold /: -PdHold[a_,c_]:=PdHold[-a,c]
 PdHold /: n_?NumericQ PdHold[a_,c_]:=PdHold[n a,c]
 PdHold /: PdHold[a_,c_]+PdHold[b_,c_]:= PdHold[a+b,c]
 PdHold[a_,id_[c_]]/;c!="(PdId)"&&!FreeQ[a,c]&&id=!=DE:=PdHold[a/.c:>"(PdId)",id@"(PdId)"]
-Simp[b_.+PdHold[a_,c_]]:= Simp[b] + PdHold[Simp[a],c]
 
-Simp[b_.+IdHold[a_]]:= Simp[b] + IdHold[Simp[a]]
+SeriSimp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= SeriSimp[b, opt] + PdHold[SeriSimp[a, opt],c]
+SeriSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= SeriSimp[b, opt] + IdHold[SeriSimp[a, opt]]
+ParaSimp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + PdHold[ParaSimp[a, opt],c]
+ParaSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + IdHold[ParaSimp[a, opt]]
 
 IbpRules = Dispatch@{
 	(*a_. PdT[b_, PdVars[c_, etc___]] + e_. :> PdHold[a PdT[b, PdVars[etc]], c] + e - Simp[PdT[b, PdVars[etc]] Pd[a,c]],*)
