@@ -187,17 +187,15 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, dum, c
 
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[tM, IdxHeadPtn]:= tM;
 assignIdx[f_ tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[f, IdxHeadPtn]:= f assignIdx[tM, fr, dumSet, conTsr, zMat];
-assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{nthCT=-1 (* used by restoreContract, count number of TensorContract *), nthIdx (* used by restoreContract, count idx number within a TensorContract *), 
-		mark (* mark idx with mark[nthCT, nthIdX] *), nthDummy (* used by assignDummy, count which dummy variable to use from dumSet *), marked, restoreContract, assignFree, assignDummy}, 
-	restoreContract[x_]:= If[FreeQ[x, TensorContract], {x}, 
-		nthCT++; nthIdx=1; x /. a:IdxHeadPtn:>a@mark[nthCT, nthIdx++] /. (mark[nthCT, #[[1]]]->mark[nthCT, #[[2]]]& /@ x[[2]])][[1]]; (* put idx like DN[mark[nthCT, nthIdx]] *)
+assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0, nthIdx (* used by restoreContract, count idx number within a TensorContract *), 
+		mark (* mark idx with mark[nthCT, nthIdX] *), nthDummy (* used by assignDummy, count which dummy variable to use from dumSet *), marked, assignFree, assignDummy}, 
+	tcGetId[t_, pairs_]:= (nthIdx=1; nthCT++; t /. a:IdxHeadPtn:>a[mark[nthCT, nthIdx++]] /. (mark[nthCT, #[[2]]]->mark[nthCT, #[[1]]] &/@ pairs));
 	assignFree[x_]:= x /. Flatten@Cases[{x}, MAT[zMat][a__] :> replaceTo[#[[1]]&/@{a}, fr], Infinity]; (* put free indices *)
 	(nthDummy[#]=1)& /@ IdxList; (* Initialize counter for assignDummy -- each type is initially 1 *)
 	assignDummy[x_]:= x /. (marked = DeleteDuplicates[#, First[#1] === First[#2] &]& @ Cases[x, _@mark[__], Infinity]; (* find dummy indices, one representive for each pair *)
 		replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
 	(*Print["restore: ", restoreContract/@tM];*)
-	assignDummy@assignFree@(restoreContract/@Flatten[{times2prod[tM, List]}]) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, TensorProduct|List]&
-]
+	assignDummy @ assignFree @ (times2prod[tM, TensorProduct]/.TensorContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, TensorProduct]&]
 
 simpTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
 	(* Add assumptions for tensors encountered in each term *)
