@@ -13,15 +13,15 @@ k::usage = "Momentum used in Fourier transformation"
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
-(Pd[#,_]:=0) &/@ {k, Eps}
+PdT[k|Eps, PdVars[__]]:=0
 
 SolveExpr[eqs_, exprsRaw_] := Module[{exprs = Flatten@{exprsRaw}, repList},
   repList = Unique[] /@ exprs;
   Solve[eqs /. (exprs~replaceTo~repList), repList] /. (repList~replaceTo~exprs)]
 
-CollectEps[vars_:{}, op_:Simp][f_]:= Collect[f, Eps, Collect[#, vars, op]&]
-SS[n_, vars_:{}, op_:Simp][f_]:= CollectEps[vars, op]@Normal@Series[op@f,{Eps,0,n}]
-OO[n_, vars_:{}, op_:Simp][f_]:= CollectEps[vars, op]@Coefficient[SS[n, vars, op][f], Eps, n]
+CollectEps[vars_:{tmp}, op_:Simp][f_]:= Collect[f, Eps, Collect[#, vars, op]&]
+SS[n_, vars_:{tmp}, op_:Simp][f_]:= CollectEps[vars, op]@Normal@Series[f,{Eps,0,n}]
+OO[n_, vars_:{tmp}, op_:Simp][f_]:= CollectEps[vars, op]@Coefficient[SS[n, vars, op][f], Eps, n]
 	
 fourier2RuleList = Dispatch@{PdT[f_, PdVars[DN@i_, DN@i_, j___]] :> -k^2 PdT[f, PdVars[j]],
  PdT[f_, PdVars[DN@i_, a___]] PdT[g_, PdVars[DN@i_, b___]] :>  k^2 PdT[f, PdVars[a]] PdT[g, PdVars[b]],

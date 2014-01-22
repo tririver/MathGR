@@ -82,6 +82,11 @@ Test[Pd[undefined, d@"x"], Pd[undefined, d@"x"], TestID->"PD on unknown var"]
 Test[Pd[a_,d@b_]:>f[a,b],Pd[a_,d@b_]:>f[a,b], TestID->"Pattern is not considered as background or constant"]
 
 (* ::Subsection:: *)
+(* Pm2 *)
+Test[x Pm2[(a + b)^2, DN] // Simp, x*Pm2[a^2, DN] + 2*x*Pm2[a*b, DN] + x*Pm2[b^2, DN], TestID->"Pm2 expand"]
+Test[PdT[f0test, PdVars[_DN, ___]] := 0; Pm2[f0test g, DN], f0test*Pm2[g, DN], TestID->"Pm2 constant"]
+Test[Pd[Pm2[PdT[f[DN@"a"], PdVars[DN@"b", DE@0]], DN], DN@"b"], PdT[f[DN["a"]], PdVars[DE[0]]], TestID->"Pm2 on Pd2"]
+(* ::Subsection:: *)
 (* SimpF *)
 
 Test[Simp[f[u@"x", d@"b"] f1[d@"b"], "Method"->"Fast"], f[u["x"], d["a"]] f1[d["a"]], TestID->"SimpF re-arrange idx"]
@@ -157,6 +162,9 @@ Test[Ibp[y Pd[Pd[x, DE@0], DE@0], "Rank"->IbpCountPt2], -Pd[x, DE[0]] Pd[y, DE[0
 
 Test[Ibp[y Pd[x, d@"i"], "Rank"->IbpVar[x]], -x Pd[y, d["i"]] + PdHold[x y, d["i"]], TestID->"IbpVar"]
 
+Test[f Pm2[g, DN] - g Pm2[f, DN] // Ibp , 0, TestID->"Ibp on Pm2, rule 1"]
+
+Test[Pm2[g*PdT[f, PdVars[DE[0], DN["i"], DN["i"]]], DN] + 2*Pm2[PdT[f, PdVars[DE[0], DN["i"]]]*PdT[g, PdVars[DN["i"]]], DN]//Ibp, g*PdT[f, PdVars[DE[0]]] - Pm2[PdT[f, PdVars[DE[0]]]*PdT[g, PdVars[DN["a"], DN["a"]]], DN], TestID->"Ibp on Pm2, rule 2"]
 (* ::Section:: *)
 (* Cosmic perturbations *)
 

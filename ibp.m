@@ -61,23 +61,32 @@ IbpRules = Dispatch@{
 	a_. PdT[b_, PdVars[c_, etc___]]^n_. + e_. :> Simp[PdHold[a PdT[b, PdVars[etc]] PdT[b, PdVars[c, etc]]^(n-1), c] - PdT[b, PdVars[etc]] Pd[a PdT[b, PdVars[c, etc]]^(n-1), c]] + e,
 	a_. b_^n_. PdT[b_, PdVars[c_]] + e_. :> e + Simp[ PdHold[a b^(n+1)/(n+1), c]  - b^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
 	a_. PdT[b_, PdVars[etc___]]^n_. PdT[b_, PdVars[c_, etc___]] + e_. :> e + Simp[ PdHold[a PdT[b, PdVars[etc]]^(n+1) / (n+1), c] - PdT[b, PdVars[etc]]^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
+	
+	h_. + g_. PdT[t_, PdVars[a_, b_, e___]]^2 :> With[{f=PdT[t, PdVars[e]]}, h + Simp[
+		PdHold[g Pd[Pd[f,a],b]Pd[f,b], a] - PdHold[g Pd[Pd[f,a],a]Pd[f,b], b] - Pd[g,a]Pd[Pd[f,a],b]Pd[f,b] + Pd[g,b]Pd[Pd[f,a],a]Pd[f,b] + g Pd[Pd[f,a],a]Pd[Pd[f,b],b] ]],
+	
 	PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_ + n_. /; Order[a,b]>=0 :> Simp[PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b] 
 		+ Pd[PdT[f,PdVars[e1]],b]Pd[PdT[g,PdVars[e2]],a]h + PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]Pd[h,b] - PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b] Pd[h,a]] + n,
 	(* some special higher order rules *)
 	x_. + f_. PdT[z, PdVars[a_, ea___]]PdT[z, PdVars[b_, c_, eb___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> 
 		x + Simp[PdHold[f PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2, c] - Pd[f,c]PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2],
-	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 :> Module[{g=PdT[h,PdVars[e]]},
+	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 :> With[{g=PdT[h,PdVars[e]]},
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],b] - f Pd[g,b]^2 Pd[Pd[g,a],c]/2 - Pd[f,a] Pd[g,b]^2 Pd[g,c]/2, a] 
 		- PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],a], b] + PdHold[f Pd[g,b]^2 Pd[Pd[g,a],a]/2, c]
 		+ f Pd[g,c]Pd[Pd[g,a],a]Pd[Pd[g,b],b] - Pd[f,c]Pd[g,b]^2 Pd[Pd[g,a],a]/2 
 		+ Pd[f,b]Pd[g,c]Pd[g,b]Pd[Pd[g,a],a] + Pd[Pd[f,a],a]Pd[g,c]Pd[g,b]^2/2 + Pd[f,a]Pd[Pd[g,a],c]Pd[g,b]^2]	],
 	(*x_. + f_. g_ PdT[g_, PdVars[a_,b_,b_]] :> x + Simp[PdHold[f g Pd[Pd[g,a],b], b] - PdHold[f Pd[g,b]^2/2, a] - Pd[f,b] g Pd[Pd[g,a],b] + Pd[f,a]Pd[g,b]^2/2],*)
-	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> Module[{g=PdT[h,PdVars[e]]},
-		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]
+	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> With[{g=PdT[h,PdVars[e]]},
+		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ],
+	(* below are for Pm2. Note: Pm2 is defined in momentum space. Thus there is no well-defined boundary term *)
+	x_. + a_ Pm2[b_, type_] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] b],
+	x_. + a_ PdT[Pm2[b_, type_], PdVars[e__]] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] PdT[b, PdVars[e]]],
+	x_. + a_. Pm2[ g_ PdT[f_, PdVars[type_@i_, type_@i_, e___]] , type_] :> 
+		x + Simp[a( PdT[f, PdVars[e]] g - 2 Pm2[PdT[f, PdVars[type@i, e]] Pd[g, type@i], type] - Pm2[PdT[f, PdVars[e]] Pd[Pd[g, type@i], type@i], type] )]
 }
 
 holdPtn=_PdHold|_IdHold
-IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5
+IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
 IbpCountTerm[e_]:=Length[plus2list[e/.holdPtn->0]] * 10^-2
 IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity] + IbpCountLeaf[e] 
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
@@ -88,7 +97,7 @@ IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@plus2list[e+tmp /.holdPtn->0];
 	Total[100^(5-#)&/@eOrderList]-100^5 + IbpCountLeaf[e] + IbpCountTerm[e]]
 
-IbpVariation[e_, v_]:=Expand[e] //. { a_.+b_.*PdT[f_,PdVars[i_,j___]] /;FreeQ[b,v]&&!FreeQ[f,v] :> a-Expand[PdT[f, PdVars[j]]*Pd[b,i]]} //Simp
+IbpVariation[e_, v_]:= FixedPoint[Replace[#, a_. + b_.*PdT[f_, PdVars[i_, j___]] /; FreeQ[b, v] && ! FreeQ[f, v] :> a - Simp[PdT[f, PdVars[j]]*Pd[b, i]]] &, Simp[e]]
 
 End[]
 EndPackage[]

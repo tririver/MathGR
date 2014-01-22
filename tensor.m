@@ -31,6 +31,7 @@ DtaGen::usage = "DtaGen[up..., dn...] is the generalized delta symbol"
 Pd::usage = "Pd[f, DN@a] is partial derivative"
 PdT::usage = "PdT[f, PdVars[DN@a, DN@b, ...]] is partial derivative"
 PdVars::usage = "Pdvars[DN@a, DN@b, ...] is a list of derivative variables"
+Pm2::usage = "Pm2[expr] is \\partial^{-2} expr. This inversed Laplacian should be understood in momentum space"
 LeviCivita::usage = "LeviCivita[a, b, ...] is the Levi Civita tensor, defined only if dimension is given as an explicit number"
 
 LatinIdx::usage = "strings {a, b, ..., }"
@@ -107,22 +108,30 @@ AntiSym[e_]:= AntiSym[e, free@e]
 (* ::Section:: *)
 (* Partial derivative *)
 
-Pd[a_Plus, i_]:= Pd[#,i]& /@ a;
-Pd[a_*b_, i_]:= Pd[a,i]*b + a*Pd[b,i];
-Pd[f_^g_, i_]:= f^(g-1)*g*Pd[f,i] + f^g*Log[f]*Pd[g,i];
-Pd[a_?NumericQ, i_]:=0;
+Pd[a_Plus, i_]:= Pd[#,i]& /@ a
+Pd[a_*b_, i_]:= Pd[a,i]*b + a*Pd[b,i]
+Pd[f_^g_, i_]:= f^(g-1)*g*Pd[f,i] + f^g*Log[f]*Pd[g,i]
+Pd[a_?NumericQ, i_]:=0
 
-Pd[f_, i_]:= Piecewise[{{PdT[f, PdVars[i]], FreeQ[f, PdT]}, {PdT[f[[1]], PdVars[i, Sequence@@f[[2]]]], Head[f]==PdT}},
+Pd[f_, i_]:= Piecewise[{
+	    {PdT[f, PdVars[i]], FreeQ[f, PdT]}, 
+		{PdT[f[[1]], PdVars[i, Sequence@@f[[2]]]], Head[f]===PdT},
+		{Pm2[Pd[f[[1]], i], f[[2]]], Head[f]===Pm2} },
 	Message[PdT::nonpoly, f];PdT[f, PdVars[i]]]
 
 SetAttributes[PdVars, Orderless]
 PdT::nonpoly="Pd acting on non-polynomial objects (as `1`) is not supported."
 PdT[f_, PdVars[]]:= f
-PdT[a_?NumericQ, PdVars[__]]:=0;
+PdT[a_?NumericQ, PdVars[__]]:=0
 PdT[f_/;MatchQ[Head[f],Plus|Times|Power|Pd|PdT], PdVars[i__]]:= Fold[Pd, f, {i}]
 
 pd2pdts[expr_]:= expr /. PdT[f_, i_] :> If[FreeQ[f, IdxPtn|_UE|_DE], pdts[Length@i][f][Sequence@@i], pdts[Length@i][Head@f][Sequence@@f, Sequence@@i]]
 pdts2pd = #/. pdts[n_][f_][i__] :> If[n==Length@{i}, PdT[f, PdVars[i]], PdT[f@@Take[{i}, Length@{i} - n], PdVars@@Take[{i}, -n]]] &
+
+Pm2[f_. Power[a_Plus, n_.], type_] /; IntegerQ[n]&&0<=n<5 := Pm2[f #, type]& /@ Expand[a^n]
+Pm2[f_*g_, type_] /; Pd[f, type@testVar]===0 := f Pm2[g, type]
+Pm2[PdT[f_, PdVars[i__]], type_]:= PdT[Pm2[f, type], PdVars[i]]
+PdT[Pm2[f_, type_], PdVars[type_@i_, type_@i_, etc___]]:= PdT[f, PdVars[etc]]
 
 (* ::Section:: *)
 (* Declare and delete symmetries *)
@@ -155,7 +164,7 @@ tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp:
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 Options[SeriSimp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *)}
-SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, dum, conTsr, zMat, simpTerm, tM, idSet, dumSet},
+SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm, dum, conTsr, zMat, simpTerm, tM, idSet, dumSet},
 	eList = SimpSelect @ plus2list @ (e//.SimpHook);
 	If[eList==={} || eList==={0}, Return @ 0];
 	fr = Sort @ free @ eList[[1]];
@@ -163,15 +172,17 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, dum, c
 	(* 1st pass, check tensor and replace dummy, try to cancel some terms *)
 	simpTermFast[t_]/; FreeQ[t, IdxPtn]:=t;	
 	simpTermFast[t_]:= ( idStat=Tally@idx@t;
+		frTerm = Sort@Cases[idStat, {a_,1}:>a];
 		If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[Simp::overdummy, Sequence@@(Cases[idStat, {a_,b_}/;b>2][[1]]), t]];
-		If[Sort@Cases[idStat, {a_,1}:>a]=!=fr, Message[Simp::diffree, t, fr]];
+		If[frTerm=!=fr, Message[Simp::diffree, t, fr]];
 		dum = Cases[idStat, {a_,2}:>a];
-		t /. replaceTo[(a0:IdxHeadPtn) /@ dum, a0 /@ Take[Complement[LatinIdx, fr], Length@dum]] );
+		t /. replaceTo[(a0:IdxHeadPtn) /@ dum, a0 /@ Take[Complement[LatinIdx, frTerm], Length@dum]] );
 	If[OptionValue@"Method"=!="M", eList = plus2listRaw @ Total @ Map[simpTermFast, eList]];
 	If[OptionValue@"Method"==="Fast", Return @ Total @ eList];
 
 	(* 2nd pass, with M engine *)
 	conTsr = If[fr==={}, 1, zMat @@ SortBy[Cases[eList[[1]], (i:IdxHeadPtn)[a_]/;MemberQ[fr, a], Infinity], First]];
+	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* Full simp of Pm2 not supported, due to limited need *)	
 	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;	
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
 	simpTerm[term_]:= ( t = conTsr~TensorProduct~times2prod[term, TensorProduct];
@@ -185,6 +196,8 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, dum, c
 	eList = assignIdx[#, fr, dumSet, conTsr, zMat]& /@ eList;
 	(Total @ SimpSelect @ pdts2pd @ eList)//.SimpHook]
 
+
+assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; !FreeQ[tM, Pm2]:= tM; (* Full simp of Pm2 not supported, due to limited need *)
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[tM, IdxHeadPtn]:= tM;
 assignIdx[f_ tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[f, IdxHeadPtn]:= f assignIdx[tM, fr, dumSet, conTsr, zMat];
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0, nthIdx (* used by restoreContract, count idx number within a TensorContract *), 
@@ -194,7 +207,6 @@ assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0, nthIdx 
 	(nthDummy[#]=1)& /@ IdxList; (* Initialize counter for assignDummy -- each type is initially 1 *)
 	assignDummy[x_]:= x /. (marked = DeleteDuplicates[#, First[#1] === First[#2] &]& @ Cases[x, _@mark[__], Infinity]; (* find dummy indices, one representive for each pair *)
 		replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
-	(*Print["restore: ", restoreContract/@tM];*)
 	assignDummy @ assignFree @ (times2prod[tM, TensorProduct]/.TensorContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, TensorProduct]&]
 
 simpTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
