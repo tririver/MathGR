@@ -87,14 +87,14 @@ IbpRules = Dispatch@{
 
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
-IbpCountTerm[e_]:=Length[plus2list[e/.holdPtn->0]] * 10^-2
+IbpCountTerm[e_]:=Length[expand2list[e/.holdPtn->0]] * 10^-2
 IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity] + IbpCountLeaf[e] 
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
 IbpStd2[e_]:= IbpCountPt2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_, Infinity] + IbpCountLeaf[e]
 
 IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
-	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@plus2list[e+tmp /.holdPtn->0];
+	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@expand2list[e+tmp /.holdPtn->0];
 	Total[100^(5-#)&/@eOrderList]-100^5 + IbpCountLeaf[e] + IbpCountTerm[e]]
 
 IbpVariation[e_, v_]:= FixedPoint[Replace[#, a_. + b_.*PdT[f_, PdVars[i_, j___]] /; FreeQ[b, v] && ! FreeQ[f, v] :> a - Simp[PdT[f, PdVars[j]]*Pd[b, i]]] &, Simp[e]]

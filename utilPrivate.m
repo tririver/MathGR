@@ -2,8 +2,8 @@
 BeginPackage["MathGR`utilPrivate`"]
 
 defQ
-plus2listRaw
 plus2list
+expand2list
 apply2term
 replaceTo
 getSampleTerm
@@ -19,10 +19,10 @@ Begin["`Private`"]
 SetAttributes[defQ, HoldAll];
 defQ[x_]:= {OwnValues[x],UpValues[x],DownValues[x]} =!= {{},{},{}};
 
-plus2listRaw = If[Head[#]===Plus||Head[#]===List, List@@#, {#}]&
-plus2list = plus2listRaw[Expand@#]&
+plus2list = If[Head[#]===Plus||Head[#]===List, List@@#, {#}]&
+expand2list = plus2list[Expand@#]&
 
-apply2term = Total[#1/@plus2list[#2]]&
+apply2term = Total[#1/@expand2list[#2]]&
 replaceTo = Thread[RuleDelayed[##]]&
 getSampleTerm = Function[e, If[Head@#===Plus, #[[1]], #]&[Expand@e]] 
 

@@ -104,8 +104,8 @@ Test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Sim
 (* private functions in tensor.m and util.m *)
 
 Begin["MathGR`tensor`Private`"]
-Test[plus2listRaw[1+a+c], {1, a, c}, TestID->"plus2listRaw"]
-Test[plus2list[1+2(a+c)], {1, 2a, 2c}, TestID->"plus2list"]
+Test[plus2list[1+a+c], {1, a, c}, TestID->"plus2list"]
+Test[expand2list[1+2(a+c)], {1, 2a, 2c}, TestID->"expand2list"]
 Test[apply2term[testf, 1+2(a+c)], testf[1]+testf[2a]+testf[2c], TestID->"apply2term"]
 Test[getSampleTerm[2(a+c)], 2a, TestID->"getSampleTerm"]
 Test[times2prod[a+b^3 c+d^n], a+prod[b,b,b,c]+d^n, TestID->"times2prod"]

@@ -136,19 +136,19 @@ PdT[Pm2[f_, type_], PdVars[type_@i_, type_@i_, etc___]]:= PdT[f, PdVars[etc]]
 (* ::Section:: *)
 (* Declare and delete symmetries *)
 
-If[!defQ@simpMAss,simpMAss = True]
-addAss[cond_]:= (simpMAss=Simplify[simpMAss&&cond];)
+If[!defQ@simpAss,simpAss = True]
+addAss[cond_]:= (simpAss=Simplify[simpAss&&cond];)
 
 DeclareSym[t_,id_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
 	addAss[MAT[t][Sequence@@id]~Element~Arrays[Dim/@rmE[id], sym]];)
 
 DeleteSym[t_]:= DeleteSym[t,{___}]
 DeleteSym[t_,id_]:= Module[{del},
-	del = Cases[{simpMAss}, Element[MAT[t][Sequence@@id], _], Infinity];
+	del = Cases[{simpAss}, Element[MAT[t][Sequence@@id], _], Infinity];
 	If[del==={}, Print["No match found in tensor definitions. Nothing is changed."];Return[]];
 	Print["The following definitions has been deleted: ", del];
 	ClearAttributes[t, Orderless];
-	simpMAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpMAss}, Element[MAT[t][Sequence@@id], _], Infinity];]
+	simpAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpAss}, Element[MAT[t][Sequence@@id], _], Infinity];]
 
 (* ::Section:: *)
 (* Simp functions *)
@@ -165,7 +165,7 @@ If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 Options[SeriSimp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *)}
 SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm, dum, conTsr, zMat, simpTerm, tM, idSet, dumSet},
-	eList = SimpSelect @ plus2list @ (e//.SimpHook);
+	eList = SimpSelect @ expand2list @ (e//.SimpHook);
 	If[eList==={} || eList==={0}, Return @ 0];
 	fr = Sort @ free @ eList[[1]];
 	
@@ -177,7 +177,7 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm
 		If[frTerm=!=fr, Message[Simp::diffree, t, fr]];
 		dum = Cases[idStat, {a_,2}:>a];
 		t /. replaceTo[(a0:IdxHeadPtn) /@ dum, a0 /@ Take[Complement[LatinIdx, frTerm], Length@dum]] );
-	If[OptionValue@"Method"=!="M", eList = plus2listRaw @ Total @ Map[simpTermFast, eList]];
+	If[OptionValue@"Method"=!="M", eList = plus2list @ Total @ Map[simpTermFast, eList]];
 	If[OptionValue@"Method"==="Fast", Return @ Total @ eList];
 
 	(* 2nd pass, with M engine *)
@@ -188,14 +188,13 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm
 	simpTerm[term_]:= ( t = conTsr~TensorProduct~times2prod[term, TensorProduct];
 		tM = TensorContract[t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@t,#]&, dummy@t]];
 		Assuming[simpTermAss@tM[[1]], tReduce@tM] );
-	eList = plus2listRaw @ Total @ Map[simpTerm, pd2pdts @ eList];
+	eList = plus2list @ Total @ Map[simpTerm, pd2pdts @ eList];
 
 	(* 3rd pass, get indices back *)
 	idSet = If[OptionValue@"Dummy"==="Unique", UniqueIdx, IdxSet[#]]&;
 	(dumSet[#] = Complement[idSet[#], fr]) & /@ IdxList;
 	eList = assignIdx[#, fr, dumSet, conTsr, zMat]& /@ eList;
 	(Total @ SimpSelect @ pdts2pd @ eList)//.SimpHook]
-
 
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; !FreeQ[tM, Pm2]:= tM; (* Full simp of Pm2 not supported, due to limited need *)
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[tM, IdxHeadPtn]:= tM;
@@ -209,24 +208,25 @@ assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0, nthIdx 
 		replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
 	assignDummy @ assignFree @ (times2prod[tM, TensorProduct]/.TensorContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, TensorProduct]&]
 
-simpTermAss[tM_]:= Module[{tInPdts, ass=simpMAss, cnt},
+simpTermAss[tM_]:= Module[{tInPdts, ass=simpAss, cnt},
 	(* Add assumptions for tensors encountered in each term *)
 	ass = ass && (And@@Cases[{tM},f:MAT[t_][idx__] 
-		/;Cases[simpMAss, Element[f,__], Infinity]==={} (* This line is added to avoid duplicate assumptions, as a work around of a bug in M*)
+		/;Cases[simpAss, Element[f,__], Infinity]==={} (* This line is added to avoid duplicate assumptions, as a work around of a bug in M*)
 		:>(f~Element~Arrays[Dim/@rmE[{idx}]]), Infinity]);
 	(* Add symmetry of T in PdPdPdT *)
 	tInPdts = Cases[{tM}, HoldPattern[f:MAT[pdts[n_][t_]][idx__]] :> {MAT[t][Sequence@@Take[{idx},Length[{idx}]-n]],f,Dim/@rmE[{idx}]}, Infinity];
-	ass = ass && And@@Flatten[Cases[simpMAss,#[[1]]~Element~HoldPattern[Arrays[dim_,dom_,sym_]]:> #[[2]]~Element~Arrays[#[[3]],dom,sym],Infinity]&/@tInPdts];
+	ass = ass && And@@Flatten[Cases[simpAss,#[[1]]~Element~HoldPattern[Arrays[dim_,dom_,sym_]]:> #[[2]]~Element~Arrays[#[[3]],dom,sym],Infinity]&/@tInPdts];
 	(* Add symmetry of PdPdPd in PdPdPdT *)
 	ass = ass && And@@Flatten@Cases[{tM},f:MAT[pdts[n_][t_]][idx__] /; n>1 :> ((f~Element~Arrays[Dim/@rmE[{idx}], Symmetric[#]])& 
 		/@ (cnt=Length[{idx}]-n; Split[Cases[Take[{idx},-n],sumAlt],Function[{x,y},Dim[x]==Dim[y]]]/.{s:(sumAlt):> ++cnt})), Infinity] ]
 
-Options[ParaSimp] = {"N" -> $ConfiguredKernels[[1, 1]], "Simp" :> (Expand[SeriSimp[#, "Method"->"M"] //. SimpHook] &)};
-ParaSimp[e_, OptionsPattern[]] := Module[{eList = plus2listRaw[e //. SimpHook // SeriSimp[#, "Method"->"Fast"]&], func = OptionValue["Simp"], parts, subLen},
-  subLen = Ceiling[Length@eList/OptionValue["N"]];
-  parts = Partition[eList, subLen, subLen, 1, 0];
-  Total @ ParallelMap[func @ Total @ # &, parts, DistributedContexts -> "MathGR`"]]
-
+paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
+paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&
+ParaSimp[e_]:= Module[{eList = e //.SimpHook // expand2list, subLen, parts},
+	subLen:= Ceiling[Length@eList/$ConfiguredKernels[[1, 1]]];
+	parts:= Partition[eList, subLen, subLen, 1, 0];
+	eList = plus2list @ Total @ ParallelMap[ paraSimpFirstPass, parts, DistributedContexts -> "MathGR`"];
+	Total @ ParallelMap[ paraSimpSecondPass, parts, DistributedContexts -> "MathGR`"]]
 
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)

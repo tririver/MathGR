@@ -15,7 +15,7 @@ idxQ[idx__]:= MatchQ[{idx}, {(IdxPtn|_UE|_DE) ..}]
 makeBoxesTsrQ = !MatchQ[#, List|Rule|Alternatives|Sequence]&
 mkPd[form_][i___] := Sequence @@ (MakeBoxes[\[CapitalSampi]@#, form] & /@ {i})
 
-SetOptions[$Output, PageWidth -> Infinity]
+(*SetOptions[$Output, PageWidth -> Infinity]*)
 
 If[!defQ@ToTeXHook, ToTeXHook = {}]
 
