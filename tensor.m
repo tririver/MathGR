@@ -55,7 +55,7 @@ Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
 Uq[n_Integer]:= Sequence@@Table[Unique[],{n}]
-Uq[100]; (* Very strange that the first 100 unique variables are much slower to use in some options (that Simp used). *)
+Uq[100]; (* Very strange that the first 100 unique variables are much slower to use in some operations (that Simp used). *)
 
 (* ::Section:: *)
 (* Idx utilities *)
@@ -136,19 +136,24 @@ PdT[Pm2[f_, type_], PdVars[type_@i_, type_@i_, etc___]]:= PdT[f, PdVars[etc]]
 (* ::Section:: *)
 (* Declare and delete symmetries *)
 
-If[!defQ@simpAss,simpAss = True]
-addAss[cond_]:= (simpAss=Simplify[simpAss&&cond];)
+TensorDimensions[MAT[_][g__]] ^:= Dim[#] & /@ rmE[{g}];
+TensorRank[MAT[_][g__]] ^:= Length @ rmE @ {g};
+TensorSymmetry[MAT[_][___]] ^:= {};
 
-DeclareSym[t_,id_,sym_]:= (If[sym===Symmetric[All]||sym==={Symmetric[All]}, SetAttributes[t, Orderless]];
-	addAss[MAT[t][Sequence@@id]~Element~Arrays[Dim/@rmE[id], sym]];)
+TensorSymmetry[MAT[pdts[n_][t_]][i__]] ^:= Module[{tId = rmE @ Drop[{i}, -n] (* idx in t *), dId = rmE @ Take[{i}, -n] (* idx of derivative *), symT},
+	symT = TensorSymmetry[MAT[t]@@tId] /. All:>{1, Length @ tId};
+	If[Length@dId>1 && Length@DeleteDuplicates[dId]===1 (* only one type of id *), symT ~Join~ {Symmetric[{Length@tId+1, Length@tId+Length@dId}]}, symT]
+];
 
-DeleteSym[t_]:= DeleteSym[t,{___}]
-DeleteSym[t_,id_]:= Module[{del},
-	del = Cases[{simpAss}, Element[MAT[t][Sequence@@id], _], Infinity];
-	If[del==={}, Print["No match found in tensor definitions. Nothing is changed."];Return[]];
-	Print["The following definitions has been deleted: ", del];
-	ClearAttributes[t, Orderless];
-	simpAss = If[#==={}, True, Flatten[#][[1]]] &@ DeleteCases[{simpAss}, Element[MAT[t][Sequence@@id], _], Infinity];]
+DeclareSym[t_, id_, sym_] := Module[{thisSym, totSym, explicitAll=Range@Length@rmE@id}, 
+	(* make sure thisSym is a list of symmetries, instead of a single symmetry *)
+	thisSym = If[MatchQ[sym, _Symmetric|_Antisymmetric|List[_Cycles, __]] || (Head[sym]===List && Depth[sym]===3 (* a single permutation list *)), {sym}, sym];
+	thisSym = thisSym /. All -> explicitAll; (* All does not work for internal handling of tensor symmetry *)
+	If[thisSym === {Symmetric[explicitAll]}, SetAttributes[t, Orderless]];
+	totSym = DeleteCases[#, {} | _TensorSymmetry]& @ Union[TensorSymmetry[MAT[t][Sequence @@ id]] ~Join~ thisSym]; (* delete cases (unknown symmetry) to avoid recursion *)
+	MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] = totSym]
+
+DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] =. )
 
 (* ::Section:: *)
 (* Simp functions *)
@@ -182,12 +187,12 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm
 
 	(* 2nd pass, with M engine *)
 	conTsr = If[fr==={}, 1, zMat @@ SortBy[Cases[eList[[1]], (i:IdxHeadPtn)[a_]/;MemberQ[fr, a], Infinity], First]];
-	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* Full simp of Pm2 not supported, due to limited need *)	
+	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* unsupported functions for 2nd & 3rd passes *)	
 	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;	
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
-	simpTerm[term_]:= ( t = conTsr~TensorProduct~times2prod[term, TensorProduct];
+	simpTerm[term_]:= (t = conTsr~prod~times2prod[term];
 		tM = TensorContract[t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@t,#]&, dummy@t]];
-		Assuming[simpTermAss@tM[[1]], tReduce@tM] );
+		Block[{prod=TensorProduct}, tReduce[tM]]);
 	eList = plus2list @ Total @ Map[simpTerm, pd2pdts @ eList];
 
 	(* 3rd pass, get indices back *)
@@ -196,29 +201,17 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm
 	eList = assignIdx[#, fr, dumSet, conTsr, zMat]& /@ eList;
 	(Total @ SimpSelect @ pdts2pd @ eList)//.SimpHook]
 
-assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; !FreeQ[tM, Pm2]:= tM; (* Full simp of Pm2 not supported, due to limited need *)
+assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; !FreeQ[tM, Pm2]:= tM; (* unsupported functions for 2nd & 3rd passes *)
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[tM, IdxHeadPtn]:= tM;
 assignIdx[f_ tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[f, IdxHeadPtn]:= f assignIdx[tM, fr, dumSet, conTsr, zMat];
-assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0, nthIdx (* used by restoreContract, count idx number within a TensorContract *), 
+assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0 (* count currently in which TensorContract *) , nthIdx (* count idx number within a TensorContract *), 
 		mark (* mark idx with mark[nthCT, nthIdX] *), nthDummy (* used by assignDummy, count which dummy variable to use from dumSet *), marked, assignFree, assignDummy}, 
 	tcGetId[t_, pairs_]:= (nthIdx=1; nthCT++; t /. a:IdxHeadPtn:>a[mark[nthCT, nthIdx++]] /. (mark[nthCT, #[[2]]]->mark[nthCT, #[[1]]] &/@ pairs));
 	assignFree[x_]:= x /. Flatten@Cases[{x}, MAT[zMat][a__] :> replaceTo[#[[1]]&/@{a}, fr], Infinity]; (* put free indices *)
 	(nthDummy[#]=1)& /@ IdxList; (* Initialize counter for assignDummy -- each type is initially 1 *)
 	assignDummy[x_]:= x /. (marked = DeleteDuplicates[#, First[#1] === First[#2] &]& @ Cases[x, _@mark[__], Infinity]; (* find dummy indices, one representive for each pair *)
 		replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
-	assignDummy @ assignFree @ (times2prod[tM, TensorProduct]/.TensorContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, TensorProduct]&]
-
-simpTermAss[tM_]:= Module[{tInPdts, ass=simpAss, cnt},
-	(* Add assumptions for tensors encountered in each term *)
-	ass = ass && (And@@Cases[{tM},f:MAT[t_][idx__] 
-		/;Cases[simpAss, Element[f,__], Infinity]==={} (* This line is added to avoid duplicate assumptions, as a work around of a bug in M*)
-		:>(f~Element~Arrays[Dim/@rmE[{idx}]]), Infinity]);
-	(* Add symmetry of T in PdPdPdT *)
-	tInPdts = Cases[{tM}, HoldPattern[f:MAT[pdts[n_][t_]][idx__]] :> {MAT[t][Sequence@@Take[{idx},Length[{idx}]-n]],f,Dim/@rmE[{idx}]}, Infinity];
-	ass = ass && And@@Flatten[Cases[simpAss,#[[1]]~Element~HoldPattern[Arrays[dim_,dom_,sym_]]:> #[[2]]~Element~Arrays[#[[3]],dom,sym],Infinity]&/@tInPdts];
-	(* Add symmetry of PdPdPd in PdPdPdT *)
-	ass = ass && And@@Flatten@Cases[{tM},f:MAT[pdts[n_][t_]][idx__] /; n>1 :> ((f~Element~Arrays[Dim/@rmE[{idx}], Symmetric[#]])& 
-		/@ (cnt=Length[{idx}]-n; Split[Cases[Take[{idx},-n],sumAlt],Function[{x,y},Dim[x]==Dim[y]]]/.{s:(sumAlt):> ++cnt})), Infinity] ]
+	assignDummy @ assignFree @ (times2prod @ tM/.TensorContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, prod|TensorProduct]&]
 
 paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
 paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&

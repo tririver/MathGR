@@ -37,8 +37,8 @@ WithMetric[g_, idx_:{UP, DN}, e_]:= (UseMetric[g, idx, "SetAsDefault"->False];
 Options[UseMetric]={"SetAsDefault"->True}
 UseMetric[g_, idx_:{UP, DN}, OptionsPattern[]]:= Module[{u=idx[[1]], d=idx[[2]], ids},
 	If[OptionValue["SetAsDefault"], Metric = g; IdxOfMetric = idx]; (* When default=False, only set attributes, but don't set Metric *)
-	DeclareSym[g, {u,u}, Symmetric[All]];
-	DeclareSym[g, {d,d}, Symmetric[All]];
+	DeclareSym[g, {u,u}, Symmetric[{1,2}]];
+	DeclareSym[g, {d,d}, Symmetric[{1,2}]];
 	(*g /: g[u@a_, d@b_]:= Dta[u@a, d@b];*) (* this is replaced by below because say, g[_UTot, _DTot] should also have g[_U1, _D1]=Dta*)
 	If[Head@g[u@"a", d@"b"]===g (* g has not transformed to other things *), g /: g[i_@a_, j_@b_]/;i===IdxDual@j := Dta[i@a,j@b]];
 	If[Head@g[u@"a", u@"b"]===g && Head@g[d@"a", d@"b"]===g, g /: g[u@a_, u@c_]g[d@c_, d@b_]:= Dta[u@a, d@b]];
