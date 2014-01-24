@@ -215,8 +215,9 @@ assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0 (* count
 
 paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
 paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&
+paraSimpNParts = 2 $ConfiguredKernels[[1, 1]]
 ParaSimp[e_]:= Module[{eList = e //.SimpHook // expand2list, subLen, parts},
-	subLen:= Ceiling[Length@eList/$ConfiguredKernels[[1, 1]]];
+	subLen:= Ceiling[Length@eList/paraSimpNParts];
 	parts:= Partition[eList, subLen, subLen, 1, 0];
 	eList = plus2list @ Total @ ParallelMap[ paraSimpFirstPass, parts, DistributedContexts -> "MathGR`"];
 	Total @ ParallelMap[ paraSimpSecondPass, parts, DistributedContexts -> "MathGR`"]]

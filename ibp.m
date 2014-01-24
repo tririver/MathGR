@@ -4,6 +4,8 @@ BeginPackage["MathGR`ibp`", {"MathGR`tensor`"}]
 TrySimp::usage = "TrySimp[expr, rule, rank] try to minimaize rank[expr] by applying rule"
 TrySimp2::usage = "TrySimp2[expr, rule, rank] try to minimaize rank[expr] by applying up to second order rules"
 Ibp::usage = "Ibp[expr, rank] do integration by parts and try to minimaize rank[expr]"
+Pm2Rules::usage = "Rules to simplify Pm2 expressions"
+Pm2Simp::usage = "Simplify Pm2 using Pm2Rules"
 Ibp2::usage = "Ibp[expr, rank] do integration by parts and try to minimaize rank[expr]. Second order rules are tried"
 IbpRules::usage = "a list of rules to do ibp"
 PdHold::usage = "Total derivative"
@@ -38,6 +40,7 @@ tryStep[rule_, rank_, level_][eRaw_]:= Module[{e, trials, tryRulesOnList, sortBy
 
 Options[TrySimp] = {"Rank"->LeafCount, "Level"->1}
 TrySimp[e_, rule_, OptionsPattern[]]:= try[rule, OptionValue["Rank"], OptionValue["Level"]][e]
+Pm2Simp[e_]:= TrySimp[Simp@e, Pm2Rules, "Rank"->IbpCountLeaf]
 
 Options[Ibp] = {"Rule"->IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
 Ibp[e_, OptionsPattern[]]:= try[OptionValue["Rule"], OptionValue["Rank"], OptionValue["Level"]][Simp@e]
@@ -56,7 +59,17 @@ SeriSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= SeriSimp[b, opt] + IdHold[SeriS
 ParaSimp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + PdHold[ParaSimp[a, opt],c]
 ParaSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + IdHold[ParaSimp[a, opt]]
 
-IbpRules = Dispatch@{
+Pm2Rules = Dispatch@{(* Note: Pm2 is defined in momentum space. Thus there is no well-defined boundary term *)
+	x_. + a_ Pm2[b_, type_] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] b],
+	x_. + a_ PdT[Pm2[b_, type_], PdVars[e__]] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] PdT[b, PdVars[e]]],
+	x_. + a_. Pm2[ g_ PdT[f_, PdVars[type_@i_, type_@i_, e___]] , type_] :> 
+		x + Simp[ a (PdT[f, PdVars[e]] g - 2 Pm2[PdT[f, PdVars[type@i, e]] Pd[g, type@i], type] - Pm2[PdT[f, PdVars[e]] Pd[Pd[g, type@i], type@i], type]) ],
+	x_. + b_. Pm2 [a_. f_ PdT[f_, PdVars[type_@i_, type_@i_]] , type_] :> 
+		x + Simp[ (b/2) ( a f^2  - Pm2[ Pd[Pd[a, type@i], type@i] f^2 + 4 Pd[a, type@i] f Pd[f, type@i] + 2 a Pd[f, type@i]^2 , type] ) ],
+	x_. + b_. Pm2 [a_. PdT[h_, PdVars[e___]] PdT[h_, PdVars[type_@i_, type_@i_, e___]] , type_] :> With[{f = PdT[h, PdVars[e]]},
+		x + Simp[ (b/2) ( a f^2  - Pm2[ Pd[Pd[a, type@i], type@i] f^2 + 4 Pd[a, type@i] f Pd[f, type@i] + 2 a Pd[f, type@i]^2 , type] ) ]]}
+
+IbpRules = Dispatch@({
 	(*a_. PdT[b_, PdVars[c_, etc___]] + e_. :> PdHold[a PdT[b, PdVars[etc]], c] + e - Simp[PdT[b, PdVars[etc]] Pd[a,c]],*)
 	a_. PdT[b_, PdVars[c_, etc___]]^n_. + e_. :> Simp[PdHold[a PdT[b, PdVars[etc]] PdT[b, PdVars[c, etc]]^(n-1), c] - PdT[b, PdVars[etc]] Pd[a PdT[b, PdVars[c, etc]]^(n-1), c]] + e,
 	a_. b_^n_. PdT[b_, PdVars[c_]] + e_. :> e + Simp[ PdHold[a b^(n+1)/(n+1), c]  - b^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
@@ -77,13 +90,9 @@ IbpRules = Dispatch@{
 		+ Pd[f,b]Pd[g,c]Pd[g,b]Pd[Pd[g,a],a] + Pd[Pd[f,a],a]Pd[g,c]Pd[g,b]^2/2 + Pd[f,a]Pd[Pd[g,a],c]Pd[g,b]^2]	],
 	(*x_. + f_. g_ PdT[g_, PdVars[a_,b_,b_]] :> x + Simp[PdHold[f g Pd[Pd[g,a],b], b] - PdHold[f Pd[g,b]^2/2, a] - Pd[f,b] g Pd[Pd[g,a],b] + Pd[f,a]Pd[g,b]^2/2],*)
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> With[{g=PdT[h,PdVars[e]]},
-		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ],
-	(* below are for Pm2. Note: Pm2 is defined in momentum space. Thus there is no well-defined boundary term *)
-	x_. + a_ Pm2[b_, type_] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] b],
-	x_. + a_ PdT[Pm2[b_, type_], PdVars[e__]] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] PdT[b, PdVars[e]]],
-	x_. + a_. Pm2[ g_ PdT[f_, PdVars[type_@i_, type_@i_, e___]] , type_] :> 
-		x + Simp[a( PdT[f, PdVars[e]] g - 2 Pm2[PdT[f, PdVars[type@i, e]] Pd[g, type@i], type] - Pm2[PdT[f, PdVars[e]] Pd[Pd[g, type@i], type@i], type] )]
-}
+		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Pm2Rules)
+
+
 
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
