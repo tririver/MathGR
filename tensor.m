@@ -55,7 +55,7 @@ Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
 Uq[n_Integer]:= Sequence@@Table[Unique[],{n}]
-Uq[100]; (* Very strange that the first 100 unique variables are much slower to use in some operations (that Simp used). *)
+Uq[100]; (* Becaues of unknown reasons, the first 100 unique variables are much slower to use in some operations (that Simp used). *)
 
 (* ::Section:: *)
 (* Idx utilities *)
@@ -142,8 +142,7 @@ TensorSymmetry[MAT[_][___]] ^:= {};
 
 TensorSymmetry[MAT[pdts[n_][t_]][i__]] ^:= Module[{tId = rmE @ Drop[{i}, -n] (* idx in t *), dId = rmE @ Take[{i}, -n] (* idx of derivative *), symT},
 	symT = TensorSymmetry[MAT[t]@@tId] /. All:>{1, Length @ tId};
-	If[Length@dId>1 && Length@DeleteDuplicates[dId]===1 (* only one type of id *), symT ~Join~ {Symmetric[{Length@tId+1, Length@tId+Length@dId}]}, symT]
-];
+	If[Length@dId>1 && Length@DeleteDuplicates[dId]===1 (* only one type of id *), symT ~Join~ {Symmetric[{Length@tId+1, Length@tId+Length@dId}]}, symT] ];
 
 DeclareSym[t_, id_, sym_] := Module[{thisSym, totSym, explicitAll=Range@Length@rmE@id}, 
 	(* make sure thisSym is a list of symmetries, instead of a single symmetry *)
@@ -165,53 +164,60 @@ If[!defQ@Simp, Simp:= SeriSimp]
 SimpUq:= Simp[#, "Dummy"->"Unique"]&
 
 tReduceMaxMemory=10^9 (* 1GB max memory *)
-tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp::ld, term];e]
+(* After TensorReduce, TensorContract and TensorTranspose are replaced to undefined functions. 
+   Otherwise those functions may evaluate during transformation of expressions, which may cause problem, and also waste time. *)
+tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp::ld, term]; e] /. {TensorContract->tContract, TensorTranspose->tTranspose} 
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 Options[SeriSimp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *)}
-SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, idStat, frTerm, dum, conTsr, zMat, simpTerm, tM, idSet, dumSet},
+
+SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, fastIds, idStat, frTerm, dum, simpTerm, tM, idSet, dumSet},
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);
 	If[eList==={} || eList==={0}, Return @ 0];
 	fr = Sort @ free @ eList[[1]];
 	
 	(* 1st pass, check tensor and replace dummy, try to cancel some terms *)
+	fastIds = If[OptionValue@"Dummy"==="Unique", UniqueIdx, LatinIdx];
 	simpTermFast[t_]/; FreeQ[t, IdxPtn]:=t;	
 	simpTermFast[t_]:= ( idStat=Tally@idx@t;
 		frTerm = Sort@Cases[idStat, {a_,1}:>a];
 		If[Cases[idStat, {a_,b_}/;b>2]=!={}, Message[Simp::overdummy, Sequence@@(Cases[idStat, {a_,b_}/;b>2][[1]]), t]];
 		If[frTerm=!=fr, Message[Simp::diffree, t, fr]];
 		dum = Cases[idStat, {a_,2}:>a];
-		t /. replaceTo[(a0:IdxHeadPtn) /@ dum, a0 /@ Take[Complement[LatinIdx, frTerm], Length@dum]] );
+		t /. replaceTo[(a0:IdxHeadPtn) /@ dum, a0 /@ Take[Complement[fastIds, frTerm], Length@dum]] );
 	If[OptionValue@"Method"=!="M", eList = plus2list @ Total @ Map[simpTermFast, eList]];
 	If[OptionValue@"Method"==="Fast", Return @ Total @ eList];
 
 	(* 2nd pass, with M engine *)
-	conTsr = If[fr==={}, 1, zMat @@ SortBy[Cases[eList[[1]], (i:IdxHeadPtn)[a_]/;MemberQ[fr, a], Infinity], First]];
 	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* unsupported functions for 2nd & 3rd passes *)	
 	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;	
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
-	simpTerm[term_]:= (t = conTsr~prod~times2prod[term];
-		tM = TensorContract[t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@t,#]&, dummy@t]];
-		Block[{prod=TensorProduct}, tReduce[tM]]);
+	simpTerm[term_]:= (
+		tM = TensorContract[times2prod[term, TensorProduct] /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@term,#]&, dummy@term]];
+		tReduce@TensorTranspose[tM, FindPermutation[free@term, fr]]);
 	eList = plus2list @ Total @ Map[simpTerm, pd2pdts @ eList];
 
 	(* 3rd pass, get indices back *)
 	idSet = If[OptionValue@"Dummy"==="Unique", UniqueIdx, IdxSet[#]]&;
 	(dumSet[#] = Complement[idSet[#], fr]) & /@ IdxList;
-	eList = assignIdx[#, fr, dumSet, conTsr, zMat]& /@ eList;
+	eList = assignIdx[#, fr, dumSet]& /@ eList;
 	(Total @ SimpSelect @ pdts2pd @ eList)//.SimpHook]
 
-assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; !FreeQ[tM, Pm2]:= tM; (* unsupported functions for 2nd & 3rd passes *)
-assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[tM, IdxHeadPtn]:= tM;
-assignIdx[f_ tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[f, IdxHeadPtn]:= f assignIdx[tM, fr, dumSet, conTsr, zMat];
-assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0 (* count currently in which TensorContract *) , nthIdx (* count idx number within a TensorContract *), 
-		mark (* mark idx with mark[nthCT, nthIdX] *), nthDummy (* used by assignDummy, count which dummy variable to use from dumSet *), marked, assignFree, assignDummy}, 
-	tcGetId[t_, pairs_]:= (nthIdx=1; nthCT++; t /. a:IdxHeadPtn:>a[mark[nthCT, nthIdx++]] /. (mark[nthCT, #[[2]]]->mark[nthCT, #[[1]]] &/@ pairs));
-	assignFree[x_]:= x /. Flatten@Cases[{x}, MAT[zMat][a__] :> replaceTo[#[[1]]&/@{a}, fr], Infinity]; (* put free indices *)
-	(nthDummy[#]=1)& /@ IdxList; (* Initialize counter for assignDummy -- each type is initially 1 *)
-	assignDummy[x_]:= x /. (marked = DeleteDuplicates[#, First[#1] === First[#2] &]& @ Cases[x, _@mark[__], Infinity]; (* find dummy indices, one representive for each pair *)
-		replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
-	assignDummy @ assignFree @ (times2prod @ tM/.TensorContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, prod|TensorProduct]&]
+
+assignIdx[tM_, fr_, dumSet_]/; !FreeQ[tM, Pm2]:= tM; (* unsupported functions for 2nd & 3rd passes *)
+assignIdx[tM_, fr_, dumSet_]/; FreeQ[tM, IdxHeadPtn]:= tM;
+assignIdx[f_ tM_, fr_, dumSet_]/; FreeQ[f, IdxHeadPtn]:= f assignIdx[tM, fr, dumSet];
+assignIdx[tMRaw_, fr_, dumSet_]:= Module[{tM=times2prod@tMRaw, contract2dummy, ids, cnt=1, toGet, nthDummy, idType, tIndexed, tContracted, freeOrder, freeToGet, freeToPut},
+	(nthDummy[#]=0)& /@ IdxList;
+	contract2dummy[t_, pairs_] := (
+		ids = Cases[t, IdxHeadPtn, Infinity];
+		cnt=1; tIndexed = t /. a : IdxHeadPtn :> a[toGet[cnt++]];
+		tIndexed /. ((idType = ids[[ #[[1]] ]]; nthDummy[idType]++; nthDummy[IdxDual@idType]++; toGet[ #[[1]] | #[[2]] ] -> dumSet[idType][[ nthDummy[idType] ]]) &/@ pairs) );
+	tContracted = Replace[tM /. tContract->contract2dummy, a:IdxHeadPtn:>a[toGet[0, cnt++]] (* in case free index not in tContract *), {-1}];
+	freeOrder = Flatten@Cases[{tContracted}, tTranspose[_, lst_]:>lst, Infinity];
+	freeToGet = Cases[tContracted, IdxHeadPtn@_toGet, Infinity];
+	freeToPut = MapThread[Head[#][#2]&, {freeToGet, Permute[fr, InversePermutation@freeOrder]}];
+	tContracted /. replaceTo[freeToGet, freeToPut] /. tTranspose[f_, _]:>f /. MAT[f_]:>f // prod2times[#, prod|TensorProduct]& ]
 
 paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
 paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&
