@@ -171,7 +171,7 @@ If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 Options[SeriSimp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *)}
 
-SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, fastIds, idStat, frTerm, dum, simpTerm, tM, idSet, dumSet},
+SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, fastIds, idStat, frTerm, dum, simpTerm, permTerm, tM, idSet, dumSet},
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);
 	If[eList==={} || eList==={0}, Return @ 0];
 	fr = Sort @ free @ eList[[1]];
@@ -192,9 +192,9 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, fastIds, idSta
 	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* unsupported functions for 2nd & 3rd passes *)	
 	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;	
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
-	simpTerm[term_]:= (
+	simpTerm[term_]:= (frTerm = free@term; permTerm = FindPermutation[frTerm, fr];
 		tM = TensorContract[times2prod[term, TensorProduct] /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@term,#]&, dummy@term]];
-		tReduce@TensorTranspose[tM, FindPermutation[free@term, fr]]);
+		tReduce[TensorTranspose[tM, permTerm]] // If[#===0, #, # ~prod~ slotTranspose[permTerm]]& (* slotTranspose is an undefined function, to pass transpose information to 3rd phase *) );
 	eList = plus2list @ Total @ Map[simpTerm, pd2pdts @ eList];
 
 	(* 3rd pass, get indices back *)
@@ -203,21 +203,31 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, fastIds, idSta
 	eList = assignIdx[#, fr, dumSet]& /@ eList;
 	(Total @ SimpSelect @ pdts2pd @ eList)//.SimpHook]
 
-
 assignIdx[tM_, fr_, dumSet_]/; !FreeQ[tM, Pm2]:= tM; (* unsupported functions for 2nd & 3rd passes *)
 assignIdx[tM_, fr_, dumSet_]/; FreeQ[tM, IdxHeadPtn]:= tM;
 assignIdx[f_ tM_, fr_, dumSet_]/; FreeQ[f, IdxHeadPtn]:= f assignIdx[tM, fr, dumSet];
-assignIdx[tMRaw_, fr_, dumSet_]:= Module[{tM=times2prod@tMRaw, contract2dummy, ids, cnt=1, toGet, nthDummy, idType, tIndexed, tContracted, freeOrder, freeToGet, freeToPut},
+assignIdx[tMRaw_, fr_, dumSet_]:= Module[{tM=times2prod@tMRaw, contract2dummy, ids, cnt=1, toGet, nthDummy, idType, tIndexed, tContracted, freeOrder, freeHeadOrder, freeToGet, freeToPut},
 	(nthDummy[#]=0)& /@ IdxList;
-	contract2dummy[t_, pairs_] := (
-		ids = Cases[t, IdxHeadPtn, Infinity];
-		cnt=1; tIndexed = t /. a : IdxHeadPtn :> a[toGet[cnt++]];
+	contract2dummy[t_, pairs_] := ( ids = Cases[t, IdxHeadPtn, Infinity]; cnt=1; tIndexed = t /. a : IdxHeadPtn :> a[toGet[cnt++]];
 		tIndexed /. ((idType = ids[[ #[[1]] ]]; nthDummy[idType]++; nthDummy[IdxDual@idType]++; toGet[ #[[1]] | #[[2]] ] -> dumSet[idType][[ nthDummy[idType] ]]) &/@ pairs) );
 	tContracted = Replace[tM /. tContract->contract2dummy, a:IdxHeadPtn:>a[toGet[0, cnt++]] (* in case free index not in tContract *), {-1}];
-	freeOrder = Flatten@Cases[{tContracted}, tTranspose[_, lst_]:>lst, Infinity];
+	freeOrder = InversePermutation @ Flatten@Cases[{tContracted}, tTranspose[_, p_]:>p, Infinity];
+	freeHeadOrder = Cases[tContracted, slotTranspose[p_]:>p, Infinity][[1]] ~ PermutationProduct ~ freeOrder;
 	freeToGet = Cases[tContracted, IdxHeadPtn@_toGet, Infinity];
-	freeToPut = MapThread[Head[#][#2]&, {freeToGet, Permute[fr, InversePermutation@freeOrder]}];
-	tContracted /. replaceTo[freeToGet, freeToPut] /. tTranspose[f_, _]:>f /. MAT[f_]:>f // prod2times[#, prod|TensorProduct]& ]
+	freeToPut = MapThread[Head[#][#2]&, {Permute[freeToGet, freeHeadOrder], Permute[fr, freeOrder]}]; (* permute free according to that TensorTranspose suggests *)
+	tContracted /. replaceTo[freeToGet, freeToPut] /. slotTranspose[_]:>1 /. tTranspose[f_, _]:>f /. MAT[f_]:>f // prod2times[#, prod|TensorProduct]& ]
+
+(* 	A note about the permutations: There are two places where permutations of tensors are generated:
+    (1) Permute the tensor before putting into tReduce. Do this to make sure every tensor in a sum has the same free slots, as they should.
+    	We record this permutation in slotTranspose[permTerm], where permTerm is the permutation from frTerm to fr (fr==Sort[frTerm]).
+	(2) TensorReduce returns a tensor with TensorTranspose, the second argument of which is a permutation object.
+		The *inverse* of this permutation is restored to freeOrder (in function assignIdx).
+		Note that freeOrder is as result of PermutionProduct of permTerm and the additional internal permutation calculated by TensorReduce.
+    Based on (1) and (2), one can recover the permutation for free indices (i.e. "a" in DN@"a") (relative to fr) and free index headers (i.e. DN in DN@"a") (relative to frTerm):
+    (a) Order of free indices should be freeOrder, i.e. Permute[fr, freeOrder], where fr is the sorted free indices.
+    (b) Order of free index headers should be permTerm ~PermutationProduct~ freeOrder.
+    	Here permTerm acts first, which permutes free index headers into the state before entering tReduce. 
+    	Then freeOrder acts, which permutes free index headers into the state after tReduce. *)
 
 paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
 paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&
