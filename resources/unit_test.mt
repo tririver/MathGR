@@ -102,13 +102,19 @@ Test[Attributes[fTmp], {Orderless}, TestID->"set orderless for symmetric All"]
 Test[DeleteSym[fTmp, {UP, UP, DE@0, DN, DN}], Null, TestID->"DeleteSym"]
 Test[Attributes[fTmp], {}, TestID->"remove orderless for symmetric All"]
 
+DeclareSym[fc1, {_, _, _, DN, UP, U2}, Symmetric[{1, 2, 3}]]
+Test[fc1[U2@"b", U1@"c", D1@"a", DN@"x", UP@"y", U2@"z"]//Simp, fc1[D1@"a", U2@"b", U1@"c", DN@"x", UP@"y", U2@"z"], TestID->"symmetry across different type of indices"]
+Test[fc1[U2@"b", D1@"a", U1@"c", DN@"x", UP@"y", U2@"z"]//Simp, fc1[D1@"a", U2@"b", U1@"c", DN@"x", UP@"y", U2@"z"], TestID->"symmetry across different type of indices, test 2"]
+Test[fc1[U1@"c", U2@"b", D1@"a", DN@"x", UP@"y", U2@"z"]//Simp, fc1[D1@"a", U2@"b", U1@"c", DN@"x", UP@"y", U2@"z"], TestID->"symmetry across different type of indices, test 3"]
+DeclareSym[fc2, {_, _, _}, Antisymmetric[All]]
+Test[fc2[U2@"c", U1@"b", DN@"a"]//Simp, -fc2[DN@"a", U1@"b", U2@"c"], TestID->"anti-symmetry across different type of indices"]
 (* ::Subsection:: *)
 (* SimpM *)
 DeclareSym[f3, {d, d, d, d}, Symmetric[{1, 2}]];
 DeclareSym[f3, {d, d, d, d}, Antisymmetric[{3, 4}]];
-Test[f3[d@"i", d@"j", d@"i", d@"j"] // Simp[#, "Method"->"MOnly"]&, 0, TestID->"SimpM symmetric"]
-Test[Pd[f3[d@"i", d@"j", d@"i", d@"j"],d@"k"] // Simp[#, "Method"->"MOnly"]&, 0, TestID->"SimpM antisymmetric"]
-Test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp[#, "Method"->"MOnly"]&, Pd[f3[d["a"], DE[0], d["a"], DE[0]], d["k"]], TestID->"SimpM with explicit idx"]
+Test[f3[d@"i", d@"j", d@"i", d@"j"] // Simp[#, "Method"->"M"]&, 0, TestID->"SimpM symmetric"]
+Test[Pd[f3[d@"i", d@"j", d@"i", d@"j"],d@"k"] // Simp[#, "Method"->"M"]&, 0, TestID->"SimpM antisymmetric"]
+Test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp[#, "Method"->"M"]&, Pd[f3[d["a"], DE[0], d["a"], DE[0]], d["k"]], TestID->"SimpM with explicit idx"]
 Test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Simp, 
 	A[U2["b"], DN["\[Mu]"]] A[U2["c"], DN["\[Nu]"]] c[D2["b"], D2["c"], U2["a"]], TestID->"Simp with free idx sorted"]
 (* ::Subsection:: *)
