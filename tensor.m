@@ -41,6 +41,7 @@ UniqueIdx::usage = "unique vars {$n1, $n2, ...}"
 
 DeclareSym::usage = "Declare tensor symmetry"
 DeleteSym::usage = "DeleteSym[tensor, {UP, DN, ...}] deletes tensor symmetry"
+ShowSym::usage = "ShowSym[tensor, {UP, DN, ...}] shows defined tensor symmetry"
 Simp::usage = "Simplification, which brings tensors into canonical form. Simp is default to SeriSimp"
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpSelect::usage = "A function to select terms to simplify, disregard others"
@@ -153,6 +154,8 @@ DeclareSym[t_, id_, sym_] := Module[{thisSym, totSym, explicitAll=Range@Length@r
 	MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] = totSym]
 
 DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] =. )
+
+ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 
 (* ::Section:: *)
 (* Simp functions *)
