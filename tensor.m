@@ -145,10 +145,14 @@ TensorSymmetry[MAT[pdts[n_][t_]][i__]] ^:= Module[{tId = rmE @ Drop[{i}, -n] (* 
 	symT = TensorSymmetry[MAT[t]@@tId] /. All:>{1, Length @ tId};
 	If[Length@dId>1 && Length@DeleteDuplicates[dId]===1 (* only one type of id *), symT ~Join~ {Symmetric[{Length@tId+1, Length@tId+Length@dId}]}, symT] ];
 
+DeclareSym::difi = "Symmetries cannot be declared on indices with different identifiers. Symmetries not declared."
 DeclareSym[t_, id_, sym_] := Module[{thisSym, totSym, explicitAll=Range@Length@rmE@id}, 
 	(* make sure thisSym is a list of symmetries, instead of a single symmetry *)
 	thisSym = If[MatchQ[sym, _Symmetric|_Antisymmetric|List[_Cycles, __]] || (Head[sym]===List && Depth[sym]===3 (* a single permutation list *)), {sym}, sym];
 	thisSym = thisSym /. All -> explicitAll; (* All does not work for internal handling of tensor symmetry *)
+	If[MatchQ[#, _Symmetric|_Antisymmetric], 
+		If[Length@DeleteDuplicates@Part[rmE@id, #[[1]]]=!=1, Message[DeclareSym::difi]]; Return[] (* check Symmetric or Antisymmetric *),
+		If[Permute[rmE@id, #[[1]] ] =!= rmE@id, Print["a"]; Message[DeclareSym::difi]]; Return[] (* check permutation lists or cycles *) ] & /@ thisSym;
 	If[thisSym === {Symmetric[explicitAll]}, SetAttributes[t, Orderless]];
 	totSym = DeleteCases[#, {} | _TensorSymmetry]& @ Union[TensorSymmetry[MAT[t][Sequence @@ id]] ~Join~ thisSym]; (* delete cases (unknown symmetry) to avoid recursion *)
 	MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] = totSym]
@@ -160,8 +164,8 @@ ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 (* ::Section:: *)
 (* Simp functions *)
 
-Simp::overdummy = "Error: index `1` appears `2` times in `3`"
-Simp::diffree = "Error: free index in term `1` is different from that of first term (`2`)"
+Simp::overdummy = "Index `1` appears `2` times in `3`"
+Simp::diffree = "Free index in term `1` is different from that of first term (`2`)"
 Simp::ld = "Warning: Memory constraint reached in `1`, simplification skipped"
 If[!defQ@Simp, Simp:= SeriSimp]
 SimpUq:= Simp[#, "Dummy"->"Unique"]&
