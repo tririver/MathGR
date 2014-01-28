@@ -143,7 +143,7 @@ TensorSymmetry[MAT[_][___]] ^:= {};
 
 TensorSymmetry[MAT[pdts[n_][t_]][i__]] ^:= Module[{tId = rmE @ Drop[{i}, -n] (* idx in t *), dId = rmE @ Take[{i}, -n] (* idx of derivative *), symT},
 	symT = TensorSymmetry[MAT[t]@@tId] /. All:>{1, Length @ tId};
-	If[Length@dId>1 && Length@DeleteDuplicates[dId]===1 (* only one type of id *), symT ~Join~ {Symmetric[{Length@tId+1, Length@tId+Length@dId}]}, symT] ];
+	If[Length@dId>1 && Length@DeleteDuplicates[dId]===1 (* only one type of id *), symT ~Join~ {Symmetric[Range[Length@tId+1, Length@tId+Length@dId]]}, symT] ];
 
 DeclareSym::difi = "Symmetries cannot be declared on indices with different identifiers. Symmetries not declared."
 DeclareSym[t_, id_, sym_] := Module[{thisSym, totSym, explicitAll=Range@Length@rmE@id}, 
