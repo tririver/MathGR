@@ -225,12 +225,9 @@ assignIdx[tMRaw_, fr_, dumSet_]:= Module[{tM=times2prod@tMRaw, contract2dummy, i
 
 paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
 paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&
-paraSimpNParts = 2 $ConfiguredKernels[[1, 1]]
-ParaSimp[e_]:= Module[{eList = e //.SimpHook // expand2list, subLen, parts},
-	subLen:= Ceiling[Length@eList/paraSimpNParts];
-	parts:= Partition[eList, subLen, subLen, 1, 0];
-	eList = plus2list @ Total @ ParallelMap[ paraSimpFirstPass, parts, DistributedContexts -> "MathGR`"];
-	Total @ ParallelMap[ paraSimpSecondPass, parts, DistributedContexts -> "MathGR`"]]
+ParaSimp[e_]:= Module[{eList = e //.SimpHook // expand2list},
+	eList = plus2list @ ParallelCombine[paraSimpFirstPass, eList, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"];
+	ParallelCombine[paraSimpSecondPass, eList, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"] ]
 
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)
