@@ -104,11 +104,12 @@ Test[Attributes[fTmp], {}, TestID->"remove orderless for symmetric All"]
 
 (* ::Subsection:: *)
 (* SimpM *)
-DeclareSym[f3, {d, d, d, d}, Symmetric[{1, 2}]];
-DeclareSym[f3, {d, d, d, d}, Antisymmetric[{3, 4}]];
-Test[f3[d@"i", d@"j", d@"i", d@"j"] // Simp[#, "Method"->"M"]&, 0, TestID->"SimpM symmetric"]
-Test[Pd[f3[d@"i", d@"j", d@"i", d@"j"],d@"k"] // Simp[#, "Method"->"M"]&, 0, TestID->"SimpM antisymmetric"]
-Test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp[#, "Method"->"M"]&, Pd[f3[d["a"], DE[0], d["a"], DE[0]], d["k"]], TestID->"SimpM with explicit idx"]
+DeclareSym[f3, {DN, DN, DN, DN}, Symmetric[{1, 2}]];
+DeclareSym[f3, {DN, DN, DN, DN}, Antisymmetric[{3, 4}]];
+Test[f3[DN@"i", DN@"j", DN@"i", DN@"j"] // Simp, 0, TestID -> "SimpM symmetric"]
+Test[Pd[f3[DN@"i", DN@"j", DN@"i", DN@"j"], DN@"k"] // Simp, 0, TestID -> "SimpM antisymmetric"]
+
+Test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp, Pd[f3[d["a"], DE[0], d["a"], DE[0]], d["k"]], TestID->"SimpM with explicit idx"]
 Test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Simp, 
 	A[U2["b"], DN["\[Mu]"]] A[U2["c"], DN["\[Nu]"]] c[D2["b"], D2["c"], U2["a"]], TestID->"Simp with free idx sorted"]
 (* ::Subsection:: *)
