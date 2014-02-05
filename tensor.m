@@ -45,8 +45,6 @@ ShowSym::usage = "ShowSym[tensor, {UP, DN, ...}] shows defined tensor symmetry"
 Simp::usage = "Simplification, which brings tensors into canonical form. Simp is default to SeriSimp"
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpSelect::usage = "A function to select terms to simplify, disregard others"
-ParaSimp::usage = "ParaSimp[expr] simplifies expr in parallel"
-SeriSimp::usage = "ParaSimp[expr] simplifies expr in parallel"
 SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->\"Unique\"]&"
 
 \[Bullet]::usage = "Symbol for time derivative"
@@ -167,7 +165,7 @@ ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 Simp::overdummy = "Index `1` appears `2` times in `3`"
 Simp::diffree = "Free index in term `1` is different from that of first term (`2`)"
 Simp::ld = "Warning: Memory constraint reached in `1`, simplification skipped"
-If[!defQ@Simp, Simp:= SeriSimp]
+
 SimpUq:= Simp[#, "Dummy"->"Unique"]&
 
 tReduceMaxMemory=10^9 (* 1GB max memory *)
@@ -176,13 +174,16 @@ tReduceMaxMemory=10^9 (* 1GB max memory *)
 tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp::ld, term]; e] /. {TensorContract->tContract} 
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
-Options[SeriSimp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *)}
+SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
+Options[Simp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False}
 
-SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, tM, idSet, dumSet, conTsr, zMat},
+Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, tM, idSet, dumSet, conTsr, zMat},
+	mapSum := If[OptionValue@"Parallel"=!=True, Total@Map[#1, #2], 
+		ParallelCombine[Function[lst,Total@Map[#1,lst]], #2, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"]]&;
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);
 	If[eList==={} || eList==={0}, Return @ 0];
 	fr = Sort @ free @ eList[[1]];
-	
+
 	(* 1st pass, check tensor and replace dummy, try to cancel some terms *)
 	fastIds = If[OptionValue@"Dummy"==="Unique", UniqueIdx, LatinIdx];
 	simpTermFast[t_]/; FreeQ[t, IdxPtn]:=t;	
@@ -192,7 +193,7 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, aaPdT, fastIds
 		If[frTerm=!=fr, Message[Simp::diffree, t, fr]];
 		dum = Cases[idStat, {a_,2}:>a];
 		t /. replaceTo[(a0:IdxHeadPtn) /@ dum, a0 /@ Take[Complement[fastIds, frTerm], Length@dum]] );
-	If[OptionValue@"Method"=!="M", eList = plus2list @ Total @ Map[simpTermFast, eList]];
+	eList = plus2list @ mapSum[simpTermFast, eList];
 	If[OptionValue@"Method"==="Fast", Return @ Total @ eList];
 
 	(* 2nd pass, with M engine *)
@@ -203,13 +204,12 @@ SeriSimp[e_, OptionsPattern[]]:= Module[{eList, fr, simpTermFast, aaPdT, fastIds
 	simpTerm[term_]:= (t = conTsr~TensorProduct~times2prod[term, TensorProduct];
 		tM = TensorContract[t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@t,#]&, dummy@t]];
         tReduce[tM]);
-	eList = plus2list @ Total @ Map[simpTerm, pd2pdts @ eList];
+	eList = plus2list @ mapSum[simpTerm, pd2pdts @ eList];
 
 	(* 3rd pass, get indices back *)
 	idSet = If[OptionValue@"Dummy"==="Unique", UniqueIdx, IdxSet[#]]&;
 	(dumSet[#] = Complement[idSet[#], fr]) & /@ IdxList;
-	eList = assignIdx[#, fr, dumSet, conTsr, zMat]& /@ eList;
-	(Total @ SimpSelect @ pdts2pd @ eList)//.SimpHook]
+	(SimpSelect @ pdts2pd @ mapSum[assignIdx[#, fr, dumSet, conTsr, zMat]&, eList])//.SimpHook]
 
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; !FreeQ[tM, Pm2]:= tM; (* unsupported functions for 2nd & 3rd passes *)
 assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]/; FreeQ[tM, IdxHeadPtn]:= tM;
@@ -222,12 +222,6 @@ assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0 (* count
     assignDummy[x_]:= x /. (marked = DeleteDuplicates[#, First[#1] === First[#2] &]& @ Cases[x, _@mark[__], Infinity]; (* find dummy indices, one representive for each pair *)
         replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
     assignDummy @ assignFree @ (times2prod @ tM/.tContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, prod|TensorProduct]&]
-
-paraSimpFirstPass = SeriSimp[Total @ #, "Method"->"Fast"]&
-paraSimpSecondPass = SeriSimp[Total @ #, "Method"->"M"]&
-ParaSimp[e_]:= Module[{eList = e //.SimpHook // expand2list},
-	eList = plus2list @ ParallelCombine[paraSimpFirstPass, eList, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"];
-	ParallelCombine[paraSimpSecondPass, eList, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"] ]
 
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)

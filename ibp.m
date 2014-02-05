@@ -54,8 +54,8 @@ PdHold /: n_?NumericQ PdHold[a_,c_]:=PdHold[n a,c]
 PdHold /: PdHold[a_,c_]+PdHold[b_,c_]:= PdHold[a+b,c]
 PdHold[a_,id_[c_]]/;c!="(PdId)"&&!FreeQ[a,c]&&id=!=DE:=PdHold[a/.c:>"(PdId)",id@"(PdId)"]
 
-SeriSimp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= SeriSimp[b, opt] + PdHold[SeriSimp[a, opt],c]
-SeriSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= SeriSimp[b, opt] + IdHold[SeriSimp[a, opt]]
+Simp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= Simp[b, opt] + PdHold[Simp[a, opt],c]
+Simp[b_.+IdHold[a_], opt:OptionsPattern[]]:= Simp[b, opt] + IdHold[Simp[a, opt]]
 ParaSimp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + PdHold[ParaSimp[a, opt],c]
 ParaSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + IdHold[ParaSimp[a, opt]]
 
