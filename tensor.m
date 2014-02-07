@@ -22,6 +22,17 @@ DN::usage = "Default lower idx prefix"
 UE::usage = "Explicit upper idx prefix"
 DE::usage = "Explicit lower idx prefix"
 
+(* Actually used in decomp.m. declared here so that typeset.m can use those variables in case of need *)
+UTot::usage = "Upper index in higher dimensions"
+DTot::usage = "Lower index in higher dimensions"
+U1::usage = "Upper index in first dimensions"
+D1::usage = "Lower index in first dimensions"
+U2::usage = "Upper index in second dimensions"
+D2::usage = "Lower index in second dimensions"
+DimTot::usage = "Dimension of the tensors, higher demension for decomposition."
+Dim1::usage = "Dimension of the tensors, first dimensions for decomposition."
+Dim2::usage = "Dimension of the tensors, second dimensions for decomposition."
+
 Uq::usage = "Uq[n] generates a sequence of Unique[] of length n"
 Sym::usage = "Sym[expr, {a, b, ...}] symmetrizes indices a, b, ... Sym[expr] symmetrizes all free indices"
 AntiSym::usage = "AntiSym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... AntiSym[expr] anti-symmetrizes all free indices"
@@ -81,9 +92,10 @@ DeclareIdx[ids_List, d_, set_List, color_]:= Module[{idsAlt=Alternatives@@ids}, 
 	add2set[IdxDnList,ids[[2]]]; IdxDnPtn=Alternatives@@(Blank/@IdxDnList);
 	Dta[idsAlt@a_, idsAlt@a_]:= d;
 	Dta/:Power[Dta[idsAlt@a_, idsAlt@b_], 2]:= d;
-	Dta/:HoldPattern[Times][f__, Dta[(a:idsAlt)@m_, (b:idsAlt)@n_]] /; !FreeQ[Hold[f], (ids[[1]][n])|(ids[[2]][n])|(ids[[1]][m])|(ids[[2]][m])]
-		:= Piecewise[{{Times[f]/.(c:idsAlt)@n -> c@m, !FreeQ[Hold[f], (ids[[1]][n])|(ids[[2]][n])]}, 
-		{Times[f]/.(c:idsAlt)@m -> c@n, !FreeQ[Hold[f], (ids[[1]][m])|(ids[[2]][m])]}},	Times[f, Dta[a@m, b@n]]];
+	Dta/:HoldPattern[Times][f__, Dta[(a:idsAlt)@m_, (b:idsAlt)@n_]] 
+		/; !FreeQ[Hold[f], (ids[[1]][Verbatim@n])|(ids[[2]][Verbatim@n])|(ids[[1]][Verbatim@m])|(ids[[2]][Verbatim@m])]
+		:= Piecewise[{{Times[f]/.(c:idsAlt)@Verbatim@n -> c@m, !FreeQ[Hold[f], (ids[[1]][Verbatim@n])|(ids[[2]][Verbatim@n])]}, 
+		{Times[f]/.(c:idsAlt)@Verbatim@m -> c@n, !FreeQ[Hold[f], (ids[[1]][Verbatim@m])|(ids[[2]][Verbatim@m])]}},	Times[f, Dta[a@m, b@n]]];
 	If[IntegerQ[d],
 		DeclareSym[LeviCivita, ConstantArray[#, d], Antisymmetric[All]]& /@ ids;
 		LeviCivita /: LeviCivita[a:(ids[[1]][_]..)]*LeviCivita[b:(ids[[2]][_]..)]:= DtaGen[a,b];  ]]
@@ -175,9 +187,9 @@ tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp:
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
-Options[Simp]= {"Method"->"Hybrid" (* Fast for simple pass only, M for M pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False}
+Options[Simp]= {"Method"->"Hybrid" (* Fast for simple pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False (* or True *) }
 
-Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, tM, idSet, dumSet, conTsr, zMat},
+Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
 	mapSum := If[OptionValue@"Parallel"=!=True, Total@Map[#1, #2], 
 		ParallelCombine[Function[lst,Total@Map[#1,lst]], #2, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"]]&;
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);
@@ -201,8 +213,8 @@ Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fas
 	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* unsupported functions for 2nd & 3rd passes *)	
 	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;	
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
-	simpTerm[term_]:= (t = conTsr~TensorProduct~times2prod[term, TensorProduct];
-		tM = TensorContract[t /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[idx@t,#]&, dummy@t]];
+	simpTerm[term_]:= (t0 = conTsr~TensorProduct~times2prod[term, TensorProduct];
+		tM = TensorContract[t0 /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[(idx@t0),#]&, Verbatim/@(dummy@t0)]];
         tReduce[tM]);
 	eList = plus2list @ mapSum[simpTerm, pd2pdts @ eList];
 

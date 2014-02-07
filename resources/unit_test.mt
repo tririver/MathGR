@@ -92,6 +92,11 @@ Test[Pd[Pm2[PdT[f[DN@"a"], PdVars[DN@"b", DE@0]], DN], DN@"b"], PdT[f[DN["a"]], 
 Test[Simp[f[u@"x", d@"b"] f1[d@"b"], "Method"->"Fast"], f[u["x"], d["a"]] f1[d["a"]], TestID->"SimpF re-arrange idx"]
 
 (* ::Subsection:: *)
+(* Simp on patterns *)
+(* note: patterns can only be on free indices *)
+Test[Simp[f[DN@a_,DN@c_]x[UP@d_,UP@b_]], f[DN@a_,DN@c_]x[UP@d_,UP@b_], TestID->"Simp with patterns"]
+
+(* ::Subsection:: *)
 (* DeclareSym *)
 
 Test[DeclareSym[fTmp, {UP, UP, DE@0, DN, DN}, Symmetric[{1, 2}]], {Symmetric[{1, 2}]}, TestID->"DeclareSym"]

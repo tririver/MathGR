@@ -54,10 +54,8 @@ PdHold /: n_?NumericQ PdHold[a_,c_]:=PdHold[n a,c]
 PdHold /: PdHold[a_,c_]+PdHold[b_,c_]:= PdHold[a+b,c]
 PdHold[a_,id_[c_]]/;c!="(PdId)"&&!FreeQ[a,c]&&id=!=DE:=PdHold[a/.c:>"(PdId)",id@"(PdId)"]
 
-Simp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= Simp[b, opt] + PdHold[Simp[a, opt],c]
-Simp[b_.+IdHold[a_], opt:OptionsPattern[]]:= Simp[b, opt] + IdHold[Simp[a, opt]]
-ParaSimp[b_.+PdHold[a_,c_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + PdHold[ParaSimp[a, opt],c]
-ParaSimp[b_.+IdHold[a_], opt:OptionsPattern[]]:= ParaSimp[b, opt] + IdHold[ParaSimp[a, opt]]
+Simp[b_. + f_. PdHold[a_,c_], opt:OptionsPattern[]]:= Simp[b, opt] + Simp[f, opt] PdHold[Simp[a, opt],c]
+Simp[b_. + f_. IdHold[a_], opt:OptionsPattern[]]:= Simp[b, opt] + Simp[f, opt] IdHold[Simp[a, opt]]
 
 Pm2Rules = Dispatch@{(* Note: Pm2 is defined in momentum space. Thus there is no well-defined boundary term *)
 	x_. + a_ Pm2[b_, type_] /; Pd[a, type@testVar]=!=0 :> x + Simp[Pm2[a, type] b],
@@ -100,7 +98,7 @@ IbpCountTerm[e_]:=Length[expand2list[e/.holdPtn->0]] * 10^-2
 IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity] + IbpCountLeaf[e] 
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
-IbpStd2[e_]:= IbpCountPt2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_, Infinity] + IbpCountLeaf[e]
+IbpStd2[e_]:= IbpCountPt2[e]*1000 + IbpCountPd2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_, Infinity]*10 + Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[DE@0,___]], Infinity] + IbpCountLeaf[e]
 
 IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@expand2list[e+tmp /.holdPtn->0];
