@@ -2,7 +2,7 @@
 BeginPackage["MathGR`util`", {"MathGR`tensor`"}]
 
 SolveExpr::usage = "SolveExpr[eqs, exprs] is a wraper of Solve[eqs, exprs], but now exprs can now be composed expression instead of atom"
-
+TReplace::usage = "TensorReplace[expr, rule] replaces expr using rule. times2prod is used to avoid power of dummy indices"
 Eps::usage = "The perturbative expansion varible"
 CollectEps::usage = "CollectEps[vars, operation] First (outer) collects Eps, then (inner) collects vars, then apply operation"
 SS::usage = "SS[n] gives up to order n series in Eps"
@@ -18,6 +18,8 @@ PdT[k|Eps, PdVars[__]]:=0
 SolveExpr[eqs_, exprsRaw_] := Module[{exprs = Flatten@{exprsRaw}, repList},
   repList = Unique[] /@ exprs;
   Solve[eqs /. (exprs~replaceTo~repList), repList] /. (repList~replaceTo~exprs)]
+
+TReplace[expr_, rule_]:= prod2times[times2prod[expr]/.rule]
 
 CollectEps[vars_:{tmp}, op_:Simp][f_]:= Collect[f, Eps, Collect[#, vars, op]&]
 SS[n_, vars_:{tmp}, op_:Simp][f_]:= CollectEps[vars, op]@Normal@Series[f,{Eps,0,n}]

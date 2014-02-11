@@ -93,7 +93,7 @@ IbpRules = Dispatch@({
 
 
 holdPtn=_PdHold|_IdHold
-IbpCountLeaf[e_]:= LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
+IbpCountLeaf[e_]:= Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[__]], Infinity] * 10^-7 + LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
 IbpCountTerm[e_]:=Length[expand2list[e/.holdPtn->0]] * 10^-2
 IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity] + IbpCountLeaf[e] 
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
