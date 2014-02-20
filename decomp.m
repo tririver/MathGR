@@ -1,5 +1,5 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
-BeginPackage["MathGR`decomp`", {"MathGR`tensor`", "MathGR`util`"}]
+BeginPackage["MathGR`decomp`", {"MathGR`tensor`"}]
 
 Decomp::usage = "Decomp[expr, rule, idx_:dummy] decomposes idx into parts. If idx not given, decompose all dummy indices"
 Decomp0i::usage = "Decomp0i[expr, idx_:dummy] 1+d decomposition"
