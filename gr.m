@@ -1,5 +1,5 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
-BeginPackage["MathGR`gr`", {"MathGR`tensor`","MathGR`decomp`", "MathGR`util`"}]
+BeginPackage["MathGR`gr`", {"MathGR`tensor`"}]
 
 WithMetric::usage = "WithMetric[g, expr] calculates expr with metric g. It does not change the default metric"
 UseMetric::usage = "UseMetric[g] chooses g for contraction and calculation of affine ane curvatures. UseMetric[g, False] set attributes for g, but don't set g as default metric."
