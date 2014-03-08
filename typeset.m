@@ -486,7 +486,7 @@ aliasesList= {"tp" -> TagBox[
        ColumnSpacings -> 0, RowSpacings -> 0], FontSize -> 10]}], 
    "mgrTsr"]};
 
-SetOptions[EvaluationNotebook[], InputAliases -> aliasesList];
+SetOptions[EvaluationNotebook[], InputAliases -> Union[aliasesList ~Join~ (InputAliases /. Options[EvaluationNotebook[], InputAliases])]];
 
 ] (* end of the big if (or tell me how to stop in the middle of a package gracefully?) *)
 

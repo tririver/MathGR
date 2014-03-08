@@ -53,7 +53,7 @@ UniqueIdx::usage = "unique vars {$n1, $n2, ...}"
 DeclareSym::usage = "Declare tensor symmetry"
 DeleteSym::usage = "DeleteSym[tensor, {UP, DN, ...}] deletes tensor symmetry"
 ShowSym::usage = "ShowSym[tensor, {UP, DN, ...}] shows defined tensor symmetry"
-Simp::usage = "Simplification, which brings tensors into canonical form. Simp is default to SeriSimp"
+Simp::usage = "Simplification, which brings tensors into canonical form."
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpSelect::usage = "A function to select terms to simplify, disregard others"
 SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->\"Unique\"]&"
@@ -162,9 +162,9 @@ DeclareSym[t_, id_, sym_] := Module[{thisSym, totSym, explicitAll=Range@Length@r
 	thisSym = thisSym /. All -> explicitAll; (* All does not work for internal handling of tensor symmetry *)
 	If[MatchQ[#, _Symmetric|_Antisymmetric], 
 		If[Length@DeleteDuplicates@Part[rmE@id, #[[1]]]=!=1, Message[DeclareSym::difi]]; Return[] (* check Symmetric or Antisymmetric *),
-		If[Permute[rmE@id, #[[1]] ] =!= rmE@id, Print["a"]; Message[DeclareSym::difi]]; Return[] (* check permutation lists or cycles *) ] & /@ thisSym;
+		If[$VersionNumber>8.99, If[Permute[rmE@id, #[[1]] ] =!= rmE@id, Message[DeclareSym::difi]]; Return[] (* check permutation lists or cycles *) ]] & /@ thisSym;
 	If[thisSym === {Symmetric[explicitAll]}, SetAttributes[t, Orderless]];
-	totSym = DeleteCases[#, {} | _TensorSymmetry]& @ Union[TensorSymmetry[MAT[t][Sequence @@ id]] ~Join~ thisSym]; (* delete cases (unknown symmetry) to avoid recursion *)
+	If[$VersionNumber>8.99, totSym = DeleteCases[#, {} | _TensorSymmetry]& @ Union[TensorSymmetry[MAT[t][Sequence @@ id]] ~Join~ thisSym]]; (* delete cases (unknown symmetry) to avoid recursion *)
 	MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] = totSym]
 
 DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[t][Sequence @@ id]] =. )
@@ -187,7 +187,7 @@ tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp:
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
-Options[Simp]= {"Method"->"Hybrid" (* Fast for simple pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False (* or True *) }
+Options[Simp]= {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False (* or True *) }
 
 Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
 	mapSum := If[OptionValue@"Parallel"=!=True, Total@Map[#1, #2], 

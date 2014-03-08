@@ -237,3 +237,4 @@ Test[TrySimp[R\[Bullet]decomp, (a_.) + (b_.)*Pd[A[U2[m_], D1[\[Alpha]_]], D1[\[B
  
  Print["Total time used:"]  
  Print[SessionTime[]-startTestTime]
+ Print[$VersionNumber]
