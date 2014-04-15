@@ -8,9 +8,10 @@ g::usage = "The default metric for contraction, affine and curvatures"
 IdxOfMetric::usage = "The indices used with the metric"
 DG::usage = "MetricContract pairs with lower idx"
 UG::usage = "MetricContract pairs with upper idx"
-MetricContract::usage = "MetricContract[expr] contracts expr with metric. The contraction variables are marked as UG pairs or DG pairs."
+MetricContract::usage = "MetricContract[expr] contracts expr with metric. The contraction variables are marked as UG pairs or DG pairs"
 
 CovD::usage = "CovD[t, DN@idx] is covariant derivative"
+Dsquare::usage = "Dsquate[f] is the covariant derivative squared"
 Affine::usage = "Affine[UP@a, DN@b, DN@c] is the affine connection calculated from Metric"
 R::usage = "Riemann, Ricci tensors and Ricci scalar"
 Rsimp::usage = "Ricci tensor and Ricci scalar, pre-simplified into metric"
@@ -73,7 +74,8 @@ With[{g:=Metric, r:=Affine},
 	K[]:= K[DG@1,DG@1]//MetricContract;
 	KK[]:= K[DG@1,DG@2]K[DG@1,DG@2]//MetricContract;
 	RADM[]:= R[]-K[]K[]+KK[];
-	X[f_]:=-Pd[f,DG@1]Pd[f,DG@1]/2//MetricContract;
+	X[f_]:= -Pd[f,DG@1]Pd[f,DG@1]/2//MetricContract;
+	Dsquare[f_]:= CovD[CovD[f, DG@1], DG@1]//MetricContract;
 	(* Some pre-simplified quantities *)
 	Rsimp[]:= (3*g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*Pd[g[id[#1], id[#3]], id[#5]]*   Pd[g[id[#2], id[#4]], id[#6]])/4 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*   Pd[g[id[#1], id[#3]], id[#6]]*Pd[g[id[#2], id[#5]], id[#4]])/2 - g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*Pd[g[id[#1], id[#3]], id[#4]]*  Pd[g[id[#2], id[#5]], id[#6]] - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*   Pd[g[id[#1], id[#2]], id[#5]]*Pd[g[id[#3], id[#4]], id[#6]])/4 + g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*Pd[g[id[#1], id[#2]], id[#4]]*  Pd[g[id[#3], id[#5]], id[#6]] - g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*  Pd[Pd[g[id[#1], id[#2]], id[#3]], id[#4]] + g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*  Pd[Pd[g[id[#1], id[#3]], id[#2]], id[#4]] &@Uq[6];
 	Rsimp[m_?isd, n_?isd]:= -(g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[m, n], id[#4]]*Pd[g[id[#1], id[#2]], id[#3]])/4 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[m, n], id[#4]]*Pd[g[id[#1], id[#3]], id[#2]])/2 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#3]], id[#4]]*Pd[g[id[#2], m], n])/2 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], n], id[#3]]*Pd[g[id[#2], m], id[#4]])/2 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#3]], id[#4]]*Pd[g[id[#2], n], m])/2 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#3]], n]*Pd[g[id[#2], id[#4]], m])/4 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#2]], id[#4]]*Pd[g[id[#3], m], n])/4 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], n], id[#4]]*Pd[g[id[#3], m], id[#2]])/2 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#2]], id[#4]]*Pd[g[id[#3], n], m])/4 - (g[iu[#1], iu[#2]]*Pd[Pd[g[m, n], id[#1]], id[#2]])/2 + (g[iu[#1], iu[#2]]*Pd[Pd[g[id[#1], m], n], id[#2]])/2 + (g[iu[#1], iu[#2]]*Pd[Pd[g[id[#1], n], m], id[#2]])/2 - (g[iu[#1], iu[#2]]*Pd[Pd[g[id[#1], id[#2]], m], n])/2 &@Uq[4];
