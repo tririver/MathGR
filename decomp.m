@@ -1,15 +1,5 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
-BeginPackage["MathGR`decomp`", {"MathGR`tensor`", "MathGR`util`"}]
-
-DimTot::usage = "Dimension of the tensors, higher demension for decomposition."
-UTot::usage = "Upper index in higher dimensions"
-DTot::usage = "Lower index in higher dimensions"
-Dim1::usage = "Dimension of the tensors, first dimensions for decomposition."
-Dim2::usage = "Dimension of the tensors, second dimensions for decomposition."
-U1::usage = "Upper index in first dimensions"
-D1::usage = "Lower index in first dimensions"
-U2::usage = "Upper index in second dimensions"
-D2::usage = "Lower index in second dimensions"
+BeginPackage["MathGR`decomp`", {"MathGR`tensor`"}]
 
 Decomp::usage = "Decomp[expr, rule, idx_:dummy] decomposes idx into parts. If idx not given, decompose all dummy indices"
 Decomp0i::usage = "Decomp0i[expr, idx_:dummy] 1+d decomposition"
