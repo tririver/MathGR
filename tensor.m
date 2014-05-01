@@ -56,7 +56,7 @@ ShowSym::usage = "ShowSym[tensor, {UP, DN, ...}] shows defined tensor symmetry"
 Simp::usage = "Simplification, which brings tensors into canonical form."
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpSelect::usage = "A function to select terms to simplify, disregard others"
-SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->\"Unique\"]&"
+SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->UniqueIdx]&"
 
 \[Bullet]::usage = "Symbol for time derivative"
 \[CapitalSampi]::usage = "Symbol for general derivative"
@@ -74,6 +74,7 @@ LatinIdx = Join[FromCharacterCode /@ Range[97, 97 + 24], "y"<>ToString[#]&/@Rang
 GreekIdx = Join[FromCharacterCode /@ Range[945, 945 + 24], "\[Omega]"<>ToString[#]&/@Range[26]]
 LatinCapitalIdx = Join[FromCharacterCode /@ Range[65, 65 + 24], "Y"<>ToString[#]&/@Range[26]]
 UniqueIdx:= Unique[]& /@ Range[50]
+internalIdx = StringJoin[#,"0"]& /@ LatinIdx
 
 SetAttributes[Dta, Orderless]
 PdT[_Dta, PdVars[__]]:= 0
@@ -178,7 +179,7 @@ Simp::overdummy = "Index `1` appears `2` times in `3`"
 Simp::diffree = "Free index in term `1` is different from that of first term (`2`)"
 Simp::ld = "Warning: Memory constraint reached in `1`, simplification skipped"
 
-SimpUq:= Simp[#, "Dummy"->"Unique"]&
+SimpUq:= Simp[#, "Dummy"->UniqueIdx]&
 
 tReduceMaxMemory=10^9 (* 1GB max memory *)
 (* After TensorReduce, TensorContract and TensorTranspose are replaced to undefined functions. 
@@ -187,17 +188,19 @@ tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp:
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
-Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False (* or True *) }
+Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->Automatic (* or UniqueIdx *), "Parallel"->False (* or True *) }
 
 Simp[f_, options___]:= simpRaw[Expand@f, options];
 
 (* List of single argument functions where simpRaw operates into its arguments (with Unique dummies). *)
 simpInto1 = Exp|Sin|Cos|Sinh|Cosh;
 simpRaw[a_. + b_. (op:simpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
-  simpRaw[a, opt] + simpRaw[b, opt] op[Simp[c, "Dummy"->"Unique"]];
+  simpRaw[a, opt] + simpRaw[b, opt] op[Simp[c, "Dummy"->internalIdx]];
 (* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simpRaw directly. *)
 simpRaw[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && d=!=2 :=
-  simpRaw[a, opt] + simpRaw[b, opt] Power[Simp[c, "Dummy"->"Unique"], Simp[d, "Dummy"->"Unique"]];
+  simpRaw[a, opt] + simpRaw[b, opt] Power[Simp[c, "Dummy"->internalIdx], Simp[d, "Dummy"->internalIdx]];
+(* simpRaw through Series *)
+simpRaw[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], opt:OptionsPattern[Simp]] := SeriesData[x, n, Simp[#, opt]& /@ coeffList, orders];
 
 (* The simplification engine *)
 simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
@@ -208,7 +211,7 @@ simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaP
 	fr = Sort @ free @ eList[[1]];
 
 	(* 1st pass, check tensor and replace dummy, try to cancel some terms *)
-	fastIds = If[OptionValue@"Dummy"==="Unique", UniqueIdx, LatinIdx];
+	fastIds = If[OptionValue@"Dummy"===Automatic, LatinIdx, OptionValue@"Dummy"];
 	simpTermFast[t_]/; FreeQ[t, IdxPtn]:=t;	
 	simpTermFast[t_]:= ( idStat=Tally@idx@(t/.PdT->aaPdT);
 		frTerm = Sort@Cases[idStat, {a_,1}:>a];
@@ -230,7 +233,7 @@ simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaP
 	eList = plus2list @ mapSum[simpTerm, pd2pdts @ eList];
 
 	(* 3rd pass, get indices back *)
-	idSet = If[OptionValue@"Dummy"==="Unique", UniqueIdx, IdxSet[#]]&;
+	idSet = If[OptionValue@"Dummy"===Automatic, IdxSet[#], OptionValue@"Dummy"]&;
 	(dumSet[#] = Complement[idSet[#], fr]) & /@ IdxList;
 	(SimpSelect @ pdts2pd @ mapSum[assignIdx[#, fr, dumSet, conTsr, zMat]&, eList])//.SimpHook]
 
