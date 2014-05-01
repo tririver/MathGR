@@ -112,7 +112,7 @@ test[x Pm2[(a + b)^2, DN] // Simp, x*Pm2[a^2, DN] + 2*x*Pm2[a*b, DN] + x*Pm2[b^2
 test[PdT[f0test, PdVars[_DN, ___]] := 0; Pm2[f0test g, DN], f0test*Pm2[g, DN], "Pm2 constant"]
 test[Pd[Pm2[PdT[f[DN@"a"], PdVars[DN@"b", DE@0]], DN], DN@"b"], PdT[f[DN["a"]], PdVars[DE[0]]], "Pm2 on Pd2"]
 (* ::Subsection:: *)
-(* SimpF *)
+(* Simp Fast *)
 
 test[Simp[f[u@"x", d@"b"] f1[d@"b"], "Method"->"Fast"], f[u["x"], d["a"]] f1[d["a"]], "SimpF re-arrange idx"]
 
@@ -133,7 +133,7 @@ test[DeleteSym[fTmp, {UP, UP, DE@0, DN, DN}], Null, "DeleteSym"]
 test[Attributes[fTmp], {}, "remove orderless for symmetric All"]
 
 (* ::Subsection:: *)
-(* SimpM *)
+(* Simp *)
 DeclareSym[f3, {DN, DN, DN, DN}, Symmetric[{1, 2}]];
 DeclareSym[f3, {DN, DN, DN, DN}, Antisymmetric[{3, 4}]];
 test[f3[DN@"i", DN@"j", DN@"i", DN@"j"] // Simp, 0, TestID -> "SimpM symmetric"]
@@ -142,6 +142,13 @@ test[Pd[f3[DN@"i", DN@"j", DN@"i", DN@"j"], DN@"k"] // Simp, 0, TestID -> "SimpM
 test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp, Pd[f3[d["a"], DE[0], d["a"], DE[0]], d["k"]], "SimpM with explicit idx"]
 test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Simp,
   A[U2["b"], DN["\[Mu]"]] A[U2["c"], DN["\[Nu]"]] c[D2["b"], D2["c"], U2["a"]], "Simp with free idx sorted"]
+
+test[Exp[1+ff[DN@"a"] gg[DN@"a"]]//Simp, Exp[1+ff[DN@"a0"] gg[DN@"a0"]], "Simp through Exp"]
+test[Sqrt[1+ff[DN@"a"] gg[DN@"a"]]//Simp, Sqrt[1+ff[DN@"a0"] gg[DN@"a0"]], "Simp through Power"]
+test[(Series[(1+Eps xx)(1+Eps yy)(1+Eps zz)ff[DN@"a"], {Eps,0,1}]//Simp//Normal)/.Eps->1, (1+xx+yy+zz)ff[DN@"a"]//Expand, "Simp through SeriesData"]
+
+test[a^2 (f[UP@"a"]^4 + 1) // Simp, a^2 + a^2 f[UP["a"]]^2 f[UP["b"]]^2, "Simp with higher than standard powers"]
+
 (* ::Subsection:: *)
 (* private functions in tensor.m and util.m *)
 

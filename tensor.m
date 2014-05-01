@@ -33,6 +33,7 @@ DimTot::usage = "Dimension of the tensors, higher demension for decomposition."
 Dim1::usage = "Dimension of the tensors, first dimensions for decomposition."
 Dim2::usage = "Dimension of the tensors, second dimensions for decomposition."
 
+Uniq::usage = "Uniq[n] generates a list of Unique[] of length n"
 Uq::usage = "Uq[n] generates a sequence of Unique[] of length n"
 Sym::usage = "Sym[expr, {a, b, ...}] symmetrizes indices a, b, ... Sym[expr] symmetrizes all free indices"
 AntiSym::usage = "AntiSym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... AntiSym[expr] anti-symmetrizes all free indices"
@@ -64,7 +65,8 @@ SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->UniqueIdx]&"
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
-Uq[n_Integer]:= Sequence@@Table[Unique[],{n}]
+Uniq[n_Integer]:= Table[Unique[],{n}]
+Uq[n_Integer]:= Sequence@@Uniq[n]
 Uq[100]; (* Becaues of unknown reasons, the first 100 unique variables are much slower to use in some operations (that Simp used). *)
 
 (* ::Section:: *)
@@ -190,7 +192,14 @@ If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
 Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->Automatic (* or UniqueIdx *), "Parallel"->False (* or True *) }
 
-Simp[f_, options___]:= simpRaw[Expand@f, options];
+Simp[f_, opt:OptionsPattern[]]:= simpRaw0[Expand[f, Power], opt];
+
+(* Deal with cases like (a_i a_i)^3 *)
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n>=2 := simpRaw0[a + b Product[SimpUq@c, {i,n}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n<=-2 := simpRaw0[a + b / Product[SimpUq@c, {i,-n}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n>=4 && EvenQ[n] := simpRaw0[a + b Product[SimpUq[c^2], {i,n/2}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n<=-4 && EvenQ[n] := simpRaw0[a + b / Product[SimpUq[c^2], {i,-n/2}], opt];
+simpRaw0[f_, opt:OptionsPattern[]]:= simpRaw[Expand@f, opt];
 
 (* List of single argument functions where simpRaw operates into its arguments (with Unique dummies). *)
 simpInto1 = Exp|Sin|Cos|Sinh|Cosh;
