@@ -191,10 +191,10 @@ Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for
 
 Simp[f_, options___]:= simpRaw[Expand@f, options];
 
-(* List of one functions where simpRaw operates into its arguments (with Unique dummies). *)
-simpInto1 = Exp|Sin|Cos|Sinh|Cosh|Pm2;
-simpRaw[a_. + b_. simpInto1[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
-  simpRaw[a, opt] + simpRaw[b, opt] simpInto1[Simp[c, "Dummy"->"Unique"]];
+(* List of single argument functions where simpRaw operates into its arguments (with Unique dummies). *)
+simpInto1 = Exp|Sin|Cos|Sinh|Cosh;
+simpRaw[a_. + b_. (op:simpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
+  simpRaw[a, opt] + simpRaw[b, opt] op[Simp[c, "Dummy"->"Unique"]];
 (* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simpRaw directly. *)
 simpRaw[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && d=!=2 :=
   simpRaw[a, opt] + simpRaw[b, opt] Power[Simp[c, "Dummy"->"Unique"], Simp[d, "Dummy"->"Unique"]];
@@ -221,8 +221,7 @@ simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaP
 
 	(* 2nd pass, with M engine *)
 	conTsr = If[fr==={}, 1, zMat @@ SortBy[Cases[eList[[1]], (i:IdxHeadPtn)[a_]/;MemberQ[fr, a], Infinity], First]];
-  (* TODO: Dead code to be removed *)
-	(*simpTerm[f_]/; !FreeQ[f, Pm2]:=f; *)(* unsupported functions for 2nd & 3rd passes *)(*	*)
+	simpTerm[f_]/; !FreeQ[f, Pm2]:=f;  (* unsupported functions for 2nd & 3rd passes *)
 	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
 	simpTerm[term_]:= (t0 = conTsr~TensorProduct~times2prod[term, TensorProduct];
