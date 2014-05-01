@@ -187,9 +187,20 @@ tReduce[e_]:= MemoryConstrained[TensorReduce[e], tReduceMaxMemory, Message[Simp:
 If[!defQ@SimpSelect, SimpSelect = Identity]
 If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
-Options[Simp]= {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False (* or True *) }
+Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->"Friendly" (* or Unique *), "Parallel"->False (* or True *) }
 
-Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
+Simp[f_, options___]:= simpRaw[Expand@f, options];
+
+(* List of one functions where simpRaw operates into its arguments (with Unique dummies). *)
+simpInto1 = Exp|Sin|Cos|Sinh|Cosh|Pm2;
+simpRaw[a_. + b_. simpInto1[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
+  simpRaw[a, opt] + simpRaw[b, opt] simpInto1[Simp[c, "Dummy"->"Unique"]];
+(* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simpRaw directly. *)
+simpRaw[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && d=!=2 :=
+  simpRaw[a, opt] + simpRaw[b, opt] Power[Simp[c, "Dummy"->"Unique"], Simp[d, "Dummy"->"Unique"]];
+
+(* The simplification engine *)
+simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
 	mapSum := If[OptionValue@"Parallel"=!=True, Total@Map[#1, #2], 
 		ParallelCombine[Function[lst,Total@Map[#1,lst]], #2, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"]]&;
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);
@@ -210,8 +221,9 @@ Simp[e_, OptionsPattern[]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fas
 
 	(* 2nd pass, with M engine *)
 	conTsr = If[fr==={}, 1, zMat @@ SortBy[Cases[eList[[1]], (i:IdxHeadPtn)[a_]/;MemberQ[fr, a], Infinity], First]];
-	simpTerm[f_]/; !FreeQ[f, Pm2]:=f; (* unsupported functions for 2nd & 3rd passes *)	
-	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;	
+  (* TODO: Dead code to be removed *)
+	(*simpTerm[f_]/; !FreeQ[f, Pm2]:=f; *)(* unsupported functions for 2nd & 3rd passes *)(*	*)
+	simpTerm[f_]/; FreeQ[f, IdxPtn]:=f;
 	simpTerm[f_ t_] /; FreeQ[f, IdxPtn]:=f * simpTerm[t];
 	simpTerm[term_]:= (t0 = conTsr~TensorProduct~times2prod[term, TensorProduct];
 		tM = TensorContract[t0 /. id:IdxPtn:>id[[0]] /. f_[id__]:>MAT[f][id] /; !FreeQ[{id},IdxHeadPtn,1], Map[Flatten@Position[(idx@t0),#]&, Verbatim/@(dummy@t0)]];
