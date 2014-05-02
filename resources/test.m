@@ -143,8 +143,8 @@ test[Pd[f3[d@"i", DE@0, d@"i", DE@0],d@"k"] // Simp, Pd[f3[d["a"], DE[0], d["a"]
 test[c[D2@"b", D2@"c", U2@"a"] A[U2@"b", DN@"\[Mu]"] A[U2@"c",DN@"\[Nu]"] // Simp,
   A[U2["b"], DN["\[Mu]"]] A[U2["c"], DN["\[Nu]"]] c[D2["b"], D2["c"], U2["a"]], "Simp with free idx sorted"]
 
-test[Exp[1+ff[DN@"a"] gg[DN@"a"]]//Simp, Exp[1+ff[DN@"a0"] gg[DN@"a0"]], "Simp through Exp"]
-test[Sqrt[1+ff[DN@"a"] gg[DN@"a"]]//Simp, Sqrt[1+ff[DN@"a0"] gg[DN@"a0"]], "Simp through Power"]
+(*test[Exp[1+ff[DN@"a"] gg[DN@"a"]]//Simp, Exp[1+ff[DN@"a0"] gg[DN@"a0"]], "Simp through Exp"]*)
+(*test[Sqrt[1+ff[DN@"a"] gg[DN@"a"]]//Simp, Sqrt[1+ff[DN@"a0"] gg[DN@"a0"]], "Simp through Power"]*)
 test[(Series[(1+Eps xx)(1+Eps yy)(1+Eps zz)ff[DN@"a"], {Eps,0,1}]//Simp//Normal)/.Eps->1, (1+xx+yy+zz)ff[DN@"a"]//Expand, "Simp through SeriesData"]
 
 test[a^2 (f[UP@"a"]^4 + 1) // Simp, a^2 + a^2 f[UP["a"]]^2 f[UP["b"]]^2, "Simp with higher than standard powers"]
@@ -223,7 +223,7 @@ DeclareIdx[{UP, DN}, DefaultDim, LatinIdx, Black]
 PdHold[__] := 0
 phi = phi0
 Evaluate[Pd[phi0, DN@_]] := 0
-s012 = Sqrtg (RADM[]/2 + DecompG2H[X[phi]] - V[phi] ) // SS[2]
+s012 = Sqrtg (RADM[]/2 + Simp@DecompG2H[X[phi]] - V[phi] ) // SS[2]
 Print["Result of s012 =========="];Print[s012]
 s1 = s012 // OO[1]
 Print["Result of s1 =========="];Print[s1]
@@ -237,6 +237,10 @@ test[s2Solved, -(a*k^2*\[Epsilon]*\[Zeta]^2) + a^3*\[Epsilon]*Pd[\[Zeta], DE[0]]
 PdHold[__]=.
 (* ::Section:: *)
 (* Decomposition *)
+
+test[Sqrt[f1[DTot["b"]]*f2[DTot["b"]]]//Decomp0i, Sqrt[f1[DE[0]]*f2[DE[0]] + f1[DN["b"]]*f2[DN["b"]]], "Decomp0i sqrt"]
+test[SeriesData[Eps, 0, {f1[DTot["a"]]*f2[DTot["a"]], Sqrt[f1[DTot["b"]]*f2[DTot["b"]]]}, 1, 3, 1]//Decomp0i,
+ SeriesData[Eps, 0, {f1[DE[0]]*f2[DE[0]] + f1[DN["a"]]*f2[DN["a"]], Sqrt[f1[DE[0]]*f2[DE[0]] + f1[DN["b"]]*f2[DN["b"]]]}, 1, 3, 1], "Decomp0i Series" ]
 
 UseMetric[\[DoubleStruckG], {UTot, DTot}]
 UseMetric[\[Eta], {U1, D1}, "SetAsDefault" -> False]
@@ -258,7 +262,7 @@ Evaluate[Pd[\[Gamma][__], _]] := 0;
 Evaluate[Pd[A[__], _D2]] := 0;
 Evaluate[Pd[Pd[A[__], _], _D2]] := 0;
 
-R\[Bullet]decomp = DecompSe[R[] // Simp]
+R\[Bullet]decomp = DecompSe[R[] // Simp]//Simp
 
 test[TrySimp[R\[Bullet]decomp, (a_.) + (b_.)*Pd[A[U2[m_], D1[\[Alpha]_]], D1[\[Beta]_]] :>
     a + Simp[b*(F[Sequence[U2[m], D1[\[Alpha]], D1[\[Beta]]]] + Pd[A[Sequence[U2[m], D1[\[Beta]]]], D1[\[Alpha]]])]],

@@ -18,17 +18,28 @@ DeclareIdx[{U1, D1}, Dim1, GreekIdx, Black]
 DeclareIdx[{U2, D2}, Dim2, LatinIdx, Red]
 
 If[!defQ@DecompHook,DecompHook = {}]
-SetAttributes[{Decomp0i, Decomp01i, Decomp0123, Decomp}, HoldFirst]
-Decomp[e_, decRule_, idList___]:= apply2term[decompTerm[#, decRule,
+(*SetAttributes[{Decomp0i, Decomp01i, Decomp0123, Decomp}, HoldFirst]*)
+
+Decomp[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], decRule_, idList___] :=
+  SeriesData[x, n, Decomp[#, decRule, idList]& /@ coeffList, orders];
+
+Decomp[e_, decRule_, idList___] /;FreeQ[e, SeriesData] := apply2term[decompTerm[#, decRule,
 	Alternatives@@Cases[decRule[[1]], (tid_[_] -> _) :> tid, Infinity](* this is type of idx, like DTot|TTot *), idList]&, e]
-decompTerm[t_, decRule_, idPtn_]:= Module[{totDummy}, 
+
+decompTerm[t_, decRule_, idPtn_]:= Module[{totDummy},
 	totDummy = Cases[Tally[ Cases[t, idPtn[a_]:>a,Infinity] ], {a_,2}:>a];
 	decompTerm[t, decRule, idPtn, totDummy]]
-decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id}, 
-	Do[	rule = #[id]& /@ decRule; 
-		If[(s/.rule[[1]])=!=s (* decompose only when idx exists *), 
-			s = Total[s/.rule//.DecompHook]], {id, idList}]; 
-	s//.DecompHook//Simp]
+
+decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id},
+	Do[	rule = #[id]& /@ decRule;
+		If[(s/.rule[[1]])=!=s (* decompose only when idx exists *),
+			s = Total[s/.rule//.DecompHook]], {id, idList}];
+	s//.DecompHook]
+
+decompTerm[a_. (op:SimpInto1)[b_], decRule_, idPtn_, idList_List] /; !FreeQ[b, IdxPtn] :=
+      decompTerm[a, decRule, idPtn, idList] * Op@decompTerm[b, decRule, idPtn, idList]
+decompTerm[a_. Power[b_, c_], decRule_, idPtn_, idList_List] /; !FreeQ[{b,c}, IdxPtn] && c=!=2 :=
+    decompTerm[a, decRule, idPtn, idList] * Power[decompTerm[b, decRule, idPtn, idList], decompTerm[c, decRule, idPtn, idList]]
 
 Decomp0i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]
 Decomp01i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DE@1, UTot@#->UE@1}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]

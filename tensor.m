@@ -58,6 +58,7 @@ Simp::usage = "Simplification, which brings tensors into canonical form."
 SimpHook::usage = "Rules to apply before and after Simp"
 SimpSelect::usage = "A function to select terms to simplify, disregard others"
 SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->UniqueIdx]&"
+SimpInto1::usage = "Pattern list of single variable functions that Simp should go into"
 
 \[Bullet]::usage = "Symbol for time derivative"
 \[CapitalSampi]::usage = "Symbol for general derivative"
@@ -75,8 +76,8 @@ Uq[100]; (* Becaues of unknown reasons, the first 100 unique variables are much 
 LatinIdx = Join[FromCharacterCode /@ Range[97, 97 + 24], "y"<>ToString[#]&/@Range[26]]
 GreekIdx = Join[FromCharacterCode /@ Range[945, 945 + 24], "\[Omega]"<>ToString[#]&/@Range[26]]
 LatinCapitalIdx = Join[FromCharacterCode /@ Range[65, 65 + 24], "Y"<>ToString[#]&/@Range[26]]
+inFuncIdx= StringJoin[#,"0"] & /@ LatinIdx
 UniqueIdx:= Unique[]& /@ Range[50]
-internalIdx = StringJoin[#,"0"]& /@ LatinIdx
 
 SetAttributes[Dta, Orderless]
 PdT[_Dta, PdVars[__]]:= 0
@@ -180,6 +181,7 @@ ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 Simp::overdummy = "Index `1` appears `2` times in `3`"
 Simp::diffree = "Free index in term `1` is different from that of first term (`2`)"
 Simp::ld = "Warning: Memory constraint reached in `1`, simplification skipped"
+Simp::tsrInFunc="Thesors detected in more than one functions at `1`. Result may be wrong.";
 
 SimpUq:= Simp[#, "Dummy"->UniqueIdx]&
 
@@ -192,27 +194,28 @@ If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
 Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->Automatic (* or UniqueIdx *), "Parallel"->False (* or True *) }
 
-Simp[f_, opt:OptionsPattern[]]:= simpRaw0[Expand[f, Power], opt];
+Simp[f_, opt:OptionsPattern[]]:= simp1[Expand[f, Power], opt];
 
 (* Deal with cases like (a_i a_i)^3 *)
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n>=2 := simpRaw[SimpUq[a] + SimpUq[b] Product[SimpUq@c, {i,n}], opt];
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n<=-2 := simpRaw[SimpUq[a] + SimpUq[b] / Product[SimpUq@c, {i,-n}], opt];
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n>=4 && EvenQ[n] := simpRaw[SimpUq[a] + SimpUq[b] Product[SimpUq[c^2], {i,n/2}], opt];
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n<=-4 && EvenQ[n] := simpRaw[SimpUq[a] + SimpUq[b] / Product[SimpUq[c^2], {i,-n/2}], opt];
-simpRaw0[f_, opt:OptionsPattern[]]:= simpRaw[Expand@f, opt];
+simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n>=2 := simp1[a, opt] + simp2[SimpUq[b] Product[SimpUq@c, {i,n}], opt];
+simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n<=-2 := simp1[a, opt] + simp2[SimpUq[b] / Product[SimpUq@c, {i,-n}], opt];
+simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n>=4 && EvenQ[n] := simp1[a, opt] + simp2[SimpUq[b] Product[SimpUq[c^2], {i,n/2}], opt];
+simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n<=-4 && EvenQ[n] := simp1[a, opt] + simp2[SimpUq[b] / Product[SimpUq[c^2], {i,-n/2}], opt];
+simp1[f_, opt:OptionsPattern[]]:= simp2[Expand@f, opt];
 
-(* List of single argument functions where simpRaw operates into its arguments (with Unique dummies). *)
-simpInto1 = Exp|Sin|Cos|Sinh|Cosh;
-simpRaw[a_. + b_. (op:simpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
-  simpRaw[a, opt] + simpRaw[b, opt] op[Simp[c, "Dummy"->internalIdx]];
-(* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simpRaw directly. *)
-simpRaw[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && d=!=2 :=
-  simpRaw[a, opt] + simpRaw[b, opt] Power[Simp[c, "Dummy"->internalIdx], Simp[d, "Dummy"->internalIdx]];
-(* simpRaw through Series *)
-simpRaw[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], opt:OptionsPattern[Simp]] := SeriesData[x, n, Simp[#, opt]& /@ coeffList, orders];
+(* List of single argument functions where simp2 operates into its arguments (with Unique dummies). *)
+If[!defQ@inFuncChoice, inFuncChoice:= UniqueIdx];
+SimpInto1 = Exp|Sin|Cos|Sinh|Cosh;
+simp2[a_. + b_. (op:SimpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
+  simp2[a, opt] + simp2[b, opt] op[Simp[c, "Dummy"->inFuncChoice]];
+(* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simp2 directly. *)
+simp2[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && d=!=2 :=
+  simp2[a, opt] + simp2[b, opt] Power[Simp[c, "Dummy"->inFuncChoice], Simp[d, "Dummy"->inFuncChoice]];
+(* simp2 through Series *)
+simp2[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], opt:OptionsPattern[Simp]] := SeriesData[x, n, Simp[#, opt]& /@ coeffList, orders];
+simp2[f_, opt:OptionsPattern[]]:= simp0[f, opt];
 
-(* The simplification engine *)
-simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
+simp0[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
 	mapSum := If[OptionValue@"Parallel"=!=True, Total@Map[#1, #2], 
 		ParallelCombine[Function[lst,Total@Map[#1,lst]], #2, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"]]&;
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);
