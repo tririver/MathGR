@@ -195,10 +195,10 @@ Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for
 Simp[f_, opt:OptionsPattern[]]:= simpRaw0[Expand[f, Power], opt];
 
 (* Deal with cases like (a_i a_i)^3 *)
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n>=2 := simpRaw0[a + b Product[SimpUq@c, {i,n}], opt];
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n<=-2 := simpRaw0[a + b / Product[SimpUq@c, {i,-n}], opt];
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n>=4 && EvenQ[n] := simpRaw0[a + b Product[SimpUq[c^2], {i,n/2}], opt];
-simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n<=-4 && EvenQ[n] := simpRaw0[a + b / Product[SimpUq[c^2], {i,-n/2}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n>=2 := simpRaw[SimpUq[a] + SimpUq[b] Product[SimpUq@c, {i,n}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n<=-2 := simpRaw[SimpUq[a] + SimpUq[b] / Product[SimpUq@c, {i,-n}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n>=4 && EvenQ[n] := simpRaw[SimpUq[a] + SimpUq[b] Product[SimpUq[c^2], {i,n/2}], opt];
+simpRaw0[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n<=-4 && EvenQ[n] := simpRaw[SimpUq[a] + SimpUq[b] / Product[SimpUq[c^2], {i,-n/2}], opt];
 simpRaw0[f_, opt:OptionsPattern[]]:= simpRaw[Expand@f, opt];
 
 (* List of single argument functions where simpRaw operates into its arguments (with Unique dummies). *)
