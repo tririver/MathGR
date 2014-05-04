@@ -32,4 +32,13 @@ DecompHook = {
 SetAttributes[DecompG2H, HoldAll]
 DecompG2H[f_]:= Decomp0i@WithMetric[g, {UTot, DTot}, MetricContract[f]]
 
+PdT[k|Eps, _]:=0
+fourier2RuleList = Dispatch@{PdT[f_, PdVars[DN@i_, DN@i_, j___]] :> -k^2 PdT[f, PdVars[j]],
+  PdT[f_, PdVars[DN@i_, a___]] PdT[g_, PdVars[DN@i_, b___]] :>  k^2 PdT[f, PdVars[a]] PdT[g, PdVars[b]],
+  PdT[f_, PdVars[DN@i_, j___]]^2 :> k^2 PdT[f, PdVars[j]]^2,
+  PdT[f_, PdVars[DN@i_, j___]] b_[DN@i_] :> -I k[DN@i] PdT[f, PdVars[j]] b[DN@i]}
+
+Fourier2[e_]:= (e//.fourier2RuleList//Expand)//.fourier2RuleList
+
+
 EndPackage[]

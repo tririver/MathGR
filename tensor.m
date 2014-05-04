@@ -46,8 +46,6 @@ PdVars::usage = "Pdvars[DN@a, DN@b, ...] is a list of derivative variables"
 Pm2::usage = "Pm2[expr] is \\partial^{-2} expr. This inversed Laplacian should be understood in momentum space"
 LeviCivita::usage = "LeviCivita[a, b, ...] is the Levi Civita tensor, defined only if dimension is given as an explicit number"
 
-TensorReplace::usage = "TensorReplace[expr, rule] replaces expr using rule, while expanding powers in expr to prevent over-dummies."
-
 LatinIdx::usage = "strings {a, b, ..., }"
 GreekIdx::usage = "strings {alpha, beta, ...}"
 LatinCapitalIdx::usage = "strings {A, B, ...}"
@@ -177,8 +175,6 @@ DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[
 
 ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 
-TensorReplace[expr_, rule_] := prod2times[times2prod@expr /. rule]
-
 (* ::Section:: *)
 (* Simp functions *)
 
@@ -198,28 +194,41 @@ If[!defQ@SimpHook, SimpHook = {}]
 SetAttributes[Simp, HoldFirst] (* Otherwise passing expression into Simp could take long. E.g. dBianchi2, ~30 000 terms, takes 8 seconds merely passing expression *)
 Options[Simp] = {"Method"->If[$VersionNumber>8.99, "Hybrid", "Fast"] (* Fast for simple pass only *), "Dummy"->Automatic (* or UniqueIdx *), "Parallel"->False (* or True *) }
 
-Simp[f_, opt:OptionsPattern[]]:= simp1[Expand[f, Power], opt];
+Simp[f_, opt:OptionsPattern[]]:= simpPower[Expand[f, Power], opt];
 
-(* Deal with cases like (a_i a_i)^3 *)
-simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n>=2 := simp1[a, opt] + simp2[SimpUq[b] Product[SimpUq@c, {i,n}], opt];
-simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]=!={} && n<=-2 := simp1[a, opt] + simp2[SimpUq[b] / Product[SimpUq@c, {i,-n}], opt];
-simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n>=4 && EvenQ[n] := simp1[a, opt] + simp2[SimpUq[b] Product[SimpUq[c^2], {i,n/2}], opt];
-simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && n<=-4 && EvenQ[n] := simp1[a, opt] + simp2[SimpUq[b] / Product[SimpUq[c^2], {i,-n/2}], opt];
-simp1[f_, opt:OptionsPattern[]]:= simp2[Expand@f, opt];
+(* simpPower: treatment of power in the expansion. The recipe is as follows: for g f^n, where n is a positive integer, and f has index in it:
+(Q1) indices in f are free indince?
+  Q1-yes: (Q2) Does g share same free indices with f? || Is n an odd number?
+    Q2-yes: fire overdummy error.
+    Q2-no: (Q3) n==2?
+      Q3-yes: proceed to SimpInFunc
+      Q3-no: expand f^n into Power[SimpUq[f^2]*SimpUq[f^2]...*SimpUq[f^2], Sign[n]]
+  Q2-no: expand f^n into SimpUq[f]*SimpUq[f]...*SimpUq[f]
+*)
 
-(* List of single argument functions where simp2 operates into its arguments (with Unique dummies). *)
+simpPower[a_. + g_. Power[f_, n_Integer], opt:OptionsPattern[Simp]] /; idx[f]=!={} && n>0 := If[free[f]=!={},
+  If[Intersection[free[g],free[f]]=!={} || OddQ[n],
+    Message[Simp::overdummy, "", "more than two", g*f^n]; a + g*f^n,
+    If[n===2,
+      Simp[a, opt] + simpInFunc[g * f^2, opt],
+      Simp[a, opt] + simpInFunc[g * Product[SimpUq[f^2], {i, n/2}], opt] ] ],
+  Simp[a, opt] + simpInFunc[g * Product[SimpUq@f, {i, n}], opt] ]
+
+simpPower[f_, opt:OptionsPattern[Simp]]:= simpInFunc[Expand@f, opt];
+
+(* List of single argument functions where simpInFunc operates into its arguments (with Unique dummies). *)
 If[!defQ@inFuncChoice, inFuncChoice:= UniqueIdx]; (* or inFuncChoice:= inFuncIdx *)
 SimpInto1 = Exp|Sin|Cos|Sinh|Cosh;
-simp2[a_. + b_. (op:SimpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
-  simp2[a, opt] + simp2[b, opt] op[Simp[c, "Dummy"->inFuncChoice]];
-(* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simp2 directly. *)
-simp2[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && !(d==2 || free[c]=!={}) :=
-  simp2[a, opt] + simp2[b, opt] Power[Simp[c, "Dummy"->inFuncChoice], Simp[d, "Dummy"->inFuncChoice]];
-(* simp2 through Series *)
-simp2[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], opt:OptionsPattern[Simp]] := SeriesData[x, n, Simp[#, opt]& /@ coeffList, orders];
-simp2[f_, opt:OptionsPattern[]]:= simp0[f, opt];
+simpInFunc[a_. + b_. (op:SimpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
+  simpInFunc[a, opt] + simpInFunc[b, opt] op[Simp[c, "Dummy"->inFuncChoice]];
+(* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simpInFunc directly. *)
+simpInFunc[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && !(d==2 || free[c]=!={}) :=
+  simpInFunc[a, opt] + simpInFunc[b, opt] Power[Simp[c, "Dummy"->inFuncChoice], Simp[d, "Dummy"->inFuncChoice]];
+(* simpInFunc through Series *)
+simpInFunc[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], opt:OptionsPattern[Simp]] := SeriesData[x, n, Simp[#, opt]& /@ coeffList, orders];
+simpInFunc[f_, opt:OptionsPattern[]]:= simpRaw[f, opt];
 
-simp0[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
+simpRaw[e_, OptionsPattern[Simp]]:= Module[{mapSum, eList, fr, simpTermFast, aaPdT, fastIds, idStat, frTerm, dum, simpTerm, t0, tM, idSet, dumSet, conTsr, zMat},
 	mapSum := If[OptionValue@"Parallel"=!=True, Total@Map[#1, #2], 
 		ParallelCombine[Function[lst,Total@Map[#1,lst]], #2, Plus, DistributedContexts -> "MathGR`", Method -> "CoarsestGrained"]]&;
 	eList = SimpSelect @ expand2list @ (e//.SimpHook);

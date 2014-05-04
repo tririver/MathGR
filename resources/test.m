@@ -3,6 +3,9 @@ startTestTime=SessionTime[]
 testPassed={};
 testFailed={};
 
+streamMsg = OpenWrite["test_message.txt"];
+$Messages = {streamMsg};
+
 SetAttributes[test,HoldAll]
 testPrecision=10^-7;
 test[in_,out_,tagRaw_:"Unspecified"]:=Module[{tag},
@@ -127,9 +130,9 @@ test[Simp[f[DN@a_,DN@c_]x[UP@d_,UP@b_]], f[DN@a_,DN@c_]x[UP@d_,UP@b_], "Simp wit
 test[DeclareSym[fTmp, {UP, UP, DE@0, DN, DN}, Symmetric[{1, 2}]], {Symmetric[{1, 2}]}, "DeclareSym"]
 test[DeclareSym[fTmp, {UP, UP, DE@0, DN, DN}, Symmetric[{3, 4}]], {Symmetric[{1, 2}], Symmetric[{3, 4}]}, "DeclareSym combination"]
 
-DeclareSym[fTmp, {UP, UP, DE@0, DN, DN}, Symmetric[{1, 2, 3, 4}]]
+DeclareSym[fTmp, {UP, UP, DE@0, UP, UP}, Symmetric[{1, 2, 3, 4}]]
 test[Attributes[fTmp], {Orderless}, "set orderless for symmetric All"]
-test[DeleteSym[fTmp, {UP, UP, DE@0, DN, DN}], Null, "DeleteSym"]
+test[DeleteSym[fTmp, {UP, UP, DE@0, UP, UP}], Null, "DeleteSym"]
 test[Attributes[fTmp], {}, "remove orderless for symmetric All"]
 
 (* ::Subsection:: *)
@@ -213,9 +216,10 @@ test[Ibp[y Pd[x, d@"i"], "Rank"->IbpVar[x]], -x Pd[y, d["i"]] + PdHold[x y, d["i
 test[f Pm2[g, DN] - g Pm2[f, DN] // Ibp , 0, "Ibp on Pm2, rule 1"]
 
 test[Pm2[g*PdT[f, PdVars[DE[0], DN["i"], DN["i"]]], DN] + 2*Pm2[PdT[f, PdVars[DE[0], DN["i"]]]*PdT[g, PdVars[DN["i"]]], DN]//Ibp, g*PdT[f, PdVars[DE[0]]] - Pm2[PdT[f, PdVars[DE[0]]]*PdT[g, PdVars[DN["a"], DN["a"]]], DN], "Ibp on Pm2, rule 2"]
+
 (* ::Section:: *)
 (* Cosmic perturbations *)
-
+Remove[a,b,h,f]
 Get["MathGR/util.m"]
 Get["MathGR/ibp.m"]
 Get["MathGR/frwadm.m"]
@@ -235,6 +239,7 @@ s2Solved = s2 /. solCons // Ibp[#, "Rank"->IbpStd2] &
 Print["Result of s2Solved =========="];Print[s2Solved]
 test[s2Solved, -(a*k^2*\[Epsilon]*\[Zeta]^2) + a^3*\[Epsilon]*Pd[\[Zeta], DE[0]]^2, "zeta gauge 2nd order action"]
 PdHold[__]=.
+
 (* ::Section:: *)
 (* Decomposition *)
 
@@ -269,7 +274,7 @@ test[TrySimp[R\[Bullet]decomp, (a_.) + (b_.)*Pd[A[U2[m_], D1[\[Alpha]_]], D1[\[B
   -(F[U2["a"], D1["\[Alpha]"], D1["\[Beta]"]]*Pd[A[U2["a"], D1["\[Gamma]"]], D1["\[Delta]"]]*\[Eta][U1["\[Alpha]"], U1["\[Gamma]"]]*
       \[Eta][U1["\[Beta]"], U1["\[Delta]"]])/2, "Decomposition of non-diag metric into Maxwell"]
 
-
 (* Generate report *)
 testReport[]
 Print["Total time used:", OutputForm[SessionTime[]-startTestTime]]
+Close[streamMsg];
