@@ -46,6 +46,8 @@ PdVars::usage = "Pdvars[DN@a, DN@b, ...] is a list of derivative variables"
 Pm2::usage = "Pm2[expr] is \\partial^{-2} expr. This inversed Laplacian should be understood in momentum space"
 LeviCivita::usage = "LeviCivita[a, b, ...] is the Levi Civita tensor, defined only if dimension is given as an explicit number"
 
+TensorReplace::usage = "TensorReplace[expr, rule] replaces expr using rule, while expanding powers in expr to prevent over-dummies."
+
 LatinIdx::usage = "strings {a, b, ..., }"
 GreekIdx::usage = "strings {alpha, beta, ...}"
 LatinCapitalIdx::usage = "strings {A, B, ...}"
@@ -175,6 +177,8 @@ DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[
 
 ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 
+TensorReplace[expr_, rule_] := prod2times[times2prod@expr /. rule]
+
 (* ::Section:: *)
 (* Simp functions *)
 
@@ -204,12 +208,12 @@ simp1[a_. + b_. Power[c_, n_Integer], opt:OptionsPattern[]] /; dummy[c]==={} && 
 simp1[f_, opt:OptionsPattern[]]:= simp2[Expand@f, opt];
 
 (* List of single argument functions where simp2 operates into its arguments (with Unique dummies). *)
-If[!defQ@inFuncChoice, inFuncChoice:= UniqueIdx];
+If[!defQ@inFuncChoice, inFuncChoice:= UniqueIdx]; (* or inFuncChoice:= inFuncIdx *)
 SimpInto1 = Exp|Sin|Cos|Sinh|Cosh;
 simp2[a_. + b_. (op:SimpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
   simp2[a, opt] + simp2[b, opt] op[Simp[c, "Dummy"->inFuncChoice]];
 (* The same thing for Power[c, d]. Note that Power[c,2] is not included here since (f_a)^2 can be dealt with simp2 directly. *)
-simp2[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && d=!=2 :=
+simp2[a_. + b_. Power[c_, d_], opt:OptionsPattern[Simp]] /; !FreeQ[{c,d}, IdxPtn] && !(d==2 || free[c]=!={}) :=
   simp2[a, opt] + simp2[b, opt] Power[Simp[c, "Dummy"->inFuncChoice], Simp[d, "Dummy"->inFuncChoice]];
 (* simp2 through Series *)
 simp2[HoldPattern@SeriesData[x_, n_, coeffList_List, orders__], opt:OptionsPattern[Simp]] := SeriesData[x, n, Simp[#, opt]& /@ coeffList, orders];
