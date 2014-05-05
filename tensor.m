@@ -43,6 +43,7 @@ DtaGen::usage = "DtaGen[up..., dn...] is the generalized delta symbol"
 Pd::usage = "Pd[f, DN@a] is partial derivative"
 PdT::usage = "PdT[f, PdVars[DN@a, DN@b, ...]] is partial derivative"
 PdVars::usage = "Pdvars[DN@a, DN@b, ...] is a list of derivative variables"
+P::usage = "P[DN@a, DN@b, ...][f] is partial derivative, which is internally converted to PdT"
 Pm2::usage = "Pm2[expr] is \\partial^{-2} expr. This inversed Laplacian should be understood in momentum space"
 LeviCivita::usage = "LeviCivita[a, b, ...] is the Levi Civita tensor, defined only if dimension is given as an explicit number"
 
@@ -147,6 +148,8 @@ Pm2[f_. Power[a_Plus, n_.], type_] /; IntegerQ[n]&&0<=n<5 := Pm2[f #, type]& /@ 
 Pm2[f_*g_, type_] /; Pd[f, type@testVar]===0 := f Pm2[g, type]
 Pm2[PdT[f_, PdVars[i__]], type_]:= PdT[Pm2[f, type], PdVars[i]]
 PdT[Pm2[f_, type_], PdVars[type_@i_, type_@i_, etc___]]:= PdT[f, PdVars[etc]]
+
+P[i___][f_]:=PdT[f, PdVars[i]]
 
 (* ::Section:: *)
 (* Declare and delete symmetries *)
