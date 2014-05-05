@@ -220,7 +220,7 @@ simpPower[a_. + g_. Power[f_, n_Integer], opt:OptionsPattern[Simp]] /; idx[f]=!=
 simpPower[f_, opt:OptionsPattern[Simp]]:= simpInFunc[Expand@f, opt];
 
 (* List of single argument functions where simpInFunc operates into its arguments (with Unique dummies). *)
-If[!defQ@inFuncChoice, inFuncChoice:= UniqueIdx]; (* or inFuncChoice:= inFuncIdx *)
+If[!defQ@inFuncChoice, inFuncChoice:= inFuncIdx]; (* or inFuncChoice:= UniqueIdx *)
 SimpInto1 = Exp|Sin|Cos|Sinh|Cosh;
 simpInFunc[a_. + b_. (op:SimpInto1)[c_], opt:OptionsPattern[Simp]] /; !FreeQ[c, IdxPtn] :=
   simpInFunc[a, opt] + simpInFunc[b, opt] op[Simp[c, "Dummy"->inFuncChoice]];
