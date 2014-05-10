@@ -32,7 +32,8 @@ decompTerm[t_, decRule_, idPtn_]:= Module[{totDummy},
 
 decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id},
 	Do[	rule = #[id]& /@ decRule;
-		If[(s/.rule[[1]])=!=s (* decompose only when idx exists *),
+		If[(*Cases[s, Apply[Alternatives, #1 & @@@ rule[[1]]], Infinity] =!= {}, *) (* Should work the same as below *)
+      (s/.rule[[1]])=!=s  (*decompose only when idx exists*),
 			s = Total[s/.rule//.DecompHook]], {id, idList}];
 	s//.DecompHook]
 

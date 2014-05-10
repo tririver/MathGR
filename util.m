@@ -20,6 +20,7 @@ SolveExpr[eqs_, exprsRaw_] := Module[{exprs = Flatten@{exprsRaw}, repList},
   Solve[eqs /. (exprs~replaceTo~repList), repList] /. (repList~replaceTo~exprs)]
 
 TReplace[expr_, rule_]:= prod2times[times2prod[expr]//.rule]
+TReplace[rule_][expr_]:= TReplace[expr, rule]
 TPower[expr_, n_Integer]:= Power[Product[expr, {i,Abs@n}],Sign@n]
 
 applyProtect[f_, e_]:=Module[{eLocal}, f //. g_ e^m_. /; FreeQ[g,protected] :> protectProd[g] eLocal^m /. eLocal -> e ];
