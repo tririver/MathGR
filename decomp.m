@@ -37,9 +37,9 @@ decompTerm[t_, decRule_, idPtn_, idList_List]:= Module[{s=t, rule, id},
 	s//.DecompHook]
 
 decompTerm[a_. (op:SimpInto1)[b_], decRule_, idPtn_, idList_List] /; !FreeQ[b, IdxPtn] :=
-      decompTerm[a, decRule, idPtn, idList] * Op@decompTerm[b, decRule, idPtn, idList]
+      decompTerm[a, decRule, idPtn, idList] * Op@Decomp[b, decRule, idList]
 decompTerm[a_. Power[b_, c_], decRule_, idPtn_, idList_List] /; !FreeQ[{b,c}, IdxPtn] && c=!=2 :=
-    decompTerm[a, decRule, idPtn, idList] * Power[decompTerm[b, decRule, idPtn, idList], decompTerm[c, decRule, idPtn, idList]]
+   decompTerm[a, decRule, idPtn, idList] * Power[Decomp[b, decRule, idList], Decomp[c, decRule, idList]]
 
 Decomp0i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]
 Decomp01i[e_, i___]:= Decomp[e, {{DTot@#->DE@0, UTot@#->UE@0}&, {DTot@#->DE@1, UTot@#->UE@1}&, {DTot@#->DN@#, UTot@#->UP@#}&}, i]

@@ -218,6 +218,12 @@ test[f Pm2[g, DN] - g Pm2[f, DN] // Ibp , 0, "Ibp on Pm2, rule 1"]
 test[Pm2[g*PdT[f, PdVars[DE[0], DN["i"], DN["i"]]], DN] + 2*Pm2[PdT[f, PdVars[DE[0], DN["i"]]]*PdT[g, PdVars[DN["i"]]], DN]//Ibp, g*PdT[f, PdVars[DE[0]]] - Pm2[PdT[f, PdVars[DE[0]]]*PdT[g, PdVars[DN["a"], DN["a"]]], DN], "Ibp on Pm2, rule 2"]
 
 (* ::Section:: *)
+(* Tests for decomp.m *)
+
+test[Sqrt[1 + f[DTot@"a"] f[UTot@"a"]] // Decomp0i, Sqrt[1 + f[DE[0]]*f[UE[0]] + f[DN["a"]]*f[UP["a"]]], "Decomp0i in sqrt"];
+test[fx[DTot@"A", UTot@"A"] - 1/(1 + f[DTot@"A", UTot@"A"]) // Decomp0i, -(1 + f[DE[0], UE[0]] + f[DN["A"], UP["A"]])^(-1) + fx[DE[0], UE[0]] + fx[DN["A"], UP["A"]], "Decomp0i ordinary term and power"];
+
+(* ::Section:: *)
 (* Cosmic perturbations *)
 Remove[a,b,h,f]
 Get["MathGR/util.m"]
