@@ -18,10 +18,10 @@ IbpVar::usage = "IbpVar[var][e] counts Pd on specified var"
 IbpStd2::usage = "Ibp count trying to bring second order Lagrangian to standard form"
 IbpVariation::usage = "IbpVariation[e, var] is Ibp which eliminates derivative on var."
 IbpReduceOrder::usage = "IbpReduceOrder[vars_List][e] counts power of vars."
+IbpPreferredPattern::usage = "IbpPreferredPattern is a pattern which Ibp tries to keep."
 
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
-
 
 try[rule_, rank_, 0][e_]:= e
 try[rule_, rank_, level_][e_] /;IntegerQ[level]&&level>0 := FixedPoint[tryStep[rule, rank, level], e]
@@ -41,9 +41,6 @@ tryStep[rule_, rank_, level_][eRaw_]:= Module[{e, trials, tryRulesOnList, sortBy
 Options[TrySimp] = {"Rank"->LeafCount, "Level"->1}
 TrySimp[e_, rule_, OptionsPattern[]]:= try[rule, OptionValue["Rank"], OptionValue["Level"]][e]
 Pm2Simp[e_]:= TrySimp[Simp@e, Pm2Rules, "Rank"->IbpCountLeaf]
-
-Options[Ibp] = {"Rule"->IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
-Ibp[e_, OptionsPattern[]]:= try[OptionValue["Rule"], OptionValue["Rank"], OptionValue["Level"]][Simp@e]
 
 (* ::Section:: *)
 (* Below are IBP rules and rank functions *)
@@ -70,6 +67,7 @@ Pm2Rules = Dispatch@{(* Note: Pm2 is defined in momentum space. Thus there is no
 IbpRules = Dispatch@({
 	(*a_. PdT[b_, PdVars[c_, etc___]] + e_. :> PdHold[a PdT[b, PdVars[etc]], c] + e - Simp[PdT[b, PdVars[etc]] Pd[a,c]],*)
 	a_. PdT[b_, PdVars[c_, etc___]]^n_. + e_. :> Simp[PdHold[a PdT[b, PdVars[etc]] PdT[b, PdVars[c, etc]]^(n-1), c] - PdT[b, PdVars[etc]] Pd[a PdT[b, PdVars[c, etc]]^(n-1), c]] + e,
+  a_. PdT[b_, PdVars[c_, d_, etc___]] + e_. :> Simp[PdHold[a PdT[b, PdVars[d, etc]], c] - PdHold[PdT[b, PdVars[etc]] Pd[a, c], d] + PdT[b, PdVars[etc]] PdT[a, PdVars[c,d]]]+ e,
 	a_. b_^n_. PdT[b_, PdVars[c_]] + e_. :> e + Simp[ PdHold[a b^(n+1)/(n+1), c]  - b^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
 	a_. PdT[b_, PdVars[etc___]]^n_. PdT[b_, PdVars[c_, etc___]] + e_. :> e + Simp[ PdHold[a PdT[b, PdVars[etc]]^(n+1) / (n+1), c] - PdT[b, PdVars[etc]]^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
 	
@@ -90,7 +88,11 @@ IbpRules = Dispatch@({
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> With[{g=PdT[h,PdVars[e]]},
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Pm2Rules)
 
+Options[Ibp] = {"Rule"->IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
+Ibp[e_, OptionsPattern[]]:= try[OptionValue["Rule"], IbpRank@OptionValue@"Rank", OptionValue["Level"]][Simp@e]
 
+If[!defQ@IbpPreferredPattern, IbpPreferredPattern={}]
+IbpRank[rankf_][e_]:= rankf[e] - 10^10 Count[{e/.holdPtn->0}, IbpPreferredPattern, Infinity];
 
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[__]], Infinity] * 10^-7 + LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
