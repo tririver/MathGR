@@ -98,7 +98,7 @@ IbpCountTerm[e_]:=Length[expand2list[e/.holdPtn->0]] * 10^-2
 IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity] + IbpCountLeaf[e] 
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
-IbpStd2[e_]:= IbpCountPt2[e]*1000 + IbpCountPd2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_, Infinity]*10 + Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[DE@0,___]], Infinity] + IbpCountLeaf[e]
+IbpStd2[e_]:= IbpCountPt2[e]*1000 + IbpCountPd2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_ | PdT[v_, PdVars[a__]]*PdT[v_, PdVars[b_,a__]]*_, Infinity]*10 + Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[DE@0,___]], Infinity] + IbpCountLeaf[e]
 
 IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@expand2list[e+tmp /.holdPtn->0];

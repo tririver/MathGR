@@ -19,7 +19,7 @@ SolveExpr[eqs_, exprsRaw_] := Module[{exprs = Flatten@{exprsRaw}, repList},
   repList = Unique[] /@ exprs;
   Solve[eqs /. (exprs~replaceTo~repList), repList] /. (repList~replaceTo~exprs)]
 
-TReplace[expr_, rule_]:= prod2times[times2prod[expr]//.rule]
+TReplace[expr_, rule_]:= prod2times[times2prod[expr] /. f_prod:>Map[#/.rule&, f] //. rule]
 TReplace[rule_][expr_]:= TReplace[expr, rule]
 TPower[expr_, n_Integer]:= Power[Product[expr, {i,Abs@n}],Sign@n]
 

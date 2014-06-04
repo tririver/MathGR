@@ -5589,7 +5589,7 @@ Cell[TextData[{
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1920, 1025},
+WindowSize->{1920, 1008},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 InputAliases->{"td" -> TagBox[
     RowBox[{
@@ -6066,7 +6066,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 194, 4, 51, "Text"],
+Cell[557, 20, 194, 4, 55, "Text"],
 Cell[CellGroupData[{
 Cell[776, 28, 117, 1, 80, "Section"],
 Cell[CellGroupData[{
