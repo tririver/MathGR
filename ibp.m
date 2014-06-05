@@ -18,8 +18,8 @@ IbpVar::usage = "IbpVar[var][e] counts Pd on specified var"
 IbpStd2::usage = "Ibp count trying to bring second order Lagrangian to standard form"
 IbpVariation::usage = "IbpVariation[e, var] is Ibp which eliminates derivative on var."
 IbpReduceOrder::usage = "IbpReduceOrder[vars_List][e] counts power of vars."
-IbpPreferredPattern::usage = "IbpPreferredPattern is a pattern which Ibp tries to keep."
-
+TrySimpPreferredPattern::usage = "a pattern which Ibp tries to keep"
+TrySimpPreferredPatternStrength::usage = "How strongly TrySimpPreferredPattern is preferred"
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
@@ -30,8 +30,10 @@ tryStepCropList = take[#, 100]&
 (*tryStepCropList = Take[#, IntegerPart[Length@#/3.0]+1] &*)
 (*tryStepCropList = Identity*)
 
-tryStep[rule_, rank_, level_][eRaw_]:= Module[{e, trials, tryRulesOnList, sortByRank=SortBy[#, rank]&, replaceListOnList = Map[ReplaceList[#, rule]&, #]&},
+tryStep[rule_, rankRaw_, level_][eRaw_]:= Module[{e, trials, tryRulesOnList, sortByRank, replaceListOnList = Map[ReplaceList[#, rule]&, #]&, rank},
 	e = try[rule, rank, level-1] @ eRaw;
+  rank = TrySimpRank@rankRaw;
+  sortByRank=SortBy[#, rank]&;
 	tryRulesOnList = tryStepCropList @ sortByRank @ DeleteDuplicates @ Flatten @ replaceListOnList @ # &;
 	trials = Nest[tryRulesOnList, {e}, level];
 	If[trials=!={} && rank@trials[[1]]<rank@e, 
@@ -39,8 +41,14 @@ tryStep[rule_, rank_, level_][eRaw_]:= Module[{e, trials, tryRulesOnList, sortBy
 		PrintTemporary["No improvement found at level "<>ToString[level]<>". Try harder or stop."];e] ]
 
 Options[TrySimp] = {"Rank"->LeafCount, "Level"->1}
-TrySimp[e_, rule_, OptionsPattern[]]:= try[rule, OptionValue["Rank"], OptionValue["Level"]][e]
+TrySimp[e_, rule_, OptionsPattern[]]:= try[rule, OptionValue@"Rank", OptionValue["Level"]][e]
+
 Pm2Simp[e_]:= TrySimp[Simp@e, Pm2Rules, "Rank"->IbpCountLeaf]
+
+If[!defQ@TrySimpPreferredPattern, TrySimpPreferredPattern={}];
+If[!defQ@TrySimpPreferredPatternStrength, TrySimpPreferredPatternStrength=10^-4];
+TrySimpRank[rankf_][e_]:= rankf[e] - TrySimpPreferredPatternStrength Count[{e/.holdPtn->0}, TrySimpPreferredPattern, Infinity];
+
 
 (* ::Section:: *)
 (* Below are IBP rules and rank functions *)
@@ -77,7 +85,7 @@ IbpRules = Dispatch@({
 	PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_ + n_. /; Order[a,b]>=0 :> Simp[PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b] 
 		+ Pd[PdT[f,PdVars[e1]],b]Pd[PdT[g,PdVars[e2]],a]h + PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]Pd[h,b] - PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b] Pd[h,a]] + n,
 	(* some special higher order rules *)
-	x_. + f_. PdT[z, PdVars[a_, ea___]]PdT[z, PdVars[b_, c_, eb___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> 
+	x_. + f_. PdT[z_, PdVars[a_, ea___]]PdT[z_, PdVars[b_, c_, eb___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :>
 		x + Simp[PdHold[f PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2, c] - Pd[f,c]PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2],
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 :> With[{g=PdT[h,PdVars[e]]},
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],b] - f Pd[g,b]^2 Pd[Pd[g,a],c]/2 - Pd[f,a] Pd[g,b]^2 Pd[g,c]/2, a] 
@@ -89,14 +97,11 @@ IbpRules = Dispatch@({
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Pm2Rules)
 
 Options[Ibp] = {"Rule"->IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
-Ibp[e_, OptionsPattern[]]:= try[OptionValue["Rule"], IbpRank@OptionValue@"Rank", OptionValue["Level"]][Simp@e]
-
-If[!defQ@IbpPreferredPattern, IbpPreferredPattern={}]
-IbpRank[rankf_][e_]:= rankf[e] - 10^10 Count[{e/.holdPtn->0}, IbpPreferredPattern, Infinity];
+Ibp[e_, OptionsPattern[]]:= try[OptionValue@"Rule", OptionValue@"Rank", OptionValue["Level"]][Simp@e]
 
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[__]], Infinity] * 10^-7 + LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
-IbpCountTerm[e_]:=Length[expand2list[e/.holdPtn->0]] * 10^-2
+IbpCountTerm[e_]:=Length[expand2list[e/.holdPtn->0]] * 10^-5  + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
 IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity] + IbpCountLeaf[e] 
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
