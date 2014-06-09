@@ -82,11 +82,11 @@ IbpRules = Dispatch@({
 	h_. + g_. PdT[t_, PdVars[a_, b_, e___]]^2 :> With[{f=PdT[t, PdVars[e]]}, h + Simp[
 		PdHold[g Pd[Pd[f,a],b]Pd[f,b], a] - PdHold[g Pd[Pd[f,a],a]Pd[f,b], b] - Pd[g,a]Pd[Pd[f,a],b]Pd[f,b] + Pd[g,b]Pd[Pd[f,a],a]Pd[f,b] + g Pd[Pd[f,a],a]Pd[Pd[f,b],b] ]],
 	
-	PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_ + n_. /; Order[a,b]>=0 :> Simp[PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b] 
+  PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_. + n_. /; Order[a,b]>=0 :> Simp[PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b]
 		+ Pd[PdT[f,PdVars[e1]],b]Pd[PdT[g,PdVars[e2]],a]h + PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]Pd[h,b] - PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b] Pd[h,a]] + n,
 	(* some special higher order rules *)
-	x_. + f_. PdT[z_, PdVars[a_, ea___]]PdT[z_, PdVars[b_, c_, eb___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :>
-		x + Simp[PdHold[f PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2, c] - Pd[f,c]PdT[z, PdVars[a, ea]]PdT[z, PdVars[b, eb]]/2],
+	x_. + f_. PdT[z_, PdVars[a_, e___]]PdT[z_, PdVars[b_, c_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :>
+		x + Simp[PdHold[f PdT[z, PdVars[a, e]]PdT[z, PdVars[b, e]]/2, c] - Pd[f,c]PdT[z, PdVars[a, e]]PdT[z, PdVars[b, e]]/2],
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 :> With[{g=PdT[h,PdVars[e]]},
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],b] - f Pd[g,b]^2 Pd[Pd[g,a],c]/2 - Pd[f,a] Pd[g,b]^2 Pd[g,c]/2, a] 
 		- PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],a], b] + PdHold[f Pd[g,b]^2 Pd[Pd[g,a],a]/2, c]
@@ -96,7 +96,7 @@ IbpRules = Dispatch@({
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> With[{g=PdT[h,PdVars[e]]},
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Pm2Rules)
 
-Options[Ibp] = {"Rule"->IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
+Options[Ibp] = {"Rule":>IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
 Ibp[e_, OptionsPattern[]]:= try[OptionValue@"Rule", OptionValue@"Rank", OptionValue["Level"]][Simp@e]
 
 holdPtn=_PdHold|_IdHold
