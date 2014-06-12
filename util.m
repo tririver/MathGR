@@ -36,12 +36,13 @@ OO[n_, vars_:{tmp}, op_:Simp][f_]:= CollectEps[vars, op]@Coefficient[SS[n, vars,
 Options[LocalToK]={"Momentum"->k};
 LocalToK[expr_, id_:DN, OptionsPattern[]]:= apply2term[LocalToKTerm[#, id, OptionValue@"Momentum"]&, expr];
 
-LocalToKTerm[term_, id_: DN, kk_: k]:= Module[{cnt = 0, vars, pvars, testId, ruleK, ruleP},
+LocalToKTerm[term_, id_: DN, kk_: k]:= Module[{cnt = 0, vars, pvars, testId, ruleK, ruleP, ruleR},
   vars = DeleteDuplicates[Variables[term] /. PdT[f_, __] :> f];
   pvars = Alternatives @@ Select[vars, Pd[#, id@testId] =!= 0 &];
   ruleK := (v : pvars) :> (cnt++; v[kk[cnt]]);
   ruleP := PdT[f_[kf_kk], PdVars[i : (_id ..), etc___]] :> Apply[Times, kf /@ {i}] PdT[f[kf], PdVars[etc]];
-  term /. ruleK /. ruleP];
+  ruleR := f_[i:(IdxPtn|_UE|_DE) ..][k0_kk] :> f[k0][i];
+  term /. ruleK /. ruleP /. ruleR];
 
 End[]
 EndPackage[]
