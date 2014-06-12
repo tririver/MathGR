@@ -9,6 +9,8 @@ Eps::usage = "The perturbative expansion varible"
 CollectEps::usage = "CollectEps[vars, operation] First (outer) collects Eps, then (inner) collects vars, then apply operation"
 SS::usage = "SS[n] gives up to order n series in Eps"
 OO::usage = "OO[n] gives order n result in Eps"
+k::usage = "Default variable for Fourier transformation."
+LocalToK::usage = "LocalToK[term, optional:id] transforms a local term into Fourier space."
 
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
@@ -30,6 +32,16 @@ TSeries[f_,{e_,e0_,n_}]:=Series[applyProtect[f,e],{e,e0,n}]/.{protected[g_]^m_:>
 CollectEps[vars_:{tmp}, op_:Simp][f_]:= Collect[f, Eps, Collect[#, vars, op]&]
 SS[n_, vars_:{tmp}, op_:Simp][f_]:= CollectEps[vars, op]@Normal@TSeries[f,{Eps,0,n}]
 OO[n_, vars_:{tmp}, op_:Simp][f_]:= CollectEps[vars, op]@Coefficient[SS[n, vars, op][f], Eps, n]
+
+Options[LocalToK]={"Momentum"->k};
+LocalToK[expr_, id_:DN, OptionsPattern[]]:= apply2term[LocalToKTerm[#, id, OptionValue@"Momentum"]&, expr];
+
+LocalToKTerm[term_, id_: DN, kk_: k]:= Module[{cnt = 0, vars, pvars, testId, ruleK, ruleP},
+  vars = DeleteDuplicates[Variables[term] /. PdT[f_, __] :> f];
+  pvars = Alternatives @@ Select[vars, Pd[#, id@testId] =!= 0 &];
+  ruleK := (v : pvars) :> (cnt++; v[kk[cnt]]);
+  ruleP := PdT[f_[kf_kk], PdVars[i : (_id ..), etc___]] :> Apply[Times, kf /@ {i}] PdT[f[kf], PdVars[etc]];
+  term /. ruleK /. ruleP];
 
 End[]
 EndPackage[]

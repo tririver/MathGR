@@ -223,6 +223,12 @@ test[Pm2[g*PdT[f, PdVars[DE[0], DN["i"], DN["i"]]], DN] + 2*Pm2[PdT[f, PdVars[DE
 test[Sqrt[1 + f[DTot@"a"] f[UTot@"a"]] // Decomp0i, Sqrt[1 + f[DE[0]]*f[UE[0]] + f[DN["a"]]*f[UP["a"]]], "Decomp0i in sqrt"];
 test[fx[DTot@"A", UTot@"A"] - 1/(1 + f[DTot@"A", UTot@"A"]) // Decomp0i, -(1 + f[DE[0], UE[0]] + f[DN["A"], UP["A"]])^(-1) + fx[DE[0], UE[0]] + fx[DN["A"], UP["A"]], "Decomp0i ordinary term and power"];
 
+
+(* ::Section:: *)
+(* Tests for util.m *)
+
+test[LocalToK[2 x PdT[y, PdVars[DN@"a", DN@"b"]]], 2*x[k[1]]*y[k[2]]*k[2][DN["a"]]*k[2][DN["b"]], "LocalToK"];
+
 (* ::Section:: *)
 (* Cosmic perturbations *)
 Remove[a,b,h,f]
