@@ -4,6 +4,7 @@ BeginPackage["MathGR`ibp`", {"MathGR`tensor`"}]
 TrySimp::usage = "TrySimp[expr, rule, rank] try to minimaize rank[expr] by applying rule"
 TrySimp2::usage = "TrySimp2[expr, rule, rank] try to minimaize rank[expr] by applying up to second order rules"
 Ibp::usage = "Ibp[expr, rank] do integration by parts and try to minimaize rank[expr]"
+IbpNB::usage = "IbpNB[f__] is Ibp, with boundary term set to zero"
 Pm2Rules::usage = "Rules to simplify Pm2 expressions"
 Pm2Simp::usage = "Simplify Pm2 using Pm2Rules"
 Ibp2::usage = "Ibp[expr, rank] do integration by parts and try to minimaize rank[expr]. Second order rules are tried"
@@ -98,6 +99,7 @@ IbpRules = Dispatch@({
 
 Options[Ibp] = {"Rule":>IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
 Ibp[e_, OptionsPattern[]]:= try[OptionValue@"Rule", OptionValue@"Rank", OptionValue["Level"]][Simp@e]
+IbpNB[e__]:= Block[{PdHold=0&}, Ibp[e]]
 
 holdPtn=_PdHold|_IdHold
 IbpCountLeaf[e_]:= Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[__]], Infinity] * 10^-7 + LeafCount[e/.holdPtn->0] * 10^-5 + Count[{e/.holdPtn->0}, Pm2[__]] * 10^-3 + Count[{e/.holdPtn->0}, Pm2[Times[f__], _] * 10^-1 ]
