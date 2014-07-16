@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
 BeginPackage["MathGR`ibp`", {"MathGR`tensor`"}]
 
@@ -54,6 +56,7 @@ TrySimpRank[rankf_][e_]:= rankf[e] - TrySimpPreferredPatternStrength Count[{e/.h
 (* ::Section:: *)
 (* Below are IBP rules and rank functions *)
 
+
 PdHold[0,_]:=0
 PdHold /: -PdHold[a_,c_]:=PdHold[-a,c]
 PdHold /: n_?NumericQ PdHold[a_,c_]:=PdHold[n a,c]
@@ -95,7 +98,7 @@ IbpRules = Dispatch@({
 		+ Pd[f,b]Pd[g,c]Pd[g,b]Pd[Pd[g,a],a] + Pd[Pd[f,a],a]Pd[g,c]Pd[g,b]^2/2 + Pd[f,a]Pd[Pd[g,a],c]Pd[g,b]^2]	],
 	(*x_. + f_. g_ PdT[g_, PdVars[a_,b_,b_]] :> x + Simp[PdHold[f g Pd[Pd[g,a],b], b] - PdHold[f Pd[g,b]^2/2, a] - Pd[f,b] g Pd[Pd[g,a],b] + Pd[f,a]Pd[g,b]^2/2],*)
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> With[{g=PdT[h,PdVars[e]]},
-		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Pm2Rules)
+		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Normal[Pm2Rules])
 
 Options[Ibp] = {"Rule":>IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
 Ibp[e_, OptionsPattern[]]:= try[OptionValue@"Rule", OptionValue@"Rank", OptionValue["Level"]][Simp@e]
