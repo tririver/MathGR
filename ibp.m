@@ -19,38 +19,38 @@ IbpCountPt2::usage = "IbpCountPt2[e] counts second time derivatives"
 IbpCountPd2::usage = "IbpCountPd2[e] counts second derivatives"
 IbpVar::usage = "IbpVar[var][e] counts Pd on specified var"
 IbpStd2::usage = "Ibp count trying to bring second order Lagrangian to standard form"
-IbpVariation::usage = "IbpVariation[e, var] is Ibp which eliminates derivative on var."
-IbpReduceOrder::usage = "IbpReduceOrder[vars_List][e] counts power of vars."
+IbpVariation::usage = "IbpVariation[e, var] is Ibp which eliminates derivative on var"
+IbpReduceOrder::usage = "IbpReduceOrder[vars_List][e] counts power of vars"
 TrySimpPreferredPattern::usage = "a pattern which Ibp tries to keep"
 TrySimpPreferredPatternStrength::usage = "How strongly TrySimpPreferredPattern is preferred"
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
 
 try[rule_, rank_, 0][e_]:= e
-try[rule_, rank_, level_][e_] /;IntegerQ[level]&&level>0 := FixedPoint[tryStep[rule, rank, level], e]
-
-tryStepCropList = take[#, 100]&
-(*tryStepCropList = Take[#, IntegerPart[Length@#/3.0]+1] &*)
-(*tryStepCropList = Identity*)
-
-tryStep[rule_, rankRaw_, level_][eRaw_]:= Module[{e, trials, tryRulesOnList, sortByRank, replaceListOnList = Map[ReplaceList[#, rule]&, #]&, rank},
-	e = try[rule, rank, level-1] @ eRaw;
-  rank = TrySimpRank@rankRaw;
-  sortByRank=SortBy[#, rank]&;
-	tryRulesOnList = tryStepCropList @ sortByRank @ DeleteDuplicates @ Flatten @ replaceListOnList @ # &;
-	trials = Nest[tryRulesOnList, {e}, level];
-	If[trials=!={} && rank@trials[[1]]<rank@e, 
-		PrintTemporary["Improved at level "<>ToString[level]<>", with rank "<>ToString@CForm@N@rank@trials[[1]] ]; trials[[1]], 
-		PrintTemporary["No improvement found at level "<>ToString[level]<>". Try harder or stop."];e] ]
-
-Options[TrySimp] = {"Rank"->LeafCount, "Level"->1}
-TrySimp[e_, rule_, OptionsPattern[]]:= try[rule, OptionValue@"Rank", OptionValue["Level"]][e]
-
-Pm2Simp[e_]:= TrySimp[Simp@e, Pm2Rules, "Rank"->IbpCountLeaf]
 
 If[!defQ@TrySimpPreferredPattern, TrySimpPreferredPattern={}];
 If[!defQ@TrySimpPreferredPatternStrength, TrySimpPreferredPatternStrength=10^-4];
 TrySimpRank[rankf_][e_]:= rankf[e] - TrySimpPreferredPatternStrength Count[{e/.holdPtn->0}, TrySimpPreferredPattern, Infinity];
+
+tryCropList = take[#, 100]&
+(*tryCropList = Take[#, IntegerPart[Length@#/3.0]+1] &*)
+(*tryCropList = Identity*)
+
+try[rule_, rankRaw_, level_Integer?Positive][eRaw_]:= Module[{e, trials, tryRulesOnList, sortByRank, replaceListOnList, rank},
+	replaceListOnList = Map[ReplaceList[#, rule]&, #]&;
+	rank = TrySimpRank@rankRaw;
+	e = try[rule, rank, level-1] @ eRaw;
+	sortByRank=SortBy[#, rank]&;
+	tryRulesOnList = tryCropList @ sortByRank @ DeleteDuplicates @ Flatten @ replaceListOnList @ # &;
+	trials = Nest[tryRulesOnList, {e}, level];
+	If[trials=!={} && rank@trials[[1]]<rank@e, 
+		(* check & debug IBP *)(*If[(trials[[1]]-e//.{PdHold[f__]\[RuleDelayed]Pd[f], IdHold[f_]\[RuleDelayed]f}//Simp) =!= 0, Print[trials[[1]]-e//Simp];Print[trials[[1]]-e//.{PdHold[f__]\[RuleDelayed]Pd[f], IdHold[f_]\[RuleDelayed]f}//Simp]];*)
+		PrintTemporary["Improved at level "<>ToString[level]<>", with rank "<>ToString@CForm@N@rank@trials[[1]] ]; trials[[1]];
+		try[rule, rank, level][trials[[1]]], 
+		PrintTemporary["No improvement found at level "<>ToString[level]<>". Try harder or stop."];e] ]
+
+Options[TrySimp] = {"Rank"->LeafCount, "Level"->1}
+TrySimp[e_, rule_, OptionsPattern[]]:= try[rule, OptionValue@"Rank", OptionValue["Level"]][e]
 
 
 (* ::Section:: *)
@@ -79,17 +79,17 @@ Pm2Rules = Dispatch@{(* Note: Pm2 is defined in momentum space. Thus there is no
 IbpRules = Dispatch@({
 	(*a_. PdT[b_, PdVars[c_, etc___]] + e_. :> PdHold[a PdT[b, PdVars[etc]], c] + e - Simp[PdT[b, PdVars[etc]] Pd[a,c]],*)
 	a_. PdT[b_, PdVars[c_, etc___]]^n_. + e_. :> Simp[PdHold[a PdT[b, PdVars[etc]] PdT[b, PdVars[c, etc]]^(n-1), c] - PdT[b, PdVars[etc]] Pd[a PdT[b, PdVars[c, etc]]^(n-1), c]] + e,
-  a_. PdT[b_, PdVars[c_, d_, etc___]] + e_. :> Simp[PdHold[a PdT[b, PdVars[d, etc]], c] - PdHold[PdT[b, PdVars[etc]] Pd[a, c], d] + PdT[b, PdVars[etc]] PdT[a, PdVars[c,d]]]+ e,
+	a_. PdT[b_, PdVars[c_, d_, etc___]] + e_. :> Simp[PdHold[a PdT[b, PdVars[d, etc]], c] - PdHold[PdT[b, PdVars[etc]] Pd[a, c], d] + PdT[b, PdVars[etc]] PdT[a, PdVars[c,d]]]+ e,
 	a_. b_^n_. PdT[b_, PdVars[c_]] + e_. :> e + Simp[ PdHold[a b^(n+1)/(n+1), c]  - b^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
 	a_. PdT[b_, PdVars[etc___]]^n_. PdT[b_, PdVars[c_, etc___]] + e_. :> e + Simp[ PdHold[a PdT[b, PdVars[etc]]^(n+1) / (n+1), c] - PdT[b, PdVars[etc]]^(n+1) Pd[a, c] / (n+1) ] /;n=!=-1,
 	
 	h_. + g_. PdT[t_, PdVars[a_, b_, e___]]^2 :> With[{f=PdT[t, PdVars[e]]}, h + Simp[
 		PdHold[g Pd[Pd[f,a],b]Pd[f,b], a] - PdHold[g Pd[Pd[f,a],a]Pd[f,b], b] - Pd[g,a]Pd[Pd[f,a],b]Pd[f,b] + Pd[g,b]Pd[Pd[f,a],a]Pd[f,b] + g Pd[Pd[f,a],a]Pd[Pd[f,b],b] ]],
 	
-  PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_. + n_. /; Order[a,b]>=0 :> Simp[PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b]
+	PdT[f_,PdVars[a_,e1___]]PdT[g_,PdVars[b_,e2___]]h_. + n_. /; Order[a,b]>=0 :> Simp[PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b]h, a] - PdHold[PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]h, b]
 		+ Pd[PdT[f,PdVars[e1]],b]Pd[PdT[g,PdVars[e2]],a]h + PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],a]Pd[h,b] - PdT[f,PdVars[e1]] Pd[PdT[g,PdVars[e2]],b] Pd[h,a]] + n,
 	(* some special higher order rules *)
-	x_. + f_. PdT[z_, PdVars[a_, e___]]PdT[z_, PdVars[b_, c_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :>
+	x_. + f_. PdT[z_, PdVars[a_, e___]]PdT[z_, PdVars[b_, c_, e___]] /; Order[a,b]>=0 && MatchQ[a, IdxPtn] && MatchQ[b, IdxPtn] && !FreeQ[f,a] && !FreeQ[f,b]&& Expand[f-(f/.{a->b,b->a})]===0 :>
 		x + Simp[PdHold[f PdT[z, PdVars[a, e]]PdT[z, PdVars[b, e]]/2, c] - Pd[f,c]PdT[z, PdVars[a, e]]PdT[z, PdVars[b, e]]/2],
 	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 :> With[{g=PdT[h,PdVars[e]]},
 		x + Simp[PdHold[f Pd[g,c]Pd[g,b]Pd[Pd[g,a],b] - f Pd[g,b]^2 Pd[Pd[g,a],c]/2 - Pd[f,a] Pd[g,b]^2 Pd[g,c]/2, a] 
@@ -97,8 +97,9 @@ IbpRules = Dispatch@({
 		+ f Pd[g,c]Pd[Pd[g,a],a]Pd[Pd[g,b],b] - Pd[f,c]Pd[g,b]^2 Pd[Pd[g,a],a]/2 
 		+ Pd[f,b]Pd[g,c]Pd[g,b]Pd[Pd[g,a],a] + Pd[Pd[f,a],a]Pd[g,c]Pd[g,b]^2/2 + Pd[f,a]Pd[Pd[g,a],c]Pd[g,b]^2]	],
 	(*x_. + f_. g_ PdT[g_, PdVars[a_,b_,b_]] :> x + Simp[PdHold[f g Pd[Pd[g,a],b], b] - PdHold[f Pd[g,b]^2/2, a] - Pd[f,b] g Pd[Pd[g,a],b] + Pd[f,a]Pd[g,b]^2/2],*)
-	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] /; Order[a,b]>=0 && Expand[f-(f/.{a->b,b->a})]===0 :> With[{g=PdT[h,PdVars[e]]},
-		x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Normal[Pm2Rules])
+	x_. + f_. PdT[h_, PdVars[c_, e___]]PdT[h_, PdVars[a_, b_, e___]] \
+		/; Order[a,b]>=0 && MatchQ[a, IdxPtn] && MatchQ[b, IdxPtn] && !FreeQ[f,a] && !FreeQ[f,b] && Expand[f-(f/.{a->b,b->a})]===0 (* make sure a and b are summation indices, and f actually depends on a, b and is symmetric *) \
+		:> With[{g=PdT[h,PdVars[e]]}, x + Simp[PdHold[f Pd[g,c]Pd[g,b], a] - PdHold[f Pd[g,a]Pd[g,b]/2, c] -Pd[f,a]Pd[g,c]Pd[g,b] + Pd[f,c]Pd[g,a]Pd[g,b]/2] ]} ~Join~ Normal[Pm2Rules])
 
 Options[Ibp] = {"Rule":>IbpRules, "Rank"->IbpCountLeaf, "Level"->1}
 Ibp[e_, OptionsPattern[]]:= try[OptionValue@"Rule", OptionValue@"Rank", OptionValue["Level"]][Simp@e]
@@ -117,6 +118,8 @@ IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 	Total[100^(5-#)&/@eOrderList]-100^5 + IbpCountLeaf[e] + IbpCountTerm[e]]
 
 IbpVariation[e_, v_]:= FixedPoint[Replace[#, a_. + b_.*PdT[f_, PdVars[i_, j___]] /; FreeQ[b, v] && ! FreeQ[f, v] :> a - Simp[PdT[f, PdVars[j]]*Pd[b, i]]] &, Simp[e]]
+
+Pm2Simp[e_]:= TrySimp[Simp@e, Pm2Rules, "Rank"->IbpCountLeaf]
 
 End[]
 EndPackage[]
