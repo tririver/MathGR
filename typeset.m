@@ -60,6 +60,8 @@ If[$FrontEnd===Null, Print["(typeset.m): No FrontEnd detected. StandardForm and 
 
 
 
+
+
 (* ::Section:: *)
 (* Tensor *)
 
@@ -136,6 +138,9 @@ MakeBoxes[Pm2[a_, type_], form_] := TagBox[RowBox[{TagBox[StyleBox[SuperscriptBo
 MakeExpression[TagBox[RowBox[{TagBox[_, type_], "(", a_, ")"}], "mgrPm2",___], StandardForm]:= With[{expr=Pm2[ToExpression[a, StandardForm], type]}, HoldComplete[expr]];
 *)
 
+
+MakeBoxes[\[CapitalSampi], StandardForm]:= TagBox["\[PartialD]", "mgrSa", Selectable->False];
+MakeExpression[TagBox["\[PartialD]","mgrSa",___], StandardForm]:= HoldComplete@\[CapitalSampi];
 
 MakeBoxes[PdT[f_, PdVars[i__]], StandardForm] /; FreeQ[{i}, DE@0] || !FreeQ[{f}, Pm2] := 
 	With[{id = mkPd[StandardForm]@i}, TagBox[RowBox[{GridBox[{{id, GridBox[{{MakeBoxes[f, StandardForm]}},Selectable->True]}}, ColumnSpacings->0, RowSpacings->0],""}], "mgrPd", Selectable->False]];
