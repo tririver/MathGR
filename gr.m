@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
 BeginPackage["MathGR`gr`", {"MathGR`tensor`"}]
 
@@ -59,9 +61,13 @@ mcTerm[tRaw_]:=Module[{t, cnt=1, idTab, metrics, tmp=Unique[]},
 
 freeUD:= Function[x,Intersection[x,MathGR`tensor`Private`free@#]] /@ {Cases[times2prod@#, iu[a_]:>a, Infinity], Cases[times2prod@#, id[a_]:>a, Infinity] }&
 freeUDSample:= freeUD[getSampleTerm@#]&
+
 CovD[t_, m_?isd]:=Module[{uf, df, uniq=Unique[]},
 	{uf, df} = freeUDSample[Expand@t];
 	Pd[t,m] + Sum[Affine[i,m,id@uniq](t/.i->iu@uniq),{i,iu/@uf}] - Sum[Affine[iu@uniq,m,i](t/.i->id@uniq),{i,id/@df}]]
+
+CovD[t_, m_?isu] := With[{n = Unique[]},
+  g[m, (Head@m)@n] CovD[t, IdxDual[Head@m] @ n]]
 
 With[{g:=Metric, r:=Affine},
 	r[i_?isu, m_?isd, n_?isd]:= 1/2 g[i, iu@#](Pd[g[id@#, m], n] + Pd[g[id@#, n], m] - Pd[g[m, n], id@#]) &@Uq[1];
