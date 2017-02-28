@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
 BeginPackage["MathGR`tensor`"]
 
@@ -71,8 +73,11 @@ Uniq[n_Integer]:= Table[Unique[],{n}]
 Uq[n_Integer]:= Sequence@@Uniq[n]
 Uq[100]; (* Becaues of unknown reasons, the first 100 unique variables are much slower to use in some operations (that Simp used). *)
 
+
+
 (* ::Section:: *)
 (* Idx utilities *)
+
 
 LatinIdx = Join[FromCharacterCode /@ Range[97, 97 + 24], "y"<>ToString[#]&/@Range[26]]
 GreekIdx = Join[FromCharacterCode /@ Range[945, 945 + 24], "\[Omega]"<>ToString[#]&/@Range[26]]
@@ -117,12 +122,15 @@ dummy:= Cases[Tally[idx@#], {a_,2}:>a] &
 getFreeSample:= free[getSampleTerm@#]&
 
 Sym[e_, iList_]:= Plus@@ ( (e/.(iList~replaceTo~#)&) /@ Permutations[iList] )
-AntiSym[e_, iList_]:= Plus@@ ( (Signature[#] e/.(iList~replaceTo~#)&) /@ Permutations[iList] )
+AntiSym[e_, iList_]:= Signature[iList] * Plus@@ ( (Signature[#] e/.(iList~replaceTo~#)&) /@ Permutations[iList] )
 Sym[e_]:= Sym[e, free@e]
 AntiSym[e_]:= AntiSym[e, free@e]  
 
+
+
 (* ::Section:: *)
 (* Partial derivative *)
+
 
 Pd[a_Plus, i_]:= Pd[#,i]& /@ a
 Pd[a_*b_, i_]:= Pd[a,i]*b + a*Pd[b,i]
@@ -151,8 +159,11 @@ PdT[Pm2[f_, type_], PdVars[type_@i_, type_@i_, etc___]]:= PdT[f, PdVars[etc]]
 
 P[i___][f_]:=PdT[f, PdVars[i]]
 
+
+
 (* ::Section:: *)
 (* Declare and delete symmetries *)
+
 
 TensorDimensions[MAT[_][g__]] ^:= Dim[#] & /@ rmE[{g}];
 TensorRank[MAT[_][g__]] ^:= Length @ rmE @ {g};
@@ -178,8 +189,11 @@ DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[
 
 ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 
+
+
 (* ::Section:: *)
 (* Simp functions *)
+
 
 Simp::overdummy = "Index `1` appears `2` times in `3`"
 Simp::diffree = "Free index in term `1` is different from that of first term (`2`)"
@@ -277,8 +291,11 @@ assignIdx[tM_, fr_, dumSet_, conTsr_, zMat_]:= Module[{tcGetId, nthCT=0 (* count
         replaceTo[First/@marked, dumSet[#[[0]]][[(nthDummy[#[[0]]])++;(nthDummy@IdxDual[#[[0]]])++]] & /@ marked]); (* replace those marked indices with standard dummies *)
     assignDummy @ assignFree @ (times2prod @ tM/.tContract->tcGetId) /. MAT[f_]:>f /. zMat[i__]:>1 // prod2times[#, prod|TensorProduct]&]
 
+
+
 (* ::Section:: *)
 (* Check tensor validity at $Pre *)
+
 
 preCheckList = {checkNestIdx}
 
