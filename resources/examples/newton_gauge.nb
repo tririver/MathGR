@@ -1,0 +1,3323 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    119227,       3315]
+NotebookOptionsPosition[     84038,       2566]
+NotebookOutlinePosition[    118254,       3281]
+CellTagsIndexPosition[    118211,       3278]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "MathGR`"}]], "Input",
+ CellChangeTimes->{{3.6972452031742954`*^9, 3.6972452058939657`*^9}}],
+
+Cell[BoxData["\<\"MathGR, by Yi Wang (2013, 2014), \
+https://github.com/tririver/MathGR. \\nBugs can be reported to \
+https://github.com/tririver/MathGR/issues\\nLoaded components tensor, decomp, \
+gr, ibp, typeset, util.\"\>"], "Output",
+ CellChangeTimes->{
+  3.697252631611615*^9, 3.6972528970305815`*^9, 3.697253033663668*^9, {
+   3.6972534334974585`*^9, 3.6972534550076723`*^9}, {3.6972537066843348`*^9, 
+   3.697253731125841*^9}, 3.697253908381276*^9, 3.697254133816236*^9, 
+   3.6972542708156357`*^9, 3.697254327248497*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DeclareIdx", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"UP", ",", " ", "DN"}], "}"}], ",", " ", "DefaultDim", ",", " ", 
+    "LatinIdx"}], "]"}], "\:ff1b"}]], "Input",
+ CellChangeTimes->{3.6972529993761206`*^9}],
+
+Cell[BoxData[
+ RowBox[{"\:ff1b", " ", 
+  RowBox[{"DeclareIdx", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"UP", ",", "DN"}], "}"}], ",", "DefaultDim", ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"a\"\>", ",", "\<\"b\"\>", ",", "\<\"c\"\>", 
+      ",", "\<\"d\"\>", ",", "\<\"e\"\>", ",", "\<\"f\"\>", ",", "\<\"g\"\>", 
+      ",", "\<\"h\"\>", ",", "\<\"i\"\>", ",", "\<\"j\"\>", ",", "\<\"k\"\>", 
+      ",", "\<\"l\"\>", ",", "\<\"m\"\>", ",", "\<\"n\"\>", ",", "\<\"o\"\>", 
+      ",", "\<\"p\"\>", ",", "\<\"q\"\>", ",", "\<\"r\"\>", ",", "\<\"s\"\>", 
+      ",", "\<\"t\"\>", ",", "\<\"u\"\>", ",", "\<\"v\"\>", ",", "\<\"w\"\>", 
+      ",", "\<\"x\"\>", ",", "\<\"y\"\>", ",", "\<\"y1\"\>", 
+      ",", "\<\"y2\"\>", ",", "\<\"y3\"\>", ",", "\<\"y4\"\>", 
+      ",", "\<\"y5\"\>", ",", "\<\"y6\"\>", ",", "\<\"y7\"\>", 
+      ",", "\<\"y8\"\>", ",", "\<\"y9\"\>", ",", "\<\"y10\"\>", 
+      ",", "\<\"y11\"\>", ",", "\<\"y12\"\>", ",", "\<\"y13\"\>", 
+      ",", "\<\"y14\"\>", ",", "\<\"y15\"\>", ",", "\<\"y16\"\>", 
+      ",", "\<\"y17\"\>", ",", "\<\"y18\"\>", ",", "\<\"y19\"\>", 
+      ",", "\<\"y20\"\>", ",", "\<\"y21\"\>", ",", "\<\"y22\"\>", 
+      ",", "\<\"y23\"\>", ",", "\<\"y24\"\>", ",", "\<\"y25\"\>", 
+      ",", "\<\"y26\"\>"}], "}"}]}], "]"}]}]], "Output",
+ CellChangeTimes->{
+  3.697252897152517*^9, 3.6972530338103933`*^9, {3.6972534335927267`*^9, 
+   3.6972534550922995`*^9}, {3.697253706768996*^9, 3.697253731209999*^9}, 
+   3.697253908481572*^9, 3.6972541339004264`*^9, 3.6972542709472237`*^9, 
+   3.697254327410817*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"PdT", "[", 
+    RowBox[{
+     RowBox[{
+     "a", "|", "\[ScriptCapitalH]", "|", "d\[ScriptCapitalH]", "|", 
+      "\[Phi]0"}], ",", " ", 
+     RowBox[{"PdVars", "[", 
+      RowBox[{"_DN", ",", " ", "___"}], "]"}]}], "]"}], ":=", "0"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6972530078726025`*^9, 3.697253025066354*^9}, {
+  3.697253687168126*^9, 3.697253689038706*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SimpHook", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"DefaultDim", "->", "3"}], ",", " ", 
+    RowBox[{
+     RowBox[{"Pd", "[", 
+      RowBox[{"a", ",", " ", 
+       RowBox[{"DE", "@", "0"}]}], "]"}], "->", 
+     RowBox[{"a", "*", "\[ScriptCapitalH]"}]}], ",", " ", 
+    RowBox[{
+     RowBox[{"PdT", "[", 
+      RowBox[{"a", ",", " ", 
+       RowBox[{"PdVars", "[", 
+        RowBox[{
+         RowBox[{"DE", "@", "0"}], ",", 
+         RowBox[{"DE", "@", "0"}]}], "]"}]}], "]"}], " ", "->", " ", 
+     RowBox[{
+      RowBox[{"a", "*", "\[ScriptCapitalH]", "*", "\[ScriptCapitalH]"}], " ", 
+      "+", " ", 
+      RowBox[{"a", "*", "d\[ScriptCapitalH]"}]}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.6972527093175135`*^9, 3.697252749285122*^9}, {
+   3.6972528007521687`*^9, 3.6972528310096397`*^9}, 3.697252890304996*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"DefaultDim", "\[Rule]", "3"}], ",", 
+   RowBox[{
+    OverscriptBox["a", "\[Bullet]"], "\[Rule]", 
+    RowBox[{"a", " ", "\[ScriptCapitalH]"}]}], ",", 
+   RowBox[{
+    OverscriptBox["a", "\[Bullet]\[Bullet]"], "\[Rule]", 
+    RowBox[{
+     RowBox[{"a", " ", "d\[ScriptCapitalH]"}], "+", 
+     RowBox[{"a", " ", 
+      SuperscriptBox["\[ScriptCapitalH]", "2"]}]}]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.6972528971838927`*^9, 3.697253033848174*^9, {3.697253433628996*^9, 
+   3.697253455157844*^9}, {3.697253706816883*^9, 3.6972537312569475`*^9}, 
+   3.6972539085188932`*^9, 3.697254133962967*^9, 3.697254270994102*^9, 
+   3.697254327448468*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Sqrtg", ":=", " ", 
+  RowBox[{
+   SuperscriptBox["a", "4"], " ", 
+   SqrtBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{"2", "Eps", " ", "\[Phi]"}]}], ")"}], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"2", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]]}]}]], "Input",
+ CellChangeTimes->{{3.6972538344207363`*^9, 3.69725389414681*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"UseMetric", "[", "h", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"h", "[", 
+   RowBox[{
+    RowBox[{"DN", "@", "i_"}], ",", " ", 
+    RowBox[{"DN", "@", "j_"}]}], "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{"-", "a"}], " ", "*", " ", "a", " ", "*", " ", 
+   RowBox[{"(", 
+    RowBox[{"1", "-", 
+     RowBox[{"2", "Eps", " ", "\[Psi]"}]}], ")"}], " ", "*", " ", 
+   RowBox[{"Dta", "[", 
+    RowBox[{
+     RowBox[{"DN", "@", "i"}], ",", " ", 
+     RowBox[{"DN", "@", "j"}]}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"h", "[", 
+   RowBox[{
+    RowBox[{"UP", "@", "i_"}], ",", " ", 
+    RowBox[{"UP", "@", "j_"}]}], "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"Dta", "[", 
+       RowBox[{
+        RowBox[{"DN", "@", "i"}], ",", " ", 
+        RowBox[{"DN", "@", "j"}]}], "]"}]}], " ", "/", "a"}], " ", "/", "a"}],
+    " ", "/", 
+   RowBox[{"(", 
+    RowBox[{"1", "-", 
+     RowBox[{"2", "Eps", " ", "\[Psi]"}]}], ")"}]}]}]}], "Input",
+ CellChangeTimes->{{3.6972520518638334`*^9, 3.6972521031230345`*^9}, {
+  3.697252606137895*^9, 3.697252619456927*^9}, {3.697254101646448*^9, 
+  3.697254105213496*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "4", "d", " ", "metric", " ", "is", " ", "used", " ", "to", " ", "be", " ",
+     "decomposed", " ", "and", " ", "be", " ", 
+    RowBox[{"replaced", "."}]}], " ", "*)"}], "\n", 
+  RowBox[{"DecompHook", " ", "=", " ", 
+   RowBox[{"{", " ", "\n", "\t", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{
+        RowBox[{"DN", "@", "i_"}], ",", " ", 
+        RowBox[{"DN", "@", "j_"}]}], "]"}], ":>", " ", 
+      RowBox[{"h", "[", 
+       RowBox[{
+        RowBox[{"DN", "@", "i"}], ",", " ", 
+        RowBox[{"DN", "@", "j"}]}], "]"}]}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{
+        RowBox[{"DE", "@", "0"}], ",", " ", 
+        RowBox[{"DE", "@", "0"}]}], "]"}], ":>", " ", 
+      RowBox[{"a", " ", "*", " ", "a", " ", "*", " ", 
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{"2", "Eps", " ", "\[Phi]"}]}], ")"}]}]}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{
+        RowBox[{"DE", "@", "0"}], ",", " ", 
+        RowBox[{"DN", "@", "i_"}]}], "]"}], ":>", " ", "0"}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{
+        RowBox[{"UP", "@", "i_"}], ",", " ", 
+        RowBox[{"UP", "@", "j_"}]}], "]"}], ":>", " ", 
+      RowBox[{"h", "[", 
+       RowBox[{
+        RowBox[{"UP", "@", "i"}], ",", " ", 
+        RowBox[{"UP", "@", "j"}]}], "]"}]}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{
+        RowBox[{"UE", "@", "0"}], ",", " ", 
+        RowBox[{"UE", "@", "0"}]}], "]"}], ":>", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"1", " ", "/", " ", "a"}], " ", "/", " ", "a"}], " ", "/", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{"2", "Eps", " ", "\[Phi]"}]}], ")"}]}]}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{
+        RowBox[{"UE", "@", "0"}], ",", " ", 
+        RowBox[{"UP", "@", "i_"}]}], "]"}], ":>", " ", "0"}]}], 
+    "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.6972521190369906`*^9, 3.6972521509760513`*^9}, {
+  3.6972522426327505`*^9, 3.697252294597322*^9}, {3.697252622546609*^9, 
+  3.6972526260961103`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[GridBox[{
+       {GridBox[{
+          {"g"}
+         },
+         Selectable->True], GridBox[{
+          {"", ""},
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"i_"}
+              },
+              Selectable->True],
+             MathGR`tensor`DN],
+            FontSize->10,
+            FontColor->GrayLevel[0]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"j_"}
+              },
+              Selectable->True],
+             MathGR`tensor`DN],
+            FontSize->10,
+            FontColor->GrayLevel[0]]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"], "\[RuleDelayed]", 
+    TagBox[GridBox[{
+       {GridBox[{
+          {"h"}
+         },
+         Selectable->True], GridBox[{
+          {"", ""},
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"i"}
+              },
+              Selectable->True],
+             MathGR`tensor`DN],
+            FontSize->10,
+            FontColor->GrayLevel[0]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"j"}
+              },
+              Selectable->True],
+             MathGR`tensor`DN],
+            FontSize->10,
+            FontColor->GrayLevel[0]]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"]}], ",", 
+   RowBox[{
+    TagBox[GridBox[{
+       {GridBox[{
+          {"g"}
+         },
+         Selectable->True], GridBox[{
+          {"", ""},
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"0"}
+              },
+              Selectable->True],
+             MathGR`tensor`DE],
+            FontSize->10,
+            FontColor->GrayLevel[0.5]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"0"}
+              },
+              Selectable->True],
+             MathGR`tensor`DE],
+            FontSize->10,
+            FontColor->GrayLevel[0.5]]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"], "\[RuleDelayed]", 
+    RowBox[{"a", " ", "a", " ", 
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}]}]}], ",", 
+   RowBox[{
+    TagBox[GridBox[{
+       {GridBox[{
+          {"g"}
+         },
+         Selectable->True], GridBox[{
+          {"", ""},
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"0"}
+              },
+              Selectable->True],
+             MathGR`tensor`DE],
+            FontSize->10,
+            FontColor->GrayLevel[0.5]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"i_"}
+              },
+              Selectable->True],
+             MathGR`tensor`DN],
+            FontSize->10,
+            FontColor->GrayLevel[0]]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"], "\[RuleDelayed]", "0"}], ",", 
+   RowBox[{
+    TagBox[GridBox[{
+       {GridBox[{
+          {"g"}
+         },
+         Selectable->True], GridBox[{
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"i_"}
+              },
+              Selectable->True],
+             MathGR`tensor`UP],
+            FontSize->10,
+            FontColor->GrayLevel[0]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"j_"}
+              },
+              Selectable->True],
+             MathGR`tensor`UP],
+            FontSize->10,
+            FontColor->GrayLevel[0]]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"], "\[RuleDelayed]", 
+    TagBox[GridBox[{
+       {GridBox[{
+          {"h"}
+         },
+         Selectable->True], GridBox[{
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"i"}
+              },
+              Selectable->True],
+             MathGR`tensor`UP],
+            FontSize->10,
+            FontColor->GrayLevel[0]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"j"}
+              },
+              Selectable->True],
+             MathGR`tensor`UP],
+            FontSize->10,
+            FontColor->GrayLevel[0]]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"]}], ",", 
+   RowBox[{
+    TagBox[GridBox[{
+       {GridBox[{
+          {"g"}
+         },
+         Selectable->True], GridBox[{
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"0"}
+              },
+              Selectable->True],
+             MathGR`tensor`UE],
+            FontSize->10,
+            FontColor->GrayLevel[0.5]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"0"}
+              },
+              Selectable->True],
+             MathGR`tensor`UE],
+            FontSize->10,
+            FontColor->GrayLevel[0.5]]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"], "\[RuleDelayed]", 
+    FractionBox["1", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"a", " ", "a"}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}]}]]}], ",", 
+   RowBox[{
+    TagBox[GridBox[{
+       {GridBox[{
+          {"g"}
+         },
+         Selectable->True], GridBox[{
+          {
+           StyleBox[
+            TagBox[GridBox[{
+               {"0"}
+              },
+              Selectable->True],
+             MathGR`tensor`UE],
+            FontSize->10,
+            FontColor->GrayLevel[0.5]], 
+           StyleBox[
+            TagBox[GridBox[{
+               {"i_"}
+              },
+              Selectable->True],
+             MathGR`tensor`UP],
+            FontSize->10,
+            FontColor->GrayLevel[0]]},
+          {"", ""}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[-0.2]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}},
+      Selectable->False],
+     "mgrTensor",
+     Selectable->False,
+     SyntaxForm->"symbol"], "\[RuleDelayed]", "0"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.697252631764303*^9, 3.6972528972307806`*^9, 3.697253033879425*^9, {
+   3.6972534336975255`*^9, 3.697253455207959*^9}, {3.6972537068692827`*^9, 
+   3.6972537313259883`*^9}, 3.697253908603547*^9, 3.697254134031571*^9, 
+   3.697254271062951*^9, 3.697254327510973*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{"SetAttributes", "[", 
+  RowBox[{"DecompG2H", ",", " ", "HoldAll"}], "]"}], "\n", 
+ RowBox[{
+  RowBox[{"DecompG2H", "[", "f_", "]"}], ":=", " ", 
+  RowBox[{"Decomp0i", "@", 
+   RowBox[{"WithMetric", "[", 
+    RowBox[{"g", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"UTot", ",", " ", "DTot"}], "}"}], ",", " ", 
+     RowBox[{"MetricContract", "[", "f", "]"}]}], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{"sFull", "=", 
+   RowBox[{
+    RowBox[{"Sqrtg", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"RADM", "[", "]"}], "/", "2"}], "+", 
+       RowBox[{"DecompG2H", "[", 
+        RowBox[{"X", "[", "\[Phi]", "]"}], "]"}], "-", 
+       RowBox[{"V", "[", "\[Phi]", "]"}]}], ")"}]}], "//", "Simp"}]}], " ", 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.6972542544748993`*^9, 3.6972542606519823`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sFull", "=", 
+  RowBox[{
+   RowBox[{"Sqrtg", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"DecompG2H", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{"R", "[", "]"}]}], "/", "2"}], "-", 
+        RowBox[{"X", "[", 
+         RowBox[{"\[Phi]0", "+", 
+          RowBox[{"Eps", " ", "\[Delta]\[Phi]"}]}], "]"}]}], "]"}], "-", 
+      RowBox[{"V", "[", 
+       RowBox[{"\[Phi]0", "+", 
+        RowBox[{"Eps", " ", "\[Delta]\[Phi]"}]}], "]"}]}], ")"}]}], "//", 
+   "Simp"}]}]], "Input",
+ CellChangeTimes->{{3.6972529684100847`*^9, 3.697252978486472*^9}, {
+   3.6972536956568213`*^9, 3.697253719223342*^9}, 3.697254125649325*^9, 
+   3.6972542433467226`*^9, {3.6972543132148576`*^9, 3.6972543153336306`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "+", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["\[ScriptCapitalH]", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "-", 
+  FractionBox[
+   RowBox[{"6", " ", 
+    SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", "Eps", " ", 
+    "\[Psi]", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "-", 
+  FractionBox[
+   RowBox[{"6", " ", 
+    SuperscriptBox["a", "2"], " ", "Eps", " ", 
+    SuperscriptBox["\[ScriptCapitalH]", "2"], " ", "\[Psi]", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["Eps", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    SuperscriptBox[
+     OverscriptBox["\[Delta]\[Phi]", "\[Bullet]"], "2"]}], 
+   RowBox[{"2", " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}]}]], "-", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["Eps", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      TagBox[GridBox[{
+         {
+          TagBox[GridBox[{
+             {GridBox[{
+                {
+                 TagBox["\[PartialD]",
+                  "mgrSa",
+                  Selectable->False]}
+               },
+               Selectable->True], GridBox[{
+                {""},
+                {
+                 StyleBox[
+                  TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                    },
+                    Selectable->True],
+                   MathGR`tensor`DN],
+                  FontSize->10,
+                  FontColor->GrayLevel[0]]}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[-0.2]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}}]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->False],
+           "mgrTensor",
+           Selectable->False,
+           SyntaxForm->"symbol"], GridBox[{
+            {"\[Delta]\[Phi]"}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "mgrPd",
+       Selectable->False], ")"}], "2"]}], 
+   RowBox[{"2", " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "-", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["a", "2"], " ", "Eps", " ", "\[ScriptCapitalH]", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    OverscriptBox["\[Phi]", "\[Bullet]"]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], "2"]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["Eps", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      TagBox[GridBox[{
+         {
+          TagBox[GridBox[{
+             {GridBox[{
+                {
+                 TagBox["\[PartialD]",
+                  "mgrSa",
+                  Selectable->False]}
+               },
+               Selectable->True], GridBox[{
+                {""},
+                {
+                 StyleBox[
+                  TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                    },
+                    Selectable->True],
+                   MathGR`tensor`DN],
+                  FontSize->10,
+                  FontColor->GrayLevel[0]]}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[-0.2]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}}]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->False],
+           "mgrTensor",
+           Selectable->False,
+           SyntaxForm->"symbol"], GridBox[{
+            {"\[Phi]"}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "mgrPd",
+       Selectable->False], ")"}], "2"]}], 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "-", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", "Eps", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], 
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Phi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", "Eps", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    OverscriptBox["\[Delta]\[Phi]", "\[Bullet]"], " ", 
+    OverscriptBox["\[Phi]0", "\[Bullet]"]}], 
+   RowBox[{"1", "+", 
+    RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    SuperscriptBox[
+     OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], 
+   RowBox[{"2", " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}]}]], "-", 
+  FractionBox[
+   RowBox[{"9", " ", 
+    SuperscriptBox["a", "2"], " ", "Eps", " ", "\[ScriptCapitalH]", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    OverscriptBox["\[Psi]", "\[Bullet]"]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "+", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["Eps", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    OverscriptBox["\[Phi]", "\[Bullet]"], " ", 
+    OverscriptBox["\[Psi]", "\[Bullet]"]}], 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["Eps", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Phi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}], " ", 
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Psi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "2"]}]], "+", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["a", "2"], " ", 
+    SuperscriptBox["Eps", "2"], " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      TagBox[GridBox[{
+         {
+          TagBox[GridBox[{
+             {GridBox[{
+                {
+                 TagBox["\[PartialD]",
+                  "mgrSa",
+                  Selectable->False]}
+               },
+               Selectable->True], GridBox[{
+                {""},
+                {
+                 StyleBox[
+                  TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                    },
+                    Selectable->True],
+                   MathGR`tensor`DN],
+                  FontSize->10,
+                  FontColor->GrayLevel[0]]}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[-0.2]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}}]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->False],
+           "mgrTensor",
+           Selectable->False,
+           SyntaxForm->"symbol"], GridBox[{
+            {"\[Psi]"}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "mgrPd",
+       Selectable->False], ")"}], "2"]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]], "-", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["a", "2"], " ", "Eps", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    OverscriptBox["\[Psi]", "\[Bullet]\[Bullet]"]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}]}]], "+", 
+  FractionBox[
+   RowBox[{"2", " ", 
+    SuperscriptBox["a", "2"], " ", "Eps", " ", 
+    SqrtBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], 
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Psi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "2"]], "-", 
+  RowBox[{
+   SuperscriptBox["a", "4"], " ", 
+   SqrtBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{"2", " ", "Eps", " ", "\[Phi]"}]}], ")"}], " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"2", " ", "Eps", " ", "\[Psi]"}]}], ")"}], "3"]}]], " ", 
+   RowBox[{"V", "[", 
+    RowBox[{
+     RowBox[{"Eps", " ", "\[Delta]\[Phi]"}], "+", "\[Phi]0"}], 
+    "]"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.697252979435153*^9, 3.6972530345338726`*^9, {3.697253434298894*^9, 
+   3.69725345607929*^9}, {3.697253707485715*^9, 3.697253732058814*^9}, 
+   3.6972539102213907`*^9, 3.6972541356022778`*^9, 3.69725427178059*^9, 
+   3.697254328130866*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"s0", "=", 
+  RowBox[{
+   RowBox[{"sFull", "//", 
+    RowBox[{"OO", "[", "0", "]"}]}], "//", "Expand"}]}]], "Input",
+ CellChangeTimes->{{3.697253749025628*^9, 3.6972537512607293`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]"}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[ScriptCapitalH]", "2"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], "-", 
+  RowBox[{
+   SuperscriptBox["a", "4"], " ", 
+   RowBox[{"V", "[", "\[Phi]0", "]"}]}]}]], "Output",
+ CellChangeTimes->{3.697253751776554*^9, 3.697253910320762*^9, 
+  3.6972541357178345`*^9, 3.697254271849619*^9, 3.6972543282336864`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"s1", "=", 
+  RowBox[{
+   RowBox[{"sFull", "//", 
+    RowBox[{"OO", "[", "1", "]"}]}], "//", "Expand"}]}]], "Input",
+ CellChangeTimes->{{3.6972534276203313`*^9, 3.6972534277362585`*^9}, 
+   3.6972537557492895`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "3"}], " ", 
+   SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", "\[Phi]"}], "-", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[ScriptCapitalH]", "2"], " ", "\[Phi]"}], "-", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", "\[Psi]"}], "-", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[ScriptCapitalH]", "2"], " ", "\[Psi]"}], "-", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", "\[ScriptCapitalH]", " ", 
+   OverscriptBox["\[Phi]", "\[Bullet]"]}], "-", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], 
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Phi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", 
+   OverscriptBox["\[Delta]\[Phi]", "\[Bullet]"], " ", 
+   OverscriptBox["\[Phi]0", "\[Bullet]"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", "\[Phi]", " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], "-", 
+  RowBox[{
+   FractionBox["3", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", "\[Psi]", " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], "-", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "\[ScriptCapitalH]", " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]"]}], "-", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]\[Bullet]"]}], "+", 
+  RowBox[{"2", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], 
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Psi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "-", 
+  RowBox[{
+   SuperscriptBox["a", "4"], " ", "\[Phi]", " ", 
+   RowBox[{"V", "[", "\[Phi]0", "]"}]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "4"], " ", "\[Psi]", " ", 
+   RowBox[{"V", "[", "\[Phi]0", "]"}]}], "-", 
+  RowBox[{
+   SuperscriptBox["a", "4"], " ", "\[Delta]\[Phi]", " ", 
+   RowBox[{
+    SuperscriptBox["V", "\[Prime]",
+     MultilineFunction->None], "[", "\[Phi]0", "]"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.697253091606244*^9, {3.6972534282209396`*^9, 3.697253456242092*^9}, {
+   3.6972537075703793`*^9, 3.6972537561124015`*^9}, 3.6972539104205694`*^9, 
+   3.697254135817733*^9, 3.697254272017979*^9, 3.6972543283319883`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"s2", "=", 
+  RowBox[{
+   RowBox[{"sFull", "//", 
+    RowBox[{"OO", "[", "2", "]"}]}], "//", "Expand"}]}]], "Input",
+ CellChangeTimes->{{3.697254353333479*^9, 3.6972543552884207`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   FractionBox["9", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", 
+   SuperscriptBox["\[Phi]", "2"]}], "+", 
+  RowBox[{
+   FractionBox["9", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[ScriptCapitalH]", "2"], " ", 
+   SuperscriptBox["\[Phi]", "2"]}], "+", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", "\[Phi]", " ", 
+   "\[Psi]"}], "+", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[ScriptCapitalH]", "2"], " ", "\[Phi]", " ", "\[Psi]"}], 
+  "+", 
+  RowBox[{
+   FractionBox["9", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", "d\[ScriptCapitalH]", " ", 
+   SuperscriptBox["\[Psi]", "2"]}], "+", 
+  RowBox[{
+   FractionBox["9", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[ScriptCapitalH]", "2"], " ", 
+   SuperscriptBox["\[Psi]", "2"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Delta]\[Phi]", "\[Bullet]"], "2"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox[
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Delta]\[Phi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}], "2"]}], "+", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "\[ScriptCapitalH]", " ", "\[Phi]", " ", 
+   OverscriptBox["\[Phi]", "\[Bullet]"]}], "+", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "\[ScriptCapitalH]", " ", "\[Psi]", " ", 
+   OverscriptBox["\[Phi]", "\[Bullet]"]}], "+", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox[
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Phi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}], "2"]}], "+", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", "\[Phi]", " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], 
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Phi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", "\[Psi]", " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], 
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Phi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "-", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", "\[Phi]", " ", 
+   OverscriptBox["\[Delta]\[Phi]", "\[Bullet]"], " ", 
+   OverscriptBox["\[Phi]0", "\[Bullet]"]}], "-", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", "\[Psi]", " ", 
+   OverscriptBox["\[Delta]\[Phi]", "\[Bullet]"], " ", 
+   OverscriptBox["\[Phi]0", "\[Bullet]"]}], "+", 
+  RowBox[{
+   FractionBox["3", "4"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[Phi]", "2"], " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], "+", 
+  RowBox[{
+   FractionBox["3", "2"], " ", 
+   SuperscriptBox["a", "2"], " ", "\[Phi]", " ", "\[Psi]", " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], "+", 
+  RowBox[{
+   FractionBox["3", "4"], " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox["\[Psi]", "2"], " ", 
+   SuperscriptBox[
+    OverscriptBox["\[Phi]0", "\[Bullet]"], "2"]}], "+", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "\[ScriptCapitalH]", " ", "\[Phi]", " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]"]}], "+", 
+  RowBox[{"9", " ", 
+   SuperscriptBox["a", "2"], " ", "\[ScriptCapitalH]", " ", "\[Psi]", " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]"]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   OverscriptBox["\[Phi]", "\[Bullet]"], " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]"]}], "+", 
+  RowBox[{
+   SuperscriptBox["a", "2"], " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Phi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}], " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Psi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", 
+   SuperscriptBox[
+    RowBox[{"(", 
+     TagBox[GridBox[{
+        {
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                TagBox["\[PartialD]",
+                 "mgrSa",
+                 Selectable->False]}
+              },
+              Selectable->True], GridBox[{
+               {""},
+               {
+                StyleBox[
+                 TagBox[GridBox[{
+                    {"\<\"a\"\>"}
+                   },
+                   Selectable->True],
+                  MathGR`tensor`DN],
+                 FontSize->10,
+                 FontColor->GrayLevel[0]]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[-0.2]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->False],
+          "mgrTensor",
+          Selectable->False,
+          SyntaxForm->"symbol"], GridBox[{
+           {"\[Psi]"}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "mgrPd",
+      Selectable->False], ")"}], "2"]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", "\[Phi]", " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]\[Bullet]"]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "2"], " ", "\[Psi]", " ", 
+   OverscriptBox["\[Psi]", "\[Bullet]\[Bullet]"]}], "+", 
+  RowBox[{"2", " ", 
+   SuperscriptBox["a", "2"], " ", "\[Phi]", " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], 
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Psi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "+", 
+  RowBox[{"2", " ", 
+   SuperscriptBox["a", "2"], " ", "\[Psi]", " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], 
+        TagBox[GridBox[{
+           {GridBox[{
+              {
+               TagBox["\[PartialD]",
+                "mgrSa",
+                Selectable->False]}
+             },
+             Selectable->True], GridBox[{
+              {""},
+              {
+               StyleBox[
+                TagBox[GridBox[{
+                   {"\<\"a\"\>"}
+                  },
+                  Selectable->True],
+                 MathGR`tensor`DN],
+                FontSize->10,
+                FontColor->GrayLevel[0]]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[-0.2]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}},
+          Selectable->False],
+         "mgrTensor",
+         Selectable->False,
+         SyntaxForm->"symbol"], GridBox[{
+          {"\[Psi]"}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     "mgrPd",
+     Selectable->False], ")"}]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["a", "4"], " ", 
+   SuperscriptBox["\[Phi]", "2"], " ", 
+   RowBox[{"V", "[", "\[Phi]0", "]"}]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "4"], " ", "\[Phi]", " ", "\[Psi]", " ", 
+   RowBox[{"V", "[", "\[Phi]0", "]"}]}], "-", 
+  RowBox[{
+   FractionBox["3", "2"], " ", 
+   SuperscriptBox["a", "4"], " ", 
+   SuperscriptBox["\[Psi]", "2"], " ", 
+   RowBox[{"V", "[", "\[Phi]0", "]"}]}], "-", 
+  RowBox[{
+   SuperscriptBox["a", "4"], " ", "\[Delta]\[Phi]", " ", "\[Phi]", " ", 
+   RowBox[{
+    SuperscriptBox["V", "\[Prime]",
+     MultilineFunction->None], "[", "\[Phi]0", "]"}]}], "+", 
+  RowBox[{"3", " ", 
+   SuperscriptBox["a", "4"], " ", "\[Delta]\[Phi]", " ", "\[Psi]", " ", 
+   RowBox[{
+    SuperscriptBox["V", "\[Prime]",
+     MultilineFunction->None], "[", "\[Phi]0", "]"}]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["a", "4"], " ", 
+   SuperscriptBox["\[Delta]\[Phi]", "2"], " ", 
+   RowBox[{
+    SuperscriptBox["V", "\[Prime]\[Prime]",
+     MultilineFunction->None], "[", "\[Phi]0", "]"}]}]}]], "Output",
+ CellChangeTimes->{3.697254355855825*^9}]
+}, Open  ]]
+},
+WindowSize->{1292, 1725},
+WindowMargins->{{-11, Automatic}, {Automatic, 0}},
+InputAliases->{"addia" -> RowBox[{"AddInputAlias", "[", 
+     RowBox[{"\"\[SelectionPlaceholder]\"", "\[Rule]", 
+       TemplateBox[{"\[Placeholder]"}, "NotationTemplateTag"]}], "]"}], "bra" -> 
+  TemplateBox[{"\[SelectionPlaceholder]"}, "Bra"], "braket" -> 
+  TemplateBox[{"\[SelectionPlaceholder]", "\[Placeholder]"}, "BraKet"], 
+  "cbrt" -> RadicalBox[
+   "\[SelectionPlaceholder]", "3", SurdForm -> True, MultilineFunction -> 
+    None], "del." -> RowBox[{
+     SubscriptBox["\[Del]", "\[SelectionPlaceholder]"], ".", 
+     "\[Placeholder]"}], "del2" -> RowBox[{
+     SubsuperscriptBox["\[Del]", "\[SelectionPlaceholder]", 2], 
+     "\[Placeholder]"}], "delay" -> 
+  TemplateBox[{"\[SelectionPlaceholder]"}, "SystemsModelDelay"], "delx" -> 
+  RowBox[{
+     SubscriptBox["\[Del]", "\[SelectionPlaceholder]"], "\[Cross]", 
+     "\[Placeholder]"}], "dintt" -> RowBox[{
+     SubsuperscriptBox[
+     "\[Integral]", "\[SelectionPlaceholder]", "\[Placeholder]"], 
+     RowBox[{"\[Placeholder]", 
+       RowBox[{"\[DifferentialD]", "\[Placeholder]"}]}]}], "dt" -> RowBox[{
+     SubscriptBox["\[PartialD]", "\[Placeholder]"], " ", 
+     "\[SelectionPlaceholder]"}], "e0" -> TagBox[
+    StyleBox["\[SelectionPlaceholder]", 
+     RGBColor[0.5, 0, 0.5]], "GREFX0", Selectable -> False], "ed" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{""}, {"\[Placeholder]"}}, ColumnSpacings -> 0, RowSpacings -> 
+         0, Selectable -> True], FontSize -> 10]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0], "GRETsr", Selectable -> False], "edd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"", ""}, {"\[Placeholder]", "\[Placeholder]"}}, 
+         ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> True], FontSize -> 
+        10]}}, ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> 
+    False], "edddd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"", "", "", ""}, {
+          "\[Placeholder]", "\[Placeholder]", "\[Placeholder]", 
+           "\[Placeholder]"}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+         Selectable -> True], FontSize -> 10]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0], "GRETsr", Selectable -> False], "edu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"", "\[Placeholder]"}, {"\[Placeholder]", ""}}, 
+         ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> True], FontSize -> 
+        10]}}, ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> 
+    False], "ep" -> RowBox[{
+     SubscriptBox["\[PartialD]", 
+      RowBox[{"\[SelectionPlaceholder]"}]], "\[Placeholder]"}], "et" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"\[Placeholder]"}, {"\[Placeholder]"}}, ColumnSpacings -> 0,
+          RowSpacings -> 0, Selectable -> True], FontSize -> 10]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> False], 
+  "eu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"\[Placeholder]"}, {""}}, ColumnSpacings -> 0, RowSpacings -> 
+         0, Selectable -> True], FontSize -> 10]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0], "GRETsr", Selectable -> False], "eud" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"\[Placeholder]", ""}, {"", "\[Placeholder]"}}, 
+         ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> True], FontSize -> 
+        10]}}, ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> 
+    False], "eudd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"\[Placeholder]", "", ""}, {
+          "", "\[Placeholder]", "\[Placeholder]"}}, ColumnSpacings -> 0, 
+         RowSpacings -> 0, Selectable -> True], FontSize -> 10]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> False], 
+  "euddd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"\[Placeholder]", "", "", ""}, {
+          "", "\[Placeholder]", "\[Placeholder]", "\[Placeholder]"}}, 
+         ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> True], FontSize -> 
+        10]}}, ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> 
+    False], "euu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       StyleBox[
+        GridBox[{{"\[Placeholder]", "\[Placeholder]"}, {"", ""}}, 
+         ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> True], FontSize -> 
+        10]}}, ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> 
+    False], "ex" -> TagBox[
+    StyleBox["\[SelectionPlaceholder]", 
+     RGBColor[1, 0, 0]], "GREFX", Selectable -> False], "grad" -> RowBox[{
+     SubscriptBox["\[Del]", "\[SelectionPlaceholder]"], "\[Placeholder]"}], 
+  "ia" -> TemplateBox[{"\[SelectionPlaceholder]"}, "Inactive"], 
+  "infixnotation" -> RowBox[{"InfixNotation", "[", 
+     RowBox[{
+       TemplateBox[{"\[SelectionPlaceholder]"}, "NotationTemplateTag"], ",", 
+       "\[Placeholder]"}], "]"}], "intt" -> RowBox[{"\[Integral]", 
+     RowBox[{"\[SelectionPlaceholder]", 
+       RowBox[{"\[DifferentialD]", "\[Placeholder]"}]}]}], "ket" -> 
+  TemplateBox[{"\[SelectionPlaceholder]"}, "Ket"], "madeboxeswraper" -> 
+  TemplateBox[{"\[SelectionPlaceholder]"}, "NotationMadeBoxesTag"], 
+  "notation" -> RowBox[{"Notation", "[", 
+     RowBox[{
+       TemplateBox[{"\[SelectionPlaceholder]"}, "NotationTemplateTag"], " ", 
+       "\[DoubleLongLeftRightArrow]", " ", 
+       TemplateBox[{"\[Placeholder]"}, "NotationTemplateTag"]}], "]"}], 
+  "notation<" -> RowBox[{"Notation", "[", 
+     RowBox[{
+       TemplateBox[{"\[SelectionPlaceholder]"}, "NotationTemplateTag"], " ", 
+       "\[DoubleLongLeftArrow]", " ", 
+       TemplateBox[{"\[Placeholder]"}, "NotationTemplateTag"]}], "]"}], 
+  "notation>" -> RowBox[{"Notation", "[", 
+     RowBox[{
+       TemplateBox[{"\[SelectionPlaceholder]"}, "NotationTemplateTag"], " ", 
+       "\[DoubleLongRightArrow]", " ", 
+       TemplateBox[{"\[Placeholder]"}, "NotationTemplateTag"]}], "]"}], 
+  "pattwraper" -> 
+  TemplateBox[{"\[SelectionPlaceholder]"}, "NotationPatternTag"], "prodt" -> 
+  RowBox[{
+     UnderoverscriptBox["\[Product]", 
+      RowBox[{"\[SelectionPlaceholder]", "=", "\[Placeholder]"}], 
+      "\[Placeholder]"], "\[Placeholder]"}], "sumt" -> RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"\[SelectionPlaceholder]", "=", "\[Placeholder]"}], 
+      "\[Placeholder]"], "\[Placeholder]"}], "surd" -> 
+  RadicalBox[
+   "\[SelectionPlaceholder]", "\[Placeholder]", SurdForm -> True, 
+    MultilineFunction -> None], "symb" -> RowBox[{"Symbolize", "[", 
+     TemplateBox[{"\[SelectionPlaceholder]"}, "NotationTemplateTag"], "]"}], 
+  "td" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "td0" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`DE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10]}}, ColumnSpacings -> 
+        0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+     Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", Selectable -> 
+    False], "td0d0" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`DE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`DE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10]}}, ColumnSpacings -> 
+        0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+     Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", Selectable -> 
+    False], "td0u0" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`UE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10]}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`DE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10], ""}}, ColumnSpacings -> 
+        0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+     Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", Selectable -> 
+    False], "td1" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D1], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "td1d1" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D1], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D1], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "td1u1" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U1], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D1], FontColor -> GrayLevel[0], FontSize -> 10], 
+          ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "td2" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10]}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "td2d2" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10]}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "td2u2" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10]}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10], ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tdd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tddd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", "", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tdddd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", "", "", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tdt" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10]}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tdtdt" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", ""}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10]}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tdtut" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10]}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10], ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tdu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tp" -> TagBox[
+    RowBox[{
+      GridBox[{{
+         TagBox[
+          GridBox[{{
+             GridBox[{{"\[CapitalSampi]"}}, Selectable -> True], 
+             GridBox[{{""}, {
+                StyleBox[
+                 TagBox[
+                  
+                  GridBox[{{"\"\[SelectionPlaceholder]\""}}, Selectable -> 
+                   True], MathGR`tensor`DN], FontColor -> GrayLevel[0], 
+                 FontSize -> 10]}}, ColumnSpacings -> 0, 
+              RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+           Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", 
+          Selectable -> False], 
+         GridBox[{{"\[Placeholder]"}}, Selectable -> True]}}, ColumnSpacings -> 
+       0, RowSpacings -> 0], ""}], "mgrPd", Selectable -> False], "tp0" -> 
+  OverscriptBox["\[SelectionPlaceholder]", "\[Bullet]"], "tp1" -> TagBox[
+    RowBox[{
+      GridBox[{{
+         TagBox[
+          GridBox[{{
+             GridBox[{{"\[CapitalSampi]"}}, Selectable -> True], 
+             GridBox[{{""}, {
+                StyleBox[
+                 TagBox[
+                  
+                  GridBox[{{"\"\[SelectionPlaceholder]\""}}, Selectable -> 
+                   True], MathGR`tensor`D1], FontColor -> GrayLevel[0], 
+                 FontSize -> 10]}}, ColumnSpacings -> 0, 
+              RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+           Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", 
+          Selectable -> False], 
+         GridBox[{{"\[Placeholder]"}}, Selectable -> True]}}, ColumnSpacings -> 
+       0, RowSpacings -> 0], ""}], "mgrPd", Selectable -> False], "tp2" -> 
+  TagBox[
+    RowBox[{
+      GridBox[{{
+         TagBox[
+          GridBox[{{
+             GridBox[{{"\[CapitalSampi]"}}, Selectable -> True], 
+             GridBox[{{""}, {
+                StyleBox[
+                 TagBox[
+                  
+                  GridBox[{{"\"\[SelectionPlaceholder]\""}}, Selectable -> 
+                   True], MathGR`tensor`D2], FontColor -> RGBColor[1, 0, 0], 
+                 FontSize -> 10]}}, ColumnSpacings -> 0, 
+              RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+           Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", 
+          Selectable -> False], 
+         GridBox[{{"\[Placeholder]"}}, Selectable -> True]}}, ColumnSpacings -> 
+       0, RowSpacings -> 0], ""}], "mgrPd", Selectable -> False], "tpt" -> 
+  TagBox[
+    RowBox[{
+      GridBox[{{
+         TagBox[
+          GridBox[{{
+             GridBox[{{"\[CapitalSampi]"}}, Selectable -> True], 
+             GridBox[{{""}, {
+                StyleBox[
+                 TagBox[
+                  
+                  GridBox[{{"\"\[SelectionPlaceholder]\""}}, Selectable -> 
+                   True], MathGR`tensor`DTot], FontColor -> RGBColor[0, 0, 1],
+                  FontSize -> 10]}}, ColumnSpacings -> 0, 
+              RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+           Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", 
+          Selectable -> False], 
+         GridBox[{{"\[Placeholder]"}}, Selectable -> True]}}, ColumnSpacings -> 
+       0, RowSpacings -> 0], ""}], "mgrPd", Selectable -> False], "tu" -> 
+  TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+         ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tu0" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`UE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10]}, {""}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tu0d0" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`UE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10], ""}, {"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`DE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10]}}, ColumnSpacings -> 
+        0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, RowSpacings -> 0, 
+     Selectable -> False], "mgrTensor", SyntaxForm -> "symbol", Selectable -> 
+    False], "tu0u0" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`UE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"0"}}, Selectable -> True], MathGR`tensor`UE], 
+           FontColor -> GrayLevel[0.5], FontSize -> 10]}, {"", ""}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tu1" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U1], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+         ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tu1d1" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U1], FontColor -> GrayLevel[0], FontSize -> 10], 
+          ""}, {"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D1], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tu1u1" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U1], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U1], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+         "", ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tu2" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10]}, {""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tu2d2" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10], ""}, {"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`D2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10]}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tu2u2" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`U2], FontColor -> RGBColor[1, 0, 0], FontSize -> 
+           10]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tud" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          ""}, {"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tudd" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], "",
+           ""}, {"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DN], FontColor -> GrayLevel[0], FontSize -> 10]}}, 
+        ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 0, 
+     RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tut" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10]}, {""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tutdt" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10], ""}, {"", 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`DTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10]}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, ColumnSpacings -> 
+     0, RowSpacings -> 0, Selectable -> False], "mgrTensor", SyntaxForm -> 
+    "symbol", Selectable -> False], "tutut" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UTot], FontColor -> RGBColor[0, 0, 1], FontSize -> 
+           10]}, {"", ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tuu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+         "", ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tuuu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+         "", "", ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False], "tuuuu" -> TagBox[
+    GridBox[{{
+       GridBox[{{"\[SelectionPlaceholder]"}}, Selectable -> True], 
+       GridBox[{{
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10], 
+          StyleBox[
+           TagBox[
+            GridBox[{{"\"\[Placeholder]\""}}, Selectable -> True], 
+            MathGR`tensor`UP], FontColor -> GrayLevel[0], FontSize -> 10]}, {
+         "", "", "", ""}}, ColumnSpacings -> 0, RowSpacings -> -0.5]}}, 
+     ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> False], "mgrTensor",
+     SyntaxForm -> "symbol", Selectable -> False]},
+Magnification:>0.9 Inherited,
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 121, 2, 41, "Input"],
+Cell[704, 26, 529, 8, 112, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1270, 39, 253, 7, 41, "Input"],
+Cell[1526, 48, 1554, 27, 112, "Output"]
+}, Open  ]],
+Cell[3095, 78, 419, 12, 43, "Input"],
+Cell[CellGroupData[{
+Cell[3539, 94, 859, 22, 77, "Input"],
+Cell[4401, 118, 701, 17, 50, "Output"]
+}, Open  ]],
+Cell[5117, 138, 423, 13, 58, "Input"],
+Cell[5543, 153, 1152, 35, 112, "Input"],
+Cell[CellGroupData[{
+Cell[6720, 192, 2213, 62, 287, "Input"],
+Cell[8936, 256, 11116, 368, 66, "Output"]
+}, Open  ]],
+Cell[20067, 627, 407, 10, 77, "Input"],
+Cell[20477, 639, 459, 13, 41, "Input"],
+Cell[CellGroupData[{
+Cell[20961, 656, 762, 20, 41, "Input"],
+Cell[21726, 678, 26630, 810, 868, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48393, 1493, 207, 5, 41, "Input"],
+Cell[48603, 1500, 608, 16, 61, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49248, 1521, 237, 6, 41, "Input"],
+Cell[49488, 1529, 8264, 242, 119, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57789, 1776, 207, 5, 41, "Input"],
+Cell[57999, 1783, 26023, 780, 290, "Output"]
+}, Open  ]]
+}
+]
+*)
+
