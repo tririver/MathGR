@@ -63,6 +63,8 @@ SimpSelect::usage = "A function to select terms to simplify, disregard others"
 SimpUq::usage = "SimpUq is identical to Simp[#, \"Dummy\"->UniqueIdx]&"
 SimpInto1::usage = "Pattern list of single variable functions that Simp should go into"
 
+TensorReplace::usage = "TensorReplace[expr, rel] or TensorReplace[rel][expr] does expr/.rel taking care of dummy indices in powers."
+
 \[Bullet]::usage = "Symbol for time derivative"
 \[CapitalSampi]::usage = "Symbol for general derivative"
 
@@ -189,6 +191,14 @@ DeleteSym[t_, id_] := (ClearAttributes[t, Orderless]; MAT /: TensorSymmetry[MAT[
 
 ShowSym[t_, id_] := TensorSymmetry[MAT[t][Sequence @@ id]]
 
+
+
+(* ::Section:: *)
+(*Other helpful functions*)
+
+
+TensorReplace[expr_,rel_]:= prod2times[times2prod[expr]/.rel]
+TensorReplace[rel_][expr_]:=TensorReplace[expr,rel]
 
 
 (* ::Section:: *)
