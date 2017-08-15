@@ -3,7 +3,8 @@
 (* Yi Wang, 2013, tririverwangyi@gmail.com, GPLv3 *)
 BeginPackage["MathGR`typeset`", {"MathGR`tensor`"}]
 
-ToTeX::usage="ToTeX[expr] translates expr into TeXForm"
+ToTeXString::usage="ToTeXString[expr] translates expr into TeXForm and return the result in a string"
+ToTeX::usage="ToTeX[expr] prints expr into TeXForm"
 ToTeXHook::usage="ToTeXHook is set of transformations before export to TeX"
 ToTeXTemplate::usage="ToTeXTemplate = True (default, export header and tail of tex) or False (no header or tail, only the equation)."
 DecorateTeXString::usage="DecorateTeXString[s] does post processing for a TeX string."
@@ -36,7 +37,8 @@ finalCleanUp[s_String]:= s // StringReplace[#, {"\n\n"->"\n"}] & (* Shouldn't be
 If[!defQ@DecorateTeXString, DecorateTeXString = (# // removeWaste // replaceTimeDot // removeTextAndCurly // breakLine // addHeaderTail // finalCleanUp) & ]
 
 If[!defQ[ToTeXTemplate], ToTeXTemplate = True]
-ToTeX[e_] := e//.ToTeXHook // PolynomialForm[#, TraditionalOrder -> False]& // ToString[#, TeXForm] & // DecorateTeXString // Print
+ToTeXString[e_]:= e//.ToTeXHook // PolynomialForm[#, TraditionalOrder -> False]& // ToString[#, TeXForm] & // DecorateTeXString
+ToTeX[e_] := ToTeXString[e] // Print
 
 MakeBoxes[\[CapitalSampi], TraditionalForm]:="\[PartialD]"
 MakeBoxes[Dta, TraditionalForm]:="\[Delta]"
@@ -54,6 +56,8 @@ MakeBoxes[PdT[f_, PdVars[i0:DE@0..]], TraditionalForm] := With[{id0 = mkPd[Tradi
 
 
 If[$FrontEnd===Null, Print["(typeset.m): No FrontEnd detected. StandardForm and input aliases definitions skipped."],
+
+
 
 
 
