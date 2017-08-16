@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    131185,       3331]
-NotebookOptionsPosition[    118247,       3053]
-NotebookOutlinePosition[    129801,       3286]
-CellTagsIndexPosition[    129758,       3283]
+NotebookDataLength[    156510,       4012]
+NotebookOptionsPosition[    141708,       3703]
+NotebookOutlinePosition[    153274,       3937]
+CellTagsIndexPosition[    153231,       3934]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -929,8 +929,7 @@ Cell[BoxData[{
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -973,8 +972,7 @@ Cell[BoxData[{
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -998,14 +996,16 @@ Cell[BoxData[{
    3.6183131433547173`*^9}, {3.618313960328596*^9, 3.618313961559203*^9}, 
    3.618313993293768*^9, {3.6183145727495623`*^9, 3.6183145775367327`*^9}, {
    3.618369832838915*^9, 3.6183698622267647`*^9}, {3.618371985362698*^9, 
-   3.6183720009070063`*^9}}],
+   3.6183720009070063`*^9}},ExpressionUUID->"330bc86d-89bb-4926-978d-\
+592db93c6669"],
 
 Cell[BoxData[
  RowBox[{"Module", "[", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"\[Sigma]", ",", "\[Eta]", ",", "\[Lambda]", ",", "\[Mu]"}], 
-    "}"}], ",", " ", 
+    RowBox[{
+    "\[Sigma]", ",", "\[Eta]", ",", "\[Lambda]", ",", "\[Mu]", ",", 
+     "\[Alpha]", ",", "\[Beta]"}], "}"}], ",", " ", 
    RowBox[{"(*", " ", 
     RowBox[{
     "Protect", " ", "those", " ", "variables", " ", "in", " ", "case", " ", 
@@ -1064,8 +1064,7 @@ Cell[BoxData[
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -1286,8 +1285,7 @@ Cell[BoxData[
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -1570,8 +1568,7 @@ Cell[BoxData[
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -1725,8 +1722,7 @@ Cell[BoxData[
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -1916,8 +1912,7 @@ Cell[BoxData[
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -2040,8 +2035,7 @@ Cell[BoxData[
         GridBoxSpacings->{"Columns" -> {
             Offset[0.27999999999999997`], {
              Offset[0.]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
             Offset[0.2], {
              Offset[0.]}, 
             Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -2088,6 +2082,127 @@ Cell[BoxData[
              StyleBox[GridBox[{
                 {"", ""},
                 {"\[Mu]", "\[Nu]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False]}]}], "]"}]}]}], ";", "\n", "\t", 
+    RowBox[{
+     TagBox[GridBox[{
+        {GridBox[{
+           {"\[DoubleStruckCapitalG]"}
+          },
+          Selectable->True], 
+         StyleBox[GridBox[{
+            {"\[Lambda]_", "\[Nu]_"},
+            {"", ""}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->True],
+          FontSize->10]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "GRETsr",
+      Selectable->False], ":=", 
+     RowBox[{
+      TagBox[GridBox[{
+         {GridBox[{
+            {
+             RowBox[{" ", "\[DoubleStruckCapitalG]"}]}
+           },
+           Selectable->True], 
+          StyleBox[GridBox[{
+             {"\[Lambda]", "\[Nu]"},
+             {"", ""}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->True],
+           FontSize->10]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "GRETsr",
+       Selectable->False], " ", "=", " ", 
+      RowBox[{"Simp", "[", 
+       RowBox[{
+        UnderoverscriptBox["\[Sum]", "\[Mu]", "\[DoubleStruckX]"], " ", 
+        RowBox[{
+         TagBox[GridBox[{
+            {GridBox[{
+               {"\[DoubleStruckG]"}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"\[Nu]", "\[Mu]"},
+                {"", ""}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False], " ", 
+         TagBox[GridBox[{
+            {GridBox[{
+               {"\[DoubleStruckCapitalG]"}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"\[Lambda]", ""},
+                {"", "\[Mu]"}
                },
                GridBoxSpacings->{"Columns" -> {
                    Offset[0.27999999999999997`], {
@@ -2170,6 +2285,425 @@ Cell[BoxData[
             RowBox[{"{", 
              RowBox[{"\[Nu]", ",", "\[DoubleStruckX]"}], "}"}]}], "]"}]}], 
          "/", "2"}], "//", "Simp"}]}], ")"}]}], ";", "\n", "\t", 
+    RowBox[{
+     TagBox[GridBox[{
+        {GridBox[{
+           {
+            RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]_", "]"}]}
+          },
+          Selectable->True], 
+         StyleBox[GridBox[{
+            {"", ""},
+            {"\[Mu]_", "\[Nu]_"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->True],
+          FontSize->10]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "GRETsr",
+      Selectable->False], ":=", 
+     RowBox[{
+      TagBox[GridBox[{
+         {GridBox[{
+            {
+             RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]", "]"}]}
+           },
+           Selectable->True], 
+          StyleBox[GridBox[{
+             {"", ""},
+             {"\[Mu]", "\[Nu]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->True],
+           FontSize->10]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "GRETsr",
+       Selectable->False], "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", 
+         TagBox[GridBox[{
+            {GridBox[{
+               {"\[DoubleStruckG]"}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"", ""},
+                {"\[Mu]", "\[Nu]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False]}], 
+        RowBox[{
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           RowBox[{
+            TagBox[GridBox[{
+               {GridBox[{
+                  {"\[DoubleStruckG]"}
+                 },
+                 Selectable->True], 
+                StyleBox[GridBox[{
+                   {"\[Alpha]", "\[Beta]"},
+                   {"", ""}
+                  },
+                  GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                    "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}, "RowsIndexed" -> {}},
+                  Selectable->True],
+                 FontSize->10]}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}],
+             "GRETsr",
+             Selectable->False], 
+            RowBox[{
+             SubscriptBox["\[PartialD]", "\[Alpha]"], "\[Phi]"}], " ", 
+            RowBox[{
+             SubscriptBox["\[PartialD]", "\[Beta]"], "\[Phi]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\[Alpha]", ",", "\[DoubleStruckX]"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\[Beta]", ",", "\[DoubleStruckX]"}], "}"}]}], "]"}], "/",
+          "2"}]}], " ", "-", " ", 
+       RowBox[{
+        TagBox[GridBox[{
+           {GridBox[{
+              {"\[DoubleStruckG]"}
+             },
+             Selectable->True], 
+            StyleBox[GridBox[{
+               {"", ""},
+               {"\[Mu]", "\[Nu]"}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}},
+              Selectable->True],
+             FontSize->10]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         "GRETsr",
+         Selectable->False], 
+        RowBox[{"V", "[", "\[Phi]", "]"}]}], " ", "+", " ", 
+       RowBox[{
+        RowBox[{
+         SubscriptBox["\[PartialD]", "\[Mu]"], "\[Phi]"}], " ", 
+        RowBox[{
+         SubscriptBox["\[PartialD]", "\[Nu]"], "\[Phi]"}]}]}]}]}], ";", "\n", 
+    "\t", 
+    RowBox[{
+     TagBox[GridBox[{
+        {GridBox[{
+           {
+            RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]_", "]"}]}
+          },
+          Selectable->True], 
+         StyleBox[GridBox[{
+            {"\[Lambda]_", ""},
+            {"", "\[Nu]_"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->True],
+          FontSize->10]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "GRETsr",
+      Selectable->False], ":=", " ", 
+     RowBox[{
+      TagBox[GridBox[{
+         {GridBox[{
+            {
+             RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]", "]"}]}
+           },
+           Selectable->True], 
+          StyleBox[GridBox[{
+             {"\[Lambda]", ""},
+             {"", "\[Nu]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->True],
+           FontSize->10]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "GRETsr",
+       Selectable->False], " ", "=", " ", 
+      RowBox[{"Simp", "[", 
+       RowBox[{
+        UnderoverscriptBox["\[Sum]", "\[Mu]", "\[DoubleStruckX]"], " ", 
+        RowBox[{
+         TagBox[GridBox[{
+            {GridBox[{
+               {"\[DoubleStruckG]"}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"\[Lambda]", "\[Mu]"},
+                {"", ""}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False], " ", 
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]", "]"}]}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"", ""},
+                {"\[Mu]", "\[Nu]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False]}]}], "]"}]}]}], ";", "\n", "\t", 
+    RowBox[{
+     TagBox[GridBox[{
+        {GridBox[{
+           {
+            RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]_", "]"}]}
+          },
+          Selectable->True], 
+         StyleBox[GridBox[{
+            {"\[Lambda]_", "\[Nu]_"},
+            {"", ""}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}},
+           Selectable->True],
+          FontSize->10]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      "GRETsr",
+      Selectable->False], ":=", 
+     RowBox[{
+      TagBox[GridBox[{
+         {GridBox[{
+            {
+             RowBox[{" ", 
+              RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]", "]"}]}]}
+           },
+           Selectable->True], 
+          StyleBox[GridBox[{
+             {"\[Lambda]", "\[Nu]"},
+             {"", ""}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->True],
+           FontSize->10]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
+       "GRETsr",
+       Selectable->False], " ", "=", " ", 
+      RowBox[{"Simp", "[", 
+       RowBox[{
+        UnderoverscriptBox["\[Sum]", "\[Mu]", "\[DoubleStruckX]"], " ", 
+        RowBox[{
+         TagBox[GridBox[{
+            {GridBox[{
+               {"\[DoubleStruckG]"}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"\[Nu]", "\[Mu]"},
+                {"", ""}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False], " ", 
+         TagBox[GridBox[{
+            {GridBox[{
+               {
+                RowBox[{"\[DoubleStruckCapitalT]", "[", "\[Phi]", "]"}]}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"\[Lambda]", ""},
+                {"", "\[Mu]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False]}]}], "]"}]}]}], ";", "\n", "\t", 
     RowBox[{"(*", " ", 
      RowBox[{
      "Box", " ", "operator", " ", "actting", " ", "on", " ", "scalar", " ", 
@@ -2305,13 +2839,23 @@ Cell[BoxData[
    3.618372810273958*^9}, {3.618372845811915*^9, 3.6183733520435867`*^9}, {
    3.618373975516975*^9, 3.618373986701692*^9}, {3.618374020314473*^9, 
    3.61837415987393*^9}, {3.6972404070734415`*^9, 3.6972405068973584`*^9}, {
-   3.69724055375616*^9, 3.697240578271304*^9}}]
+   3.69724055375616*^9, 3.697240578271304*^9}, {3.7118400547640843`*^9, 
+   3.7118402359700036`*^9}, {3.7118406511237383`*^9, 
+   3.7118406601440144`*^9}, {3.7118407076180687`*^9, 3.711840749882389*^9}, {
+   3.711841750799178*^9, 3.7118420331746793`*^9}, {3.7118422757240944`*^9, 
+   3.7118423622220864`*^9}, {3.7118424495120306`*^9, 
+   3.7118424606591625`*^9}, {3.711842691884656*^9, 3.7118426936249204`*^9}, {
+   3.711844683440245*^9, 
+   3.7118448762340226`*^9}},ExpressionUUID->"25068656-12e8-4b7b-8205-\
+20774baa263c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Printing", "Section",
- CellChangeTimes->{{3.618315378770698*^9, 3.6183153796217403`*^9}}],
+ CellChangeTimes->{{3.618315378770698*^9, 
+  3.6183153796217403`*^9}},ExpressionUUID->"37c19092-6360-4c6f-8e61-\
+5affc703cb19"],
 
 Cell[BoxData[{
  RowBox[{
@@ -2862,11 +3406,117 @@ Cell[BoxData[{
       RowBox[{"\[Lambda]", ",", "\[DoubleStruckX]"}], "}"}], ",", 
      RowBox[{"{", 
       RowBox[{"\[Nu]", ",", "\[DoubleStruckX]"}], "}"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print\[DoubleStruckCapitalG]uu", "[", "]"}], ":=", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        TagBox[GridBox[{
+           {GridBox[{
+              {"\[DoubleStruckCapitalG]"}
+             },
+             Selectable->True], 
+            StyleBox[GridBox[{
+               {"\[Lambda]", "\[Nu]"},
+               {"", ""}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}},
+              Selectable->True],
+             FontSize->10]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         "GRETsr",
+         Selectable->False], "=!=", "0"}], ",", " ", 
+       RowBox[{"Print", "[", 
+        RowBox[{
+         RowBox[{"HoldForm", "[", 
+          TagBox[GridBox[{
+             {GridBox[{
+                {"\[DoubleStruckCapitalG]"}
+               },
+               Selectable->True], 
+              StyleBox[GridBox[{
+                 {"\[Lambda]", "\[Nu]"},
+                 {"", ""}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                  "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}, "RowsIndexed" -> {}},
+                Selectable->True],
+               FontSize->10]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           "GRETsr",
+           Selectable->False], "]"}], ",", " ", "\"\< = \>\"", ",", " ", 
+         TagBox[GridBox[{
+            {GridBox[{
+               {"\[DoubleStruckCapitalG]"}
+              },
+              Selectable->True], 
+             StyleBox[GridBox[{
+                {"\[Lambda]", "\[Nu]"},
+                {"", ""}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}},
+               Selectable->True],
+              FontSize->10]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}],
+          "GRETsr",
+          Selectable->False]}], "]"}]}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]", ",", "\[DoubleStruckX]"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Nu]", ",", "\[DoubleStruckX]"}], "}"}]}], "]"}]}], 
   ";"}]}], "Code",
  CellChangeTimes->{{3.618317031854919*^9, 3.618317050862632*^9}, {
    3.6183170872453423`*^9, 3.6183173470561457`*^9}, 3.618317550458213*^9, {
    3.6183176723942738`*^9, 3.618317798555935*^9}, {3.618318043057897*^9, 
-   3.618318122075499*^9}, {3.618373505219132*^9, 3.618373678085907*^9}}]
+   3.618318122075499*^9}, {3.618373505219132*^9, 3.618373678085907*^9}, {
+   3.7118402489852047`*^9, 
+   3.7118402925757947`*^9}},ExpressionUUID->"407477db-354a-4d90-a3be-\
+16932b884095"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3052,8 +3702,8 @@ Cell[BoxData[{
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{2592, 1740},
-WindowMargins->{{-13, Automatic}, {Automatic, -13}},
+WindowSize->{2491, 1397},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 InputAliases->{"addia" -> RowBox[{"AddInputAlias", "[", 
      RowBox[{"\"\[SelectionPlaceholder]\"", "\[Rule]", 
@@ -3271,7 +3921,8 @@ InputAliases->{"addia" -> RowBox[{"AddInputAlias", "[",
          ColumnSpacings -> 0, RowSpacings -> 0, Selectable -> True], FontSize -> 
         10]}}, ColumnSpacings -> 0, RowSpacings -> 0], "GRETsr", Selectable -> 
     False]},
-FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (2017\:5e743\:670813\
+\:65e5)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -3285,53 +3936,83 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 873, 19, 88, "Input"],
-Cell[1433, 41, 358, 9, 47, "Input"],
+Cell[557, 20, 873, 19, 50, "Input", "ExpressionUUID" -> \
+"aa0e21c2-6e7e-4c2e-b8e9-9154fb2bb19d"],
+Cell[1433, 41, 358, 9, 30, "Input", "ExpressionUUID" -> \
+"540db21e-e484-4b3e-a6da-2fdb37afdbf5"],
 Cell[CellGroupData[{
-Cell[1816, 54, 101, 1, 111, "Section"],
-Cell[1920, 57, 363, 7, 65, "Code"],
-Cell[2286, 66, 964, 23, 103, "Code"],
-Cell[3253, 91, 1139, 26, 103, "Code"],
-Cell[4395, 119, 3587, 84, 177, "Code"]
+Cell[1816, 54, 101, 1, 70, "Section", "ExpressionUUID" -> \
+"d7118a01-cf5d-48a7-8bf0-e32618d9491f"],
+Cell[1920, 57, 363, 7, 50, "Code", "ExpressionUUID" -> \
+"cdb49460-9a2c-4398-b99f-da0414bafa9f"],
+Cell[2286, 66, 964, 23, 69, "Code", "ExpressionUUID" -> \
+"2200cf69-5842-4090-a42e-cf192b846fb0"],
+Cell[3253, 91, 1139, 26, 69, "Code", "ExpressionUUID" -> \
+"c4545511-6a7e-4f92-83e2-cd004b1e7356"],
+Cell[4395, 119, 3587, 84, 105, "Code", "ExpressionUUID" -> \
+"d58e420f-eee8-4865-8164-a508e63cedbf"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8019, 208, 96, 1, 111, "Section"],
+Cell[8019, 208, 96, 1, 70, "Section", "ExpressionUUID" -> \
+"dc44f815-5ca8-479f-93f6-b3e0f62e761c"],
 Cell[CellGroupData[{
-Cell[8140, 213, 119, 1, 80, "Subsection"],
-Cell[8262, 216, 7861, 158, 214, "Code"],
-Cell[16126, 376, 5551, 101, 103, "Code"]
+Cell[8140, 213, 119, 1, 49, "Subsection", "ExpressionUUID" -> \
+"576b6d23-9e8f-42e3-9818-dc1487bed492"],
+Cell[8262, 216, 7861, 158, 123, "Code", "ExpressionUUID" -> \
+"4520eba8-6b14-4551-ac01-61bc2438785a"],
+Cell[16126, 376, 5551, 101, 69, "Code", "ExpressionUUID" -> \
+"76346c4f-e865-4757-a8c4-529320277a11"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[21714, 482, 113, 1, 80, "Subsection"],
-Cell[21830, 485, 563, 12, 122, "Text"],
-Cell[22396, 499, 118, 1, 47, "Text"],
-Cell[22517, 502, 3988, 98, 288, "Code"]
+Cell[21714, 482, 113, 1, 49, "Subsection", "ExpressionUUID" -> \
+"da487a06-af70-4cfb-8e20-d2a6862e28ff"],
+Cell[21830, 485, 563, 12, 71, "Text", "ExpressionUUID" -> \
+"d91d28a7-f685-4039-9342-d6bd8380cc2a"],
+Cell[22396, 499, 118, 1, 30, "Text", "ExpressionUUID" -> \
+"a6ece460-9af4-4631-841b-3bbf7c6e08e2"],
+Cell[22517, 502, 3988, 98, 159, "Code", "ExpressionUUID" -> \
+"568ce38c-4916-4ee4-8ef1-aa7d0bfd9e4c"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[26542, 605, 106, 1, 80, "Subsection"],
-Cell[26651, 608, 278, 6, 83, "Text"],
-Cell[26932, 616, 1708, 41, 103, "Code"],
-Cell[28643, 659, 1753, 44, 103, "Code"]
+Cell[26542, 605, 106, 1, 49, "Subsection", "ExpressionUUID" -> \
+"7bb861fb-68e5-42f6-9be0-7e55b0a5d3ba"],
+Cell[26651, 608, 278, 6, 49, "Text", "ExpressionUUID" -> \
+"93a4475d-cf74-415b-ad1f-f48f126dda3b"],
+Cell[26932, 616, 1708, 41, 69, "Code", "ExpressionUUID" -> \
+"185824b7-7a07-4dba-8dd7-e1171c23a94e"],
+Cell[28643, 659, 1753, 44, 69, "Code", "ExpressionUUID" -> \
+"81389796-9aaf-4787-a85f-5a10ebc6ac87"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30433, 708, 103, 1, 80, "Subsection"],
-Cell[30539, 711, 157, 2, 47, "Text"],
-Cell[30699, 715, 7744, 179, 622, "Code"]
+Cell[30433, 708, 103, 1, 49, "Subsection", "ExpressionUUID" -> \
+"6cbd096e-c837-495d-8894-2580f4a28db4"],
+Cell[30539, 711, 157, 2, 30, "Text", "ExpressionUUID" -> \
+"7de8a796-d478-457c-86f4-dd13e0ed7800"],
+Cell[30699, 715, 7744, 179, 322, "Code", "ExpressionUUID" -> \
+"57318de1-2cb6-45b0-b39c-5d232f5bd905"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[38492, 900, 97, 1, 111, "Section"],
-Cell[38592, 903, 3474, 97, 194, "Code"],
-Cell[42069, 1002, 48437, 1305, 781, "Code"]
+Cell[38492, 900, 97, 1, 70, "Section", "ExpressionUUID" -> \
+"cfb48895-16a9-49c6-bc6f-92eb220251d2"],
+Cell[38592, 903, 3509, 96, 118, "Code", "ExpressionUUID" -> \
+"330bc86d-89bb-4926-978d-592db93c6669"],
+Cell[42104, 1001, 67964, 1848, 629, "Code", "ExpressionUUID" -> \
+"25068656-12e8-4b7b-8205-20774baa263c"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[90543, 2312, 95, 1, 111, "Section"],
-Cell[90641, 2315, 20337, 553, 253, "Code"]
+Cell[110105, 2854, 155, 3, 70, "Section", "ExpressionUUID" -> \
+"37c19092-6360-4c6f-8e61-5affc703cb19"],
+Cell[110263, 2859, 24176, 659, 177, "Code", "ExpressionUUID" -> \
+"407477db-354a-4d90-a3be-16932b884095"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[111015, 2873, 90, 1, 111, "Section"],
-Cell[111108, 2876, 4641, 111, 228, "Code"],
-Cell[115752, 2989, 2479, 61, 288, "Code"]
+Cell[134476, 3523, 90, 1, 70, "Section", "ExpressionUUID" -> \
+"61860234-8d8b-45a8-949e-410f904f4d1d"],
+Cell[134569, 3526, 4641, 111, 138, "Code", "ExpressionUUID" -> \
+"97fa0fc5-1750-437c-8a3d-e1ce21dfac63"],
+Cell[139213, 3639, 2479, 61, 159, "Code", "ExpressionUUID" -> \
+"b344e3b1-0139-4713-b128-768f04000276"]
 }, Open  ]]
 }
 ]
