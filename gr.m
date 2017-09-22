@@ -24,6 +24,8 @@ RADM::usage = "The ADM curvature, equal to R up to a total derivative"
 LapseN::usage = "The lapse function"
 ShiftN::usage = "The shift vector"
 X::usage = "X[field] gives -g[UP@a, UP@b]Pd[field,DN@a]PD[field,DN@b]/2"
+T::usage = "The stress tensor of a canonical scalar field"
+V::usage = "The potential of a canonical scalar field"
 
 Begin["`Private`"]
 Needs["MathGR`utilPrivate`"]
@@ -83,6 +85,7 @@ With[{g:=Metric, r:=Affine},
 	RADM[]:= R[]-K[]K[]+KK[];
 	X[f_]:= -Pd[f,DG@1]Pd[f,DG@1]/2//MetricContract;
 	Dsquare[f_]:= CovD[CovD[f, DG@1], DG@1]//MetricContract;
+	T[f_][i_?isd, j_?isd]:= g[i,j](X[f] - V[f]) + Pd[f, i] Pd[f, j];
 	(* Some pre-simplified quantities *)
 	Rsimp[]:= (3*g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*Pd[g[id[#1], id[#3]], id[#5]]*   Pd[g[id[#2], id[#4]], id[#6]])/4 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*   Pd[g[id[#1], id[#3]], id[#6]]*Pd[g[id[#2], id[#5]], id[#4]])/2 - g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*Pd[g[id[#1], id[#3]], id[#4]]*  Pd[g[id[#2], id[#5]], id[#6]] - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*   Pd[g[id[#1], id[#2]], id[#5]]*Pd[g[id[#3], id[#4]], id[#6]])/4 + g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*g[iu[#5], iu[#6]]*Pd[g[id[#1], id[#2]], id[#4]]*  Pd[g[id[#3], id[#5]], id[#6]] - g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*  Pd[Pd[g[id[#1], id[#2]], id[#3]], id[#4]] + g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*  Pd[Pd[g[id[#1], id[#3]], id[#2]], id[#4]] &@Uq[6];
 	Rsimp[m_?isd, n_?isd]:= -(g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[m, n], id[#4]]*Pd[g[id[#1], id[#2]], id[#3]])/4 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[m, n], id[#4]]*Pd[g[id[#1], id[#3]], id[#2]])/2 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#3]], id[#4]]*Pd[g[id[#2], m], n])/2 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], n], id[#3]]*Pd[g[id[#2], m], id[#4]])/2 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#3]], id[#4]]*Pd[g[id[#2], n], m])/2 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#3]], n]*Pd[g[id[#2], id[#4]], m])/4 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#2]], id[#4]]*Pd[g[id[#3], m], n])/4 - (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], n], id[#4]]*Pd[g[id[#3], m], id[#2]])/2 + (g[iu[#1], iu[#2]]*g[iu[#3], iu[#4]]*Pd[g[id[#1], id[#2]], id[#4]]*Pd[g[id[#3], n], m])/4 - (g[iu[#1], iu[#2]]*Pd[Pd[g[m, n], id[#1]], id[#2]])/2 + (g[iu[#1], iu[#2]]*Pd[Pd[g[id[#1], m], n], id[#2]])/2 + (g[iu[#1], iu[#2]]*Pd[Pd[g[id[#1], n], m], id[#2]])/2 - (g[iu[#1], iu[#2]]*Pd[Pd[g[id[#1], id[#2]], m], n])/2 &@Uq[4];
