@@ -78,6 +78,8 @@ With[{g:=Metric, r:=Affine},
 	R[m_?isd, n_?isd]:= R[iu@#, m, id@#, n] &@Uq[1];
 	R[]:= R[DG@1,DG@1]//MetricContract;
 	G[m_?isd, n_?isd]:= R[m,n] - 1/2 g[m,n] R[];
+	G[m_?isu, n_?isd]:= g[m,iu@#1]G[id@#1,n] &@Uq[1];
+	G[m_?isd, n_?isu]:= g[n,iu@#1]G[m,id@#1] &@Uq[1];
 	G[m_?isu, n_?isu]:= g[m,iu@#1]g[n,iu@#2] G[id@#1,id@#2] &@Uq[2];
 	K[i_?isd, j_?isd]:= 1/(2 LapseN)(Pd[g[i,j],DE@0]-CovD[ShiftN[i],j]-CovD[ShiftN[j],i]);
 	K[]:= K[DG@1,DG@1]//MetricContract;
