@@ -17,6 +17,7 @@ IbpCountLeaf::usage = "IbpCountLeaf[e] counts leaves of e outside PdHold or IdHo
 IbpCountTerm::usage = "IbpCountTerm[e] counts terms of e outside PdHold or IdHold"
 IbpCountPt2::usage = "IbpCountPt2[e] counts second time derivatives"
 IbpCountPd2::usage = "IbpCountPd2[e] counts second derivatives"
+IbpRuleWithForbiddenPatterrn::usage = "IbpRuleWithForbiddenPatterrn[rule, ptn][e] is Infinity (i.e. forbidden transformation) if e contains ptn, otherwise return rule[e]"
 IbpVar::usage = "IbpVar[var][e] counts Pd on specified var"
 IbpStd2::usage = "Ibp count trying to bring second order Lagrangian to standard form"
 IbpVariation::usage = "IbpVariation[e, var] is Ibp which eliminates derivative on var"
@@ -112,6 +113,9 @@ IbpCountPt2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[_DE, _DE, ___]], Infinity
 IbpCountPd2[e_]:= Count[{e/.holdPtn->0}, PdT[_, PdVars[IdxPtn, IdxPtn, ___]], Infinity] + IbpCountLeaf[e]
 IbpVar[var_][e_]:= 10000*Count[{e/.holdPtn->0}, Pd[Pd[Pd[a_/;!FreeQ[a, var], _],_],_], Infinity] + 100*Count[{e/.holdPtn->0}, Pd[Pd[a_/;!FreeQ[a, var], _],_], Infinity] + Count[{e/.holdPtn->0}, Pd[a_/;!FreeQ[a, var], _], Infinity] + IbpCountLeaf[e]
 IbpStd2[e_]:= IbpCountPt2[e]*1000 + IbpCountPd2[e]*100 + Count[{e/.holdPtn->0}, v_*Pd[v_,_]*_ | PdT[v_, PdVars[a__]]*PdT[v_, PdVars[b_,a__]]*_, Infinity]*10 + Count[{e/.holdPtn->0}, PdT[v_[DE@0,___],PdVars[DE@0,___]], Infinity] + IbpCountLeaf[e]
+
+IbpRuleWithForbiddenPatterrn[rule_, ptn_][e_]:= If[!FreeQ[e,ptn],Infinity, rule[e]];
+(* For example: Ibp[#,"Rank"\[Rule]IbpRuleWithForbiddenPatterrn[IbpCountLeaf,PdHold[_,_DN]]]&  (* Only time derivative, no space derivative *) *)
 
 IbpReduceOrder[vars_List][e_]:=Module[{eOrderList, tmp},
 	eOrderList = Count[{#}, Alternatives@@vars, Infinity] & /@ times2prod@expand2list[e+tmp /.holdPtn->0];
