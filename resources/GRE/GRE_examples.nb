@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    561288,      16765]
-NotebookOptionsPosition[    540205,      16428]
-NotebookOutlinePosition[    544567,      16521]
-CellTagsIndexPosition[    544524,      16518]
+NotebookDataLength[    562396,      16761]
+NotebookOptionsPosition[    541311,      16424]
+NotebookOutlinePosition[    545673,      16517]
+CellTagsIndexPosition[    545630,      16514]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -23,7 +23,7 @@ Cell[BoxData[
   RowBox[{"SetDirectory", "@", 
    RowBox[{"NotebookDirectory", "[", "]"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.6971964379756*^9, 3.69719645244051*^9}},
- CellLabel->"In[7]:=",ExpressionUUID->"517c7e56-3fb0-4544-89b2-02d308ebcdd1"],
+ CellLabel->"In[58]:=",ExpressionUUID->"517c7e56-3fb0-4544-89b2-02d308ebcdd1"],
 
 Cell[CellGroupData[{
 
@@ -43,11 +43,11 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{
      RowBox[{"-", 
-      RowBox[{"A", "[", "r", "]"}]}], 
+      RowBox[{"B", "[", "r", "]"}]}], 
      SuperscriptBox[
       RowBox[{"\[DoubleStruckD]", "[", "t", "]"}], "2"]}], "+", 
     RowBox[{
-     RowBox[{"B", "[", "r", "]"}], 
+     RowBox[{"A", "[", "r", "]"}], 
      SuperscriptBox[
       RowBox[{"\[DoubleStruckD]", "[", "r", "]"}], "2"]}], "+", 
     RowBox[{
@@ -64,8 +64,8 @@ Cell[BoxData[{
       ")"}]}]}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{"<<", "GRE.m"}]}], "Input",
  CellChangeTimes->{{3.8648134990399523`*^9, 3.864813503689446*^9}, 
-   3.864813595116665*^9},
- CellLabel->"In[50]:=",ExpressionUUID->"c2123d4d-219a-421b-ae0c-a91f70537a9a"],
+   3.864813595116665*^9, {3.864856757202798*^9, 3.864856768313138*^9}},
+ CellLabel->"In[59]:=",ExpressionUUID->"c2123d4d-219a-421b-ae0c-a91f70537a9a"],
 
 Cell[CellGroupData[{
 
@@ -143,7 +143,7 @@ Cell[BoxData[
       RowBox[{"B", "[", "r", "]"}]}], "}"}], ",", "r"}], "]"}], "//", 
   "FullSimplify"}]], "Input",
  CellChangeTimes->{{3.864814076132626*^9, 3.8648141954102573`*^9}},
- CellLabel->"In[53]:=",ExpressionUUID->"3bb36ddb-001c-4a93-8890-e05e6f1d75cd"],
+ CellLabel->"In[62]:=",ExpressionUUID->"3bb36ddb-001c-4a93-8890-e05e6f1d75cd"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -151,7 +151,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      TagBox[
-      StyleBox["A",
+      StyleBox["B",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -165,7 +165,7 @@ Cell[BoxData[
         "C"], "r"]}]}], ",", 
     RowBox[{
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -185,15 +185,15 @@ Cell[BoxData[
    3.8648499429364443`*^9}, 3.8648500264163837`*^9, 3.86485007751198*^9, 
    3.864850413736012*^9, 3.864850510690585*^9, 3.8648508269593773`*^9, {
    3.864850921484414*^9, 3.8648509340796947`*^9}, 3.8648509836763363`*^9, {
-   3.864851631469561*^9, 3.8648516570650387`*^9}},
- CellLabel->"Out[53]=",ExpressionUUID->"2bf237d1-17a5-47cf-b69e-e7add9b58047"]
+   3.864851631469561*^9, 3.8648516570650387`*^9}, 3.864856774944433*^9},
+ CellLabel->"Out[62]=",ExpressionUUID->"1569f72a-54ee-4d41-862e-d765a7b5c8c4"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Print\[CapitalGamma]", "[", "]"}]], "Input",
- CellLabel->"In[54]:=",ExpressionUUID->"733388e6-6863-47e1-8256-71786171ce26"],
+ CellLabel->"In[63]:=",ExpressionUUID->"733388e6-6863-47e1-8256-71786171ce26"],
 
 Cell[CellGroupData[{
 
@@ -209,142 +209,6 @@ Cell[BoxData[
         StyleBox[GridBox[{
            {"t", "", ""},
            {"", "r", "t"}
-          },
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.]}, 
-              Offset[0.27999999999999997`]}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.]}, 
-              Offset[0.2]}},
-          Selectable->True],
-         FontSize->10]}
-      },
-      GridBoxSpacings->{"Columns" -> {
-          Offset[0.27999999999999997`], {
-           Offset[0.]}, 
-          Offset[0.27999999999999997`]}, "Rows" -> {
-          Offset[0.2], {
-           Offset[0.]}, 
-          Offset[0.2]}}],
-     "GRETsr",
-     Selectable->False],
-    HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
-   FractionBox[
-    TagBox[
-     StyleBox[
-      SuperscriptBox["A", "\[Prime]",
-       MultilineFunction->None],
-      LineColor->RGBColor[0, 0, 1],
-      FrontFaceColor->RGBColor[0, 0, 1],
-      BackFaceColor->RGBColor[0, 0, 1],
-      GraphicsColor->RGBColor[0, 0, 1],
-      FontColor->RGBColor[0, 0, 1]],
-     "GREFX1",
-     Selectable->False], 
-    RowBox[{"2", " ", 
-     TagBox[
-      StyleBox["A",
-       LineColor->RGBColor[0, 0, 1],
-       FrontFaceColor->RGBColor[0, 0, 1],
-       BackFaceColor->RGBColor[0, 0, 1],
-       GraphicsColor->RGBColor[0, 0, 1],
-       FontColor->RGBColor[0, 0, 1]],
-      "GREFX1",
-      Selectable->False]}]]}],
-  SequenceForm[
-   HoldForm[
-    $CellContext`GRETsr[$CellContext`\[CapitalGamma], \
-{{$CellContext`\[Lambda], Null, Null}, {
-      Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 2] $CellContext`A[$CellContext`r]^(-1) 
-   Derivative[1][$CellContext`A][$CellContext`r]],
-  Editable->False]], "Print",
- CellChangeTimes->{3.8648516655249367`*^9},
- CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"13ccc07e-c001-4549-bb17-\
-6c241db3098e"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox[
-    TagBox[GridBox[{
-       {GridBox[{
-          {"\[CapitalGamma]"}
-         },
-         Selectable->True], 
-        StyleBox[GridBox[{
-           {"r", "", ""},
-           {"", "t", "t"}
-          },
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.]}, 
-              Offset[0.27999999999999997`]}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.]}, 
-              Offset[0.2]}},
-          Selectable->True],
-         FontSize->10]}
-      },
-      GridBoxSpacings->{"Columns" -> {
-          Offset[0.27999999999999997`], {
-           Offset[0.]}, 
-          Offset[0.27999999999999997`]}, "Rows" -> {
-          Offset[0.2], {
-           Offset[0.]}, 
-          Offset[0.2]}}],
-     "GRETsr",
-     Selectable->False],
-    HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
-   FractionBox[
-    TagBox[
-     StyleBox[
-      SuperscriptBox["A", "\[Prime]",
-       MultilineFunction->None],
-      LineColor->RGBColor[0, 0, 1],
-      FrontFaceColor->RGBColor[0, 0, 1],
-      BackFaceColor->RGBColor[0, 0, 1],
-      GraphicsColor->RGBColor[0, 0, 1],
-      FontColor->RGBColor[0, 0, 1]],
-     "GREFX1",
-     Selectable->False], 
-    RowBox[{"2", " ", 
-     TagBox[
-      StyleBox["B",
-       LineColor->RGBColor[0, 0, 1],
-       FrontFaceColor->RGBColor[0, 0, 1],
-       BackFaceColor->RGBColor[0, 0, 1],
-       GraphicsColor->RGBColor[0, 0, 1],
-       FontColor->RGBColor[0, 0, 1]],
-      "GREFX1",
-      Selectable->False]}]]}],
-  SequenceForm[
-   HoldForm[
-    $CellContext`GRETsr[$CellContext`\[CapitalGamma], \
-{{$CellContext`\[Lambda], Null, Null}, {
-      Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 2] $CellContext`B[$CellContext`r]^(-1) 
-   Derivative[1][$CellContext`A][$CellContext`r]],
-  Editable->False]], "Print",
- CellChangeTimes->{3.864851665527051*^9},
- CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"bc5a7db9-177d-4b65-98a8-\
-2e888caa2c4d"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox[
-    TagBox[GridBox[{
-       {GridBox[{
-          {"\[CapitalGamma]"}
-         },
-         Selectable->True], 
-        StyleBox[GridBox[{
-           {"r", "", ""},
-           {"", "r", "r"}
           },
           GridBoxSpacings->{"Columns" -> {
               Offset[0.27999999999999997`], {
@@ -396,10 +260,146 @@ Cell[BoxData[
    Rational[1, 2] $CellContext`B[$CellContext`r]^(-1) 
    Derivative[1][$CellContext`B][$CellContext`r]],
   Editable->False]], "Print",
- CellChangeTimes->{3.86485166552943*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.864856777893936*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"ed7255b0-679b-4d51-83a7-\
-b6337588e194"],
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"2330b696-3772-486c-84c0-\
+144ed944d3d9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[GridBox[{
+       {GridBox[{
+          {"\[CapitalGamma]"}
+         },
+         Selectable->True], 
+        StyleBox[GridBox[{
+           {"r", "", ""},
+           {"", "t", "t"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}},
+          Selectable->True],
+         FontSize->10]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}}],
+     "GRETsr",
+     Selectable->False],
+    HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    TagBox[
+     StyleBox[
+      SuperscriptBox["B", "\[Prime]",
+       MultilineFunction->None],
+      LineColor->RGBColor[0, 0, 1],
+      FrontFaceColor->RGBColor[0, 0, 1],
+      BackFaceColor->RGBColor[0, 0, 1],
+      GraphicsColor->RGBColor[0, 0, 1],
+      FontColor->RGBColor[0, 0, 1]],
+     "GREFX1",
+     Selectable->False], 
+    RowBox[{"2", " ", 
+     TagBox[
+      StyleBox["A",
+       LineColor->RGBColor[0, 0, 1],
+       FrontFaceColor->RGBColor[0, 0, 1],
+       BackFaceColor->RGBColor[0, 0, 1],
+       GraphicsColor->RGBColor[0, 0, 1],
+       FontColor->RGBColor[0, 0, 1]],
+      "GREFX1",
+      Selectable->False]}]]}],
+  SequenceForm[
+   HoldForm[
+    $CellContext`GRETsr[$CellContext`\[CapitalGamma], \
+{{$CellContext`\[Lambda], Null, Null}, {
+      Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
+   Rational[1, 2] $CellContext`A[$CellContext`r]^(-1) 
+   Derivative[1][$CellContext`B][$CellContext`r]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8648516655249367`*^9, 3.864856777903071*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"4478e929-fb82-42e0-91e2-\
+127293dc7c61"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[GridBox[{
+       {GridBox[{
+          {"\[CapitalGamma]"}
+         },
+         Selectable->True], 
+        StyleBox[GridBox[{
+           {"r", "", ""},
+           {"", "r", "r"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}},
+          Selectable->True],
+         FontSize->10]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}}],
+     "GRETsr",
+     Selectable->False],
+    HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    TagBox[
+     StyleBox[
+      SuperscriptBox["A", "\[Prime]",
+       MultilineFunction->None],
+      LineColor->RGBColor[0, 0, 1],
+      FrontFaceColor->RGBColor[0, 0, 1],
+      BackFaceColor->RGBColor[0, 0, 1],
+      GraphicsColor->RGBColor[0, 0, 1],
+      FontColor->RGBColor[0, 0, 1]],
+     "GREFX1",
+     Selectable->False], 
+    RowBox[{"2", " ", 
+     TagBox[
+      StyleBox["A",
+       LineColor->RGBColor[0, 0, 1],
+       FrontFaceColor->RGBColor[0, 0, 1],
+       BackFaceColor->RGBColor[0, 0, 1],
+       GraphicsColor->RGBColor[0, 0, 1],
+       FontColor->RGBColor[0, 0, 1]],
+      "GREFX1",
+      Selectable->False]}]]}],
+  SequenceForm[
+   HoldForm[
+    $CellContext`GRETsr[$CellContext`\[CapitalGamma], \
+{{$CellContext`\[Lambda], Null, Null}, {
+      Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
+   Rational[1, 2] $CellContext`A[$CellContext`r]^(-1) 
+   Derivative[1][$CellContext`A][$CellContext`r]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8648516655249367`*^9, 3.864856777905962*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"e1e3f07b-2211-431d-919f-\
+f246eb1bfb90"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -437,7 +437,7 @@ Cell[BoxData[
    RowBox[{"-", 
     FractionBox["r", 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -450,12 +450,12 @@ Cell[BoxData[
     $CellContext`GRETsr[$CellContext`\[CapitalGamma], \
 {{$CellContext`\[Lambda], Null, Null}, {
       Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], 
-   " = ", -$CellContext`r/$CellContext`B[$CellContext`r]],
+   " = ", -$CellContext`r/$CellContext`A[$CellContext`r]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851665530487*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.8648567779071302`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"fce88a95-a338-4d2e-8af6-\
-b3e679f87af2"],
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"6b8e1d18-6f97-4ca4-a278-\
+7edeb8c7dbea"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -496,7 +496,7 @@ Cell[BoxData[
       SuperscriptBox[
        RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"]}], 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -509,13 +509,13 @@ Cell[BoxData[
     $CellContext`GRETsr[$CellContext`\[CapitalGamma], \
 {{$CellContext`\[Lambda], Null, Null}, {
       Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], 
-   " = ", -$CellContext`r $CellContext`B[$CellContext`r]^(-1) 
+   " = ", -$CellContext`r $CellContext`A[$CellContext`r]^(-1) 
    Sin[$CellContext`\[Theta]]^2],
   Editable->False]], "Print",
- CellChangeTimes->{3.8648516655315113`*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.8648567779082603`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"3778a3a4-2a89-4f15-b20b-\
-6586afada98a"],
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"98b2146d-fc33-4185-b30d-\
+dc50ec79e66b"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -558,10 +558,10 @@ Cell[BoxData[
       Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], 
    " = ", $CellContext`r^(-1)],
   Editable->False]], "Print",
- CellChangeTimes->{3.8648516655325212`*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.864856777909349*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"4eb54d23-983c-49e7-a0ea-\
-20fe7aae5c5d"],
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"94984afc-1a54-4ece-aea4-\
+511ccb7fdafe"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -607,10 +607,10 @@ Cell[BoxData[
       Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", -
    Cos[$CellContext`\[Theta]] Sin[$CellContext`\[Theta]]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851665533474*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.8648567779104424`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"a4a1051f-48fc-4ee0-bc4c-\
-2ca2439f5d31"],
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"d1e9a009-a54b-467d-825e-\
+a73f2b404228"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -653,10 +653,10 @@ Cell[BoxData[
       Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], 
    " = ", $CellContext`r^(-1)],
   Editable->False]], "Print",
- CellChangeTimes->{3.86485166553449*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.864856777911542*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"5c428cee-a257-478f-9db6-\
-1261ab4fe0f9"],
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"e73c2cdb-c943-4920-b74b-\
+536630105d9e"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -699,10 +699,10 @@ Cell[BoxData[
       Null, $CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
    Cot[$CellContext`\[Theta]]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851665535432*^9},
+ CellChangeTimes->{3.8648516655249367`*^9, 3.8648567779126472`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"311c81f9-2d66-4de1-96cf-\
-30f78a247d10"]
+  "\:6b63\:5728\:8ba1\:7b97In[63]:=",ExpressionUUID->"9a7c01af-aea0-424d-8c6b-\
+be15bb247c49"]
 }, Open  ]]
 }, Open  ]],
 
@@ -710,7 +710,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Print\[DoubleStruckCapitalR]4", "[", "]"}]], "Input",
- CellLabel->"In[55]:=",ExpressionUUID->"12847bcb-d9ae-4f42-b9d8-6075e9fc0878"],
+ CellLabel->"In[64]:=",ExpressionUUID->"12847bcb-d9ae-4f42-b9d8-6075e9fc0878"],
 
 Cell[CellGroupData[{
 
@@ -751,7 +751,7 @@ Cell[BoxData[
     RowBox[{"r", " ", 
      TagBox[
       StyleBox[
-       SuperscriptBox["A", "\[Prime]",
+       SuperscriptBox["B", "\[Prime]",
         MultilineFunction->None],
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
@@ -762,7 +762,7 @@ Cell[BoxData[
       Selectable->False]}], 
     RowBox[{"2", " ", 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -776,13 +776,13 @@ Cell[BoxData[
       Null, Null, Null, 
        Null}, {$CellContext`\[Lambda], $CellContext`\[Mu], \
 $CellContext`\[Nu], $CellContext`\[Rho]}}]], " = ", 
-   Rational[1, 2] $CellContext`r $CellContext`B[$CellContext`r]^(-1) 
-   Derivative[1][$CellContext`A][$CellContext`r]],
+   Rational[1, 2] $CellContext`r $CellContext`A[$CellContext`r]^(-1) 
+   Derivative[1][$CellContext`B][$CellContext`r]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851673833674*^9},
+ CellChangeTimes->{3.864851673833674*^9, 3.864856780909137*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[55]:=",ExpressionUUID->"eccad1ed-fc4f-40e9-8f9a-\
-3ee824603a68"],
+  "\:6b63\:5728\:8ba1\:7b97In[64]:=",ExpressionUUID->"5d45792f-7804-4cd3-a847-\
+206af029fdb8"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -823,7 +823,7 @@ Cell[BoxData[
       RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"], " ", 
      TagBox[
       StyleBox[
-       SuperscriptBox["A", "\[Prime]",
+       SuperscriptBox["B", "\[Prime]",
         MultilineFunction->None],
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
@@ -834,7 +834,7 @@ Cell[BoxData[
       Selectable->False]}], 
     RowBox[{"2", " ", 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -848,13 +848,13 @@ Cell[BoxData[
       Null, Null, Null, 
        Null}, {$CellContext`\[Lambda], $CellContext`\[Mu], \
 $CellContext`\[Nu], $CellContext`\[Rho]}}]], " = ", 
-   Rational[1, 2] $CellContext`r $CellContext`B[$CellContext`r]^(-1) 
-   Sin[$CellContext`\[Theta]]^2 Derivative[1][$CellContext`A][$CellContext`r]],
+   Rational[1, 2] $CellContext`r $CellContext`A[$CellContext`r]^(-1) 
+   Sin[$CellContext`\[Theta]]^2 Derivative[1][$CellContext`B][$CellContext`r]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851673848936*^9},
+ CellChangeTimes->{3.864851673833674*^9, 3.8648567809339247`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[55]:=",ExpressionUUID->"51a48630-cfaa-4097-8052-\
-55530b68d7b6"],
+  "\:6b63\:5728\:8ba1\:7b97In[64]:=",ExpressionUUID->"e0ce0417-4303-4c21-88e0-\
+f4f5156b951d"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -895,7 +895,7 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"-", 
        FractionBox[
-        SuperscriptBox[
+        RowBox[{
          TagBox[
           StyleBox[
            SuperscriptBox["A", "\[Prime]",
@@ -906,7 +906,18 @@ Cell[BoxData[
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], "2"], 
+          Selectable->False], " ", 
+         TagBox[
+          StyleBox[
+           SuperscriptBox["B", "\[Prime]",
+            MultilineFunction->None],
+           LineColor->RGBColor[0, 0, 1],
+           FrontFaceColor->RGBColor[0, 0, 1],
+           BackFaceColor->RGBColor[0, 0, 1],
+           GraphicsColor->RGBColor[0, 0, 1],
+           FontColor->RGBColor[0, 0, 1]],
+          "GREFX1",
+          Selectable->False]}], 
         TagBox[
          StyleBox["A",
           LineColor->RGBColor[0, 0, 1],
@@ -917,18 +928,7 @@ Cell[BoxData[
          "GREFX1",
          Selectable->False]]}], "-", 
       FractionBox[
-       RowBox[{
-        TagBox[
-         StyleBox[
-          SuperscriptBox["A", "\[Prime]",
-           MultilineFunction->None],
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False], " ", 
+       SuperscriptBox[
         TagBox[
          StyleBox[
           SuperscriptBox["B", "\[Prime]",
@@ -939,7 +939,7 @@ Cell[BoxData[
           GraphicsColor->RGBColor[0, 0, 1],
           FontColor->RGBColor[0, 0, 1]],
          "GREFX1",
-         Selectable->False]}], 
+         Selectable->False], "2"], 
        TagBox[
         StyleBox["B",
          LineColor->RGBColor[0, 0, 1],
@@ -952,7 +952,7 @@ Cell[BoxData[
       RowBox[{"2", " ", 
        TagBox[
         StyleBox[
-         SuperscriptBox["A", "\[Prime]\[Prime]",
+         SuperscriptBox["B", "\[Prime]\[Prime]",
           MultilineFunction->None],
          LineColor->RGBColor[0, 0, 1],
          FrontFaceColor->RGBColor[0, 0, 1],
@@ -968,17 +968,16 @@ Cell[BoxData[
        Null}, {$CellContext`\[Lambda], $CellContext`\[Mu], \
 $CellContext`\[Nu], $CellContext`\[Rho]}}]], " = ", 
    Rational[1, 4] (-$CellContext`A[$CellContext`r]^(-1) 
+     Derivative[1][$CellContext`A][$CellContext`r] 
      Derivative[
-       1][$CellContext`A][$CellContext`r]^2 - \
-$CellContext`B[$CellContext`r]^(-1) 
-    Derivative[1][$CellContext`A][$CellContext`r] 
-    Derivative[1][$CellContext`B][$CellContext`r] + 
-    2 Derivative[2][$CellContext`A][$CellContext`r])],
+      1][$CellContext`B][$CellContext`r] - $CellContext`B[$CellContext`r]^(-1)
+       Derivative[1][$CellContext`B][$CellContext`r]^2 + 
+    2 Derivative[2][$CellContext`B][$CellContext`r])],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851673863546*^9},
+ CellChangeTimes->{3.864851673833674*^9, 3.864856780936451*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[55]:=",ExpressionUUID->"b0f536b1-9b22-4183-be0f-\
-9e61c6b3437c"],
+  "\:6b63\:5728\:8ba1\:7b97In[64]:=",ExpressionUUID->"9f340ad5-6042-411e-bcf3-\
+e6ad68f5b8cb"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1017,7 +1016,7 @@ Cell[BoxData[
     RowBox[{"r", " ", 
      TagBox[
       StyleBox[
-       SuperscriptBox["B", "\[Prime]",
+       SuperscriptBox["A", "\[Prime]",
         MultilineFunction->None],
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
@@ -1028,7 +1027,7 @@ Cell[BoxData[
       Selectable->False]}], 
     RowBox[{"2", " ", 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -1042,13 +1041,13 @@ Cell[BoxData[
       Null, Null, Null, 
        Null}, {$CellContext`\[Lambda], $CellContext`\[Mu], \
 $CellContext`\[Nu], $CellContext`\[Rho]}}]], " = ", 
-   Rational[1, 2] $CellContext`r $CellContext`B[$CellContext`r]^(-1) 
-   Derivative[1][$CellContext`B][$CellContext`r]],
+   Rational[1, 2] $CellContext`r $CellContext`A[$CellContext`r]^(-1) 
+   Derivative[1][$CellContext`A][$CellContext`r]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851673864912*^9},
+ CellChangeTimes->{3.864851673833674*^9, 3.8648567809500647`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[55]:=",ExpressionUUID->"fe7ec6f4-a7ff-4d22-b6ea-\
-cf527194814f"],
+  "\:6b63\:5728\:8ba1\:7b97In[64]:=",ExpressionUUID->"a5bafb19-7dfa-43e0-a884-\
+b809c1a25ca1"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1089,7 +1088,7 @@ Cell[BoxData[
       RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"], " ", 
      TagBox[
       StyleBox[
-       SuperscriptBox["B", "\[Prime]",
+       SuperscriptBox["A", "\[Prime]",
         MultilineFunction->None],
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
@@ -1100,7 +1099,7 @@ Cell[BoxData[
       Selectable->False]}], 
     RowBox[{"2", " ", 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -1114,13 +1113,13 @@ Cell[BoxData[
       Null, Null, Null, 
        Null}, {$CellContext`\[Lambda], $CellContext`\[Mu], \
 $CellContext`\[Nu], $CellContext`\[Rho]}}]], " = ", 
-   Rational[1, 2] $CellContext`r $CellContext`B[$CellContext`r]^(-1) 
-   Sin[$CellContext`\[Theta]]^2 Derivative[1][$CellContext`B][$CellContext`r]],
+   Rational[1, 2] $CellContext`r $CellContext`A[$CellContext`r]^(-1) 
+   Sin[$CellContext`\[Theta]]^2 Derivative[1][$CellContext`A][$CellContext`r]],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851673877914*^9},
+ CellChangeTimes->{3.864851673833674*^9, 3.8648567809511833`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[55]:=",ExpressionUUID->"e0ba6a7c-4f85-46eb-8a6c-\
-7c1abd947c65"],
+  "\:6b63\:5728\:8ba1\:7b97In[64]:=",ExpressionUUID->"ba00dc7c-3869-4502-8c11-\
+7a4476207140"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1162,7 +1161,7 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"-", "1"}], "+", 
        TagBox[
-        StyleBox["B",
+        StyleBox["A",
          LineColor->RGBColor[0, 0, 1],
          FrontFaceColor->RGBColor[0, 0, 1],
          BackFaceColor->RGBColor[0, 0, 1],
@@ -1173,7 +1172,7 @@ Cell[BoxData[
      SuperscriptBox[
       RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"]}], 
     TagBox[
-     StyleBox["B",
+     StyleBox["A",
       LineColor->RGBColor[0, 0, 1],
       FrontFaceColor->RGBColor[0, 0, 1],
       BackFaceColor->RGBColor[0, 0, 1],
@@ -1187,13 +1186,13 @@ Cell[BoxData[
       Null, Null, Null, 
        Null}, {$CellContext`\[Lambda], $CellContext`\[Mu], \
 $CellContext`\[Nu], $CellContext`\[Rho]}}]], 
-   " = ", $CellContext`r^2 (-1 + $CellContext`B[$CellContext`r]) \
-$CellContext`B[$CellContext`r]^(-1) Sin[$CellContext`\[Theta]]^2],
+   " = ", $CellContext`r^2 (-1 + $CellContext`A[$CellContext`r]) \
+$CellContext`A[$CellContext`r]^(-1) Sin[$CellContext`\[Theta]]^2],
   Editable->False]], "Print",
- CellChangeTimes->{3.8648516738789463`*^9},
+ CellChangeTimes->{3.864851673833674*^9, 3.864856780952177*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[55]:=",ExpressionUUID->"bd67c6cb-1013-48d7-8c14-\
-c05923456e6f"]
+  "\:6b63\:5728\:8ba1\:7b97In[64]:=",ExpressionUUID->"02688514-73bf-450a-9786-\
+0ec57e56f29b"]
 }, Open  ]]
 }, Open  ]],
 
@@ -1202,7 +1201,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Print\[DoubleStruckCapitalR]2", "[", "]"}]], "Input",
  CellChangeTimes->{{3.8648142404361753`*^9, 3.864814256071167*^9}},
- CellLabel->"In[12]:=",ExpressionUUID->"7bc27d5d-99bd-446b-a55a-bb5af7045abd"],
+ CellLabel->"In[65]:=",ExpressionUUID->"7bc27d5d-99bd-446b-a55a-bb5af7045abd"],
 
 Cell[CellGroupData[{
 
@@ -1268,7 +1267,7 @@ Cell[BoxData[
       RowBox[{"4", " ", 
        SuperscriptBox[
         TagBox[
-         StyleBox["B",
+         StyleBox["A",
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
           BackFaceColor->RGBColor[0, 0, 1],
@@ -1281,7 +1280,7 @@ Cell[BoxData[
       FractionBox[
        TagBox[
         StyleBox[
-         SuperscriptBox["A", "\[Prime]",
+         SuperscriptBox["B", "\[Prime]",
           MultilineFunction->None],
          LineColor->RGBColor[0, 0, 1],
          FrontFaceColor->RGBColor[0, 0, 1],
@@ -1294,7 +1293,7 @@ Cell[BoxData[
        SuperscriptBox[
         TagBox[
          StyleBox[
-          SuperscriptBox["A", "\[Prime]",
+          SuperscriptBox["B", "\[Prime]",
            MultilineFunction->None],
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
@@ -1305,7 +1304,7 @@ Cell[BoxData[
          Selectable->False], "2"], 
        RowBox[{"4", " ", 
         TagBox[
-         StyleBox["A",
+         StyleBox["B",
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
           BackFaceColor->RGBColor[0, 0, 1],
@@ -1316,7 +1315,7 @@ Cell[BoxData[
       FractionBox[
        TagBox[
         StyleBox[
-         SuperscriptBox["A", "\[Prime]\[Prime]",
+         SuperscriptBox["B", "\[Prime]\[Prime]",
           MultilineFunction->None],
          LineColor->RGBColor[0, 0, 1],
          FrontFaceColor->RGBColor[0, 0, 1],
@@ -1326,7 +1325,7 @@ Cell[BoxData[
         "GREFX1",
         Selectable->False], "2"]}], 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -1338,14 +1337,14 @@ Cell[BoxData[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalR], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
-   Rational[-1, 4] $CellContext`B[$CellContext`r]^(-2) 
+   Rational[-1, 4] $CellContext`A[$CellContext`r]^(-2) 
     Derivative[1][$CellContext`A][$CellContext`r] 
     Derivative[
-     1][$CellContext`B][$CellContext`r] + $CellContext`B[$CellContext`r]^(-1) \
-($CellContext`r^(-1) Derivative[1][$CellContext`A][$CellContext`r] + 
-     Rational[-1, 4] $CellContext`A[$CellContext`r]^(-1) 
-      Derivative[1][$CellContext`A][$CellContext`r]^2 + 
-     Rational[1, 2] Derivative[2][$CellContext`A][$CellContext`r])],
+     1][$CellContext`B][$CellContext`r] + $CellContext`A[$CellContext`r]^(-1) \
+($CellContext`r^(-1) Derivative[1][$CellContext`B][$CellContext`r] + 
+     Rational[-1, 4] $CellContext`B[$CellContext`r]^(-1) 
+      Derivative[1][$CellContext`B][$CellContext`r]^2 + 
+     Rational[1, 2] Derivative[2][$CellContext`B][$CellContext`r])],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.8648142567084837`*^9, 3.864814927711059*^9, 3.864841156862671*^9, 
@@ -1359,10 +1358,10 @@ Cell[BoxData[
    3.864850415882978*^9, 3.8648504561732807`*^9, 3.8648505119789143`*^9, 
    3.864850759066907*^9, {3.864850814866164*^9, 3.864850828451865*^9}, {
    3.864850918434761*^9, 3.864850935098094*^9}, 3.864850983679955*^9, {
-   3.864851632918342*^9, 3.864851635572803*^9}},
+   3.864851632918342*^9, 3.864851635572803*^9}, 3.864856782909927*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[12]:=",ExpressionUUID->"870e5832-01ac-4b31-bde0-\
-7b73f6351da3"],
+  "\:6b63\:5728\:8ba1\:7b97In[65]:=",ExpressionUUID->"d245a24e-76ac-424b-b4c4-\
+fa30715e6539"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1401,41 +1400,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{
       TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], " ", 
-      RowBox[{"(", 
-       RowBox[{
-        RowBox[{"4", " ", 
-         TagBox[
-          StyleBox["A",
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False]}], "+", 
-        RowBox[{"r", " ", 
-         TagBox[
-          StyleBox[
-           SuperscriptBox["A", "\[Prime]",
-            MultilineFunction->None],
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False]}]}], ")"}], " ", 
-      TagBox[
        StyleBox[
-        SuperscriptBox["B", "\[Prime]",
+        SuperscriptBox["A", "\[Prime]",
          MultilineFunction->None],
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
@@ -1443,23 +1409,14 @@ Cell[BoxData[
         GraphicsColor->RGBColor[0, 0, 1],
         FontColor->RGBColor[0, 0, 1]],
        "GREFX1",
-       Selectable->False]}], "+", 
-     RowBox[{"r", " ", 
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
        Selectable->False], " ", 
       RowBox[{"(", 
        RowBox[{
-        SuperscriptBox[
+        FractionBox["4", "r"], "+", 
+        FractionBox[
          TagBox[
           StyleBox[
-           SuperscriptBox["A", "\[Prime]",
+           SuperscriptBox["B", "\[Prime]",
             MultilineFunction->None],
            LineColor->RGBColor[0, 0, 1],
            FrontFaceColor->RGBColor[0, 0, 1],
@@ -1467,41 +1424,75 @@ Cell[BoxData[
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], "2"], "-", 
-        RowBox[{"2", " ", 
+          Selectable->False], 
          TagBox[
-          StyleBox["A",
+          StyleBox["B",
            LineColor->RGBColor[0, 0, 1],
            FrontFaceColor->RGBColor[0, 0, 1],
            BackFaceColor->RGBColor[0, 0, 1],
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], " ", 
-         TagBox[
-          StyleBox[
-           SuperscriptBox["A", "\[Prime]\[Prime]",
-            MultilineFunction->None],
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False]}]}], ")"}]}]}], 
-    RowBox[{"4", " ", "r", " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"], " ", 
+          Selectable->False]]}], ")"}]}], "+", 
+     FractionBox[
+      RowBox[{
+       TagBox[
+        StyleBox["A",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         SuperscriptBox[
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], "2"], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           StyleBox["B",
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False]}]}], ")"}]}], 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"]]}], 
+    RowBox[{"4", " ", 
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -1513,17 +1504,15 @@ Cell[BoxData[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalR], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 
-     4] $CellContext`r^(-1) $CellContext`A[$CellContext`r]^(-2) \
-$CellContext`B[$CellContext`r]^(-1) ($CellContext`A[$CellContext`r] (
-      4 $CellContext`A[$CellContext`r] + $CellContext`r 
-       Derivative[1][$CellContext`A][$CellContext`r]) 
-     Derivative[
-      1][$CellContext`B][$CellContext`r] + $CellContext`r \
-$CellContext`B[$CellContext`r] (
-      Derivative[1][$CellContext`A][$CellContext`r]^2 - 
-      2 $CellContext`A[$CellContext`r] 
-      Derivative[2][$CellContext`A][$CellContext`r]))],
+   Rational[1, 4] $CellContext`A[$CellContext`r]^(-1) (
+    Derivative[1][$CellContext`A][$CellContext`r] (
+      4/$CellContext`r + $CellContext`B[$CellContext`r]^(-1) 
+       Derivative[
+        1][$CellContext`B][$CellContext`r]) + $CellContext`A[$CellContext`r] \
+$CellContext`B[$CellContext`r]^(-2) (
+      Derivative[1][$CellContext`B][$CellContext`r]^2 - 
+      2 $CellContext`B[$CellContext`r] 
+      Derivative[2][$CellContext`B][$CellContext`r]))],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.8648142567084837`*^9, 3.864814927711059*^9, 3.864841156862671*^9, 
@@ -1537,10 +1526,10 @@ $CellContext`B[$CellContext`r] (
    3.864850415882978*^9, 3.8648504561732807`*^9, 3.8648505119789143`*^9, 
    3.864850759066907*^9, {3.864850814866164*^9, 3.864850828451865*^9}, {
    3.864850918434761*^9, 3.864850935098094*^9}, 3.864850983679955*^9, {
-   3.864851632918342*^9, 3.8648516355740623`*^9}},
+   3.864851632918342*^9, 3.864851635572803*^9}, 3.8648567829134207`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[12]:=",ExpressionUUID->"435ea8cc-3b4b-4daa-9027-\
-f12f9f6fae7d"],
+  "\:6b63\:5728\:8ba1\:7b97In[65]:=",ExpressionUUID->"e805a2ed-6bf2-4d9e-a6f1-\
+8fb8b8907d00"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1578,45 +1567,12 @@ Cell[BoxData[
    RowBox[{
     FractionBox["1", "2"], " ", 
     RowBox[{"(", 
-     RowBox[{"2", "-", 
-      FractionBox[
-       RowBox[{"2", "+", 
-        FractionBox[
-         RowBox[{"r", " ", 
-          TagBox[
-           StyleBox[
-            SuperscriptBox["A", "\[Prime]",
-             MultilineFunction->None],
-            LineColor->RGBColor[0, 0, 1],
-            FrontFaceColor->RGBColor[0, 0, 1],
-            BackFaceColor->RGBColor[0, 0, 1],
-            GraphicsColor->RGBColor[0, 0, 1],
-            FontColor->RGBColor[0, 0, 1]],
-           "GREFX1",
-           Selectable->False]}], 
-         TagBox[
-          StyleBox["A",
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False]]}], 
-       TagBox[
-        StyleBox["B",
-         LineColor->RGBColor[0, 0, 1],
-         FrontFaceColor->RGBColor[0, 0, 1],
-         BackFaceColor->RGBColor[0, 0, 1],
-         GraphicsColor->RGBColor[0, 0, 1],
-         FontColor->RGBColor[0, 0, 1]],
-        "GREFX1",
-        Selectable->False]], "+", 
+     RowBox[{"2", "+", 
       FractionBox[
        RowBox[{"r", " ", 
         TagBox[
          StyleBox[
-          SuperscriptBox["B", "\[Prime]",
+          SuperscriptBox["A", "\[Prime]",
            MultilineFunction->None],
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
@@ -1627,25 +1583,58 @@ Cell[BoxData[
          Selectable->False]}], 
        SuperscriptBox[
         TagBox[
-         StyleBox["B",
+         StyleBox["A",
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
           BackFaceColor->RGBColor[0, 0, 1],
           GraphicsColor->RGBColor[0, 0, 1],
           FontColor->RGBColor[0, 0, 1]],
          "GREFX1",
-         Selectable->False], "2"]]}], ")"}]}]}],
+         Selectable->False], "2"]], "-", 
+      FractionBox[
+       RowBox[{"2", "+", 
+        FractionBox[
+         RowBox[{"r", " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False]}], 
+         TagBox[
+          StyleBox["B",
+           LineColor->RGBColor[0, 0, 1],
+           FrontFaceColor->RGBColor[0, 0, 1],
+           BackFaceColor->RGBColor[0, 0, 1],
+           GraphicsColor->RGBColor[0, 0, 1],
+           FontColor->RGBColor[0, 0, 1]],
+          "GREFX1",
+          Selectable->False]]}], 
+       TagBox[
+        StyleBox["A",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False]]}], ")"}]}]}],
   SequenceForm[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalR], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
    Rational[1, 2] (
-    2 - $CellContext`B[$CellContext`r]^(-1) (
-     2 + $CellContext`r $CellContext`A[$CellContext`r]^(-1) 
-      Derivative[
-       1][$CellContext`A][$CellContext`r]) + $CellContext`r \
-$CellContext`B[$CellContext`r]^(-2) 
-     Derivative[1][$CellContext`B][$CellContext`r])],
+    2 + $CellContext`r $CellContext`A[$CellContext`r]^(-2) 
+     Derivative[
+      1][$CellContext`A][$CellContext`r] - \
+$CellContext`A[$CellContext`r]^(-1) (
+     2 + $CellContext`r $CellContext`B[$CellContext`r]^(-1) 
+      Derivative[1][$CellContext`B][$CellContext`r]))],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.8648142567084837`*^9, 3.864814927711059*^9, 3.864841156862671*^9, 
@@ -1659,10 +1648,10 @@ $CellContext`B[$CellContext`r]^(-2)
    3.864850415882978*^9, 3.8648504561732807`*^9, 3.8648505119789143`*^9, 
    3.864850759066907*^9, {3.864850814866164*^9, 3.864850828451865*^9}, {
    3.864850918434761*^9, 3.864850935098094*^9}, 3.864850983679955*^9, {
-   3.864851632918342*^9, 3.864851635576009*^9}},
+   3.864851632918342*^9, 3.864851635572803*^9}, 3.864856782931766*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[12]:=",ExpressionUUID->"86aa656f-6ee4-4e03-8181-\
-6de0851c1c27"],
+  "\:6b63\:5728\:8ba1\:7b97In[65]:=",ExpressionUUID->"a22f4ef3-4e2b-41d2-9cb0-\
+e01aa28df663"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1703,8 +1692,27 @@ Cell[BoxData[
       RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"], " ", 
      RowBox[{"(", 
       RowBox[{
-       RowBox[{
-        RowBox[{"-", "r"}], " ", 
+       RowBox[{"2", " ", 
+        SuperscriptBox[
+         TagBox[
+          StyleBox["A",
+           LineColor->RGBColor[0, 0, 1],
+           FrontFaceColor->RGBColor[0, 0, 1],
+           BackFaceColor->RGBColor[0, 0, 1],
+           GraphicsColor->RGBColor[0, 0, 1],
+           FontColor->RGBColor[0, 0, 1]],
+          "GREFX1",
+          Selectable->False], "2"], " ", 
+        TagBox[
+         StyleBox["B",
+          LineColor->RGBColor[0, 0, 1],
+          FrontFaceColor->RGBColor[0, 0, 1],
+          BackFaceColor->RGBColor[0, 0, 1],
+          GraphicsColor->RGBColor[0, 0, 1],
+          FontColor->RGBColor[0, 0, 1]],
+         "GREFX1",
+         Selectable->False]}], "+", 
+       RowBox[{"r", " ", 
         TagBox[
          StyleBox["B",
           LineColor->RGBColor[0, 0, 1],
@@ -1724,7 +1732,7 @@ Cell[BoxData[
           GraphicsColor->RGBColor[0, 0, 1],
           FontColor->RGBColor[0, 0, 1]],
          "GREFX1",
-         Selectable->False]}], "+", 
+         Selectable->False]}], "-", 
        RowBox[{
         TagBox[
          StyleBox["A",
@@ -1737,8 +1745,7 @@ Cell[BoxData[
          Selectable->False], " ", 
         RowBox[{"(", 
          RowBox[{
-          RowBox[{
-           RowBox[{"-", "2"}], " ", 
+          RowBox[{"2", " ", 
            TagBox[
             StyleBox["B",
              LineColor->RGBColor[0, 0, 1],
@@ -1748,17 +1755,6 @@ Cell[BoxData[
              FontColor->RGBColor[0, 0, 1]],
             "GREFX1",
             Selectable->False]}], "+", 
-          RowBox[{"2", " ", 
-           SuperscriptBox[
-            TagBox[
-             StyleBox["B",
-              LineColor->RGBColor[0, 0, 1],
-              FrontFaceColor->RGBColor[0, 0, 1],
-              BackFaceColor->RGBColor[0, 0, 1],
-              GraphicsColor->RGBColor[0, 0, 1],
-              FontColor->RGBColor[0, 0, 1]],
-             "GREFX1",
-             Selectable->False], "2"]}], "+", 
           RowBox[{"r", " ", 
            TagBox[
             StyleBox[
@@ -1772,39 +1768,39 @@ Cell[BoxData[
             "GREFX1",
             Selectable->False]}]}], ")"}]}]}], ")"}]}], 
     RowBox[{"2", " ", 
-     TagBox[
-      StyleBox["A",
-       LineColor->RGBColor[0, 0, 1],
-       FrontFaceColor->RGBColor[0, 0, 1],
-       BackFaceColor->RGBColor[0, 0, 1],
-       GraphicsColor->RGBColor[0, 0, 1],
-       FontColor->RGBColor[0, 0, 1]],
-      "GREFX1",
-      Selectable->False], " ", 
      SuperscriptBox[
       TagBox[
-       StyleBox["B",
+       StyleBox["A",
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
         BackFaceColor->RGBColor[0, 0, 1],
         GraphicsColor->RGBColor[0, 0, 1],
         FontColor->RGBColor[0, 0, 1]],
        "GREFX1",
-       Selectable->False], "2"]}]]}],
+       Selectable->False], "2"], " ", 
+     TagBox[
+      StyleBox["B",
+       LineColor->RGBColor[0, 0, 1],
+       FrontFaceColor->RGBColor[0, 0, 1],
+       BackFaceColor->RGBColor[0, 0, 1],
+       GraphicsColor->RGBColor[0, 0, 1],
+       FontColor->RGBColor[0, 0, 1]],
+      "GREFX1",
+      Selectable->False]}]]}],
   SequenceForm[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalR], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
    Rational[1, 
-     2] $CellContext`A[$CellContext`r]^(-1) \
-$CellContext`B[$CellContext`r]^(-2) 
-   Sin[$CellContext`\[Theta]]^2 (-$CellContext`r \
-$CellContext`B[$CellContext`r] 
+     2] $CellContext`A[$CellContext`r]^(-2) \
+$CellContext`B[$CellContext`r]^(-1) 
+   Sin[$CellContext`\[Theta]]^2 (
+    2 $CellContext`A[$CellContext`r]^2 $CellContext`B[$CellContext`r] + \
+$CellContext`r $CellContext`B[$CellContext`r] 
      Derivative[
-      1][$CellContext`A][$CellContext`r] + $CellContext`A[$CellContext`r] \
-((-2) $CellContext`B[$CellContext`r] + 
-      2 $CellContext`B[$CellContext`r]^2 + $CellContext`r 
-       Derivative[1][$CellContext`B][$CellContext`r]))],
+      1][$CellContext`A][$CellContext`r] - $CellContext`A[$CellContext`r] (
+     2 $CellContext`B[$CellContext`r] + $CellContext`r 
+      Derivative[1][$CellContext`B][$CellContext`r]))],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.8648142567084837`*^9, 3.864814927711059*^9, 3.864841156862671*^9, 
@@ -1818,10 +1814,10 @@ $CellContext`B[$CellContext`r]
    3.864850415882978*^9, 3.8648504561732807`*^9, 3.8648505119789143`*^9, 
    3.864850759066907*^9, {3.864850814866164*^9, 3.864850828451865*^9}, {
    3.864850918434761*^9, 3.864850935098094*^9}, 3.864850983679955*^9, {
-   3.864851632918342*^9, 3.864851635576889*^9}},
+   3.864851632918342*^9, 3.864851635572803*^9}, 3.864856782945983*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[12]:=",ExpressionUUID->"2e8a4a89-ca65-4297-8acb-\
-f568e7e0df89"]
+  "\:6b63\:5728\:8ba1\:7b97In[65]:=",ExpressionUUID->"127af076-9dd7-4fbc-92c1-\
+0346beedba71"]
 }, Open  ]]
 }, Open  ]],
 
@@ -1829,7 +1825,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Print\[DoubleStruckCapitalG]", "[", "]"}]], "Input",
- CellLabel->"In[56]:=",ExpressionUUID->"7feb4f9c-610d-4056-bd95-2b28a7696608"],
+ CellLabel->"In[66]:=",ExpressionUUID->"7feb4f9c-610d-4056-bd95-2b28a7696608"],
 
 Cell[CellGroupData[{
 
@@ -1869,7 +1865,7 @@ Cell[BoxData[
    FractionBox[
     RowBox[{
      TagBox[
-      StyleBox["A",
+      StyleBox["B",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -1881,7 +1877,7 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"-", 
         TagBox[
-         StyleBox["B",
+         StyleBox["A",
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
           BackFaceColor->RGBColor[0, 0, 1],
@@ -1891,7 +1887,7 @@ Cell[BoxData[
          Selectable->False]}], "+", 
        SuperscriptBox[
         TagBox[
-         StyleBox["B",
+         StyleBox["A",
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
           BackFaceColor->RGBColor[0, 0, 1],
@@ -1902,7 +1898,7 @@ Cell[BoxData[
        RowBox[{"r", " ", 
         TagBox[
          StyleBox[
-          SuperscriptBox["B", "\[Prime]",
+          SuperscriptBox["A", "\[Prime]",
            MultilineFunction->None],
           LineColor->RGBColor[0, 0, 1],
           FrontFaceColor->RGBColor[0, 0, 1],
@@ -1915,7 +1911,7 @@ Cell[BoxData[
      SuperscriptBox["r", "2"], " ", 
      SuperscriptBox[
       TagBox[
-       StyleBox["B",
+       StyleBox["A",
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
         BackFaceColor->RGBColor[0, 0, 1],
@@ -1927,15 +1923,15 @@ Cell[BoxData[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], 
-   " = ", $CellContext`r^(-2) $CellContext`A[$CellContext`r] \
-$CellContext`B[$CellContext`r]^(-2) (-$CellContext`B[$CellContext`r] + \
-$CellContext`B[$CellContext`r]^2 + $CellContext`r 
-     Derivative[1][$CellContext`B][$CellContext`r])],
+   " = ", $CellContext`r^(-2) $CellContext`A[$CellContext`r]^(-2) \
+$CellContext`B[$CellContext`r] (-$CellContext`A[$CellContext`r] + \
+$CellContext`A[$CellContext`r]^2 + $CellContext`r 
+     Derivative[1][$CellContext`A][$CellContext`r])],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851683977412*^9},
+ CellChangeTimes->{3.864851683977412*^9, 3.8648567848199253`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[56]:=",ExpressionUUID->"a0eb293f-0307-4135-8c65-\
-0028b647d187"],
+  "\:6b63\:5728\:8ba1\:7b97In[66]:=",ExpressionUUID->"b816120c-d6e0-4520-9cfe-\
+3b28d334a199"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -1973,7 +1969,7 @@ Cell[BoxData[
    FractionBox[
     RowBox[{
      TagBox[
-      StyleBox["A",
+      StyleBox["B",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -2003,7 +1999,7 @@ Cell[BoxData[
      RowBox[{"r", " ", 
       TagBox[
        StyleBox[
-        SuperscriptBox["A", "\[Prime]",
+        SuperscriptBox["B", "\[Prime]",
          MultilineFunction->None],
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
@@ -2015,7 +2011,7 @@ Cell[BoxData[
     RowBox[{
      SuperscriptBox["r", "2"], " ", 
      TagBox[
-      StyleBox["A",
+      StyleBox["B",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -2027,15 +2023,15 @@ Cell[BoxData[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], 
-   " = ", $CellContext`r^(-2) $CellContext`A[$CellContext`r]^(-1) \
-($CellContext`A[$CellContext`r] - $CellContext`A[$CellContext`r] \
+   " = ", $CellContext`r^(-2) $CellContext`B[$CellContext`r]^(-1) \
+($CellContext`B[$CellContext`r] - $CellContext`A[$CellContext`r] \
 $CellContext`B[$CellContext`r] + $CellContext`r 
-     Derivative[1][$CellContext`A][$CellContext`r])],
+     Derivative[1][$CellContext`B][$CellContext`r])],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851683981002*^9},
+ CellChangeTimes->{3.864851683977412*^9, 3.8648567848258333`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[56]:=",ExpressionUUID->"cc87e02b-caab-4e32-a354-\
-fd7558113e3b"],
+  "\:6b63\:5728\:8ba1\:7b97In[66]:=",ExpressionUUID->"9e78662b-7233-4134-a928-\
+5bacd4eb10cd"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2070,22 +2066,22 @@ Cell[BoxData[
      "GRETsr",
      Selectable->False],
     HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
-   FractionBox[
-    RowBox[{"r", " ", 
-     RowBox[{"(", 
-      RowBox[{
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"r", " ", 
+      RowBox[{"(", 
        RowBox[{
-        RowBox[{"-", "r"}], " ", 
-        TagBox[
-         StyleBox["B",
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False], " ", 
-        SuperscriptBox[
+        RowBox[{"2", " ", 
+         SuperscriptBox[
+          TagBox[
+           StyleBox["B",
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], "2"], " ", 
          TagBox[
           StyleBox[
            SuperscriptBox["A", "\[Prime]",
@@ -2096,9 +2092,8 @@ Cell[BoxData[
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], "2"]}], "-", 
-       RowBox[{"2", " ", 
-        SuperscriptBox[
+          Selectable->False]}], "+", 
+        RowBox[{"r", " ", 
          TagBox[
           StyleBox["A",
            LineColor->RGBColor[0, 0, 1],
@@ -2107,81 +2102,69 @@ Cell[BoxData[
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], "2"], " ", 
-        TagBox[
-         StyleBox[
-          SuperscriptBox["B", "\[Prime]",
-           MultilineFunction->None],
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False]}], "+", 
-       RowBox[{
-        TagBox[
-         StyleBox["A",
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False], " ", 
-        RowBox[{"(", 
-         RowBox[{
+          Selectable->False], " ", 
+         SuperscriptBox[
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], "2"]}], "+", 
+        RowBox[{
+         TagBox[
+          StyleBox["B",
+           LineColor->RGBColor[0, 0, 1],
+           FrontFaceColor->RGBColor[0, 0, 1],
+           BackFaceColor->RGBColor[0, 0, 1],
+           GraphicsColor->RGBColor[0, 0, 1],
+           FontColor->RGBColor[0, 0, 1]],
+          "GREFX1",
+          Selectable->False], " ", 
+         RowBox[{"(", 
           RowBox[{
-           RowBox[{"-", "r"}], " ", 
-           TagBox[
-            StyleBox[
-             SuperscriptBox["A", "\[Prime]",
-              MultilineFunction->None],
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False], " ", 
-           TagBox[
-            StyleBox[
-             SuperscriptBox["B", "\[Prime]",
-              MultilineFunction->None],
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False]}], "+", 
-          RowBox[{"2", " ", 
-           TagBox[
-            StyleBox["B",
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False], " ", 
-           RowBox[{"(", 
-            RowBox[{
-             TagBox[
-              StyleBox[
-               SuperscriptBox["A", "\[Prime]",
-                MultilineFunction->None],
-               LineColor->RGBColor[0, 0, 1],
-               FrontFaceColor->RGBColor[0, 0, 1],
-               BackFaceColor->RGBColor[0, 0, 1],
-               GraphicsColor->RGBColor[0, 0, 1],
-               FontColor->RGBColor[0, 0, 1]],
-              "GREFX1",
-              Selectable->False], "+", 
-             RowBox[{"r", " ", 
+           RowBox[{"r", " ", 
+            TagBox[
+             StyleBox[
+              SuperscriptBox["A", "\[Prime]",
+               MultilineFunction->None],
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False], " ", 
+            TagBox[
+             StyleBox[
+              SuperscriptBox["B", "\[Prime]",
+               MultilineFunction->None],
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False]}], "-", 
+           RowBox[{"2", " ", 
+            TagBox[
+             StyleBox["A",
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False], " ", 
+            RowBox[{"(", 
+             RowBox[{
               TagBox[
                StyleBox[
-                SuperscriptBox["A", "\[Prime]\[Prime]",
+                SuperscriptBox["B", "\[Prime]",
                  MultilineFunction->None],
                 LineColor->RGBColor[0, 0, 1],
                 FrontFaceColor->RGBColor[0, 0, 1],
@@ -2189,50 +2172,63 @@ Cell[BoxData[
                 GraphicsColor->RGBColor[0, 0, 1],
                 FontColor->RGBColor[0, 0, 1]],
                "GREFX1",
-               Selectable->False]}]}], ")"}]}]}], ")"}]}]}], ")"}]}], 
-    RowBox[{"4", " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"], " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"]}]]}],
+               Selectable->False], "+", 
+              RowBox[{"r", " ", 
+               TagBox[
+                StyleBox[
+                 SuperscriptBox["B", "\[Prime]\[Prime]",
+                  MultilineFunction->None],
+                 LineColor->RGBColor[0, 0, 1],
+                 FrontFaceColor->RGBColor[0, 0, 1],
+                 BackFaceColor->RGBColor[0, 0, 1],
+                 GraphicsColor->RGBColor[0, 0, 1],
+                 FontColor->RGBColor[0, 0, 1]],
+                "GREFX1",
+                Selectable->False]}]}], ")"}]}]}], ")"}]}]}], ")"}]}], 
+     RowBox[{"4", " ", 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["A",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"], " ", 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"]}]]}]}],
   SequenceForm[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 
+   Rational[-1, 
      4] $CellContext`r $CellContext`A[$CellContext`r]^(-2) \
-$CellContext`B[$CellContext`r]^(-2) (-$CellContext`r \
-$CellContext`B[$CellContext`r] 
-     Derivative[1][$CellContext`A][$CellContext`r]^2 - 
-    2 $CellContext`A[$CellContext`r]^2 
-    Derivative[
-     1][$CellContext`B][$CellContext`r] + $CellContext`A[$CellContext`r] \
-(-$CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
-       Derivative[1][$CellContext`B][$CellContext`r] + 
-      2 $CellContext`B[$CellContext`r] (
-        Derivative[1][$CellContext`A][$CellContext`r] + $CellContext`r 
-         Derivative[2][$CellContext`A][$CellContext`r])))],
+$CellContext`B[$CellContext`r]^(-2) (
+    2 $CellContext`B[$CellContext`r]^2 
+     Derivative[
+      1][$CellContext`A][$CellContext`r] + $CellContext`r \
+$CellContext`A[$CellContext`r] 
+     Derivative[
+       1][$CellContext`B][$CellContext`r]^2 + $CellContext`B[$CellContext`r] \
+($CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
+       Derivative[1][$CellContext`B][$CellContext`r] - 
+      2 $CellContext`A[$CellContext`r] (
+       Derivative[1][$CellContext`B][$CellContext`r] + $CellContext`r 
+        Derivative[2][$CellContext`B][$CellContext`r])))],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851683993145*^9},
+ CellChangeTimes->{3.864851683977412*^9, 3.8648567848424788`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[56]:=",ExpressionUUID->"c4010b17-11a2-4924-b37e-\
-d5726c290b65"],
+  "\:6b63\:5728\:8ba1\:7b97In[66]:=",ExpressionUUID->"a5f566a4-13c3-4f0d-8058-\
+4f5627584173"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2267,24 +2263,24 @@ Cell[BoxData[
      "GRETsr",
      Selectable->False],
     HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
-   FractionBox[
-    RowBox[{"r", " ", 
-     SuperscriptBox[
-      RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"], " ", 
-     RowBox[{"(", 
-      RowBox[{
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"r", " ", 
+      SuperscriptBox[
+       RowBox[{"Sin", "[", "\[Theta]", "]"}], "2"], " ", 
+      RowBox[{"(", 
        RowBox[{
-        RowBox[{"-", "r"}], " ", 
-        TagBox[
-         StyleBox["B",
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False], " ", 
-        SuperscriptBox[
+        RowBox[{"2", " ", 
+         SuperscriptBox[
+          TagBox[
+           StyleBox["B",
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], "2"], " ", 
          TagBox[
           StyleBox[
            SuperscriptBox["A", "\[Prime]",
@@ -2295,9 +2291,8 @@ Cell[BoxData[
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], "2"]}], "-", 
-       RowBox[{"2", " ", 
-        SuperscriptBox[
+          Selectable->False]}], "+", 
+        RowBox[{"r", " ", 
          TagBox[
           StyleBox["A",
            LineColor->RGBColor[0, 0, 1],
@@ -2306,81 +2301,69 @@ Cell[BoxData[
            GraphicsColor->RGBColor[0, 0, 1],
            FontColor->RGBColor[0, 0, 1]],
           "GREFX1",
-          Selectable->False], "2"], " ", 
-        TagBox[
-         StyleBox[
-          SuperscriptBox["B", "\[Prime]",
-           MultilineFunction->None],
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False]}], "+", 
-       RowBox[{
-        TagBox[
-         StyleBox["A",
-          LineColor->RGBColor[0, 0, 1],
-          FrontFaceColor->RGBColor[0, 0, 1],
-          BackFaceColor->RGBColor[0, 0, 1],
-          GraphicsColor->RGBColor[0, 0, 1],
-          FontColor->RGBColor[0, 0, 1]],
-         "GREFX1",
-         Selectable->False], " ", 
-        RowBox[{"(", 
-         RowBox[{
+          Selectable->False], " ", 
+         SuperscriptBox[
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], "2"]}], "+", 
+        RowBox[{
+         TagBox[
+          StyleBox["B",
+           LineColor->RGBColor[0, 0, 1],
+           FrontFaceColor->RGBColor[0, 0, 1],
+           BackFaceColor->RGBColor[0, 0, 1],
+           GraphicsColor->RGBColor[0, 0, 1],
+           FontColor->RGBColor[0, 0, 1]],
+          "GREFX1",
+          Selectable->False], " ", 
+         RowBox[{"(", 
           RowBox[{
-           RowBox[{"-", "r"}], " ", 
-           TagBox[
-            StyleBox[
-             SuperscriptBox["A", "\[Prime]",
-              MultilineFunction->None],
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False], " ", 
-           TagBox[
-            StyleBox[
-             SuperscriptBox["B", "\[Prime]",
-              MultilineFunction->None],
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False]}], "+", 
-          RowBox[{"2", " ", 
-           TagBox[
-            StyleBox["B",
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False], " ", 
-           RowBox[{"(", 
-            RowBox[{
-             TagBox[
-              StyleBox[
-               SuperscriptBox["A", "\[Prime]",
-                MultilineFunction->None],
-               LineColor->RGBColor[0, 0, 1],
-               FrontFaceColor->RGBColor[0, 0, 1],
-               BackFaceColor->RGBColor[0, 0, 1],
-               GraphicsColor->RGBColor[0, 0, 1],
-               FontColor->RGBColor[0, 0, 1]],
-              "GREFX1",
-              Selectable->False], "+", 
-             RowBox[{"r", " ", 
+           RowBox[{"r", " ", 
+            TagBox[
+             StyleBox[
+              SuperscriptBox["A", "\[Prime]",
+               MultilineFunction->None],
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False], " ", 
+            TagBox[
+             StyleBox[
+              SuperscriptBox["B", "\[Prime]",
+               MultilineFunction->None],
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False]}], "-", 
+           RowBox[{"2", " ", 
+            TagBox[
+             StyleBox["A",
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False], " ", 
+            RowBox[{"(", 
+             RowBox[{
               TagBox[
                StyleBox[
-                SuperscriptBox["A", "\[Prime]\[Prime]",
+                SuperscriptBox["B", "\[Prime]",
                  MultilineFunction->None],
                 LineColor->RGBColor[0, 0, 1],
                 FrontFaceColor->RGBColor[0, 0, 1],
@@ -2388,51 +2371,64 @@ Cell[BoxData[
                 GraphicsColor->RGBColor[0, 0, 1],
                 FontColor->RGBColor[0, 0, 1]],
                "GREFX1",
-               Selectable->False]}]}], ")"}]}]}], ")"}]}]}], ")"}]}], 
-    RowBox[{"4", " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"], " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"]}]]}],
+               Selectable->False], "+", 
+              RowBox[{"r", " ", 
+               TagBox[
+                StyleBox[
+                 SuperscriptBox["B", "\[Prime]\[Prime]",
+                  MultilineFunction->None],
+                 LineColor->RGBColor[0, 0, 1],
+                 FrontFaceColor->RGBColor[0, 0, 1],
+                 BackFaceColor->RGBColor[0, 0, 1],
+                 GraphicsColor->RGBColor[0, 0, 1],
+                 FontColor->RGBColor[0, 0, 1]],
+                "GREFX1",
+                Selectable->False]}]}], ")"}]}]}], ")"}]}]}], ")"}]}], 
+     RowBox[{"4", " ", 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["A",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"], " ", 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"]}]]}]}],
   SequenceForm[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{
       Null, Null}, {$CellContext`\[Mu], $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 
+   Rational[-1, 
      4] $CellContext`r $CellContext`A[$CellContext`r]^(-2) \
 $CellContext`B[$CellContext`r]^(-2) 
-   Sin[$CellContext`\[Theta]]^2 (-$CellContext`r \
-$CellContext`B[$CellContext`r] 
-     Derivative[1][$CellContext`A][$CellContext`r]^2 - 
-    2 $CellContext`A[$CellContext`r]^2 
-    Derivative[
-     1][$CellContext`B][$CellContext`r] + $CellContext`A[$CellContext`r] \
-(-$CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
-       Derivative[1][$CellContext`B][$CellContext`r] + 
-      2 $CellContext`B[$CellContext`r] (
-        Derivative[1][$CellContext`A][$CellContext`r] + $CellContext`r 
-         Derivative[2][$CellContext`A][$CellContext`r])))],
+   Sin[$CellContext`\[Theta]]^2 (
+    2 $CellContext`B[$CellContext`r]^2 
+     Derivative[
+      1][$CellContext`A][$CellContext`r] + $CellContext`r \
+$CellContext`A[$CellContext`r] 
+     Derivative[
+       1][$CellContext`B][$CellContext`r]^2 + $CellContext`B[$CellContext`r] \
+($CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
+       Derivative[1][$CellContext`B][$CellContext`r] - 
+      2 $CellContext`A[$CellContext`r] (
+       Derivative[1][$CellContext`B][$CellContext`r] + $CellContext`r 
+        Derivative[2][$CellContext`B][$CellContext`r])))],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851684009012*^9},
+ CellChangeTimes->{3.864851683977412*^9, 3.864856784856092*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[56]:=",ExpressionUUID->"c8677296-f015-4bfa-9f71-\
-4e381967d716"]
+  "\:6b63\:5728\:8ba1\:7b97In[66]:=",ExpressionUUID->"64113346-0014-49ba-8b63-\
+412be5d10953"]
 }, Open  ]]
 }, Open  ]],
 
@@ -2440,7 +2436,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Print\[DoubleStruckCapitalG]ud", "[", "]"}]], "Input",
- CellLabel->"In[57]:=",ExpressionUUID->"34e55f2a-d833-4a4f-8352-37a756110d70"],
+ CellLabel->"In[67]:=",ExpressionUUID->"34e55f2a-d833-4a4f-8352-37a756110d70"],
 
 Cell[CellGroupData[{
 
@@ -2480,7 +2476,7 @@ Cell[BoxData[
    FractionBox[
     RowBox[{
      TagBox[
-      StyleBox["B",
+      StyleBox["A",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -2490,7 +2486,7 @@ Cell[BoxData[
       Selectable->False], "-", 
      SuperscriptBox[
       TagBox[
-       StyleBox["B",
+       StyleBox["A",
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
         BackFaceColor->RGBColor[0, 0, 1],
@@ -2501,7 +2497,7 @@ Cell[BoxData[
      RowBox[{"r", " ", 
       TagBox[
        StyleBox[
-        SuperscriptBox["B", "\[Prime]",
+        SuperscriptBox["A", "\[Prime]",
          MultilineFunction->None],
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
@@ -2514,7 +2510,7 @@ Cell[BoxData[
      SuperscriptBox["r", "2"], " ", 
      SuperscriptBox[
       TagBox[
-       StyleBox["B",
+       StyleBox["A",
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
         BackFaceColor->RGBColor[0, 0, 1],
@@ -2526,14 +2522,14 @@ Cell[BoxData[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{$CellContext`\
 \[Lambda], Null}, {Null, $CellContext`\[Nu]}}]], 
-   " = ", $CellContext`r^(-2) $CellContext`B[$CellContext`r]^(-2) \
-($CellContext`B[$CellContext`r] - $CellContext`B[$CellContext`r]^2 - \
-$CellContext`r Derivative[1][$CellContext`B][$CellContext`r])],
+   " = ", $CellContext`r^(-2) $CellContext`A[$CellContext`r]^(-2) \
+($CellContext`A[$CellContext`r] - $CellContext`A[$CellContext`r]^2 - \
+$CellContext`r Derivative[1][$CellContext`A][$CellContext`r])],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851692284318*^9},
+ CellChangeTimes->{3.864851692284318*^9, 3.864856786595039*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[57]:=",ExpressionUUID->"4f77ff4c-c7f8-4584-b123-\
-6ab21c838133"],
+  "\:6b63\:5728\:8ba1\:7b97In[67]:=",ExpressionUUID->"e8cb0510-8bda-46fb-b7d0-\
+7e14cfffeede"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2571,7 +2567,7 @@ Cell[BoxData[
    FractionBox[
     RowBox[{
      TagBox[
-      StyleBox["A",
+      StyleBox["B",
        LineColor->RGBColor[0, 0, 1],
        FrontFaceColor->RGBColor[0, 0, 1],
        BackFaceColor->RGBColor[0, 0, 1],
@@ -2601,7 +2597,7 @@ Cell[BoxData[
      RowBox[{"r", " ", 
       TagBox[
        StyleBox[
-        SuperscriptBox["A", "\[Prime]",
+        SuperscriptBox["B", "\[Prime]",
          MultilineFunction->None],
         LineColor->RGBColor[0, 0, 1],
         FrontFaceColor->RGBColor[0, 0, 1],
@@ -2635,14 +2631,14 @@ Cell[BoxData[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{$CellContext`\
 \[Lambda], Null}, {Null, $CellContext`\[Nu]}}]], 
    " = ", $CellContext`r^(-2) $CellContext`A[$CellContext`r]^(-1) \
-$CellContext`B[$CellContext`r]^(-1) ($CellContext`A[$CellContext`r] - \
+$CellContext`B[$CellContext`r]^(-1) ($CellContext`B[$CellContext`r] - \
 $CellContext`A[$CellContext`r] $CellContext`B[$CellContext`r] + \
-$CellContext`r Derivative[1][$CellContext`A][$CellContext`r])],
+$CellContext`r Derivative[1][$CellContext`B][$CellContext`r])],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851692297111*^9},
+ CellChangeTimes->{3.864851692284318*^9, 3.864856786600349*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[57]:=",ExpressionUUID->"5f06b7d8-6892-457a-8c85-\
-a99df389b496"],
+  "\:6b63\:5728\:8ba1\:7b97In[67]:=",ExpressionUUID->"45dfa3d1-2d31-4220-9d55-\
+f13e7a6a6a09"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2677,20 +2673,20 @@ Cell[BoxData[
      "GRETsr",
      Selectable->False],
     HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
-   FractionBox[
-    RowBox[{
+   RowBox[{"-", 
+    FractionBox[
      RowBox[{
-      RowBox[{"-", "r"}], " ", 
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], " ", 
-      SuperscriptBox[
+      RowBox[{"2", " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["B",
+          LineColor->RGBColor[0, 0, 1],
+          FrontFaceColor->RGBColor[0, 0, 1],
+          BackFaceColor->RGBColor[0, 0, 1],
+          GraphicsColor->RGBColor[0, 0, 1],
+          FontColor->RGBColor[0, 0, 1]],
+         "GREFX1",
+         Selectable->False], "2"], " ", 
        TagBox[
         StyleBox[
          SuperscriptBox["A", "\[Prime]",
@@ -2701,8 +2697,100 @@ Cell[BoxData[
          GraphicsColor->RGBColor[0, 0, 1],
          FontColor->RGBColor[0, 0, 1]],
         "GREFX1",
-        Selectable->False], "2"]}], "-", 
-     RowBox[{"2", " ", 
+        Selectable->False]}], "+", 
+      RowBox[{"r", " ", 
+       TagBox[
+        StyleBox["A",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox[
+          SuperscriptBox["B", "\[Prime]",
+           MultilineFunction->None],
+          LineColor->RGBColor[0, 0, 1],
+          FrontFaceColor->RGBColor[0, 0, 1],
+          BackFaceColor->RGBColor[0, 0, 1],
+          GraphicsColor->RGBColor[0, 0, 1],
+          FontColor->RGBColor[0, 0, 1]],
+         "GREFX1",
+         Selectable->False], "2"]}], "+", 
+      RowBox[{
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"r", " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["A", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           StyleBox["A",
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            TagBox[
+             StyleBox[
+              SuperscriptBox["B", "\[Prime]",
+               MultilineFunction->None],
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False], "+", 
+            RowBox[{"r", " ", 
+             TagBox[
+              StyleBox[
+               SuperscriptBox["B", "\[Prime]\[Prime]",
+                MultilineFunction->None],
+               LineColor->RGBColor[0, 0, 1],
+               FrontFaceColor->RGBColor[0, 0, 1],
+               BackFaceColor->RGBColor[0, 0, 1],
+               GraphicsColor->RGBColor[0, 0, 1],
+               FontColor->RGBColor[0, 0, 1]],
+              "GREFX1",
+              Selectable->False]}]}], ")"}]}]}], ")"}]}]}], 
+     RowBox[{"4", " ", "r", " ", 
       SuperscriptBox[
        TagBox[
         StyleBox["A",
@@ -2713,131 +2801,39 @@ Cell[BoxData[
          FontColor->RGBColor[0, 0, 1]],
         "GREFX1",
         Selectable->False], "2"], " ", 
-      TagBox[
-       StyleBox[
-        SuperscriptBox["B", "\[Prime]",
-         MultilineFunction->None],
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False]}], "+", 
-     RowBox[{
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], " ", 
-      RowBox[{"(", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"-", "r"}], " ", 
-         TagBox[
-          StyleBox[
-           SuperscriptBox["A", "\[Prime]",
-            MultilineFunction->None],
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False], " ", 
-         TagBox[
-          StyleBox[
-           SuperscriptBox["B", "\[Prime]",
-            MultilineFunction->None],
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False]}], "+", 
-        RowBox[{"2", " ", 
-         TagBox[
-          StyleBox["B",
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False], " ", 
-         RowBox[{"(", 
-          RowBox[{
-           TagBox[
-            StyleBox[
-             SuperscriptBox["A", "\[Prime]",
-              MultilineFunction->None],
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False], "+", 
-           RowBox[{"r", " ", 
-            TagBox[
-             StyleBox[
-              SuperscriptBox["A", "\[Prime]\[Prime]",
-               MultilineFunction->None],
-              LineColor->RGBColor[0, 0, 1],
-              FrontFaceColor->RGBColor[0, 0, 1],
-              BackFaceColor->RGBColor[0, 0, 1],
-              GraphicsColor->RGBColor[0, 0, 1],
-              FontColor->RGBColor[0, 0, 1]],
-             "GREFX1",
-             Selectable->False]}]}], ")"}]}]}], ")"}]}]}], 
-    RowBox[{"4", " ", "r", " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"], " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"]}]]}],
+      SuperscriptBox[
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"]}]]}]}],
   SequenceForm[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{$CellContext`\
 \[Lambda], Null}, {Null, $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 
+   Rational[-1, 
      4] $CellContext`r^(-1) $CellContext`A[$CellContext`r]^(-2) \
-$CellContext`B[$CellContext`r]^(-2) (-$CellContext`r \
-$CellContext`B[$CellContext`r] 
-     Derivative[1][$CellContext`A][$CellContext`r]^2 - 
-    2 $CellContext`A[$CellContext`r]^2 
-    Derivative[
-     1][$CellContext`B][$CellContext`r] + $CellContext`A[$CellContext`r] \
-(-$CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
-       Derivative[1][$CellContext`B][$CellContext`r] + 
-      2 $CellContext`B[$CellContext`r] (
-        Derivative[1][$CellContext`A][$CellContext`r] + $CellContext`r 
-         Derivative[2][$CellContext`A][$CellContext`r])))],
+$CellContext`B[$CellContext`r]^(-2) (
+    2 $CellContext`B[$CellContext`r]^2 
+     Derivative[
+      1][$CellContext`A][$CellContext`r] + $CellContext`r \
+$CellContext`A[$CellContext`r] 
+     Derivative[
+       1][$CellContext`B][$CellContext`r]^2 + $CellContext`B[$CellContext`r] \
+($CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
+       Derivative[1][$CellContext`B][$CellContext`r] - 
+      2 $CellContext`A[$CellContext`r] (
+       Derivative[1][$CellContext`B][$CellContext`r] + $CellContext`r 
+        Derivative[2][$CellContext`B][$CellContext`r])))],
   Editable->False]], "Print",
- CellChangeTimes->{3.8648516922997007`*^9},
+ CellChangeTimes->{3.864851692284318*^9, 3.864856786617895*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[57]:=",ExpressionUUID->"3d0157b1-c9a1-41c1-8dfd-\
-df97261c547c"],
+  "\:6b63\:5728\:8ba1\:7b97In[67]:=",ExpressionUUID->"393228b6-0c95-4a34-9700-\
+853064feda70"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2872,20 +2868,20 @@ Cell[BoxData[
      "GRETsr",
      Selectable->False],
     HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
-   FractionBox[
-    RowBox[{
+   RowBox[{"-", 
+    FractionBox[
      RowBox[{
-      RowBox[{"-", "r"}], " ", 
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], " ", 
-      SuperscriptBox[
+      RowBox[{"2", " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["B",
+          LineColor->RGBColor[0, 0, 1],
+          FrontFaceColor->RGBColor[0, 0, 1],
+          BackFaceColor->RGBColor[0, 0, 1],
+          GraphicsColor->RGBColor[0, 0, 1],
+          FontColor->RGBColor[0, 0, 1]],
+         "GREFX1",
+         Selectable->False], "2"], " ", 
        TagBox[
         StyleBox[
          SuperscriptBox["A", "\[Prime]",
@@ -2896,8 +2892,100 @@ Cell[BoxData[
          GraphicsColor->RGBColor[0, 0, 1],
          FontColor->RGBColor[0, 0, 1]],
         "GREFX1",
-        Selectable->False], "2"]}], "-", 
-     RowBox[{"2", " ", 
+        Selectable->False]}], "+", 
+      RowBox[{"r", " ", 
+       TagBox[
+        StyleBox["A",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox[
+          SuperscriptBox["B", "\[Prime]",
+           MultilineFunction->None],
+          LineColor->RGBColor[0, 0, 1],
+          FrontFaceColor->RGBColor[0, 0, 1],
+          BackFaceColor->RGBColor[0, 0, 1],
+          GraphicsColor->RGBColor[0, 0, 1],
+          FontColor->RGBColor[0, 0, 1]],
+         "GREFX1",
+         Selectable->False], "2"]}], "+", 
+      RowBox[{
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"r", " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["A", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["B", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           StyleBox["A",
+            LineColor->RGBColor[0, 0, 1],
+            FrontFaceColor->RGBColor[0, 0, 1],
+            BackFaceColor->RGBColor[0, 0, 1],
+            GraphicsColor->RGBColor[0, 0, 1],
+            FontColor->RGBColor[0, 0, 1]],
+           "GREFX1",
+           Selectable->False], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            TagBox[
+             StyleBox[
+              SuperscriptBox["B", "\[Prime]",
+               MultilineFunction->None],
+              LineColor->RGBColor[0, 0, 1],
+              FrontFaceColor->RGBColor[0, 0, 1],
+              BackFaceColor->RGBColor[0, 0, 1],
+              GraphicsColor->RGBColor[0, 0, 1],
+              FontColor->RGBColor[0, 0, 1]],
+             "GREFX1",
+             Selectable->False], "+", 
+            RowBox[{"r", " ", 
+             TagBox[
+              StyleBox[
+               SuperscriptBox["B", "\[Prime]\[Prime]",
+                MultilineFunction->None],
+               LineColor->RGBColor[0, 0, 1],
+               FrontFaceColor->RGBColor[0, 0, 1],
+               BackFaceColor->RGBColor[0, 0, 1],
+               GraphicsColor->RGBColor[0, 0, 1],
+               FontColor->RGBColor[0, 0, 1]],
+              "GREFX1",
+              Selectable->False]}]}], ")"}]}]}], ")"}]}]}], 
+     RowBox[{"4", " ", "r", " ", 
       SuperscriptBox[
        TagBox[
         StyleBox["A",
@@ -2908,131 +2996,39 @@ Cell[BoxData[
          FontColor->RGBColor[0, 0, 1]],
         "GREFX1",
         Selectable->False], "2"], " ", 
-      TagBox[
-       StyleBox[
-        SuperscriptBox["B", "\[Prime]",
-         MultilineFunction->None],
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False]}], "+", 
-     RowBox[{
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], " ", 
-      RowBox[{"(", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"-", "r"}], " ", 
-         TagBox[
-          StyleBox[
-           SuperscriptBox["A", "\[Prime]",
-            MultilineFunction->None],
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False], " ", 
-         TagBox[
-          StyleBox[
-           SuperscriptBox["B", "\[Prime]",
-            MultilineFunction->None],
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False]}], "+", 
-        RowBox[{"2", " ", 
-         TagBox[
-          StyleBox["B",
-           LineColor->RGBColor[0, 0, 1],
-           FrontFaceColor->RGBColor[0, 0, 1],
-           BackFaceColor->RGBColor[0, 0, 1],
-           GraphicsColor->RGBColor[0, 0, 1],
-           FontColor->RGBColor[0, 0, 1]],
-          "GREFX1",
-          Selectable->False], " ", 
-         RowBox[{"(", 
-          RowBox[{
-           TagBox[
-            StyleBox[
-             SuperscriptBox["A", "\[Prime]",
-              MultilineFunction->None],
-             LineColor->RGBColor[0, 0, 1],
-             FrontFaceColor->RGBColor[0, 0, 1],
-             BackFaceColor->RGBColor[0, 0, 1],
-             GraphicsColor->RGBColor[0, 0, 1],
-             FontColor->RGBColor[0, 0, 1]],
-            "GREFX1",
-            Selectable->False], "+", 
-           RowBox[{"r", " ", 
-            TagBox[
-             StyleBox[
-              SuperscriptBox["A", "\[Prime]\[Prime]",
-               MultilineFunction->None],
-              LineColor->RGBColor[0, 0, 1],
-              FrontFaceColor->RGBColor[0, 0, 1],
-              BackFaceColor->RGBColor[0, 0, 1],
-              GraphicsColor->RGBColor[0, 0, 1],
-              FontColor->RGBColor[0, 0, 1]],
-             "GREFX1",
-             Selectable->False]}]}], ")"}]}]}], ")"}]}]}], 
-    RowBox[{"4", " ", "r", " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["A",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"], " ", 
-     SuperscriptBox[
-      TagBox[
-       StyleBox["B",
-        LineColor->RGBColor[0, 0, 1],
-        FrontFaceColor->RGBColor[0, 0, 1],
-        BackFaceColor->RGBColor[0, 0, 1],
-        GraphicsColor->RGBColor[0, 0, 1],
-        FontColor->RGBColor[0, 0, 1]],
-       "GREFX1",
-       Selectable->False], "2"]}]]}],
+      SuperscriptBox[
+       TagBox[
+        StyleBox["B",
+         LineColor->RGBColor[0, 0, 1],
+         FrontFaceColor->RGBColor[0, 0, 1],
+         BackFaceColor->RGBColor[0, 0, 1],
+         GraphicsColor->RGBColor[0, 0, 1],
+         FontColor->RGBColor[0, 0, 1]],
+        "GREFX1",
+        Selectable->False], "2"]}]]}]}],
   SequenceForm[
    HoldForm[
     $CellContext`GRETsr[$CellContext`\[DoubleStruckCapitalG], {{$CellContext`\
 \[Lambda], Null}, {Null, $CellContext`\[Nu]}}]], " = ", 
-   Rational[1, 
+   Rational[-1, 
      4] $CellContext`r^(-1) $CellContext`A[$CellContext`r]^(-2) \
-$CellContext`B[$CellContext`r]^(-2) (-$CellContext`r \
-$CellContext`B[$CellContext`r] 
-     Derivative[1][$CellContext`A][$CellContext`r]^2 - 
-    2 $CellContext`A[$CellContext`r]^2 
-    Derivative[
-     1][$CellContext`B][$CellContext`r] + $CellContext`A[$CellContext`r] \
-(-$CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
-       Derivative[1][$CellContext`B][$CellContext`r] + 
-      2 $CellContext`B[$CellContext`r] (
-        Derivative[1][$CellContext`A][$CellContext`r] + $CellContext`r 
-         Derivative[2][$CellContext`A][$CellContext`r])))],
+$CellContext`B[$CellContext`r]^(-2) (
+    2 $CellContext`B[$CellContext`r]^2 
+     Derivative[
+      1][$CellContext`A][$CellContext`r] + $CellContext`r \
+$CellContext`A[$CellContext`r] 
+     Derivative[
+       1][$CellContext`B][$CellContext`r]^2 + $CellContext`B[$CellContext`r] \
+($CellContext`r Derivative[1][$CellContext`A][$CellContext`r] 
+       Derivative[1][$CellContext`B][$CellContext`r] - 
+      2 $CellContext`A[$CellContext`r] (
+       Derivative[1][$CellContext`B][$CellContext`r] + $CellContext`r 
+        Derivative[2][$CellContext`B][$CellContext`r])))],
   Editable->False]], "Print",
- CellChangeTimes->{3.864851692301165*^9},
+ CellChangeTimes->{3.864851692284318*^9, 3.8648567866194897`*^9},
  CellLabel->
-  "\:6b63\:5728\:8ba1\:7b97In[57]:=",ExpressionUUID->"ca29fe4e-e2a5-4765-b5c0-\
-c211daaefda7"]
+  "\:6b63\:5728\:8ba1\:7b97In[67]:=",ExpressionUUID->"bd0027b0-cff1-4d79-9cdc-\
+cd3152b01d68"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -16520,251 +16516,251 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 259, 5, 30, "Input",ExpressionUUID->"517c7e56-3fb0-4544-89b2-02d308ebcdd1"],
+Cell[558, 20, 260, 5, 30, "Input",ExpressionUUID->"517c7e56-3fb0-4544-89b2-02d308ebcdd1"],
 Cell[CellGroupData[{
-Cell[842, 29, 172, 3, 54, "Subsection",ExpressionUUID->"a4d31a03-09f2-4463-8d96-6499394e7a58"],
-Cell[1017, 34, 1139, 33, 75, "Input",ExpressionUUID->"c2123d4d-219a-421b-ae0c-a91f70537a9a"],
+Cell[843, 29, 172, 3, 54, "Subsection",ExpressionUUID->"a4d31a03-09f2-4463-8d96-6499394e7a58"],
+Cell[1018, 34, 1185, 33, 75, "Input",ExpressionUUID->"c2123d4d-219a-421b-ae0c-a91f70537a9a"],
 Cell[CellGroupData[{
-Cell[2181, 71, 2422, 74, 37, "Input",ExpressionUUID->"3bb36ddb-001c-4a93-8890-e05e6f1d75cd"],
-Cell[4606, 147, 1576, 41, 50, "Output",ExpressionUUID->"2bf237d1-17a5-47cf-b69e-e7add9b58047"]
+Cell[2228, 71, 2422, 74, 37, "Input",ExpressionUUID->"3bb36ddb-001c-4a93-8890-e05e6f1d75cd"],
+Cell[4653, 147, 1598, 41, 50, "Output",ExpressionUUID->"1569f72a-54ee-4d41-862e-d765a7b5c8c4"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6219, 193, 147, 2, 30, "Input",ExpressionUUID->"733388e6-6863-47e1-8256-71786171ce26"],
+Cell[6288, 193, 147, 2, 30, "Input",ExpressionUUID->"733388e6-6863-47e1-8256-71786171ce26"],
 Cell[CellGroupData[{
-Cell[6391, 199, 2058, 66, 40, "Print",ExpressionUUID->"13ccc07e-c001-4549-bb17-6c241db3098e"],
-Cell[8452, 267, 2056, 66, 40, "Print",ExpressionUUID->"bc5a7db9-177d-4b65-98a8-2e888caa2c4d"],
-Cell[10511, 335, 2055, 66, 40, "Print",ExpressionUUID->"ed7255b0-679b-4d51-83a7-b6337588e194"],
-Cell[12569, 403, 1683, 54, 37, "Print",ExpressionUUID->"fce88a95-a338-4d2e-8af6-b3e679f87af2"],
-Cell[14255, 459, 1815, 58, 42, "Print",ExpressionUUID->"3778a3a4-2a89-4f15-b20b-6586afada98a"],
-Cell[16073, 519, 1368, 44, 39, "Print",ExpressionUUID->"4eb54d23-983c-49e7-a0ea-20fe7aae5c5d"],
-Cell[17444, 565, 1505, 47, 32, "Print",ExpressionUUID->"a4a1051f-48fc-4ee0-bc4c-2ca2439f5d31"],
-Cell[18952, 614, 1361, 44, 39, "Print",ExpressionUUID->"5c428cee-a257-478f-9db6-1261ab4fe0f9"],
-Cell[20316, 660, 1392, 44, 32, "Print",ExpressionUUID->"311c81f9-2d66-4de1-96cf-30f78a247d10"]
+Cell[6460, 199, 2080, 66, 40, "Print",ExpressionUUID->"2330b696-3772-486c-84c0-144ed944d3d9"],
+Cell[8543, 267, 2080, 66, 40, "Print",ExpressionUUID->"4478e929-fb82-42e0-91e2-127293dc7c61"],
+Cell[10626, 335, 2080, 66, 40, "Print",ExpressionUUID->"e1e3f07b-2211-431d-919f-f246eb1bfb90"],
+Cell[12709, 403, 1709, 54, 37, "Print",ExpressionUUID->"6b8e1d18-6f97-4ca4-a278-7edeb8c7dbea"],
+Cell[14421, 459, 1839, 58, 42, "Print",ExpressionUUID->"98b2146d-fc33-4185-b30d-dc50ec79e66b"],
+Cell[16263, 519, 1390, 44, 39, "Print",ExpressionUUID->"94984afc-1a54-4ece-aea4-511ccb7fdafe"],
+Cell[17656, 565, 1531, 47, 32, "Print",ExpressionUUID->"d1e9a009-a54b-467d-825e-a73f2b404228"],
+Cell[19190, 614, 1386, 44, 39, "Print",ExpressionUUID->"e73c2cdb-c943-4920-b74b-536630105d9e"],
+Cell[20579, 660, 1418, 44, 32, "Print",ExpressionUUID->"9a7c01af-aea0-424d-8c6b-be15bb247c49"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[21757, 710, 156, 2, 30, "Input",ExpressionUUID->"12847bcb-d9ae-4f42-b9d8-6075e9fc0878"],
+Cell[22046, 710, 156, 2, 30, "Input",ExpressionUUID->"12847bcb-d9ae-4f42-b9d8-6075e9fc0878"],
 Cell[CellGroupData[{
-Cell[21938, 716, 2181, 68, 40, "Print",ExpressionUUID->"eccad1ed-fc4f-40e9-8f9a-3ee824603a68"],
-Cell[24122, 786, 2284, 70, 42, "Print",ExpressionUUID->"51a48630-cfaa-4097-8052-55530b68d7b6"],
-Cell[26409, 858, 4030, 122, 46, "Print",ExpressionUUID->"b0f536b1-9b22-4183-be0f-9e61c6b3437c"],
-Cell[30442, 982, 2181, 68, 40, "Print",ExpressionUUID->"fe7ec6f4-a7ff-4d22-b6ea-cf527194814f"],
-Cell[32626, 1052, 2284, 70, 42, "Print",ExpressionUUID->"e0ba6a7c-4f85-46eb-8a6c-7c1abd947c65"],
-Cell[34913, 1124, 2295, 71, 42, "Print",ExpressionUUID->"bd67c6cb-1013-48d7-8c14-c05923456e6f"]
+Cell[22227, 716, 2203, 68, 40, "Print",ExpressionUUID->"5d45792f-7804-4cd3-a847-206af029fdb8"],
+Cell[24433, 786, 2308, 70, 42, "Print",ExpressionUUID->"e0ce0417-4303-4c21-88e0-f4f5156b951d"],
+Cell[26744, 858, 4063, 121, 46, "Print",ExpressionUUID->"9f340ad5-6042-411e-bcf3-e6ad68f5b8cb"],
+Cell[30810, 981, 2205, 68, 40, "Print",ExpressionUUID->"a5bafb19-7dfa-43e0-a884-b809c1a25ca1"],
+Cell[33018, 1051, 2308, 70, 42, "Print",ExpressionUUID->"ba00dc7c-3869-4502-8c11-7a4476207140"],
+Cell[35329, 1123, 2315, 71, 42, "Print",ExpressionUUID->"02688514-73bf-450a-9786-0ec57e56f29b"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[37257, 1201, 224, 3, 30, "Input",ExpressionUUID->"7bc27d5d-99bd-446b-a55a-bb5af7045abd"],
+Cell[37693, 1200, 224, 3, 30, "Input",ExpressionUUID->"7bc27d5d-99bd-446b-a55a-bb5af7045abd"],
 Cell[CellGroupData[{
-Cell[37506, 1208, 5600, 156, 53, "Print",ExpressionUUID->"870e5832-01ac-4b31-bde0-7b73f6351da3"],
-Cell[43109, 1366, 6296, 176, 45, "Print",ExpressionUUID->"435ea8cc-3b4b-4daa-9027-f12f9f6fae7d"],
-Cell[49408, 1544, 4382, 120, 62, "Print",ExpressionUUID->"86aa656f-6ee4-4e03-8181-6de0851c1c27"],
-Cell[53793, 1666, 5673, 157, 45, "Print",ExpressionUUID->"2e8a4a89-ca65-4297-8acb-f568e7e0df89"]
+Cell[37942, 1207, 5622, 156, 53, "Print",ExpressionUUID->"d245a24e-76ac-424b-b4c4-fa30715e6539"],
+Cell[43567, 1365, 6006, 166, 57, "Print",ExpressionUUID->"e805a2ed-6bf2-4d9e-a6f1-8fb8b8907d00"],
+Cell[49576, 1533, 4403, 120, 62, "Print",ExpressionUUID->"a22f4ef3-4e2b-41d2-9cb0-e01aa28df663"],
+Cell[53982, 1655, 5946, 164, 45, "Print",ExpressionUUID->"127af076-9dd7-4fbc-92c1-0346beedba71"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[59515, 1829, 155, 2, 30, "Input",ExpressionUUID->"7feb4f9c-610d-4056-bd95-2b28a7696608"],
+Cell[59977, 1825, 155, 2, 30, "Input",ExpressionUUID->"7feb4f9c-610d-4056-bd95-2b28a7696608"],
 Cell[CellGroupData[{
-Cell[59695, 1835, 3298, 102, 45, "Print",ExpressionUUID->"a0eb293f-0307-4135-8c65-0028b647d187"],
-Cell[62996, 1939, 3120, 98, 41, "Print",ExpressionUUID->"cc87e02b-caab-4e32-a354-fd7558113e3b"],
-Cell[66119, 2039, 6812, 195, 45, "Print",ExpressionUUID->"c4010b17-11a2-4924-b37e-d5726c290b65"],
-Cell[72934, 2236, 6919, 198, 45, "Print",ExpressionUUID->"c8677296-f015-4bfa-9f71-4e381967d716"]
+Cell[60157, 1831, 3322, 102, 45, "Print",ExpressionUUID->"b816120c-d6e0-4520-9cfe-3b28d334a199"],
+Cell[63482, 1935, 3144, 98, 41, "Print",ExpressionUUID->"9e78662b-7233-4134-a928-5bacd4eb10cd"],
+Cell[66629, 2035, 6950, 195, 45, "Print",ExpressionUUID->"a5f566a4-13c3-4f0d-8058-4f5627584173"],
+Cell[73582, 2232, 7057, 198, 45, "Print",ExpressionUUID->"64113346-0014-49ba-8b63-412be5d10953"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[79902, 2440, 157, 2, 30, "Input",ExpressionUUID->"34e55f2a-d833-4a4f-8352-37a756110d70"],
+Cell[80688, 2436, 157, 2, 30, "Input",ExpressionUUID->"34e55f2a-d833-4a4f-8352-37a756110d70"],
 Cell[CellGroupData[{
-Cell[80084, 2446, 2842, 89, 43, "Print",ExpressionUUID->"4f77ff4c-c7f8-4584-b123-6ab21c838133"],
-Cell[82929, 2537, 3431, 107, 41, "Print",ExpressionUUID->"5f06b7d8-6892-457a-8c85-a99df389b496"],
-Cell[86363, 2646, 6543, 193, 43, "Print",ExpressionUUID->"3d0157b1-c9a1-41c1-8dfd-df97261c547c"],
-Cell[92909, 2841, 6537, 193, 43, "Print",ExpressionUUID->"ca29fe4e-e2a5-4765-b5c0-c211daaefda7"]
+Cell[80870, 2442, 2864, 89, 43, "Print",ExpressionUUID->"e8cb0510-8bda-46fb-b7d0-7e14cfffeede"],
+Cell[83737, 2533, 3453, 107, 41, "Print",ExpressionUUID->"45dfa3d1-2d31-4220-9d55-f13e7a6a6a09"],
+Cell[87193, 2642, 6679, 193, 43, "Print",ExpressionUUID->"393228b6-0c95-4a34-9700-853064feda70"],
+Cell[93875, 2837, 6677, 193, 43, "Print",ExpressionUUID->"bd0027b0-cff1-4d79-9cdc-cd3152b01d68"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[99507, 3041, 160, 3, 54, "Subsection",ExpressionUUID->"ca26fd07-b165-4384-ac14-622ebfba148e"],
-Cell[99670, 3046, 874, 25, 75, "Input",ExpressionUUID->"15d38cc6-e54d-4f57-8400-a21f6ac249c6"],
+Cell[100613, 3037, 160, 3, 54, "Subsection",ExpressionUUID->"ca26fd07-b165-4384-ac14-622ebfba148e"],
+Cell[100776, 3042, 874, 25, 75, "Input",ExpressionUUID->"15d38cc6-e54d-4f57-8400-a21f6ac249c6"],
 Cell[CellGroupData[{
-Cell[100569, 3075, 233, 6, 30, "Input",ExpressionUUID->"df9e3b13-c638-4844-bf6b-c9cfaaa883c9"],
-Cell[100805, 3083, 1511, 45, 41, "Output",ExpressionUUID->"541bd56a-e973-49ff-8ddf-36e1c3ea3df6"]
+Cell[101675, 3071, 233, 6, 30, "Input",ExpressionUUID->"df9e3b13-c638-4844-bf6b-c9cfaaa883c9"],
+Cell[101911, 3079, 1511, 45, 41, "Output",ExpressionUUID->"541bd56a-e973-49ff-8ddf-36e1c3ea3df6"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[102353, 3133, 190, 4, 30, "Input",ExpressionUUID->"8a952103-2754-4e1a-b231-f2b6ab944aae"],
-Cell[102546, 3139, 2148, 57, 57, "Output",ExpressionUUID->"862c9681-70c8-49d5-b128-0fd5faa261ba"]
+Cell[103459, 3129, 190, 4, 30, "Input",ExpressionUUID->"8a952103-2754-4e1a-b231-f2b6ab944aae"],
+Cell[103652, 3135, 2148, 57, 57, "Output",ExpressionUUID->"862c9681-70c8-49d5-b128-0fd5faa261ba"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[104731, 3201, 147, 2, 30, "Input",ExpressionUUID->"08d7d22f-58b1-4985-89c1-05e5524c4a50"],
+Cell[105837, 3197, 147, 2, 30, "Input",ExpressionUUID->"08d7d22f-58b1-4985-89c1-05e5524c4a50"],
 Cell[CellGroupData[{
-Cell[104903, 3207, 2417, 71, 32, "Print",ExpressionUUID->"31c04764-e7ae-4f24-b603-7e7c103afe61"],
-Cell[107323, 3280, 2414, 71, 32, "Print",ExpressionUUID->"5e1bd994-e207-49b7-982c-61e74d168fff"],
-Cell[109740, 3353, 2415, 71, 32, "Print",ExpressionUUID->"44f1e54b-32b2-4a08-81e4-b22781ce8b2f"],
-Cell[112158, 3426, 2418, 71, 40, "Print",ExpressionUUID->"79a77c0d-7f9a-4657-91a2-f10e95918fec"],
-Cell[114579, 3499, 2418, 71, 40, "Print",ExpressionUUID->"6ef88dcc-97e1-4e02-8e7a-6d384ec0dbf4"],
-Cell[117000, 3572, 2418, 71, 40, "Print",ExpressionUUID->"69efb3ba-a207-4217-86fb-a6b13073ec48"]
+Cell[106009, 3203, 2417, 71, 32, "Print",ExpressionUUID->"31c04764-e7ae-4f24-b603-7e7c103afe61"],
+Cell[108429, 3276, 2414, 71, 32, "Print",ExpressionUUID->"5e1bd994-e207-49b7-982c-61e74d168fff"],
+Cell[110846, 3349, 2415, 71, 32, "Print",ExpressionUUID->"44f1e54b-32b2-4a08-81e4-b22781ce8b2f"],
+Cell[113264, 3422, 2418, 71, 40, "Print",ExpressionUUID->"79a77c0d-7f9a-4657-91a2-f10e95918fec"],
+Cell[115685, 3495, 2418, 71, 40, "Print",ExpressionUUID->"6ef88dcc-97e1-4e02-8e7a-6d384ec0dbf4"],
+Cell[118106, 3568, 2418, 71, 40, "Print",ExpressionUUID->"69efb3ba-a207-4217-86fb-a6b13073ec48"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[119467, 3649, 156, 2, 30, "Input",ExpressionUUID->"f836aa70-18d9-4b7f-bd19-011d4eeb97c1"],
+Cell[120573, 3645, 156, 2, 30, "Input",ExpressionUUID->"f836aa70-18d9-4b7f-bd19-011d4eeb97c1"],
 Cell[CellGroupData[{
-Cell[119648, 3655, 2438, 72, 32, "Print",ExpressionUUID->"e4b837d0-d59d-4007-8fc5-b273de237297"],
-Cell[122089, 3729, 2438, 72, 32, "Print",ExpressionUUID->"13dcf933-b60a-43f7-b25e-30a4be425b8e"],
-Cell[124530, 3803, 2440, 72, 32, "Print",ExpressionUUID->"729d0b11-aecf-4098-9025-5ae58baffac8"],
-Cell[126973, 3877, 2476, 73, 32, "Print",ExpressionUUID->"957dd996-d999-4891-a9bd-befa5fae194b"],
-Cell[129452, 3952, 2476, 73, 32, "Print",ExpressionUUID->"05fff33c-c6fc-4993-a405-9bc53f049c5a"],
-Cell[131931, 4027, 2476, 73, 32, "Print",ExpressionUUID->"5e97a181-9567-4ba1-9f48-936cf2e904b3"]
+Cell[120754, 3651, 2438, 72, 32, "Print",ExpressionUUID->"e4b837d0-d59d-4007-8fc5-b273de237297"],
+Cell[123195, 3725, 2438, 72, 32, "Print",ExpressionUUID->"13dcf933-b60a-43f7-b25e-30a4be425b8e"],
+Cell[125636, 3799, 2440, 72, 32, "Print",ExpressionUUID->"729d0b11-aecf-4098-9025-5ae58baffac8"],
+Cell[128079, 3873, 2476, 73, 32, "Print",ExpressionUUID->"957dd996-d999-4891-a9bd-befa5fae194b"],
+Cell[130558, 3948, 2476, 73, 32, "Print",ExpressionUUID->"05fff33c-c6fc-4993-a405-9bc53f049c5a"],
+Cell[133037, 4023, 2476, 73, 32, "Print",ExpressionUUID->"5e97a181-9567-4ba1-9f48-936cf2e904b3"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[134456, 4106, 224, 3, 30, "Input",ExpressionUUID->"ca39e2bd-230d-4d69-8686-8fa4a159159e"],
+Cell[135562, 4102, 224, 3, 30, "Input",ExpressionUUID->"ca39e2bd-230d-4d69-8686-8fa4a159159e"],
 Cell[CellGroupData[{
-Cell[134705, 4113, 2381, 70, 40, "Print",ExpressionUUID->"11d4fbd3-46a2-4d3f-be24-de50f23224c8"],
-Cell[137089, 4185, 2821, 83, 32, "Print",ExpressionUUID->"57904a4d-fe14-4f6e-a53e-4d9768b4da54"],
-Cell[139913, 4270, 2821, 83, 32, "Print",ExpressionUUID->"171815db-6321-4ea6-a38c-aa4c5917e592"],
-Cell[142737, 4355, 2821, 83, 32, "Print",ExpressionUUID->"531948b5-2165-4888-8b88-47ebea5fd059"]
+Cell[135811, 4109, 2381, 70, 40, "Print",ExpressionUUID->"11d4fbd3-46a2-4d3f-be24-de50f23224c8"],
+Cell[138195, 4181, 2821, 83, 32, "Print",ExpressionUUID->"57904a4d-fe14-4f6e-a53e-4d9768b4da54"],
+Cell[141019, 4266, 2821, 83, 32, "Print",ExpressionUUID->"171815db-6321-4ea6-a38c-aa4c5917e592"],
+Cell[143843, 4351, 2821, 83, 32, "Print",ExpressionUUID->"531948b5-2165-4888-8b88-47ebea5fd059"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[145607, 4444, 223, 3, 30, "Input",ExpressionUUID->"d61791b5-aba0-4f22-8ce8-c593ffbcd494"],
+Cell[146713, 4440, 223, 3, 30, "Input",ExpressionUUID->"d61791b5-aba0-4f22-8ce8-c593ffbcd494"],
 Cell[CellGroupData[{
-Cell[145855, 4451, 2402, 71, 43, "Print",ExpressionUUID->"e1a653de-e182-4395-85f4-99ece0872408"],
-Cell[148260, 4524, 2825, 83, 32, "Print",ExpressionUUID->"fe3cf86a-9786-4df2-af30-20862df5b4a6"],
-Cell[151088, 4609, 2823, 83, 32, "Print",ExpressionUUID->"cdba14c0-734c-49a1-94cd-f0115197f72c"],
-Cell[153914, 4694, 2823, 83, 32, "Print",ExpressionUUID->"21ea9c29-8f95-4044-8d4f-0d816317bd5f"]
+Cell[146961, 4447, 2402, 71, 43, "Print",ExpressionUUID->"e1a653de-e182-4395-85f4-99ece0872408"],
+Cell[149366, 4520, 2825, 83, 32, "Print",ExpressionUUID->"fe3cf86a-9786-4df2-af30-20862df5b4a6"],
+Cell[152194, 4605, 2823, 83, 32, "Print",ExpressionUUID->"cdba14c0-734c-49a1-94cd-f0115197f72c"],
+Cell[155020, 4690, 2823, 83, 32, "Print",ExpressionUUID->"21ea9c29-8f95-4044-8d4f-0d816317bd5f"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[156786, 4783, 157, 2, 30, "Input",ExpressionUUID->"29e06c42-98da-48c6-8ab8-bb3e9c815f93"],
+Cell[157892, 4779, 157, 2, 30, "Input",ExpressionUUID->"29e06c42-98da-48c6-8ab8-bb3e9c815f93"],
 Cell[CellGroupData[{
-Cell[156968, 4789, 2446, 72, 43, "Print",ExpressionUUID->"dece635d-8a63-4c70-a283-16ce7b6687cf"],
-Cell[159417, 4863, 3270, 95, 43, "Print",ExpressionUUID->"2b2045b3-80bd-4b5d-b916-2555d306f646"],
-Cell[162690, 4960, 3271, 95, 43, "Print",ExpressionUUID->"e36554c0-a6a6-4d9f-b300-a68e341cff81"],
-Cell[165964, 5057, 3271, 95, 43, "Print",ExpressionUUID->"99f56806-05ba-4d10-bf80-516910835b74"]
+Cell[158074, 4785, 2446, 72, 43, "Print",ExpressionUUID->"dece635d-8a63-4c70-a283-16ce7b6687cf"],
+Cell[160523, 4859, 3270, 95, 43, "Print",ExpressionUUID->"2b2045b3-80bd-4b5d-b916-2555d306f646"],
+Cell[163796, 4956, 3271, 95, 43, "Print",ExpressionUUID->"e36554c0-a6a6-4d9f-b300-a68e341cff81"],
+Cell[167070, 5053, 3271, 95, 43, "Print",ExpressionUUID->"99f56806-05ba-4d10-bf80-516910835b74"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[169284, 5158, 232, 4, 30, "Input",ExpressionUUID->"2621b1fe-b3d8-474d-b7f2-076e7d4d23e4"],
-Cell[169519, 5164, 6426, 202, 62, "Output",ExpressionUUID->"29aadda5-f074-4724-b692-1a9f2ea4c7b5"]
+Cell[170390, 5154, 232, 4, 30, "Input",ExpressionUUID->"2621b1fe-b3d8-474d-b7f2-076e7d4d23e4"],
+Cell[170625, 5160, 6426, 202, 62, "Output",ExpressionUUID->"29aadda5-f074-4724-b692-1a9f2ea4c7b5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[175982, 5371, 925, 26, 70, "Input",ExpressionUUID->"7fc94d91-1cc3-46bf-9a48-c26a7c610966"],
-Cell[176910, 5399, 7300, 232, 49, "Output",ExpressionUUID->"95572418-bd0b-44f1-8e2e-1a4d065021fb"]
+Cell[177088, 5367, 925, 26, 70, "Input",ExpressionUUID->"7fc94d91-1cc3-46bf-9a48-c26a7c610966"],
+Cell[178016, 5395, 7300, 232, 49, "Output",ExpressionUUID->"95572418-bd0b-44f1-8e2e-1a4d065021fb"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[184247, 5636, 450, 12, 38, "Input",ExpressionUUID->"dc37aa11-7fd0-4e1c-838b-56ed950459b6"],
-Cell[184700, 5650, 7863, 259, 61, "Output",ExpressionUUID->"5574851e-5ca1-430f-ad13-7c5ebe2c4981"]
+Cell[185353, 5632, 450, 12, 38, "Input",ExpressionUUID->"dc37aa11-7fd0-4e1c-838b-56ed950459b6"],
+Cell[185806, 5646, 7863, 259, 61, "Output",ExpressionUUID->"5574851e-5ca1-430f-ad13-7c5ebe2c4981"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[192612, 5915, 165, 3, 54, "Subsection",ExpressionUUID->"1fc25272-fee3-40dc-ab5b-30e43208b634"],
-Cell[192780, 5920, 1472, 44, 120, "Input",ExpressionUUID->"a337ebed-3345-4b31-a819-c41744148027"],
+Cell[193718, 5911, 165, 3, 54, "Subsection",ExpressionUUID->"1fc25272-fee3-40dc-ab5b-30e43208b634"],
+Cell[193886, 5916, 1472, 44, 120, "Input",ExpressionUUID->"a337ebed-3345-4b31-a819-c41744148027"],
 Cell[CellGroupData[{
-Cell[194277, 5968, 654, 19, 47, "Input",ExpressionUUID->"444e6b96-323d-4715-9f4a-85c942a05a61"],
-Cell[194934, 5989, 6205, 194, 61, "Output",ExpressionUUID->"c297122d-b276-4349-8de2-00100da8e508"]
+Cell[195383, 5964, 654, 19, 47, "Input",ExpressionUUID->"444e6b96-323d-4715-9f4a-85c942a05a61"],
+Cell[196040, 5985, 6205, 194, 61, "Output",ExpressionUUID->"c297122d-b276-4349-8de2-00100da8e508"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[201176, 6188, 397, 11, 38, "Input",ExpressionUUID->"c3fb7730-ed6f-4251-89c9-4e52127813ef"],
-Cell[201576, 6201, 8062, 265, 60, "Output",ExpressionUUID->"f09be9f4-7636-4054-9c3b-c8cd3ebc9d62"]
+Cell[202282, 6184, 397, 11, 38, "Input",ExpressionUUID->"c3fb7730-ed6f-4251-89c9-4e52127813ef"],
+Cell[202682, 6197, 8062, 265, 60, "Output",ExpressionUUID->"f09be9f4-7636-4054-9c3b-c8cd3ebc9d62"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[209687, 6472, 165, 3, 54, "Subsection",ExpressionUUID->"1dc1b47c-35f6-44de-a215-cdb7e3455636"],
-Cell[209855, 6477, 857, 24, 73, "Input",ExpressionUUID->"703ec442-e622-4fb2-8593-cfae405e8fd0"],
+Cell[210793, 6468, 165, 3, 54, "Subsection",ExpressionUUID->"1dc1b47c-35f6-44de-a215-cdb7e3455636"],
+Cell[210961, 6473, 857, 24, 73, "Input",ExpressionUUID->"703ec442-e622-4fb2-8593-cfae405e8fd0"],
 Cell[CellGroupData[{
-Cell[210737, 6505, 221, 3, 30, "Input",ExpressionUUID->"5a322adb-9b11-4139-81dc-186099c1481f"],
-Cell[210961, 6510, 3778, 116, 39, "Print",ExpressionUUID->"73e7073f-70ef-4b06-b7c9-b0a18f1126ce"]
+Cell[211843, 6501, 221, 3, 30, "Input",ExpressionUUID->"5a322adb-9b11-4139-81dc-186099c1481f"],
+Cell[212067, 6506, 3778, 116, 39, "Print",ExpressionUUID->"73e7073f-70ef-4b06-b7c9-b0a18f1126ce"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[214776, 6631, 223, 3, 30, "Input",ExpressionUUID->"5fde478f-f46c-4045-901a-ad2811a0b322"],
-Cell[215002, 6636, 3510, 112, 32, "Print",ExpressionUUID->"d00614b3-30f1-48d7-aef0-7779442992b7"]
+Cell[215882, 6627, 223, 3, 30, "Input",ExpressionUUID->"5fde478f-f46c-4045-901a-ad2811a0b322"],
+Cell[216108, 6632, 3510, 112, 32, "Print",ExpressionUUID->"d00614b3-30f1-48d7-aef0-7779442992b7"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[218561, 6754, 200, 3, 54, "Subsection",ExpressionUUID->"58868a0f-59b5-4e2d-8a88-70b8044c0b91"],
-Cell[218764, 6759, 3063, 84, 117, "Input",ExpressionUUID->"eff041b8-4113-4d4d-bff2-d87dc4726482"],
+Cell[219667, 6750, 200, 3, 54, "Subsection",ExpressionUUID->"58868a0f-59b5-4e2d-8a88-70b8044c0b91"],
+Cell[219870, 6755, 3063, 84, 117, "Input",ExpressionUUID->"eff041b8-4113-4d4d-bff2-d87dc4726482"],
 Cell[CellGroupData[{
-Cell[221852, 6847, 211, 3, 30, "Input",ExpressionUUID->"d33430ba-120b-4536-a71e-2a4841ba8c48"],
-Cell[222066, 6852, 1823, 51, 34, "Output",ExpressionUUID->"eede7185-ab24-4732-9307-00a7a543f379"]
+Cell[222958, 6843, 211, 3, 30, "Input",ExpressionUUID->"d33430ba-120b-4536-a71e-2a4841ba8c48"],
+Cell[223172, 6848, 1823, 51, 34, "Output",ExpressionUUID->"eede7185-ab24-4732-9307-00a7a543f379"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[223926, 6908, 192, 2, 30, "Input",ExpressionUUID->"d8566fc6-bd4e-4d2d-a12e-12c54f86311a"],
-Cell[224121, 6912, 5130, 144, 37, "Output",ExpressionUUID->"1c4434ad-bd58-4954-bf9a-f871ca27582e"]
+Cell[225032, 6904, 192, 2, 30, "Input",ExpressionUUID->"d8566fc6-bd4e-4d2d-a12e-12c54f86311a"],
+Cell[225227, 6908, 5130, 144, 37, "Output",ExpressionUUID->"1c4434ad-bd58-4954-bf9a-f871ca27582e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[229288, 7061, 196, 2, 30, "Input",ExpressionUUID->"fa566c7e-0acc-4d10-aad9-010cb05884a6"],
-Cell[229487, 7065, 5381, 153, 52, "Output",ExpressionUUID->"bdf42e9b-150e-4da7-a3ea-af3d41b01f29"]
+Cell[230394, 7057, 196, 2, 30, "Input",ExpressionUUID->"fa566c7e-0acc-4d10-aad9-010cb05884a6"],
+Cell[230593, 7061, 5381, 153, 52, "Output",ExpressionUUID->"bdf42e9b-150e-4da7-a3ea-af3d41b01f29"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[234905, 7223, 213, 3, 30, "Input",ExpressionUUID->"0efbce6e-69de-4ae9-8583-c56119a9df24"],
+Cell[236011, 7219, 213, 3, 30, "Input",ExpressionUUID->"0efbce6e-69de-4ae9-8583-c56119a9df24"],
 Cell[CellGroupData[{
-Cell[235143, 7230, 3195, 98, 32, "Print",ExpressionUUID->"970b5dd6-5948-490b-aad8-223915c2a1bb"],
-Cell[238341, 7330, 2730, 87, 32, "Print",ExpressionUUID->"785b47d9-c472-4377-8203-b40b5ee5be86"],
-Cell[241074, 7419, 4553, 132, 32, "Print",ExpressionUUID->"d172479a-4fa7-47ac-ac79-74ad69401c4a"],
-Cell[245630, 7553, 2728, 87, 32, "Print",ExpressionUUID->"be520b09-bd97-4174-be81-f222c997aa8d"],
-Cell[248361, 7642, 4553, 132, 32, "Print",ExpressionUUID->"4917cf93-0bee-41bf-8c16-dee585645f70"],
-Cell[252917, 7776, 2730, 87, 32, "Print",ExpressionUUID->"f618d4f1-ebc7-4efb-b645-dbbb74f5430c"],
-Cell[255650, 7865, 4555, 132, 32, "Print",ExpressionUUID->"573fcf4e-8c7d-49a1-80ef-52f18ca1c1e2"],
-Cell[260208, 7999, 2730, 87, 32, "Print",ExpressionUUID->"48d6da00-edf0-4807-bba6-0663610230e7"],
-Cell[262941, 8088, 3185, 98, 32, "Print",ExpressionUUID->"2a028e6c-71f5-4bac-9f45-96664ba6177d"],
-Cell[266129, 8188, 2734, 87, 32, "Print",ExpressionUUID->"c00108b8-df3e-4812-b486-cc19f30bfaa7"],
-Cell[268866, 8277, 2736, 87, 32, "Print",ExpressionUUID->"fcd5cfa0-3cff-4dc4-939e-b10a3334f163"],
-Cell[271605, 8366, 2736, 87, 32, "Print",ExpressionUUID->"28c2f5b1-3369-4701-8c39-08cb6b58887f"],
-Cell[274344, 8455, 2718, 87, 32, "Print",ExpressionUUID->"50cc0553-ee05-49a8-a3bf-f14ef4b9bbd4"],
-Cell[277065, 8544, 2720, 87, 32, "Print",ExpressionUUID->"7151e298-c915-4803-b0b6-8cb996dd888b"],
-Cell[279788, 8633, 2728, 87, 32, "Print",ExpressionUUID->"f4559bf8-ca7e-48b0-b376-209065fef7bd"],
-Cell[282519, 8722, 2718, 87, 32, "Print",ExpressionUUID->"e7598cfc-6520-4416-810b-0ac422d787fa"],
-Cell[285240, 8811, 2733, 87, 32, "Print",ExpressionUUID->"0393c693-a497-4ee4-9373-2254f7b4897b"],
-Cell[287976, 8900, 3183, 98, 32, "Print",ExpressionUUID->"f7fb388b-2f2d-453d-9f82-a0d4ea5f1b9a"],
-Cell[291162, 9000, 2736, 87, 32, "Print",ExpressionUUID->"b70f3404-faf5-4f8e-9008-197017645d1b"],
-Cell[293901, 9089, 2733, 87, 32, "Print",ExpressionUUID->"490c5dfb-750c-41b2-9508-76c71fe68214"],
-Cell[296637, 9178, 2718, 87, 32, "Print",ExpressionUUID->"58315866-6f5f-4035-8bd9-7100ff8c3198"],
-Cell[299358, 9267, 2728, 87, 32, "Print",ExpressionUUID->"ebe5f427-c02b-4153-a055-2cad5f79fee3"],
-Cell[302089, 9356, 2718, 87, 32, "Print",ExpressionUUID->"9ff18b82-0ca7-4730-91f1-bfc2391b1023"],
-Cell[304810, 9445, 2736, 87, 32, "Print",ExpressionUUID->"b4c33f95-327d-4018-8505-42aabd39569c"],
-Cell[307549, 9534, 2718, 87, 32, "Print",ExpressionUUID->"aa7926ec-e618-425f-9434-8773b2256a28"],
-Cell[310270, 9623, 2736, 87, 32, "Print",ExpressionUUID->"e96fed11-0c7b-44de-aff5-6ff6c9ac6f0f"],
-Cell[313009, 9712, 3183, 98, 32, "Print",ExpressionUUID->"7fac5ac7-a210-4988-bf22-ec8366c6adaa"],
-Cell[316195, 9812, 2736, 87, 32, "Print",ExpressionUUID->"3aadf3ee-dc04-4cdb-81ca-2f3c410fff69"]
+Cell[236249, 7226, 3195, 98, 32, "Print",ExpressionUUID->"970b5dd6-5948-490b-aad8-223915c2a1bb"],
+Cell[239447, 7326, 2730, 87, 32, "Print",ExpressionUUID->"785b47d9-c472-4377-8203-b40b5ee5be86"],
+Cell[242180, 7415, 4553, 132, 32, "Print",ExpressionUUID->"d172479a-4fa7-47ac-ac79-74ad69401c4a"],
+Cell[246736, 7549, 2728, 87, 32, "Print",ExpressionUUID->"be520b09-bd97-4174-be81-f222c997aa8d"],
+Cell[249467, 7638, 4553, 132, 32, "Print",ExpressionUUID->"4917cf93-0bee-41bf-8c16-dee585645f70"],
+Cell[254023, 7772, 2730, 87, 32, "Print",ExpressionUUID->"f618d4f1-ebc7-4efb-b645-dbbb74f5430c"],
+Cell[256756, 7861, 4555, 132, 32, "Print",ExpressionUUID->"573fcf4e-8c7d-49a1-80ef-52f18ca1c1e2"],
+Cell[261314, 7995, 2730, 87, 32, "Print",ExpressionUUID->"48d6da00-edf0-4807-bba6-0663610230e7"],
+Cell[264047, 8084, 3185, 98, 32, "Print",ExpressionUUID->"2a028e6c-71f5-4bac-9f45-96664ba6177d"],
+Cell[267235, 8184, 2734, 87, 32, "Print",ExpressionUUID->"c00108b8-df3e-4812-b486-cc19f30bfaa7"],
+Cell[269972, 8273, 2736, 87, 32, "Print",ExpressionUUID->"fcd5cfa0-3cff-4dc4-939e-b10a3334f163"],
+Cell[272711, 8362, 2736, 87, 32, "Print",ExpressionUUID->"28c2f5b1-3369-4701-8c39-08cb6b58887f"],
+Cell[275450, 8451, 2718, 87, 32, "Print",ExpressionUUID->"50cc0553-ee05-49a8-a3bf-f14ef4b9bbd4"],
+Cell[278171, 8540, 2720, 87, 32, "Print",ExpressionUUID->"7151e298-c915-4803-b0b6-8cb996dd888b"],
+Cell[280894, 8629, 2728, 87, 32, "Print",ExpressionUUID->"f4559bf8-ca7e-48b0-b376-209065fef7bd"],
+Cell[283625, 8718, 2718, 87, 32, "Print",ExpressionUUID->"e7598cfc-6520-4416-810b-0ac422d787fa"],
+Cell[286346, 8807, 2733, 87, 32, "Print",ExpressionUUID->"0393c693-a497-4ee4-9373-2254f7b4897b"],
+Cell[289082, 8896, 3183, 98, 32, "Print",ExpressionUUID->"f7fb388b-2f2d-453d-9f82-a0d4ea5f1b9a"],
+Cell[292268, 8996, 2736, 87, 32, "Print",ExpressionUUID->"b70f3404-faf5-4f8e-9008-197017645d1b"],
+Cell[295007, 9085, 2733, 87, 32, "Print",ExpressionUUID->"490c5dfb-750c-41b2-9508-76c71fe68214"],
+Cell[297743, 9174, 2718, 87, 32, "Print",ExpressionUUID->"58315866-6f5f-4035-8bd9-7100ff8c3198"],
+Cell[300464, 9263, 2728, 87, 32, "Print",ExpressionUUID->"ebe5f427-c02b-4153-a055-2cad5f79fee3"],
+Cell[303195, 9352, 2718, 87, 32, "Print",ExpressionUUID->"9ff18b82-0ca7-4730-91f1-bfc2391b1023"],
+Cell[305916, 9441, 2736, 87, 32, "Print",ExpressionUUID->"b4c33f95-327d-4018-8505-42aabd39569c"],
+Cell[308655, 9530, 2718, 87, 32, "Print",ExpressionUUID->"aa7926ec-e618-425f-9434-8773b2256a28"],
+Cell[311376, 9619, 2736, 87, 32, "Print",ExpressionUUID->"e96fed11-0c7b-44de-aff5-6ff6c9ac6f0f"],
+Cell[314115, 9708, 3183, 98, 32, "Print",ExpressionUUID->"7fac5ac7-a210-4988-bf22-ec8366c6adaa"],
+Cell[317301, 9808, 2736, 87, 32, "Print",ExpressionUUID->"3aadf3ee-dc04-4cdb-81ca-2f3c410fff69"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[318980, 9905, 251, 4, 30, "Input",ExpressionUUID->"0b9ed4f6-dfc3-44e5-b84e-f570002b891b"],
+Cell[320086, 9901, 251, 4, 30, "Input",ExpressionUUID->"0b9ed4f6-dfc3-44e5-b84e-f570002b891b"],
 Cell[CellGroupData[{
-Cell[319256, 9913, 7797, 232, 32, "Print",ExpressionUUID->"5fc865b8-7e4b-4941-9672-2de4d3a993d1"],
-Cell[327056, 10147, 4556, 138, 32, "Print",ExpressionUUID->"bdc46891-c988-4b92-8594-6b0cc40a5dd1"],
-Cell[331615, 10287, 15830, 455, 32, "Print",ExpressionUUID->"229b68ed-0ce3-4375-b6b1-07bb379f33eb"],
-Cell[347448, 10744, 4172, 129, 32, "Print",ExpressionUUID->"fe8d9a76-1605-4a27-9312-1f8b0df4e6fe"],
-Cell[351623, 10875, 4172, 129, 32, "Print",ExpressionUUID->"09b3231b-59d6-47db-9515-84d0f4406966"],
-Cell[355798, 11006, 4555, 138, 32, "Print",ExpressionUUID->"218fbe10-5b2e-4ef7-9ae0-88215f99ea0c"],
-Cell[360356, 11146, 15830, 455, 32, "Print",ExpressionUUID->"a2296856-96bd-4344-9642-e27ada26e810"],
-Cell[376189, 11603, 4172, 129, 32, "Print",ExpressionUUID->"ce564a2d-15e4-485b-a499-ae14de5e8409"],
-Cell[380364, 11734, 4556, 138, 32, "Print",ExpressionUUID->"28462350-43b8-47a3-a258-79686000c746"],
-Cell[384923, 11874, 15830, 455, 32, "Print",ExpressionUUID->"d66dbffc-d861-4606-b6ec-5eaab9980b7e"]
+Cell[320362, 9909, 7797, 232, 32, "Print",ExpressionUUID->"5fc865b8-7e4b-4941-9672-2de4d3a993d1"],
+Cell[328162, 10143, 4556, 138, 32, "Print",ExpressionUUID->"bdc46891-c988-4b92-8594-6b0cc40a5dd1"],
+Cell[332721, 10283, 15830, 455, 32, "Print",ExpressionUUID->"229b68ed-0ce3-4375-b6b1-07bb379f33eb"],
+Cell[348554, 10740, 4172, 129, 32, "Print",ExpressionUUID->"fe8d9a76-1605-4a27-9312-1f8b0df4e6fe"],
+Cell[352729, 10871, 4172, 129, 32, "Print",ExpressionUUID->"09b3231b-59d6-47db-9515-84d0f4406966"],
+Cell[356904, 11002, 4555, 138, 32, "Print",ExpressionUUID->"218fbe10-5b2e-4ef7-9ae0-88215f99ea0c"],
+Cell[361462, 11142, 15830, 455, 32, "Print",ExpressionUUID->"a2296856-96bd-4344-9642-e27ada26e810"],
+Cell[377295, 11599, 4172, 129, 32, "Print",ExpressionUUID->"ce564a2d-15e4-485b-a499-ae14de5e8409"],
+Cell[381470, 11730, 4556, 138, 32, "Print",ExpressionUUID->"28462350-43b8-47a3-a258-79686000c746"],
+Cell[386029, 11870, 15830, 455, 32, "Print",ExpressionUUID->"d66dbffc-d861-4606-b6ec-5eaab9980b7e"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[400802, 12335, 157, 2, 30, "Input",ExpressionUUID->"936fb4a8-30b5-426a-819e-21daa0551412"],
+Cell[401908, 12331, 157, 2, 30, "Input",ExpressionUUID->"936fb4a8-30b5-426a-819e-21daa0551412"],
 Cell[CellGroupData[{
-Cell[400984, 12341, 9639, 279, 50, "Print",ExpressionUUID->"23e5f124-4989-4e67-a418-24ce4452e62b"],
-Cell[410626, 12622, 5123, 150, 50, "Print",ExpressionUUID->"3f4044f4-e5d5-42c2-b737-058831d5feb4"],
-Cell[415752, 12774, 5123, 150, 50, "Print",ExpressionUUID->"47b8a315-5ba5-416f-b7bc-81168cd66d72"],
-Cell[420878, 12926, 5123, 150, 50, "Print",ExpressionUUID->"c74769e0-ac40-4b6c-a19f-afebc4d4fed6"],
-Cell[426004, 13078, 5179, 152, 50, "Print",ExpressionUUID->"b667fd61-67cd-430c-842f-cd4f13692369"],
-Cell[431186, 13232, 15534, 440, 50, "Print",ExpressionUUID->"7bcf3aee-bd6c-40db-9ec7-013eab09cdc9"],
-Cell[446723, 13674, 4584, 137, 50, "Print",ExpressionUUID->"929d5d20-5876-468f-a14a-3a81b4e9bb5a"],
-Cell[451310, 13813, 4582, 137, 50, "Print",ExpressionUUID->"3593a16a-0e26-42f5-a19c-bd36f84e631e"],
-Cell[455895, 13952, 5177, 152, 50, "Print",ExpressionUUID->"d50d9c33-3b1f-40c3-bf42-807bc3ed2ec2"],
-Cell[461075, 14106, 4582, 137, 50, "Print",ExpressionUUID->"f0783a9d-dc1c-4ba2-8cdd-523bddc6857a"],
-Cell[465660, 14245, 15536, 440, 50, "Print",ExpressionUUID->"58f9dbd2-d40a-4667-9c6e-a1dcb8be8f8a"],
-Cell[481199, 14687, 4582, 137, 50, "Print",ExpressionUUID->"4fa1d298-11f9-4590-b824-046210f6eead"],
-Cell[485784, 14826, 5177, 152, 50, "Print",ExpressionUUID->"63f542c5-93ce-4d77-99f1-481564e7c279"],
-Cell[490964, 14980, 4582, 137, 50, "Print",ExpressionUUID->"fbaba4e4-eed5-4ecb-8a6e-4526942267a3"],
-Cell[495549, 15119, 4582, 137, 50, "Print",ExpressionUUID->"ff10f25d-092f-4da0-b729-0a37697a754e"],
-Cell[500134, 15258, 15534, 440, 50, "Print",ExpressionUUID->"d30b596d-49ee-460f-89e7-02cb511067f8"]
+Cell[402090, 12337, 9639, 279, 50, "Print",ExpressionUUID->"23e5f124-4989-4e67-a418-24ce4452e62b"],
+Cell[411732, 12618, 5123, 150, 50, "Print",ExpressionUUID->"3f4044f4-e5d5-42c2-b737-058831d5feb4"],
+Cell[416858, 12770, 5123, 150, 50, "Print",ExpressionUUID->"47b8a315-5ba5-416f-b7bc-81168cd66d72"],
+Cell[421984, 12922, 5123, 150, 50, "Print",ExpressionUUID->"c74769e0-ac40-4b6c-a19f-afebc4d4fed6"],
+Cell[427110, 13074, 5179, 152, 50, "Print",ExpressionUUID->"b667fd61-67cd-430c-842f-cd4f13692369"],
+Cell[432292, 13228, 15534, 440, 50, "Print",ExpressionUUID->"7bcf3aee-bd6c-40db-9ec7-013eab09cdc9"],
+Cell[447829, 13670, 4584, 137, 50, "Print",ExpressionUUID->"929d5d20-5876-468f-a14a-3a81b4e9bb5a"],
+Cell[452416, 13809, 4582, 137, 50, "Print",ExpressionUUID->"3593a16a-0e26-42f5-a19c-bd36f84e631e"],
+Cell[457001, 13948, 5177, 152, 50, "Print",ExpressionUUID->"d50d9c33-3b1f-40c3-bf42-807bc3ed2ec2"],
+Cell[462181, 14102, 4582, 137, 50, "Print",ExpressionUUID->"f0783a9d-dc1c-4ba2-8cdd-523bddc6857a"],
+Cell[466766, 14241, 15536, 440, 50, "Print",ExpressionUUID->"58f9dbd2-d40a-4667-9c6e-a1dcb8be8f8a"],
+Cell[482305, 14683, 4582, 137, 50, "Print",ExpressionUUID->"4fa1d298-11f9-4590-b824-046210f6eead"],
+Cell[486890, 14822, 5177, 152, 50, "Print",ExpressionUUID->"63f542c5-93ce-4d77-99f1-481564e7c279"],
+Cell[492070, 14976, 4582, 137, 50, "Print",ExpressionUUID->"fbaba4e4-eed5-4ecb-8a6e-4526942267a3"],
+Cell[496655, 15115, 4582, 137, 50, "Print",ExpressionUUID->"ff10f25d-092f-4da0-b729-0a37697a754e"],
+Cell[501240, 15254, 15534, 440, 50, "Print",ExpressionUUID->"d30b596d-49ee-460f-89e7-02cb511067f8"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[515717, 15704, 1185, 30, 34, "Input",ExpressionUUID->"98058f58-dc7d-407e-a5b2-0ae8b0844bd8"],
-Cell[516905, 15736, 23272, 688, 77, "Output",ExpressionUUID->"815010ff-224d-432e-8fd4-58e6e647015f"]
+Cell[516823, 15700, 1185, 30, 34, "Input",ExpressionUUID->"98058f58-dc7d-407e-a5b2-0ae8b0844bd8"],
+Cell[518011, 15732, 23272, 688, 77, "Output",ExpressionUUID->"815010ff-224d-432e-8fd4-58e6e647015f"]
 }, Open  ]]
 }, Open  ]]
 }
