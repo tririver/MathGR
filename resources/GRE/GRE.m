@@ -76,19 +76,19 @@ MakeExpression[TagBox[f_,"GREFX1",___],StandardForm]:= With[{fx=ToExpression[f][
 
 addAlias[alias_]:=CurrentValue[$FrontEndSession,{InputAliases,alias[[1]]}]=alias[[2]];
 aliasList = {
-	"tu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{Null}}]],
-	"td"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null},{0}}]],
-	"tuu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,0},{Null,Null}}]],
-	"tud"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null},{Null,0}}]],
-	"tdu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,0},{0,Null}}]],
-	"tdd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null},{0,0}}]],
-	"tudd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null},{Null,0,0}}]],
-	"tuddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null,Null},{Null,0,0,0}}]],
-	"tdddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null,Null,Null},{0,0,0,0}}]],
-	"tt"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{0}}]],
-	"tx"->ToBoxes[\[SelectionPlaceholder]@@\[DoubleStruckX]],
-	"t0"->ToBoxes[\[SelectionPlaceholder][\[DoubleStruckX][[1]]]],
-	"tp"->ToBoxes[Unevaluated@D[\[Placeholder],\[SelectionPlaceholder]]]
+	"eu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{Null}}]],
+	"ed"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null},{0}}]],
+	"euu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,0},{Null,Null}}]],
+	"eud"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null},{Null,0}}]],
+	"edu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,0},{0,Null}}]],
+	"edd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null},{0,0}}]],
+	"eudd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null},{Null,0,0}}]],
+	"euddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null,Null},{Null,0,0,0}}]],
+	"edddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null,Null,Null},{0,0,0,0}}]],
+	"et"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{0}}]],
+	"ex"->ToBoxes[\[SelectionPlaceholder]@@\[DoubleStruckX]],
+	"e0"->ToBoxes[\[SelectionPlaceholder][\[DoubleStruckX][[1]]]],
+	"ep"->ToBoxes[Unevaluated@D[\[Placeholder],\[SelectionPlaceholder]]]
 };
 addAlias/@(aliasList/."0"->"\[Placeholder]");
 
