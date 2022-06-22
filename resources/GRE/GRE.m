@@ -32,7 +32,7 @@ If[!DefQ[Simp], Simp[e_] := Collect[e, Col, Simplify]];
 
 If[!DefQ[\[DoubleStruckX]], Print["Please define coordinate before running GRE."];Abort[]];
 If[DefQ[\[DoubleStruckD]s2], \[DoubleStruckG]Mat = Simp[Map[Coefficient[\[DoubleStruckD]s2,#[[2]]]/If[#[[1]],1,2]&,Table[{i===j,\[DoubleStruckD][i]\[DoubleStruckD][j]},{i,\[DoubleStruckX]},{j,\[DoubleStruckX]}],{2}]],
-	If[DefQ[\[DoubleStruckG]Mat], \[DoubleStruckD]s2 = (Table[\[DoubleStruckD][i],{i,\[DoubleStruckX]}].\[DoubleStruckG]Mat.Table[{\[DoubleStruckD][i]},{i,\[DoubleStruckX]}])[[1]]//Simp, 
+	If[DefQ[\[DoubleStruckG]Mat], \[DoubleStruckD]s2 = (Table[\[DoubleStruckD][i],{i,\[DoubleStruckX]}] . \[DoubleStruckG]Mat . Table[{\[DoubleStruckD][i]},{i,\[DoubleStruckX]}])[[1]]//Simp, 
 		Print["Please define either \[DoubleStruckD]s2 or \[DoubleStruckG] before running GRE."];Abort[]]];
 
 
@@ -62,30 +62,35 @@ MakeExpression[TagBox[GridBox[{{GridBox[{{f_}},___],StyleBox[GridBox[i_List,___]
 	With[{fExpr=ToExpression@f,iExpr=Map[ToExpression,i/."\[Placeholder]"->"",{2}]}, HoldComplete@GRETsr[fExpr,iExpr]];
 
 
-With[{fx=f_@@\[DoubleStruckX]}, MakeBoxes[fx, StandardForm]:= TagBox[StyleBox[ToBoxes[f],Red],"GREFX",Selectable->False]];
+nonSystemFunctionPattern = HoldPattern[f_ /; Head[f]=!=Symbol || (Head[f]==Symbol && Context[f]=!="System`")];
+
+With[{fx=(f:nonSystemFunctionPattern)@@\[DoubleStruckX]}, MakeBoxes[fx, StandardForm]:= TagBox[StyleBox[ToBoxes[f],Red],"GREFX",Selectable->False]];
 MakeExpression[TagBox[f_,"GREFX",___],StandardForm]:= With[{fx=ToExpression[f]@@\[DoubleStruckX]},HoldComplete@fx];
 
-
-With[{fx=f_[\[DoubleStruckX][[1]]]}, MakeBoxes[fx, StandardForm]:= TagBox[StyleBox[ToBoxes[f],Purple],"GREFX0",Selectable->False]];
+With[{fx=(f:nonSystemFunctionPattern)[\[DoubleStruckX][[1]]]}, MakeBoxes[fx, StandardForm]:= TagBox[StyleBox[ToBoxes[f],Purple],"GREFX0",Selectable->False]];
 MakeExpression[TagBox[f_,"GREFX0",___],StandardForm]:= With[{fx=ToExpression[f][\[DoubleStruckX][[1]]]},HoldComplete@fx];
 
+With[{fx=(f:nonSystemFunctionPattern)[\[DoubleStruckX][[2]]]}, MakeBoxes[fx, StandardForm]:= TagBox[StyleBox[ToBoxes[f],Blue],"GREFX1",Selectable->False]];
+MakeExpression[TagBox[f_,"GREFX1",___],StandardForm]:= With[{fx=ToExpression[f][\[DoubleStruckX][[2]]]},HoldComplete@fx];
 
-SetOptions[#, InputAliases->Select[InputAliases/.Options[#,InputAliases],FreeQ[#,"eu"|"ed"|"eud"|"edu"|"eudd"|"euddd"|"edddd"|"et"|"ex"|"e0"|"ep"]&]]& /@ Append[Notebooks[],$FrontEnd];
-SetOptions[#, InputAliases->Union[InputAliases/.Options[#,InputAliases],{
-	"eu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{Null}}]],
-	"ed"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null},{0}}]],
-	"euu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,0},{Null,Null}}]],
-	"eud"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null},{Null,0}}]],
-	"edu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,0},{0,Null}}]],
-	"edd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null},{0,0}}]],
-	"eudd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null},{Null,0,0}}]],
-	"euddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null,Null},{Null,0,0,0}}]],
-	"edddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null,Null,Null},{0,0,0,0}}]],
-	"et"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{0}}]],
-	"ex"->ToBoxes[\[SelectionPlaceholder]@@\[DoubleStruckX]],
-	"e0"->ToBoxes[\[SelectionPlaceholder][\[DoubleStruckX][[1]]]],
-	"ep"->ToBoxes[Unevaluated@D[\[Placeholder],\[SelectionPlaceholder]]]
-}/."0"->"\[Placeholder]" (*otherwise \[Placeholder] is converted to Null*)]]& /@ Append[Notebooks[],$FrontEnd];
+
+addAlias[alias_]:=CurrentValue[$FrontEndSession,{InputAliases,alias[[1]]}]=alias[[2]];
+aliasList = {
+	"tu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{Null}}]],
+	"td"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null},{0}}]],
+	"tuu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,0},{Null,Null}}]],
+	"tud"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null},{Null,0}}]],
+	"tdu"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,0},{0,Null}}]],
+	"tdd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null},{0,0}}]],
+	"tudd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null},{Null,0,0}}]],
+	"tuddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0,Null,Null,Null},{Null,0,0,0}}]],
+	"tdddd"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{Null,Null,Null,Null},{0,0,0,0}}]],
+	"tt"->ToBoxes[GRETsr[\[SelectionPlaceholder],{{0},{0}}]],
+	"tx"->ToBoxes[\[SelectionPlaceholder]@@\[DoubleStruckX]],
+	"t0"->ToBoxes[\[SelectionPlaceholder][\[DoubleStruckX][[1]]]],
+	"tp"->ToBoxes[Unevaluated@D[\[Placeholder],\[SelectionPlaceholder]]]
+};
+addAlias/@(aliasList/."0"->"\[Placeholder]");
 
 
 Evaluate@Table[\!\(\*
@@ -98,11 +103,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\),{\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}] = \[DoubleStruckG]Mat;
 \[DoubleStruckG]uuMat = Inverse@\[DoubleStruckG]Mat//Simp;
@@ -116,11 +121,11 @@ StyleBox[GridBox[{
 {"\[Mu]", "\[Nu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\),{\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}] = \[DoubleStruckG]uuMat;
 \[DoubleStruckG][] = Det[\[DoubleStruckG]Mat]//Simp;
@@ -137,11 +142,11 @@ StyleBox[GridBox[{
 {"\[Lambda]_", "", ""},
 {"", "\[Mu]_", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) := \!\(\*
 TagBox[GridBox[{
@@ -153,11 +158,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) =\!\(\*
 TagBox[GridBox[{
@@ -170,11 +175,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Nu]", "\[Mu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = Simp[\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(\[Sigma]\), \(\[DoubleStruckX]\)]\ \(
@@ -188,11 +193,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "\[Sigma]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\ \((
 \*SubscriptBox[\(\[PartialD]\), \(\[Mu]\)]\*
@@ -205,11 +210,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Sigma]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\  + \ 
 \*SubscriptBox[\(\[PartialD]\), \(\[Nu]\)]\*
@@ -222,11 +227,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Sigma]", "\[Mu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\  - \ 
 \*SubscriptBox[\(\[PartialD]\), \(\[Sigma]\)]\*
@@ -239,11 +244,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False])\)\)\)];
 	\!\(\*
@@ -256,11 +261,11 @@ StyleBox[GridBox[{
 {"\[Lambda]_", "", "", ""},
 {"", "\[Mu]_", "\[Sigma]_", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\):= \!\(\*
 TagBox[GridBox[{
@@ -272,11 +277,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", "", ""},
 {"", "\[Mu]", "\[Sigma]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = -(\!\(\*
 TagBox[GridBox[{
@@ -288,11 +293,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", "", ""},
 {"", "\[Mu]", "\[Sigma]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = Simp[\!\(
 \*SubscriptBox[\(\[PartialD]\), \(\[Nu]\)]\*
@@ -305,11 +310,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Sigma]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) - \!\(
 \*SubscriptBox[\(\[PartialD]\), \(\[Sigma]\)]\*
@@ -322,11 +327,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) + \!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(\[Eta]\), \(\[DoubleStruckX]\)]\ \((\*
@@ -339,11 +344,11 @@ StyleBox[GridBox[{
 {"\[Eta]", "", ""},
 {"", "\[Mu]", "\[Sigma]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False] \*
 TagBox[GridBox[{
@@ -355,11 +360,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Eta]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\  - \ \*
 TagBox[GridBox[{
@@ -371,11 +376,11 @@ StyleBox[GridBox[{
 {"\[Eta]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False] \*
 TagBox[GridBox[{
@@ -387,11 +392,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Eta]", "\[Sigma]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False])\)\)]);
 	\!\(\*
@@ -404,11 +409,11 @@ StyleBox[GridBox[{
 {"", "", "", ""},
 {"\[Rho]_", "\[Mu]_", "\[Sigma]_", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\):= \!\(\*
 TagBox[GridBox[{
@@ -420,11 +425,11 @@ StyleBox[GridBox[{
 {"", "", "", ""},
 {"\[Rho]", "\[Mu]", "\[Sigma]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = -(\!\(\*
 TagBox[GridBox[{
@@ -436,11 +441,11 @@ StyleBox[GridBox[{
 {"", "", "", ""},
 {"\[Rho]", "\[Mu]", "\[Nu]", "\[Sigma]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = Simp[\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(\[Lambda]\), \(\[DoubleStruckX]\)]\ \(\*
@@ -453,11 +458,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Rho]", "\[Lambda]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False] \*
 TagBox[GridBox[{
@@ -469,11 +474,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", "", ""},
 {"", "\[Mu]", "\[Nu]", "\[Sigma]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)\)]);
 	\!\(\*
@@ -486,11 +491,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]_", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\):= \!\(\*
 TagBox[GridBox[{
@@ -502,11 +507,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = \!\(\*
 TagBox[GridBox[{
@@ -518,11 +523,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Nu]", "\[Mu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = Simp[\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(\[Lambda]\), \(\[DoubleStruckX]\)]\*
@@ -536,11 +541,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", "", ""},
 {"", "\[Mu]", "\[Lambda]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)];
 	\[DoubleStruckCapitalR][]:= Simp @ Sum[\!\(\*
@@ -553,11 +558,11 @@ StyleBox[GridBox[{
 {"\[Mu]", "\[Nu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) \!\(\*
 TagBox[GridBox[{
@@ -569,11 +574,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\), {\[Mu],\[DoubleStruckX]}, {\[Nu],\[DoubleStruckX]}];
 	\!\(\*
@@ -586,11 +591,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]_", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\):= \!\(\*
 TagBox[GridBox[{
@@ -602,11 +607,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = \!\(\*
 TagBox[GridBox[{
@@ -618,11 +623,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) - 1/2 \!\(\*
 TagBox[GridBox[{
@@ -635,11 +640,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) \[DoubleStruckCapitalR][] // Simp;
 	\!\(\*
@@ -652,11 +657,11 @@ StyleBox[GridBox[{
 {"\[Lambda]_", ""},
 {"", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\):= \!\(\*
 TagBox[GridBox[{
@@ -668,11 +673,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = Simp[\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(\[Mu]\), \(\[DoubleStruckX]\)]\ \(\*
@@ -685,11 +690,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "\[Mu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\ \*
 TagBox[GridBox[{
@@ -701,11 +706,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)\)];
 	\!\(\*
@@ -752,11 +757,11 @@ StyleBox[GridBox[{
 {"\[Nu]", "\[Mu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\ \*
 TagBox[GridBox[{
@@ -768,11 +773,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Mu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)\)];
 	\[DoubleStruckCapitalX][\[Phi]_]:= (Col=Col~Union~{\[Phi],Derivative[__][\[Phi][[0]]][Sequence@@\[Phi]]}; -Sum[\!\(\*
@@ -785,11 +790,11 @@ StyleBox[GridBox[{
 {"\[Mu]", "\[Nu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) \!\(
 \*SubscriptBox[\(\[PartialD]\), \(\[Mu]\)]\[Phi]\) \!\(
@@ -838,11 +843,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)Sum[\!\(\*
 TagBox[GridBox[{
@@ -872,11 +877,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)V[\[Phi]] + \!\(
 \*SubscriptBox[\(\[PartialD]\), \(\[Mu]\)]\[Phi]\) \!\(
@@ -892,11 +897,11 @@ StyleBox[GridBox[{
 {"\[Lambda]_", ""},
 {"", "\[Nu]_"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\):= \!\(\*
 TagBox[GridBox[{
@@ -909,11 +914,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) = Simp[\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(\[Mu]\), \(\[DoubleStruckX]\)]\ \(\*
@@ -926,11 +931,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "\[Mu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\ \*
 TagBox[GridBox[{
@@ -943,11 +948,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)\)];
 	\!\(\*
@@ -996,11 +1001,11 @@ StyleBox[GridBox[{
 {"\[Nu]", "\[Mu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\ \*
 TagBox[GridBox[{
@@ -1013,11 +1018,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Mu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)\)];
 	(* Box operator actting on scalar only. (Note GRE doesn't know if a quantity is a scalar.) *)
@@ -1031,11 +1036,11 @@ StyleBox[GridBox[{
 {"\[Mu]", "\[Nu]"},
 {"", ""}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) (\!\(\*
 TagBox[GridBox[{
@@ -1044,14 +1049,14 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10], GridBox[{
 {"\[Phi]"}
 },
 Selectable->True]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRED",
 Selectable->False]\) - Sum[\!\(\*
 TagBox[GridBox[{
@@ -1063,11 +1068,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\) \!\(
 \*SubscriptBox[\(\[PartialD]\), \(\[Lambda]\)]\[Phi]\),{\[Lambda],\[DoubleStruckX]}]), {\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}];]
@@ -1083,11 +1088,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)=!=0, Print[HoldForm[\!\(\*
 TagBox[GridBox[{
@@ -1099,11 +1104,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)]," = ", \!\(\*
 TagBox[GridBox[{
@@ -1115,11 +1120,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", "", ""},
 {"", "\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)]], {\[Lambda],\[DoubleStruckX]},{\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}];
 Print\[DoubleStruckCapitalR]4[]:= Do[If[Order[\[Lambda],\[Mu]]>0 && Order[\[Nu],\[Rho]]>0 && Order[\[Lambda],\[Nu]]>=0 && \!\(\*
@@ -1132,11 +1137,11 @@ StyleBox[GridBox[{
 {"", "", "", ""},
 {"\[Lambda]", "\[Mu]", "\[Nu]", "\[Rho]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)=!=0, Print[HoldForm[\!\(\*
 TagBox[GridBox[{
@@ -1148,11 +1153,11 @@ StyleBox[GridBox[{
 {"", "", "", ""},
 {"\[Lambda]", "\[Mu]", "\[Nu]", "\[Rho]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)], " = ", \!\(\*
 TagBox[GridBox[{
@@ -1164,11 +1169,11 @@ StyleBox[GridBox[{
 {"", "", "", ""},
 {"\[Lambda]", "\[Mu]", "\[Nu]", "\[Rho]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)]], {\[Lambda],\[DoubleStruckX]},{\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]},{\[Rho],\[DoubleStruckX]}];
 Print\[DoubleStruckCapitalR]2[]:= Do[If[Order[\[Mu],\[Nu]]>=0 && \!\(\*
@@ -1181,11 +1186,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)=!=0, Print[HoldForm[\!\(\*
 TagBox[GridBox[{
@@ -1197,11 +1202,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)], " = ", \!\(\*
 TagBox[GridBox[{
@@ -1213,11 +1218,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)]], {\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}];
 Print\[DoubleStruckCapitalG][]:= Do[If[Order[\[Mu],\[Nu]]>=0 &&\!\(\*
@@ -1231,11 +1236,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)=!=0, Print[HoldForm[\!\(\*
 TagBox[GridBox[{
@@ -1247,11 +1252,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)], " = ", \!\(\*
 TagBox[GridBox[{
@@ -1263,11 +1268,11 @@ StyleBox[GridBox[{
 {"", ""},
 {"\[Mu]", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)]], {\[Mu],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}];
 Print\[DoubleStruckCapitalG]ud[]:=Do[If[\!\(\*
@@ -1280,11 +1285,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)=!=0, Print[HoldForm[\!\(\*
 TagBox[GridBox[{
@@ -1296,11 +1301,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)], " = ", \!\(\*
 TagBox[GridBox[{
@@ -1312,11 +1317,11 @@ StyleBox[GridBox[{
 {"\[Lambda]", ""},
 {"", "\[Nu]"}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}},
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}},
 Selectable->True],
 FontSize->10]}
 },
-GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}, "Items" -> {}, "ItemsIndexed" -> {}}],
+GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
 Selectable->False]\)]], {\[Lambda],\[DoubleStruckX]},{\[Nu],\[DoubleStruckX]}];
 Print\[DoubleStruckCapitalG]uu[]:=Do[If[\!\(\*
