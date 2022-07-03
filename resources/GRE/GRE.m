@@ -30,10 +30,17 @@ If[!DefQ[Col],Col={Unique[]}];
 If[!DefQ[Simp], Simp[e_] := Collect[e, Col, Simplify]];
 
 
-If[!DefQ[\[DoubleStruckX]], Print["Please define coordinate before running GRE."];Abort[]];
+If[!DefQ[\[DoubleStruckX]], Print["Please define coordinate before running GRE. Aborting."];Abort[]];
 If[DefQ[\[DoubleStruckD]s2], \[DoubleStruckG]Mat = Simp[Map[Coefficient[\[DoubleStruckD]s2,#[[2]]]/If[#[[1]],1,2]&,Table[{i===j,\[DoubleStruckD][i]\[DoubleStruckD][j]},{i,\[DoubleStruckX]},{j,\[DoubleStruckX]}],{2}]],
 	If[DefQ[\[DoubleStruckG]Mat], \[DoubleStruckD]s2 = (Table[\[DoubleStruckD][i],{i,\[DoubleStruckX]}] . \[DoubleStruckG]Mat . Table[{\[DoubleStruckD][i]},{i,\[DoubleStruckX]}])[[1]]//Simp, 
-		Print["Please define either \[DoubleStruckD]s2 or \[DoubleStruckG] before running GRE."];Abort[]]];
+		Print["Please define either \[DoubleStruckD]s2 or \[DoubleStruckG] before running GRE. Aborting."];Abort[]]];
+
+
+(* ::Input::Initialization:: *)
+If[!DefQ[SignConvention],SignConvention = "MTW"];
+If[!MemberQ[{"MTW","Weinberg"},SignConvention],Print["Unknown sign convention. Aborting.";Abort[]] ];
+R4Sign["MTW"]=+1;
+R4Sign["Weinberg"]=-1;
 
 
 PdBox[lst_]:= StyleBox[#, FontSize->10]&@ GridBox[#, Selectable->True, ColumnSpacings->0, RowSpacings->0]&@ Transpose@DeleteCases[Transpose[Map[ToBoxes,lst,{2}]]/.{"1",dn_}:>{"",dn},{"0",_}];
@@ -299,7 +306,7 @@ FontSize->10]}
 },
 GridBoxSpacings->{"Columns" -> {Offset[0.27999999999999997`], {Offset[0.]}, Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {Offset[0.2], {Offset[0.]}, Offset[0.2]}, "RowsIndexed" -> {}}],
 "GRETsr",
-Selectable->False]\) = Simp[\!\(
+Selectable->False]\) = R4Sign[SignConvention] * Simp[\!\(
 \*SubscriptBox[\(\[PartialD]\), \(\[Nu]\)]\*
 TagBox[GridBox[{
 {GridBox[{
