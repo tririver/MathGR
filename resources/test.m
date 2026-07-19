@@ -178,6 +178,15 @@ test[MathGR`tensor`Private`rmE[{UE@0,u@"a",d@"b",DE@1,d@"c"}], {u@"a",d@"b",d@"c
 
 UseMetric[g, {u,d}]
 
+UseMetric[h, {u,d}, "SetAsDefault"->False]
+test[Pd[f2, u@"i"] // Simp, g[u@"i", u@"a"] Pd[f2, d@"a"] // Simp,
+  "Pd upper idx uses current metric"]
+test[Pd[Pd[f2, u@"a"], d@"b"] // Simp,
+  Pd[g[u@"a", u@"c"], d@"b"] Pd[f2, d@"c"] + g[u@"a", u@"c"] Pd[Pd[f2, d@"c"], d@"b"] // Simp,
+  "Pd upper idx Leibniz"]
+test[Pd[Pd[f2, d@"i"], u@"j"] - Pd[Pd[f2, u@"j"], d@"i"] // Simp,
+  -Pd[g[u@"j", u@"a"], d@"i"] Pd[f2, d@"a"] // Simp, "Pd mixed upper-lower idx"]
+
 (* ::Subsection:: *)
 (* MetricContract *)
 

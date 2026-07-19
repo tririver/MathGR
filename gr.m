@@ -54,6 +54,8 @@ UseMetric[g_, idx_:{UP, DN}, OptionsPattern[]]:= Module[{u=idx[[1]], d=idx[[2]],
 
 UseMetric[g]
 
+Pd[t_, m_?isu]:= With[{n=Unique[]}, Metric[m, iu@n] Pd[t, id@n]]
+
 MetricContract[e_]:= mcTerm~apply2term~e
 mcTerm[tRaw_]:=Module[{t, cnt=1, idTab, metrics, tmp=Unique[]},
 	t = times2prod[tRaw] /. {(f:UG|DG)[n_]:>f[n, cnt++]}; (* make contraction labels unique *)

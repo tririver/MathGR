@@ -42,7 +42,7 @@ AntiSym::usage = "AntiSym[expr, {a, b, ...}] anti-symmetrizes indices a, b, ... 
 
 Dta::usage = "Delta symbol"
 DtaGen::usage = "DtaGen[up..., dn...] is the generalized delta symbol"
-Pd::usage = "Pd[f, DN@a] is partial derivative"
+Pd::usage = "Pd[f, DN@a] is a partial derivative and is internally converted to PdT. Pd[f, UP@a] first uses the current metric to rewrite it in terms of a lower-index partial derivative."
 PdT::usage = "PdT[f, PdVars[DN@a, DN@b, ...]] is partial derivative"
 PdVars::usage = "Pdvars[DN@a, DN@b, ...] is a list of derivative variables"
 P::usage = "P[DN@a, DN@b, ...][f] is partial derivative, which is internally converted to PdT"
